@@ -11,12 +11,13 @@ if(defined(fun)) {
     macro_include <errno.h>
     macro_include <assert.h>
     macro_include <stdbool.h>
+    macro_include "a.h"
 }
 else {
     macro_include "stdlib.h"
 }
 
-#define FUN(a, b) (a + b)
+macro_define "FUN(a, b) (a + b)"
 
 puts(macro_call("FUN", "1, 2"))
 

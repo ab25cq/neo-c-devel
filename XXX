@@ -1,3 +1,253 @@
-/usr/lib/clang/21/include/stdarg.h 68(real 0)(block 0) 1: unexpected character(
-/usr/lib/clang/21/include/stdarg.h 68(real 0)(block 0) 1: unexpected character(
-/usr/lib/clang/21/include/stdarg.h 68(real 0)(block 0) 1: unexpected word()(2)
+rm -fR *.log *.c.o neo-c *.o a *.tmp neo-c-val neo-c-Sch neo-c-inf *.i *.val *.out *.log a.c.c b.c.c b c c.c.c *.valgrind aa aaa src/neo-c2 code/a code/*.c.c code/*.c.o code/b code/neo-c code/neo-c2 code/neo-c3 code/neo-c4 code/neo-c5 code/neo-c6 code/neo-c7 code/neo-c8 code/neo-c9 code/neo-c10 code/neo-c11 code/neo-c12 code/codex code/neo-c13 code/neo-c14 code/runner code/test_array_ptr code/test_control code/test_functions code/test_ops code/test_string_cast code/test_struct_enum code/test_switch_ternary neo-c.c neo-c.c.c
+(cd code && make clean)
+make[1]: Entering directory '/home/ab25cq/neo-c-devel/code'
+rm -rf test_array_features test_array_pointer_advanced test_typedefs test_array_pointer_matrix test_array_views test_pointer_qualifiers test_comelang test_comelang2 test_comelang3 test_nums inline_asm
+rm -rf .*.bin runner .valid_bin .invalid_bin .test_out *.c.c *.c.o ./attrs ./codex ./neo-c ./neo-c10 ./neo-c11 ./neo-c12 ./neo-c13 ./neo-c14 ./neo-c2 ./neo-c3 ./neo-c4 ./neo-c5 ./neo-c6 ./neo-c7 ./neo-c8 ./neo-c9 ./labels_as_values ./nested_functions ./statement_expr ./test_arith ./test_array_ptr ./test_c_compat ./test_c_compat2 ./test_c_compat3 ./test_c_compat4 ./test_c_compat5 ./test_c_compat6 ./test_c_compat7 ./c_test_compat8 ./c_test_compat9 ./c_test_compat38 ./c_test_compat10 ./c_test_compat11 ./c_test_compat12 ./c_test_compat13 ./c_test_compat14 ./c_test_compat15 ./c_test_compat16 ./c_test_compat17 ./c_test_compat18 ./c_test_compat19 ./c_test_compat20 ./c_test_compat21 ./c_test_compat22 ./c_test_compat23 ./c_test_compat24 ./c_test_compat25 ./c_test_compat26 ./c_test_compat27 ./c_test_compat28 ./c_test_compat29 ./c_test_compat30 ./c_test_compat31 ./c_test_compat32 ./c_test_compat33 ./c_test_compat34 ./c_test_compat35 ./c_test_compat36 ./c_test_compat37 ./test_control_flow ./test_control ./test_functions ./test_invalid_0888 ./test_ops ./test_pointers_arrays ./test_string_cast ./test_struct_enum ./test_struct_union_enum ./test_switch_ternary ./test_valid *.i* *.c.c* ./attrs ./builtins ./codex ./comelang ./comelang10 ./comelang11 ./comelang12 ./comelang13 ./comelang14 ./comelang2 ./comelang3 ./comelang4 ./comelang5 ./comelang6 ./comelang7 ./comelang8 ./comelang9 ./labels_as_values ./nested_functions ./runner ./statement_expr ./test_arith ./test_array_ptr ./test_c_compat ./test_c_compat2 ./test_c_compat3 ./test_c_compat4 ./test_c_compat5 ./test_c_compat6 ./test_c_compat7 ./c_test_compat8 ./c_test_compat9 ./c_test_compat10 ./c_test_compat11 ./c_test_compat12 ./c_test_compat13 ./c_test_compat14 ./c_test_compat15 ./c_test_compat16 ./c_test_compat17 ./c_test_compat18 ./c_test_compat19 ./c_test_compat20 ./c_test_compat21 ./c_test_compat22 ./c_test_compat23 ./c_test_compat24 ./c_test_compat25 ./c_test_compat26 ./c_test_compat27 ./c_test_compat28 ./c_test_compat29 ./c_test_compat30 ./c_test_compat31 ./c_test_compat32 ./c_test_compat33 ./c_test_compat34 ./c_test_compat35 ./c_test_compat36 ./c_test_compat37 ./test_control_flow ./test_control ./test_functions ./test_invalid_0888 ./test_ops ./test_pointers_arrays ./test_string_cast ./test_struct_enum ./test_struct_union_enum ./test_switch_ternary ./test_valid ./typeof_auto ./user ./vector_types test_c_compat_host test_c_compat2_host test_c_compat3_host test_c_compat4_host test_c_compat5_host test_c_compat6_host test_c_compat7_host c_test_compat8_host c_test_compat9_host c_test_compat10_host c_test_compat11_host c_test_compat12_host c_test_compat13_host c_test_compat14_host c_test_compat15_host c_test_compat16_host c_test_compat17_host c_test_compat18_host c_test_compat19_host c_test_compat20_host c_test_compat21_host c_test_compat22_host c_test_compat23_host c_test_compat24_host c_test_compat25_host c_test_compat26_host c_test_compat27_host c_test_compat28_host c_test_compat29_host c_test_compat30_host c_test_compat31_host c_test_compat32_host c_test_compat33_host c_test_compat34_host c_test_compat35_host c_test_compat36_host c_test_compat37_host
+make[1]: Leaving directory '/home/ab25cq/neo-c-devel/code'
+rm -fR  config.h autom4te.cache 
+Nothing to do.
+neo-c -Sc -C -o 01main.c.o -c 01main.c -DPREFIX="\"/usr/local/\""  -I/usr/local/include -O2 -g -std=c11 -g -O2 
+neo-c -Sc -C -o 02transpile.c.o -c 02transpile.c -DPREFIX="\"/usr/local/\""  -I/usr/local/include -O2 -g -std=c11 -g -O2 
+neo-c -Sc -C -o 03output_code.c.o -c 03output_code.c -DPREFIX="\"/usr/local/\""  -I/usr/local/include -O2 -g -std=c11 -g -O2 
+neo-c -Sc -C -o 04heap.c.o -c 04heap.c -DPREFIX="\"/usr/local/\""  -I/usr/local/include -O2 -g -std=c11 -g -O2 
+neo-c -Sc -C  -o 05pre_op.c.o -c 05pre_op.c -DPREFIX="\"/usr/local/\""  -I/usr/local/include -O2 -g -std=c11 -g -O2 
+neo-c -Sc -C -o 05call.c.o -c 05call.c -DPREFIX="\"/usr/local/\""  -I/usr/local/include -O2 -g -std=c11 -g -O2 
+UNIX
+/usr/include/bits/types/__fpos_t.h 12: class not found(__off_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/__fpos_t.h 13: class not found(__mbstate_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/__fpos64_t.h 12: class not found(__off64_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/struct_FILE.h 93: class not found(__uint64_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/include/bits/types/cookie_io_functions_t.h 27: class not found(__ssize_t)(1)
+05type.c 2574 #42
+05type.c 2574 #44
+17typedef.c 114 #4
+/usr/include/stdio.h 138: class not found(FILE)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/include/stdio.h 262: class not found(__FILE)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/include/stdio.h 353(real 0)(block 0) 4: unexpected word(ext)(2)
+UNIX
+/usr/include/bits/types/__fpos_t.h 12: class not found(__off_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/__fpos_t.h 13: class not found(__mbstate_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/__fpos64_t.h 12: class not found(__off64_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/struct_FILE.h 93: class not found(__uint64_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/include/bits/types/cookie_io_functions_t.h 27: class not found(__ssize_t)(1)
+05type.c 2574 #42
+05type.c 2574 #44
+17typedef.c 114 #4
+/usr/include/stdio.h 138: class not found(FILE)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/include/stdio.h 262: class not found(__FILE)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/include/stdio.h 353(real 0)(block 0) 4: unexpected word(ext)(2)
+05pre_op.c.c:14:21: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]
+05pre_op.c.c:14:9: error: type specifier missing, defaults to 'int'; ISO C99 and later do not support implicit int [-Wimplicit-int]
+05pre_op.c.c:14:19: error: function cannot return function type 'int (void *, char *, unsigned long)'
+05pre_op.c.c:16:45: error: function cannot return function type '__ssize_t' (aka 'int (int *)')
+05pre_op.c.c:18:45: error: unknown type name '__off64_t'
+05pre_op.c.c:381:17: error: field has incomplete type '__mbstate_t' (aka 'struct anonymous_typeX23')
+05pre_op.c.c:387:17: error: field has incomplete type '__mbstate_t' (aka 'struct anonymous_typeX23')
+05pre_op.c.c:428:25: error: function cannot return function type '__ssize_t' (aka 'int (int *)')
+05pre_op.c.c:429:26: error: function cannot return function type '__ssize_t' (aka 'int (int *)')
+05pre_op.c.c:1799:21: error: function cannot return function type '__ssize_t' (aka 'int (int *)')
+05pre_op.c.c:1800:19: error: function cannot return function type '__ssize_t' (aka 'int (int *)')
+05pre_op.c.c:1801:18: error: function cannot return function type '__ssize_t' (aka 'int (int *)')
+UNIX
+/usr/include/bits/types/__fpos_t.h 12: class not found(__off_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/__fpos_t.h 13: class not found(__mbstate_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/__fpos64_t.h 12: class not found(__off64_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/struct_FILE.h 93: class not found(__uint64_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/include/bits/types/cookie_io_functions_t.h 27: class not found(__ssize_t)(1)
+05type.c 2574 #42
+05type.c 2574 #44
+17typedef.c 114 #4
+/usr/include/stdio.h 138: class not found(FILE)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/include/stdio.h 262: class not found(__FILE)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+clang is faild
+UNIX
+/usr/include/bits/types/__fpos_t.h 12: class not found(__off_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/__fpos_t.h 13: class not found(__mbstate_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/__fpos64_t.h 12: class not found(__off64_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+17typedef.c 114 #4
+/usr/include/bits/types/struct_FILE.h 93: class not found(__uint64_t)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/include/bits/types/cookie_io_functions_t.h 27: class not found(__ssize_t)(1)
+05type.c 2574 #42
+05type.c 2574 #44
+17typedef.c 114 #4
+/usr/include/stdio.h 138: class not found(FILE)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/include/stdio.h 262: class not found(__FILE)(1)
+05type.c 3086 #76
+05type.c 3086 #78
+05type.c 1422 #13
+/usr/local/include/neo-c.h 7593(real 7593)(block 955) 1: The type of BUFSIZ is not found. so can't check the heap type
+
+/usr/local/include/neo-c.h 7595(real 7595)(block 955) 1: The type of BUFSIZ is not found. so can't check the heap type
+
+/usr/local/include/neo-c.h 7595 fread param num 3 is assinged to
+left type is FILE pointer num 1
+right type is _IO_FILE pointer num 1
+/usr/local/include/neo-c.h 7599(real 7599)(block 955) 1: The type of BUFSIZ is not found. so can't check the heap type
+
+/usr/local/include/neo-c.h 7613 fwrite param num 3 is assinged to
+left type is FILE pointer num 1
+right type is _IO_FILE pointer num 1
+/usr/local/include/neo-c.h 7622 fclose param num 0 is assinged to
+left type is FILE pointer num 1
+right type is _IO_FILE pointer num 1
+/usr/local/include/neo-c.h 7660 f is assining to
+left type is _IO_FILE pointer num 1
+right type is FILE pointer num 1
+/usr/local/include/neo-c.h 7663 f is assining to
+left type is _IO_FILE pointer num 1
+right type is FILE pointer num 1
+/usr/local/include/neo-c.h 7670 fwrite param num 3 is assinged to
+left type is FILE pointer num 1
+right type is _IO_FILE pointer num 1
+/usr/local/include/neo-c.h 7678 fclose param num 0 is assinged to
+left type is FILE pointer num 1
+right type is _IO_FILE pointer num 1
+/usr/local/include/neo-c.h 7691 f is assining to
+left type is _IO_FILE pointer num 1
+right type is FILE pointer num 1
+/usr/local/include/neo-c.h 7700(real 7700)(block 955) 1: The type of BUFSIZ is not found. so can't check the heap type
+
+/usr/local/include/neo-c.h 7702(real 7702)(block 955) 1: The type of BUFSIZ is not found. so can't check the heap type
+
+/usr/local/include/neo-c.h 7702 fread param num 3 is assinged to
+left type is FILE pointer num 1
+right type is _IO_FILE pointer num 1
+/usr/local/include/neo-c.h 7706(real 7706)(block 955) 1: The type of BUFSIZ is not found. so can't check the heap type
+
+/usr/local/include/neo-c.h 7715 fclose param num 0 is assinged to
+left type is FILE pointer num 1
+right type is _IO_FILE pointer num 1
+/usr/local/include/neo-c.h 7731(real 7731)(block 955) 1: The type of BUFSIZ is not found. so can't check the heap type
+
+/usr/local/include/neo-c.h 7733(real 7733)(block 955) 1: The type of BUFSIZ is not found. so can't check the heap type
+
+/usr/local/include/neo-c.h 7733 fgets param num 2 is assinged to
+left type is FILE pointer num 1
+right type is _IO_FILE pointer num 1
+transpile error. err num 11
+02transpile.c.c:2881:9: error: call to undeclared library function 'fopen' with type 'FILE *(const char *, const char *)' (aka 'struct _IO_FILE *(const char *, const char *)'); ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+02transpile.c.c:2883:9: error: call to undeclared function 'puts'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+02transpile.c.c:2897:9: error: call to undeclared function 'fclose'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+02transpile.c.c:2931:5: error: call to undeclared function 'fclose'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+02transpile.c.c:2979:9: error: call to undeclared function 'puts'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+02transpile.c.c:2983:9: error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+02transpile.c.c:2986:13: error: call to undeclared function 'puts'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+02transpile.c.c:3235:9: error: call to undeclared function 'puts'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+02transpile.c.c:3248:17: error: call to undeclared function 'puts'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+02transpile.c.c:3276:21: error: call to undeclared function 'puts'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+02transpile.c.c:6011:14: error: incompatible pointer to integer conversion assigning to 'int' from 'FILE *' (aka 'struct _IO_FILE *') [-Wint-conversion]
+02transpile.c.c:6013:13: error: call to undeclared function 'fclose'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+UNIX
+02transpile.c 143: function not found(fopen) at function call(1), so no check types and no heap management
+02transpile.c 145: function not found(puts) at function call(1), so no check types and no heap management
+02transpile.c 157: function not found(fopen) at function call(1), so no check types and no heap management
+02transpile.c 160: function not found(fclose) at function call(1), so no check types and no heap management
+02transpile.c 199: function not found(fclose) at function call(1), so no check types and no heap management
+02transpile.c 445: function not found(puts) at function call(1), so no check types and no heap management
+02transpile.c 457: function not found(printf) at function call(1), so no check types and no heap management
+02transpile.c 461: function not found(puts) at function call(1), so no check types and no heap management
+02transpile.c 538: function not found(puts) at function call(1), so no check types and no heap management
+02transpile.c 547: function not found(puts) at function call(1), so no check types and no heap management
+02transpile.c 561: function not found(puts) at function call(1), so no check types and no heap management
+02transpile.c 564: function not found(printf) at function call(1), so no check types and no heap management
+02transpile.c 572: function not found(printf) at function call(1), so no check types and no heap management
+/usr/local/include/neo-c.h 2324: function not found(printf) at function call(1), so no check types and no heap management
+/usr/local/include/neo-c.h 2413: function not found(printf) at function call(1), so no check types and no heap management
+/usr/local/include/neo-c.h 2324: function not found(printf) at function call(1), so no check types and no heap management
+/usr/local/include/neo-c.h 2413: function not found(printf) at function call(1), so no check types and no heap management
+02transpile.c 1718: function not found(fopen) at function call(1), so no check types and no heap management
+02transpile.c 1719: function not found(fclose) at function call(1), so no check types and no heap management
+02transpile.c 1766: function not found(printf) at function call(1), so no check types and no heap management
+02transpile.c 1786: function not found(printf) at function call(1), so no check types and no heap management
+02transpile.c 1791: function not found(printf) at function call(1), so no check types and no heap management
+02transpile.c 1796: function not found(printf) at function call(1), so no check types and no heap management
+02transpile.c 1801: function not found(printf) at function call(1), so no check types and no heap management
+02transpile.c 1839: function not found(printf) at function call(1), so no check types and no heap management
+clang is faild
+05call.c.c:6205:9: error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+UNIX
+05call.c 1100: function not found(printf) at function call(1), so no check types and no heap management
+05call.c 1824: function not found(printf) at function call(1), so no check types and no heap management
+/usr/local/include/neo-c.h 2324: function not found(printf) at function call(1), so no check types and no heap management
+/usr/local/include/neo-c.h 2493: function not found(printf) at function call(1), so no check types and no heap management
+clang is faild

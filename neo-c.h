@@ -19,23 +19,20 @@
 #define nullptr ((void*)0)
 typedef char*% string;
 
-if(macro_defined "__MINUX__") {
-    var UNIX=1
-}
-elif(macro_defined "__BARE_METAL__") {
-    var UNIX=0
-}
-elif(macro_defined "__PICO__") {
-    var UNIX=0
-}
-else {
-    var UNIX=1
-}
+#if defined(__MINUX__)
+var UNIX=1
+#elif defined(__BARE_METAL__)
+var UNIX=0
+#elif defined(__PICO__)
+var UNIX=0
+#else
+var UNIX=1
+#endif
 
 ///////////////////////////////////////////////////////////////////////////
 // PICO
 ///////////////////////////////////////////////////////////////////////////
-if(macro_defined("__PICO__")) {
+#if defined(__PICO__)
     __c__ {#define _GNU_SOURCE}
     __c__ {#include "stdarg.h"}
     __c__ {#include "stdlib.h"}
@@ -60,20 +57,18 @@ if(macro_defined("__PICO__")) {
     typedef __builtin_va_list va_list;
 
     using neo-c;
-}
 
 ///////////////////////////////////////////////////////////////////////////
 // BARE METAL 
 ///////////////////////////////////////////////////////////////////////////
-elif(macro_defined("__BARE_METAL__")) {
-    #include "neo-c-libc.h"
+#elif defined(__BARE_METAL__)
+    macro_include "neo-c-libc.h"
 
     using neo-c;
-}
 ///////////////////////////////////////////////////////////////////////////
 // UNIX
 ///////////////////////////////////////////////////////////////////////////
-else {
+#else
     using c;
     
     #include <stdio.h>
@@ -89,7 +84,7 @@ else {
     #include <stdbool.h>
     
     using neo-c;
-}
+#endif
 
 ///////////////////////////////////////////////////////////////////////////
 // PREVIOUS DEFINITIONS
@@ -855,44 +850,42 @@ uniq string __builtin_string(char* str)
     return result;
 }
 
-if(!macro_defined("__RISCV__"))
+#if !defined(__RISCV__)
+uniq void come_push_stackframe(char* sname, int sline, int id) version 2
 {
-    uniq void come_push_stackframe(char* sname, int sline, int id) version 2
-    {
-        inherit(sname, sline, id);
-    }
-    
-    uniq void come_pop_stackframe() version 2
-    {
-        inherit();
-    }
-    
-    uniq void come_save_stackframe(char* sname, int sline) version 2
-    {
-        inherit(sname, sline);
-    }
-    
-    uniq void stackframe() version 2
-    {
-        inherit();
-    }
-    
-    uniq string come_get_stackframe() version 2
-    {
-        return inherit();
-    }
-    
-    uniq void* come_calloc(size_t count, size_t size, char* sname=null, int sline=0, char* class_name="") version 2
-    {
-        return inherit(count, size, sname, sline, class_name);
-    }
-    
-    uniq void come_free(void* mem) version 2
-    {
-        inherit(mem);
-    }
+    inherit(sname, sline, id);
 }
 
+uniq void come_pop_stackframe() version 2
+{
+    inherit();
+}
+
+uniq void come_save_stackframe(char* sname, int sline) version 2
+{
+    inherit(sname, sline);
+}
+
+uniq void stackframe() version 2
+{
+    inherit();
+}
+
+uniq string come_get_stackframe() version 2
+{
+    return inherit();
+}
+
+uniq void* come_calloc(size_t count, size_t size, char* sname=null, int sline=0, char* class_name="") version 2
+{
+    return inherit(count, size, sname, sline, class_name);
+}
+
+uniq void come_free(void* mem) version 2
+{
+    inherit(mem);
+}
+#endif
 //////////////////////////////
 // list
 //////////////////////////////

@@ -454,10 +454,6 @@ string reflection_node(sInfo* info=info)
         
         bool defined = get_macro(exp) != NULL;
         
-        if(!defined) {
-            defined = info.cpp_option.scan(s"-D\{exp}").length() > 0;
-        }
-        
         if(defined) {
             return s"true";
         }

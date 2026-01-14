@@ -1032,6 +1032,15 @@ void transpile_toplevel(bool block=false, sInfo* info=info)
         info.sname_at_head = clone info.sname;
         skip_spaces_and_lf();
         
+        if(*info->p == '\0') {
+            break;
+        }
+        if(block && *info->p == '}') {
+            info->p++;
+            skip_spaces_and_lf(info);
+            break;
+        }
+        
         char* head = info.p;
         int head_sline = info.sline;
         string buf = parse_word();

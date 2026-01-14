@@ -732,6 +732,8 @@ static FILE *open_in_search_next(const char *name,
                                  const PPOpts *opts,
                                  char **outpath);
 
+static void ensure_reflect_table(void);
+
 static bool g_keep_comments = true; // default; set per-invocation in preprocess
 // Persist block comment depth across lines
 static int g_block_comment_depth = 0;
@@ -741,6 +743,7 @@ static int g_expand_pass = 0;
 static int g_preprocess_depth = 0;
 static bool g_injected_xen_types = false;
 static Str g_macro_call_out = {0};
+static bool g_reflect_inited = false;
 // Context for evaluating __has_include in #if expressions
 static const PPOpts *g_ifexpr_opts = NULL;
 static const char *g_ifexpr_curdir = NULL;
@@ -2757,6 +2760,7 @@ static void preprocess_file(const char *path, FILE *in, const char *curdir, cons
 }
 
 MacroTable tbl_global;
+static MacroTable tbl_reflect;
 PPOpts opts_global = {0};
 
 void init_ccpp(int argc, char** argv)
@@ -2811,6 +2815,7 @@ void init_ccpp(int argc, char** argv)
     }
     // Initialize the shared macro table for neo-c preprocessing once.
     apply_predefined_macros(&tbl_global, &opts_global);
+    ensure_reflect_table();
     // populate system include paths from env and defaults
     const char *envs[] = { getenv("CPATH"), getenv("C_INCLUDE_PATH") };
     for (size_t ei=0; ei<sizeof(envs)/sizeof(envs[0]); ++ei) {
@@ -2896,23 +2901,29 @@ void preprocess_file_neo_c(const char *path, FILE *out)
     preprocess_file(path, in, curdir, &opts_global, out, &tbl_global);
 }
 
+static void ensure_reflect_table(void)
+{
+    if (!g_reflect_inited) {
+        mtable_init(&tbl_reflect);
+        set_host_macros(&tbl_reflect);
+        g_reflect_inited = true;
+    }
+}
+
 const char *get_macro(const char *macro_name)
 {
     if (!macro_name || !*macro_name) return NULL;
-    if (tbl_global.items == NULL && tbl_global.len == 0 && tbl_global.cap == 0) {
-        apply_predefined_macros(&tbl_global, &opts_global);
-    }
-    Macro *m = mtable_find(&tbl_global, macro_name);
+    ensure_reflect_table();
+    Macro *m = mtable_find(&tbl_reflect, macro_name);
     if (!m) return NULL;
     return m->value ? m->value : "";
 }
 
+
 void macro_define(const char *def)
 {
     if (!def || !*def) return;
-    if (tbl_global.items == NULL && tbl_global.len == 0 && tbl_global.cap == 0) {
-        apply_predefined_macros(&tbl_global, &opts_global);
-    }
+    ensure_reflect_table();
 
     const char *p = def;
     while (*p && isspace((unsigned char)*p)) p++;
@@ -2937,16 +2948,15 @@ void macro_define(const char *def)
         line[plen + len] = '\0';
     }
 
-    process_define(&tbl_global, line);
+    process_define(&tbl_reflect, line);
     free(line);
 }
+
 
 void macro_undef(const char *name)
 {
     if (!name || !*name) return;
-    if (tbl_global.items == NULL && tbl_global.len == 0 && tbl_global.cap == 0) {
-        apply_predefined_macros(&tbl_global, &opts_global);
-    }
+    ensure_reflect_table();
 
     const char *p = name;
     while (*p && isspace((unsigned char)*p)) p++;
@@ -2968,18 +2978,18 @@ void macro_undef(const char *name)
     }
     idbuf[i] = '\0';
     if (*idbuf) {
-        mtable_unset(&tbl_global, idbuf);
+        mtable_unset(&tbl_reflect, idbuf);
     }
 }
+
 
 const char *call_func_macro(const char *macro_name, const char *args, const char *file, long line)
 {
     if (!macro_name || !*macro_name) return NULL;
-    if (tbl_global.items == NULL && tbl_global.len == 0 && tbl_global.cap == 0) {
-        apply_predefined_macros(&tbl_global, &opts_global);
-    }
-    Macro *m = mtable_find(&tbl_global, macro_name);
+    ensure_reflect_table();
+    Macro *m = mtable_find(&tbl_reflect, macro_name);
     if (!m || !m->is_func) return NULL;
+    MacroTable *tbl = &tbl_reflect;
 
     size_t name_len = strlen(macro_name);
     size_t args_len = args ? strlen(args) : 0;
@@ -3006,7 +3016,7 @@ const char *call_func_macro(const char *macro_name, const char *args, const char
 
     Str out;
     sb_init(&out);
-    expand_into_str(&tbl_global, linebuf, &out);
+    expand_into_str(tbl, linebuf, &out);
 
     g_cur_file = prev_file;
     g_cur_line = prev_line;
@@ -3021,6 +3031,7 @@ const char *call_func_macro(const char *macro_name, const char *args, const char
     return g_macro_call_out.buf ? g_macro_call_out.buf : "";
 }
 
+
 void set_macro(const char *name, const char *value)
 {
     mtable_set_obj(&tbl_global, name, value);
@@ -3029,6 +3040,7 @@ void set_macro(const char *name, const char *value)
 void incldue_file_neo_c(char* path, int quoted, FILE* out)
 {
     char* header = path;
+    ensure_reflect_table();
     char *opened_path=NULL;
     char* curdir = getenv("PWD");
     FILE *f = NULL;
@@ -3047,7 +3059,7 @@ void incldue_file_neo_c(char* path, int quoted, FILE* out)
         }
         if (!skip) {
             char *ndir = dirname_dup(opened_path);
-            preprocess_file(opened_path, f, ndir, &opts_global, out, &tbl_global);
+            preprocess_file(opened_path, f, ndir, &opts_global, out, &tbl_reflect);
             fclose(f);
             free(ndir);
         }
