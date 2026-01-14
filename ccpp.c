@@ -2905,6 +2905,7 @@ static void ensure_reflect_table(void)
 {
     if (!g_reflect_inited) {
         mtable_init(&tbl_reflect);
+        apply_predefined_macros(&tbl_reflect, &opts_global);
         set_host_macros(&tbl_reflect);
         g_reflect_inited = true;
     }
