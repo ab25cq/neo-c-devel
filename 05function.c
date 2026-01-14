@@ -996,6 +996,16 @@ string,string parse_function_attribute(sInfo* info=info)
             char* tail = info.p;
             result.append(head, tail-head);
         }
+        else if(parsecmp("__THROW")) {
+            char* head = info.p;
+            
+            info->p += strlen("__THROW");
+            
+            parse_function_attribute_skip_paren(info);
+            
+            char* tail = info.p;
+            result.append(head, tail-head);
+        }
         else if(parsecmp("__asm")) {
             char* head = info.p;
             

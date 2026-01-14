@@ -7,10 +7,10 @@ using c
 {
 #include <unistd.h>
 #include <arpa/inet.h>
-#ifdef __LINUX__
+#ifdef __linux__
 #include <endian.h>
 #endif
-#ifdef __MAC__
+#ifdef __APPLE__
 #include <libkern/OSByteOrder.h>
 #endif
 #include <openssl/ssl.h>

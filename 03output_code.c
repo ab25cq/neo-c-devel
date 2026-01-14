@@ -1135,11 +1135,6 @@ string output_function(sFun* fun, sInfo* info)
 
 bool is_gcc_builtin_float_type(sType* type, sInfo* info=info)
 {
-/*
-#ifdef __LINUX__
-    return false;
-#endif
-*/
     return type.mClass.mName === "_Float128"
             || type.mClass.mName === "__float128";
 }
@@ -1450,6 +1445,12 @@ bool output_source_file(sInfo* info)
     fprintf(f, "/// struct definition ///\n");
     foreach(it, info.struct_definition) {
         buffer* buf = borrow info.struct_definition[string(it)]??;
+        fprintf(f, "%s\n", buf.to_string());
+    }
+    
+    fprintf(f, "/// variable definition ///\n");
+    foreach(it, info.var_definition) {
+        buffer* buf = borrow info.var_definition[string(it)]??;
         fprintf(f, "%s\n", buf.to_string());
     }
     

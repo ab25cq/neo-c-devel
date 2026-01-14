@@ -8,6 +8,8 @@
 #include <stdarg.h>
 #include <stddef.h>
 
+#undef _Static_assert
+
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846

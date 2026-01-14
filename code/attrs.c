@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stddef.h>
 
 #undef va_start
 #define va_start(ap, last) __builtin_va_start(ap, last)

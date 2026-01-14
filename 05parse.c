@@ -408,7 +408,7 @@ void parse_sharp(sInfo* info=info) version 5
                 }
     
                 if(line > 0) {
-                    info->sline = line - 1;
+                    info->sline = line; // - 1;
                 }
                 else {
                     info->sline = line;

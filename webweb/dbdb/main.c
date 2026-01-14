@@ -225,7 +225,7 @@ bool eval_create_table(sInfo* info)
     
     expected_next_charactor(')')
     
-    Database* current_db = gDatabases[info.current_db_name];
+    Database*% current_db = gDatabases[info.current_db_name];
     
     if(current_db.tables[table_name] == null) {
         current_db.tables.insert(table_name, new Table(table_name, types));
@@ -330,9 +330,9 @@ bool eval_insert_into(sInfo* info)
         return false;
     }
     
-    Database* current_db = gDatabases[info.current_db_name];
+    Database*% current_db = gDatabases[info.current_db_name];
     
-    Table* table = current_db.tables[table_name];
+    Table*% table = current_db.tables[table_name];
     
     if(table) {
         map<string, string>*% row = new map<string, string>();
@@ -531,8 +531,8 @@ bool where_select(map<string,string>* row, WhereNode* where_node)
     switch(where_node.op) {
         case kWOEq: {
             if(where_node.left.v1.op == kWOData && where_node.right.v1.op == kWOData) {
-                char* left = row[where_node.left.v1.data];
-                char* right = where_node.right.v1.data;
+                char*% left = row[where_node.left.v1.data];
+                char*% right = where_node.right.v1.data;
                 
                 int right_int_value = atoi(right);
                 
@@ -551,8 +551,8 @@ bool where_select(map<string,string>* row, WhereNode* where_node)
             
         case kWONotEq: {
             if(where_node.left.v1.op == kWOData && where_node.right.v1.op == kWOData) {
-                char* left = row[where_node.left.v1.data];
-                char* right = where_node.right.v1.data;
+                char*% left = row[where_node.left.v1.data];
+                char*% right = where_node.right.v1.data;
                 
                 int right_int_value = atoi(right);
                 
@@ -571,8 +571,8 @@ bool where_select(map<string,string>* row, WhereNode* where_node)
             
         case kWOLt: {
             if(where_node.left.v1.op == kWOData && where_node.right.v1.op == kWOData) {
-                char* left = row[where_node.left.v1.data];
-                char* right = where_node.right.v1.data;
+                char*% left = row[where_node.left.v1.data];
+                char*% right = where_node.right.v1.data;
                 
                 int right_int_value = atoi(right);
                 
@@ -591,8 +591,8 @@ bool where_select(map<string,string>* row, WhereNode* where_node)
             
         case kWOLtEq: {
             if(where_node.left.v1.op == kWOData && where_node.right.v1.op == kWOData) {
-                char* left = row[where_node.left.v1.data];
-                char* right = where_node.right.v1.data;
+                char*% left = row[where_node.left.v1.data];
+                char*% right = where_node.right.v1.data;
                 
                 int right_int_value = atoi(right);
                 
@@ -611,8 +611,8 @@ bool where_select(map<string,string>* row, WhereNode* where_node)
             
         case kWOGt: {
             if(where_node.left.v1.op == kWOData && where_node.right.v1.op == kWOData) {
-                char* left = row[where_node.left.v1.data];
-                char* right = where_node.right.v1.data;
+                char*% left = row[where_node.left.v1.data];
+                char*% right = where_node.right.v1.data;
                 
                 int right_int_value = atoi(right);
                 
@@ -631,8 +631,8 @@ bool where_select(map<string,string>* row, WhereNode* where_node)
             
         case kWOGtEq: {
             if(where_node.left.v1.op == kWOData && where_node.right.v1.op == kWOData) {
-                char* left = row[where_node.left.v1.data];
-                char* right = where_node.right.v1.data;
+                char*% left = row[where_node.left.v1.data];
+                char*% right = where_node.right.v1.data;
                 
                 int right_int_value = atoi(right);
                 
@@ -838,9 +838,9 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
         return false;
     }
     
-    Database* current_db = gDatabases[info.current_db_name];
+    Database*% current_db = gDatabases[info.current_db_name];
     
-    Table* table = current_db.tables[table_name];
+    Table*% table = current_db.tables[table_name];
     
     buffer*% buf = new buffer();
     
@@ -861,7 +861,7 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                     
                     if(check) {
                         foreach(it3, row) {
-                            char* value = row[it3];
+                            char*% value = row[it3];
                             string value2 = value + string(deliminater);
                             buf.append_str(value2);
                         }
@@ -883,7 +883,7 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                     
                     if(check) {
                         foreach(it3, field_names) {
-                            char* value = row[it3];
+                            char*% value = row[it3];
                             string value2 = value + string(deliminater);
                             buf.append_str(value2);
                         }
@@ -901,7 +901,7 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                     foreach(it2, in_values) {
                         if(row[in_target] === it2) {
                             foreach(it3, row) {
-                                char* value = row[it3];
+                                char*% value = row[it3];
                                 string value2 = value + string(deliminater);
                                 buf.append_str(value2);
                             }
@@ -919,7 +919,7 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                     foreach(it2, in_values) {
                         if(row[in_target] === it2) {
                             foreach(it3, field_names) {
-                                char* value = row[it3];
+                                char*% value = row[it3];
                                 string value2 = value + string(deliminater);
                                 buf.append_str(value2);
                             }
@@ -936,14 +936,14 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                 foreach(it, rows) {
                     map<string,string>* row = it;
                     
-                    char* value = row[between_target];
+                    char*% value = row[between_target];
                     
                     char* start = between_values.v1;
                     char* end = between_values.v2;
                     
                     if(atoi(value) >= atoi(start) && atoi(value) <= atoi(end)) {
                         foreach(it3, row) {
-                            char* value = row[it3];
+                            char*% value = row[it3];
                             string value2 = value + string(deliminater);
                             buf.append_str(value2);
                         }
@@ -957,14 +957,14 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                 foreach(it, rows) {
                     map<string,string>* row = it;
                     
-                    char* value = row[between_target];
+                    char*% value = row[between_target];
                     
                     char* start = between_values.v1;
                     char* end = between_values.v2;
                     
                     if(atoi(value) >= atoi(start) && atoi(value) <= atoi(end)) {
                         foreach(it3, field_names) {
-                            char* value = row[it3];
+                            char*% value = row[it3];
                             string value2 = value + string(deliminater);
                             buf.append_str(value2);
                         }
@@ -980,13 +980,13 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                 foreach(it, rows) {
                     map<string,string>* row = it;
                     
-                    char* value = row[like_target];
+                    char*% value = row[like_target];
                     
                     char* pattern = like_value;
                     
                     if(like(value, pattern)) {
                         foreach(it3, row) {
-                            char* value = row[it3];
+                            char*% value = row[it3];
                             string value2 = value + string(deliminater);
                             buf.append_str(value2);
                         }
@@ -1000,13 +1000,13 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                 foreach(it, rows) {
                     map<string,string>* row = it;
                     
-                    char* value = row[like_target];
+                    char*% value = row[like_target];
                     
                     char* pattern = like_value;
                     
                     if(like(value, pattern)) {
                         foreach(it3, field_names) {
-                            char* value = row[it3];
+                            char*% value = row[it3];
                             string value2 = value + string(deliminater);
                             buf.append_str(value2);
                         }
@@ -1022,13 +1022,13 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                 foreach(it, rows) {
                     map<string,string>* row = it;
                     
-                    char* value = row[not_like_target];
+                    char*% value = row[not_like_target];
                     
                     char* pattern = not_like_value;
                     
                     if(!like(value, pattern)) {
                         foreach(it3, row) {
-                            char* value = row[it3];
+                            char*% value = row[it3];
                             string value2 = value + string(deliminater);
                             buf.append_str(value2);
                         }
@@ -1042,13 +1042,13 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                 foreach(it, rows) {
                     map<string,string>* row = it;
                     
-                    char* value = row[not_like_target];
+                    char*% value = row[not_like_target];
                     
                     char* pattern = not_like_value;
                     
                     if(!like(value, pattern)) {
                         foreach(it3, field_names) {
-                            char* value = row[it3];
+                            char*% value = row[it3];
                             string value2 = value + string(deliminater);
                             buf.append_str(value2);
                         }
@@ -1065,7 +1065,7 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                     map<string,string>* row = it;
                     if(where_select(row, where_node)) {
                         foreach(it2, row) {
-                            char* value = row[it2];
+                            char*% value = row[it2];
                             string value2 = value + string(deliminater);
                             buf.append_str(value2);
                         }
@@ -1081,7 +1081,7 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                     map<string,string>* row = it;
                     if(where_select(row, where_node)) {
                         foreach(it2, field_names) {
-                            char* value = row[it2];
+                            char*% value = row[it2];
                             if(max_field[it2]) {
                                 if(atoi(value) > max_value) {
                                     max_value = atoi(value);
@@ -1093,7 +1093,7 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                 }
                 if(max_row) {
                     foreach(it2, field_names) {
-                        char* value = max_row[it2];
+                        char*% value = max_row[it2];
                         string value2 = value + string(deliminater);
                         buf.append_str(value2);
                     }
@@ -1107,7 +1107,7 @@ bool eval_select_from(char* deliminater="\n", sInfo* info)
                     int max_value = 0;
                     if(where_select(row, where_node)) {
                         foreach(it2, field_names) {
-                            char* value = row[it2];
+                            char*% value = row[it2];
                             string value2 = value + string(deliminater);
                             buf.append_str(value2);
                         }
@@ -1166,10 +1166,10 @@ fclose(f);
 string show_tables(sInfo* info=info)
 {
     var buf = new buffer();
-    Database* current_db = gDatabases[info.current_db_name];
+    Database*% current_db = gDatabases[info.current_db_name];
     
     foreach(it, current_db.tables) {
-        Table* table = current_db.tables[it];
+        Table*% table = current_db.tables[it];
         
         buf.append_str(table.name);
         buf.append_str("\n");
@@ -1301,4 +1301,3 @@ fclose(f);
     }
     return 0;
 }
-

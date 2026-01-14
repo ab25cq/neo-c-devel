@@ -14,7 +14,7 @@ bool is_type_name(char* buf, sInfo* info=info)
             || (klass && klass->mFloat) 
             || buf === "_Thread_local"
             || buf === "_Complex"
-            || buf === "const" || buf === "register" || buf === "static" || buf === "volatile" || buf === "unsigned" 
+            || buf === "const" || buf === "register" || buf === "static" || buf === "volatile" || buf === "unsigned" || buf === "__volatile__"
             || buf === "signed" || buf === "struct" || buf === "enum" || buf === "union" || buf === "extern" 
             || info->in_top_level && (buf === "inline" || buf === "__inline" || buf === "__always_inline" || buf === "__inline__" || buf === "__forceinline" )
             || buf === "__extension__" 
@@ -32,7 +32,7 @@ bool is_type_name(char* buf, sInfo* info=info)
     }
     else {
         return generics_class || generics_type_name || mgenerics_type_name || klass || type 
-        || buf === "const" || buf === "register" || buf === "static" || buf === "volatile" || buf === "unsigned" 
+        || buf === "const" || buf === "register" || buf === "static" || buf === "volatile" || buf === "__volatile__" || buf === "unsigned" 
         || buf === "signed" || buf === "struct" || buf === "enum" || buf === "union" || buf === "extern" 
         || info->in_top_level && (buf === "inline" || buf === "__inline" || buf === "__always_inline" || buf === "__inline__" || buf === "__forceinline")
         || buf === "__extension__" 
@@ -1164,7 +1164,7 @@ sType*%, string parse_variable_name_on_multiple_declare(sType* base_type_name, b
         if(xisalpha(*info->p) || *info->p == '_') {
             string word = parse_word();
             
-            if(word === "const" || word === "__restrict" || word === "restrict" || word === "__user" || word === "volatile" || word === "_Nonnull" || word === "_Nullable" || word === "_Null_unspecified" || word === "__user" || word === "_Addr") {
+            if(word === "const" || word === "__restrict" || word === "restrict" || word === "__user" || word === "volatile" || word === "__volatile__" || word === "_Nonnull" || word === "_Nullable" || word === "_Null_unspecified" || word === "__user" || word === "_Addr") {
             }
             else {
                 info.p = p;
@@ -1325,7 +1325,7 @@ sType*%, string parse_variable_name_on_multiple_declare(sType* base_type_name, b
             if(xisalpha(*info->p) || *info->p == '_') {
                 string word = parse_word();
                 
-                if(word === "const" || word === "__restrict" || word === "restrict" || word === "__user" || word === "volatile" || word === "_Nonnull" || word === "_Nullable" || word === "_Null_unspecified" || word === "__user" || word === "_Addr") {
+                if(word === "const" || word === "__restrict" || word === "restrict" || word === "__user" || word === "volatile" || word === "__volatile__" || word === "_Nonnull" || word === "_Nullable" || word === "_Null_unspecified" || word === "__user" || word === "_Addr") {
                 }
                 else {
                     info.p = p;
@@ -1402,7 +1402,7 @@ void skip_pointer_attribute(sInfo* info=info)
                 }
             }
         }
-        else if(word === "const" || word === "__restrict" || word === "restrict" || word === "__user" || word === "volatile" || word === "_Nonnull" || word === "_Nullable" || word === "__nonnull" || word === "_Null_unspecified" || word === "__user" || word === "_Addr" || word === "__noreturn" || word === "_noreturn" || word === "_Noreturn") {
+        else if(word === "const" || word === "__restrict" || word === "restrict" || word === "__user" || word === "volatile" || word === "__volatile__" || word === "_Nonnull" || word === "_Nullable" || word === "__nonnull" || word === "_Null_unspecified" || word === "__user" || word === "_Addr" || word === "__noreturn" || word === "_noreturn" || word === "_Noreturn") {
         }
         else {
             info.p = p;
@@ -1568,7 +1568,7 @@ record tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_var
             
             type_name = parse_word();
         }
-        else if(type_name === "volatile") {
+        else if(type_name === "volatile" || type_name === "__volatile__") {
             volatile_ = true;
             
             type_name = parse_word();
@@ -2373,7 +2373,7 @@ record tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_var
                 type_name = xsprintf("anonymous_typeX%d", ++anonymous_num);
             }
             
-            sNode*% node = parse_struct(type_name, union_attribute, info);
+            sNode*% node = parse_struct(type_name, union_attribute, info, anonymous);
             
             node_compile(node).elif {
                 err_msg(info, "parse_struct is failed");
@@ -2396,6 +2396,9 @@ record tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_var
             if(type == null) {
                 type = new sType(string(type_name));
             }
+            sClass*% klass = info.classes[type_name];
+            klass->mAnonymous = true;
+            type->mAnonymous = anonymous;
             type->mAnonymous = anonymous;
             type->mAnonymousName = string(type_name);
             
@@ -2433,7 +2436,7 @@ record tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_var
                 anonymous = true;
             }
             
-            sNode*% node = parse_union(type_name, union_attribute, info);
+            sNode*% node = parse_union(type_name, union_attribute, info, true@anoymous);
             
             node_compile(node).elif {
                 printf("%s %d: compiling is failed(X)\n", info->sname, info->sline);
@@ -2457,6 +2460,9 @@ record tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_var
                 type = new sType(string(type_name));
             }
             //type = new sType(string(type_name));
+            
+            sClass*% klass = info.classes[type_name];
+            klass->mAnonymous = true;
             
             type->mPointerNum = pointer_num;
             type->mAnonymous = anonymous;
@@ -2878,8 +2884,12 @@ record tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_var
             type->mOriginalTypePointerHeap = heap;
             if(type->mTypedef || t) {
                 sType*% type_ = clone type;
+                type_->mAttribute = s"";
                 type.mTypedefOriginalType = clone type_;
             }
+            
+            type->mAttribute = s"";
+            type->mVarAttribute = s"";
             
             type->mConstant = type->mConstant || constant;
             type->mComplex = type->mComplex || complex_;

@@ -94,6 +94,7 @@ sh all_build.sh
 # Histories
 
 ```
+0.8.3.0 compile time reflection
 0.8.2.0 remove GC. This system use calloc and free only. So you can debug with valgrind.
 0.8.1.6 GC algorithm bug has been fixed. Some code can't be work maybe, but more properly heap algorith has come.
 0.8.1.5 Compiletime Reflection
@@ -2520,6 +2521,28 @@ int main(int argc, char** argv)
 {
     printf("a %d b %d c %d d %d\n", a, b, c, d);
     printf("size %ld\n", sizeof(struct sData));
+    
+    return 0;
+}
+```
+
+```
+int fun(int x) { return x; };
+
+if(defined(fun)) {
+    macro_include "stdio.h"
+}
+else {
+    macro_include "stdlib.h"
+}
+
+#define FUN(a, b) (a + b)
+
+puts(macro_call("FUN", "1, 2"))
+
+int main(int argc, char** argv)
+{
+    puts("THE COMPILE TIME REFLECTION WORLDDDDDDDD!!!");
     
     return 0;
 }

@@ -47,6 +47,7 @@ uniq class sClass
     bool mNumber;
     bool mUniq;
     bool mTypeName;
+    bool mAnonymous;
     
     string mName;
     
@@ -487,6 +488,7 @@ struct sInfo
     char* p;
     char* head;
     buffer*% source;
+    string original_source;
     char* end;
     string sname;
     string sname_at_head;
@@ -518,8 +520,10 @@ struct sInfo
     map<string, sType*%>*% types;
     map<string, sClass*%>*% generics_classes;
     map<string, buffer*%>*% struct_definition;
+    map<string, buffer*%>*% var_definition;
     map<string, buffer*%>*% previous_struct_definition;
     map<string, buffer*%>*% typedef_definition;
+    map<string, sType*%>*% named_child_struct;
     
     map<string, string>*% reflection_vars;
     
@@ -1022,23 +1026,23 @@ sNode*% string_node(char* buf, char* head, int head_sline, sInfo* info) version 
 /////////////////////////////////////////////////////////////////////
 /// 14struct.c
 /////////////////////////////////////////////////////////////////////
-void child_output_struct(sType* type, string struct_name, buffer* buf, bool* existance_generics, string name, int indent, sInfo* info);
+void child_output_struct(sType* type, string struct_name, buffer* buf, bool* existance_generics, string name, int indent, sInfo* info, bool* named_child);
 string parse_struct_attribute(sInfo* info=info);
 sNode*% create_nothing_node(sInfo* info=info);
 bool is_contained_method_generics_types(sType* type, sInfo* info);
 bool is_contained_generics_types(sType* type, sInfo* info);
 sNode*% string_node(char* buf, char* head, int head_sline, sInfo* info) version 14;
-sNode*% parse_struct(string type_name, string struct_attribute, sInfo* info);
+sNode*% parse_struct(string type_name, string struct_attribute, sInfo* info, bool anonymous=false);
 string get_none_generics_name(char* class_name);
 sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 98;
 bool output_generics_struct(sType* type, sType* generics_type, sInfo* info);
-void output_struct(sClass* klass, string pragma, sInfo* info);
+void output_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=false);
 
 /////////////////////////////////////////////////////////////////////
 /// 15union.c
 /////////////////////////////////////////////////////////////////////
 sNode*% string_node(char* buf, char* head, int head_sline, sInfo* info) version 15;
-sNode*% parse_union(string type_name, string union_attribute, sInfo* info);
+sNode*% parse_union(string type_name, string union_attribute, sInfo* info, bool anonymous=false);
 sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 97;
 
 /////////////////////////////////////////////////////////////////////
@@ -1134,5 +1138,13 @@ uniq class sNothingNode extends sNodeBase
         return true;
     }
 };
+
+/// ccpp.c ///
+void preprocess_file_neo_c(const char *path, FILE *out) ;
+void init_ccpp(int argc, char** argv);
+void incldue_file_neo_c(char* path, int quoted, FILE* out);
+const char *get_macro(const char *macro_name);
+const char *call_func_macro(const char *macro_name, const char *args, const char *file, long line);
+void set_macro(const char *name, const char *value);
 
 #endif

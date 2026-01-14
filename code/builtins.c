@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdint.h>
 
+#undef _Static_assert
+
 static int likely_branch(int x) {
     if (__builtin_expect(x != 0, 1)) {
         return 1;
