@@ -21,27 +21,36 @@ typedef char*% string;
 
 if(__MINUX__ == 1)
 {
+    var EMBBEDED=1
     var MINUX=1
     var UNIX=0
 }
 elif(__BARE_METAL__ == 1) 
 {
+    var EMBBEDED=1
     var BARE_METAL=1
     var UNIX=0
 }
 elif(__PICO__ == 1)
 {
     var PICO=1
+    var EMBBEDED=1
     var UNIX=0
 }
 else {
+    var EMBBEDED=0
     var UNIX=1
 }
 
-////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 // PICO
-////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 #ifdef __PICO__
+
+/*
+typedef unsigned int size_t;
+typedef int uint32_t;
+*/
 
 __c__ {#define _GNU_SOURCE}
 __c__ {#include "stdarg.h"}
@@ -82,12 +91,8 @@ using neo-c;
 ///////////////////////////////////////////////////////////////////////////
 #else
 
-//typedef long size_t;
-//typedef int wchar_t;
-
 using C
 {
-#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -99,14 +104,7 @@ using C
 #include <errno.h>
 #include <assert.h>
 #include <stdbool.h>
-#include <wchar.h>
-#include <libgen.h>
 }
-#ifndef NULL
-#define NULL ((void*)0)
-#endif
-
-#undef _Static_assert
 
 using neo-c;
 
@@ -5046,8 +5044,8 @@ typedef struct re_capture
 
 // Definitions:
 
-#define MAX_REGEXP_OBJECTS   64
-#define MAX_CHAR_CLASS_LEN   40
+#define MAX_REGEXP_OBJECTS   64   // Max number of regex symbols in expression, incl. groups. 
+#define MAX_CHAR_CLASS_LEN   40   // Max length of character-class buffer.                   
 #define MAX_CAPTURE_SLOTS    MAX_REGEXP_OBJECTS
 
 enum
@@ -6738,12 +6736,14 @@ uniq string string::sub_block(char* self, char* reg, bool global=true, bool igno
     return char*::sub_block(self, reg, global, ignore_case, parent, block);
 }
 
-#if defined(__linux__) || defined(__ANDROID__) || defined(__RASPBERRY_PI__) || defined(__APPLE__)
+#if defined(__LINUX__) || defined(__ANDROID__) || defined(__RASPBERRY_PI__) || defined(__MAC__)
 
 #ifndef _XOPEN_SOURCE
 #define _XOPEN_SOURCE
 #endif
 
+#include <wchar.h>
+#include <libgen.h>
 
 typedef wchar_t*% wstring;
 

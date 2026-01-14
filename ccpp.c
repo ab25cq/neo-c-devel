@@ -2907,6 +2907,71 @@ const char *get_macro(const char *macro_name)
     return m->value ? m->value : "";
 }
 
+void macro_define(const char *def)
+{
+    if (!def || !*def) return;
+    if (tbl_global.items == NULL && tbl_global.len == 0 && tbl_global.cap == 0) {
+        apply_predefined_macros(&tbl_global, &opts_global);
+    }
+
+    const char *p = def;
+    while (*p && isspace((unsigned char)*p)) p++;
+    bool has_define = false;
+    if (*p == '#') {
+        has_define = true;
+    } else if (starts_with(p, "define")) {
+        has_define = true;
+    }
+
+    char *line = NULL;
+    if (has_define) {
+        line = xstrdup(def);
+    } else {
+        size_t len = strlen(def);
+        const char *prefix = "#define ";
+        size_t plen = strlen(prefix);
+        line = (char *)malloc(plen + len + 1);
+        if (!line) die("malloc");
+        memcpy(line, prefix, plen);
+        memcpy(line + plen, def, len);
+        line[plen + len] = '\0';
+    }
+
+    process_define(&tbl_global, line);
+    free(line);
+}
+
+void macro_undef(const char *name)
+{
+    if (!name || !*name) return;
+    if (tbl_global.items == NULL && tbl_global.len == 0 && tbl_global.cap == 0) {
+        apply_predefined_macros(&tbl_global, &opts_global);
+    }
+
+    const char *p = name;
+    while (*p && isspace((unsigned char)*p)) p++;
+    if (*p == '#') {
+        p++;
+        while (*p && isspace((unsigned char)*p)) p++;
+    }
+    if (starts_with(p, "undef")) {
+        p += 5;
+        while (*p && isspace((unsigned char)*p)) p++;
+    }
+
+    char idbuf[256];
+    size_t i = 0;
+    if (!(isalpha((unsigned char)*p) || *p == '_')) return;
+    while (*p && (isalnum((unsigned char)*p) || *p == '_')) {
+        if (i + 1 < sizeof idbuf) idbuf[i++] = *p;
+        p++;
+    }
+    idbuf[i] = '\0';
+    if (*idbuf) {
+        mtable_unset(&tbl_global, idbuf);
+    }
+}
+
 const char *call_func_macro(const char *macro_name, const char *args, const char *file, long line)
 {
     if (!macro_name || !*macro_name) return NULL;

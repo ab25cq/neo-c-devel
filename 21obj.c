@@ -1916,7 +1916,6 @@ sNode*% string_node(char* buf, char* head, int head_sline, sInfo* info) version 
         return new sDynamicTypeOf(exp, info) implements sNode;
     }
     else if(buf === "_Alignof") {
-puts("1");
         bool paren = false;
         if(*info->p == '(') {
             paren = true;

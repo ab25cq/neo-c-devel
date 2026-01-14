@@ -1731,7 +1731,14 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 91
         return new sUndefNode(word, info) implements sNode;
     }
     else if(buf === "macro_include") {
-        expected_next_character('"');
+        int quoted = 0;
+        if(*info->p == '"') {
+            quoted = 1;
+            info->p++;
+        }
+        else if(*info->p == '<') {
+            info->p++;
+        }
         
         var buf = new buffer();
         while(*info->p) {
@@ -1741,6 +1748,10 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 91
                 info->p++;
             }
             else if(*info->p == '"') {
+                info->p++;
+                break;
+            }
+            else if(*info->p == '>') {
                 info->p++;
                 break;
             }
@@ -1754,7 +1765,7 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 91
         
         FILE* out = fopen("__ccpp_tmp", "w");
         
-        incldue_file_neo_c(path, 0@quoted, out);
+        incldue_file_neo_c(path, quoted, out);
         
         fclose(out);
         
@@ -1797,7 +1808,7 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 91
         }
         
         bool match_ = false;
-        if(reflection_condtional === "true") {
+        if(reflection_condtional !== "false") {
             expected_next_character('{');
             transpile_toplevel(block:true);
             match_ = true;
@@ -1825,7 +1836,7 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 91
                     skip_spaces_and_lf();
                 }
                 
-                if(!match_ && reflection_condtional === "true") {
+                if(!match_ && reflection_condtional !== "false") {
                     expected_next_character('{');
                     transpile_toplevel(block:true);
                     match_ = true;
@@ -1911,6 +1922,60 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 91
         if(*info->p == ')') {
             info->p++;
             skip_spaces_and_lf();
+        }
+        
+        return new sNothingNode(info) implements sNode;
+    }
+    else if(buf === "macro_define") {
+        if(*info->p == '(') {
+            info->p++;
+            skip_spaces_and_lf();
+        }
+        
+        string exp = reflection_expression();
+        string exp2 = null;
+        
+        if(*info->p == ',') {
+            info->p++;
+            skip_spaces_and_lf();
+            exp2 = reflection_expression();
+        }
+        
+        if(*info->p == ')') {
+            info->p++;
+            skip_spaces_and_lf();
+        }
+        
+        skip_spaces_and_lf();
+        
+        string def = exp;
+        if(exp2) {
+            def = exp + s" " + exp2;
+        }
+        
+        if(def) {
+            macro_define(def);
+        }
+        
+        return new sNothingNode(info) implements sNode;
+    }
+    else if(buf === "macro_undef") {
+        if(*info->p == '(') {
+            info->p++;
+            skip_spaces_and_lf();
+        }
+        
+        string exp = reflection_expression();
+        
+        if(*info->p == ')') {
+            info->p++;
+            skip_spaces_and_lf();
+        }
+        
+        skip_spaces_and_lf();
+        
+        if(exp) {
+            macro_undef(exp);
         }
         
         return new sNothingNode(info) implements sNode;
