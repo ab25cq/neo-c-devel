@@ -1,0 +1,93 @@
+#line 1 "/usr/lib/clang/21/include/stdarg.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 1 "/usr/lib/clang/21/include/__stdarg_header_macro.h"
+
+
+
+
+
+
+
+
+#line 44 "/usr/lib/clang/21/include/stdarg.h"
+
+#line 1 "/usr/lib/clang/21/include/__stdarg___gnuc_va_list.h"
+
+
+
+
+
+
+
+
+#line 48 "/usr/lib/clang/21/include/stdarg.h"
+
+#line 1 "/usr/lib/clang/21/include/__stdarg_va_list.h"
+
+
+
+
+
+
+
+
+#line 53 "/usr/lib/clang/21/include/stdarg.h"
+
+#line 1 "/usr/lib/clang/21/include/__stdarg_va_arg.h"
+
+
+
+
+
+
+
+
+
+
+
+#line 58 "/usr/lib/clang/21/include/stdarg.h"
+
+#line 1 "/usr/lib/clang/21/include/__stdarg___va_copy.h"
+
+
+
+
+
+
+
+
+#line 63 "/usr/lib/clang/21/include/stdarg.h"
+
+#line 1 "/usr/lib/clang/21/include/__stdarg_va_copy.h"
+
+
+
+
+
+
+
+
+#line 68 "/usr/lib/clang/21/include/stdarg.h"

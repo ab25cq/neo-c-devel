@@ -4934,7 +4934,7 @@ uniq string char*::print(char* self)
     return string(self);
 }
 
-if(macro_defined("__RISCV__")) {
+if($UNIX == 0) {
     uniq string char*::printf(char* self, ...)
     {
         if(self == null) {
