@@ -1,5 +1,5 @@
-#ifndef COMELANG_H
-#define COMELANG_H
+#ifndef NEO_C_DEVEL_H
+#define NEO_C_DEVEL_H
 
 #define __BEGIN_DECLS
 #define __END_DECLS
@@ -19,101 +19,81 @@
 #define nullptr ((void*)0)
 typedef char*% string;
 
-if(__MINUX__ == 1)
-{
-    var EMBBEDED=1
-    var MINUX=1
+if(macro_defined "__MINUX__") {
+    var UNIX=1
+}
+elif(macro_defined "__BARE_METAL__") {
     var UNIX=0
 }
-elif(__BARE_METAL__ == 1) 
-{
-    var EMBBEDED=1
-    var BARE_METAL=1
-    var UNIX=0
-}
-elif(__PICO__ == 1)
-{
-    var PICO=1
-    var EMBBEDED=1
+elif(macro_defined "__PICO__") {
     var UNIX=0
 }
 else {
-    var EMBBEDED=0
     var UNIX=1
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // PICO
 ///////////////////////////////////////////////////////////////////////////
-#ifdef __PICO__
+if(macro_defined("__PICO__")) {
+    __c__ {#define _GNU_SOURCE}
+    __c__ {#include "stdarg.h"}
+    __c__ {#include "stdlib.h"}
+    __c__ {#include "stdint.h"}
+    __c__ {#include "string.h"}
+    __c__ {#include "stdio.h"}
+    __c__ {#include "ctype.h"}
+    __c__ {#include "wchar.h"}
+    __c__ {#include "pico/stdlib.h"}
+    __c__ {#include "pico/stdio.h"}
+    __c__ {#include "pico/time.h"}
+    __c__ {#include "hardware/irq.h"}
+    __c__ {#include "hardware/timer.h"}
+    __c__ {#include "hardware/uart.h"}
+    
+    __c__ {#include "pico/mutex.h"}
+    __c__ {#include "pico/multicore.h"}
 
-/*
-typedef unsigned int size_t;
-typedef int uint32_t;
-*/
+    macro_define("MUTEX_INITIALIZER (mutex_t){ .locked = false, .core = NULL }")
+    macro_define("NULL ((void*)0)")
 
-__c__ {#define _GNU_SOURCE}
-__c__ {#include "stdarg.h"}
-__c__ {#include "stdlib.h"}
-__c__ {#include "stdint.h"}
-__c__ {#include "string.h"}
-__c__ {#include "stdio.h"}
-__c__ {#include "ctype.h"}
-__c__ {#include "wchar.h"}
-__c__ {#include "pico/stdlib.h"}
-__c__ {#include "pico/stdio.h"}
-__c__ {#include "pico/time.h"}
-__c__ {#include "hardware/irq.h"}
-__c__ {#include "hardware/timer.h"}
-__c__ {#include "hardware/uart.h"}
+    typedef __builtin_va_list va_list;
 
-__c__ {#include "pico/mutex.h"}
-__c__ {#include "pico/multicore.h"}
-
-#define MUTEX_INITIALIZER (mutex_t){ .locked = false, .core = NULL }
-#define NULL ((void*)0)
-
-typedef __builtin_va_list va_list;
-
-using neo-c;
+    using neo-c;
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // BARE METAL 
 ///////////////////////////////////////////////////////////////////////////
-#elif __BARE_METAL__
+elif(macro_defined("__BARE_METAL__")) {
+    #include "neo-c-libc.h"
 
-#include "neo-c-libc.h"
-
-using neo-c;
-
+    using neo-c;
+}
 ///////////////////////////////////////////////////////////////////////////
 // UNIX
 ///////////////////////////////////////////////////////////////////////////
-#else
-
-using C;
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdarg.h>
-#undef va_start
-#define va_start(ap, last) __builtin_va_start(ap, last)
-#include <limits.h>
-#include <locale.h>
-#include <errno.h>
-#include <assert.h>
-#include <stdbool.h>
-
-using neo-c;
-
-#endif
+else {
+    using c;
+    
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <stdarg.h>
+    #undef va_start
+    #define va_start(ap, last) __builtin_va_start(ap, last)
+    #include <limits.h>
+    #include <locale.h>
+    #include <errno.h>
+    #include <assert.h>
+    #include <stdbool.h>
+    
+    using neo-c;
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // PREVIOUS DEFINITIONS
 ///////////////////////////////////////////////////////////////////////////
-//#define foreach(o1, o2) for(var o2_saved = (o2), var o1 = (o2_saved).begin(); !(o2_saved).end(); o1 = (o2_saved).next())
-
 struct buffer 
 {
     char*% buf;
@@ -159,14 +139,10 @@ uniq string _Bool::to_string(bool self);
 uniq bool string::equals(char* self, char* right);
 
 
-///////////////////////////////////////////////////////////////////////////
-// NONE UNIX
-///////////////////////////////////////////////////////////////////////////
 #define COME_STACKFRAME_MAX 16
 #define COME_STACKFRAME_MAX_GLOBAL 128
 
-if($UNIX == 0)
-{
+if($UNIX == 0) {
     uniq void come_push_stackframe(char* sname, int sline, int id)
     {
     }
@@ -196,7 +172,7 @@ if($UNIX == 0)
         return false;
     }
     
-    #undef assert
+    macro_undef "assert"
     
     uniq record int assert(int exp) version 2
     {
@@ -209,12 +185,7 @@ if($UNIX == 0)
         }
     }
 }
-
-///////////////////////////////////////////////////////////////////////////
-// UNIX
-///////////////////////////////////////////////////////////////////////////
-else 
-{
+else  {
     uniq char* gComeStackFrameSName[COME_STACKFRAME_MAX_GLOBAL];
     uniq int gComeStackFrameSLine[COME_STACKFRAME_MAX_GLOBAL];
     uniq int gComeStackFrameID[COME_STACKFRAME_MAX_GLOBAL];
@@ -291,8 +262,7 @@ struct sMemHeaderTiny
     int sline;
 };
 
-if($UNIX == 1) 
-{
+if($UNIX == 1) {
     struct sMemHeader
     {
         long size;
@@ -562,8 +532,7 @@ if($UNIX == 1)
         }
     }
 }
-else 
-{
+else {
     uniq sMemHeaderTiny* gAllocMem;
     
     uniq void come_heap_init(int come_debug)
@@ -886,43 +855,43 @@ uniq string __builtin_string(char* str)
     return result;
 }
 
-#ifndef __RISCV__
-uniq void come_push_stackframe(char* sname, int sline, int id) version 2
+if(!macro_defined("__RISCV__"))
 {
-    inherit(sname, sline, id);
+    uniq void come_push_stackframe(char* sname, int sline, int id) version 2
+    {
+        inherit(sname, sline, id);
+    }
+    
+    uniq void come_pop_stackframe() version 2
+    {
+        inherit();
+    }
+    
+    uniq void come_save_stackframe(char* sname, int sline) version 2
+    {
+        inherit(sname, sline);
+    }
+    
+    uniq void stackframe() version 2
+    {
+        inherit();
+    }
+    
+    uniq string come_get_stackframe() version 2
+    {
+        return inherit();
+    }
+    
+    uniq void* come_calloc(size_t count, size_t size, char* sname=null, int sline=0, char* class_name="") version 2
+    {
+        return inherit(count, size, sname, sline, class_name);
+    }
+    
+    uniq void come_free(void* mem) version 2
+    {
+        inherit(mem);
+    }
 }
-
-uniq void come_pop_stackframe() version 2
-{
-    inherit();
-}
-
-uniq void come_save_stackframe(char* sname, int sline) version 2
-{
-    inherit(sname, sline);
-}
-
-uniq void stackframe() version 2
-{
-    inherit();
-}
-
-uniq string come_get_stackframe() version 2
-{
-    return inherit();
-}
-
-uniq void* come_calloc(size_t count, size_t size, char* sname=null, int sline=0, char* class_name="") version 2
-{
-    return inherit(count, size, sname, sline, class_name);
-}
-
-uniq void come_free(void* mem) version 2
-{
-    inherit(mem);
-}
-
-#endif
 
 //////////////////////////////
 // list
@@ -3385,54 +3354,84 @@ uniq buffer* buffer*::append_str(buffer* self, char* mem)
     return self;
 }
 
-uniq buffer* buffer*::append_format(buffer* self, char* msg, ...)
-{
-    if(self == null || msg == null) {
+if($UNIX == 0) {
+    uniq buffer* buffer*::append_format(buffer* self, char* msg, ...)
+    {
+        if(self == null || msg == null) {
+            return self;
+        }
+        
+        char result[128];
+        
+        va_list` args;
+        va_start(args, msg);
+        vsnprintf(result, 128, msg, args);
+        va_end(args);
+        
+        int len = strlen(result);
+        
+        string mem = string(result);
+        
+        int size = strlen(mem);
+        if(self.len + size + 1 + 1 >= self.size) {
+            char*% old_buf = new char[self.size];
+            memcpy(old_buf, self.buf, self.size);
+            int old_len = self.len;
+            int new_size = (self.size + size + 1) * 2;
+            self.buf = new char[new_size];
+            memcpy(self.buf, old_buf, old_len);
+            self.buf[old_len] = '\0';
+            self.size = new_size;
+        }
+    
+        memcpy(self.buf + self.len, mem, size);
+        self.len += size;
+        self.buf[self.len] = '\0';
+        
+        free(result);
+        
         return self;
     }
+}
+else {
+    uniq buffer* buffer*::append_format(buffer* self, char* msg, ...)
+    {
+        if(self == null || msg == null) {
+            return self;
+        }
+        
+        va_list` args;
+        va_start(args, msg);
+        char* result;
+        int len = vasprintf(&result, msg, args);
+        va_end(args);
+        
+        if(len < 0) {
+            return self;
+        }
+        
+        string mem = string(result);
+        
+        int size = strlen(mem);
+        if(self.len + size + 1 + 1 >= self.size) {
+            char*% old_buf = new char[self.size];
+            memcpy(old_buf, self.buf, self.size);
+            int old_len = self.len;
+            int new_size = (self.size + size + 1) * 2;
+            self.buf = new char[new_size];
+            memcpy(self.buf, old_buf, old_len);
+            self.buf[old_len] = '\0';
+            self.size = new_size;
+        }
     
-#ifdef __RISCV__
-    char result[128];
-    
-    va_list` args;
-    va_start(args, msg);
-    vsnprintf(result, 128, msg, args);
-    va_end(args);
-    
-    int len = strlen(result);
-#else
-    va_list` args;
-    va_start(args, msg);
-    char* result;
-    int len = vasprintf(&result, msg, args);
-    va_end(args);
-    
-    if(len < 0) {
+        memcpy(self.buf + self.len, mem, size);
+        self.len += size;
+        self.buf[self.len] = '\0';
+        
+        free(result);
+        
         return self;
     }
-#endif
-    
-    string mem = string(result);
-    
-    int size = strlen(mem);
-    if(self.len + size + 1 + 1 >= self.size) {
-        char*% old_buf = new char[self.size];
-        memcpy(old_buf, self.buf, self.size);
-        int old_len = self.len;
-        int new_size = (self.size + size + 1) * 2;
-        self.buf = new char[new_size];
-        memcpy(self.buf, old_buf, old_len);
-        self.buf[old_len] = '\0';
-        self.size = new_size;
-    }
-
-    memcpy(self.buf + self.len, mem, size);
-    self.len += size;
-    self.buf[self.len] = '\0';
-    
-    free(result);
-    
-    return self;
 }
 
 uniq buffer* buffer*::append_nullterminated_str(buffer* self, char* mem)
@@ -4935,32 +4934,47 @@ uniq string char*::print(char* self)
     return string(self);
 }
 
-uniq string char*::printf(char* self, ...)
-{
-    if(self == null) {
-        return string("");
+if(macro_defined("__RISCV__")) {
+    uniq string char*::printf(char* self, ...)
+    {
+        if(self == null) {
+            return string("");
+        }
+        char* msg2;
+    
+        char msg2[128];
+        
+        va_list` args;
+        va_start(args, self);
+        int len = snprintf(msg2, 128, self, args);
+        va_end(args);
+        
+        printf("%s", msg2);
+    
+        free(msg2);
+        
+        return string(self);
     }
-    char* msg2;
-
-#ifdef __RISCV__
-    char msg2[128];
+}
+else {
+    uniq string char*::printf(char* self, ...)
+    {
+        if(self == null) {
+            return string("");
+        }
+        char* msg2;
     
-    va_list` args;
-    va_start(args, self);
-    int len = snprintf(msg2, 128, self, args);
-    va_end(args);
-#else
-    va_list` args;
-    va_start(args, self);
-    vasprintf(&msg2,self,args);
-    va_end(args);
-#endif
+        va_list` args;
+        va_start(args, self);
+        vasprintf(&msg2,self,args);
+        va_end(args);
+        
+        printf("%s", msg2);
     
-    printf("%s", msg2);
-
-    free(msg2);
-    
-    return string(self);
+        free(msg2);
+        
+        return string(self);
+    }
 }
 
 uniq int int::printf(int self, char* msg)
@@ -6202,22 +6216,21 @@ uniq string string::chomp(char* str)
     return result;
 }
 
-#if !defined(__BARE_METAL__) && !defined(__PICO__)
-uniq string xrealpath(char* path)
-{
-    if(path == null) {
-        return string("");
+if($UNIX == 1) {
+    uniq string xrealpath(char* path)
+    {
+        if(path == null) {
+            return string("");
+        }
+        char* result = realpath(path, null);
+    
+        string result2 = string(result);
+    
+        free(result);
+    
+        return result2;
     }
-    char* result = realpath(path, null);
-
-    string result2 = string(result);
-
-    free(result);
-
-    return result2;
 }
-#endif
-
 
 uniq string char*::replace(char* self, int index, char c)
 {
@@ -6735,1054 +6748,1023 @@ uniq string string::sub_block(char* self, char* reg, bool global=true, bool igno
     return char*::sub_block(self, reg, global, ignore_case, parent, block);
 }
 
-#if defined(__LINUX__) || defined(__ANDROID__) || defined(__RASPBERRY_PI__) || defined(__MAC__)
-
 #ifndef _XOPEN_SOURCE
 #define _XOPEN_SOURCE
 #endif
 
+if($UNIX == 1) {
 #include <wchar.h>
 #include <libgen.h>
-
-typedef wchar_t*% wstring;
-
-uniq wstring __builtin_wstring(char* str)
-{
-    if(str == null) {
-        return null;
-    }
-    int len = strlen(str);
-
-    wstring wstr = new wchar_t[len+1];
-
-    int ret = mbstowcs(wstr, str, len+1);
-    wstr[ret] = '\0';
-
-    if(ret < 0) {
-        wstr[0] = 0;
-    }
-
-    return wstr;
-}
-
-uniq int wchar_t*::length(wchar_t* str)
-{
-    if(str == null) {
-        return 0;
-    }
-    return wcslen(str);
-}
-
-uniq int wchar_t[]::length(wchar_t* str)
-{
-    if(str == null) {
-        return 0;
-    }
-    return wcslen(str);
-}
-
-uniq int wstring::length(wchar_t* str)
-{
-    return wchar_t*::length(str);
-}
-
-uniq string string::lower_case(char* str)
-{
-    if(str == null) {
-        return string("");
-    }
-    string result = string(str);
-    for(int i=0; i<strlen(str); i++) {
-        if(str[i] >= 'A' && str[i] <= 'Z') {
-            result[i] = str[i] - 'A' + 'a';
+    
+    typedef wchar_t*% wstring;
+    
+    uniq wstring __builtin_wstring(char* str)
+    {
+        if(str == null) {
+            return null;
         }
-    }
+        int len = strlen(str);
     
-    return result;
-}
-
-uniq string string::upper_case(char* str)
-{
-    if(str == null) {
-        return string("");
-    }
-    string result = string(str);
-    for(int i=0; i<strlen(str); i++) {
-        if(str[i] >= 'a' && str[i] <= 'z') {
-            result[i] = str[i] - 'a' + 'A';
+        wstring wstr = new wchar_t[len+1];
+    
+        int ret = mbstowcs(wstr, str, len+1);
+        wstr[ret] = '\0';
+    
+        if(ret < 0) {
+            wstr[0] = 0;
         }
+    
+        return wstr;
     }
     
-    return result;
-}
-
-uniq wstring wchar_t*::substring(wchar_t* str, int head, int tail)
-{
-    if(str == null) {
-        return wstring("");
-    }
-
-    int len = wcslen(str);
-
-    if(head < 0) {
-        head += len;
-    }
-    if(tail < 0) {
-        tail += len + 1;
-    }
-
-    if(head > tail) {
-        return wstring("");
-    }
-
-    if(head < 0) {
-        head = 0;
-    }
-
-    if(tail >= len) {
-        tail = len;
+    uniq int wchar_t*::length(wchar_t* str)
+    {
+        if(str == null) {
+            return 0;
+        }
+        return wcslen(str);
     }
     
-    if(head >= len) {
-        return wstring("");
-    }
-
-    if(head == tail) {
-        return wstring("");
-    }
-
-    if(tail-head+1 < 1) {
-        return wstring("");
-    }
-
-    wstring result = new wchar_t[tail-head+1];
-
-    memcpy(result, str + head, sizeof(wchar_t)*(tail-head));
-    result[tail-head] = '\0';
-
-    return result;
-}
-
-uniq int char*::index_count(char* str, char* search_str, int count, int default_value)
-{
-    if(str == null || search_str == null) {
-        return default_value;
+    uniq int wchar_t[]::length(wchar_t* str)
+    {
+        if(str == null) {
+            return 0;
+        }
+        return wcslen(str);
     }
     
-    int n = 0;
-    int len = strlen(str);
-    for(int i=0; i<len; i++) {
-        int len2 = strlen(search_str);
-        int j;
-        for(j=0; j<len2; j++) {
-            if(str[i+j] != search_str[j]) {
-                break;
+    uniq int wstring::length(wchar_t* str)
+    {
+        return wchar_t*::length(str);
+    }
+    
+    uniq string string::lower_case(char* str)
+    {
+        if(str == null) {
+            return string("");
+        }
+        string result = string(str);
+        for(int i=0; i<strlen(str); i++) {
+            if(str[i] >= 'A' && str[i] <= 'Z') {
+                result[i] = str[i] - 'A' + 'a';
             }
         }
         
-        if(j == len2) {
-            n++;
-            
-            if(n == count) {
-                return i;
+        return result;
+    }
+    
+    uniq string string::upper_case(char* str)
+    {
+        if(str == null) {
+            return string("");
+        }
+        string result = string(str);
+        for(int i=0; i<strlen(str); i++) {
+            if(str[i] >= 'a' && str[i] <= 'z') {
+                result[i] = str[i] - 'a' + 'A';
             }
         }
+        
+        return result;
     }
     
-    return default_value;
-}
-
-
-uniq int char*::rindex(char* str, char* search_str, int default_value)
-{
-    if(str == null || search_str == null) {
-        return default_value;
-    }
-    int len = strlen(search_str);
-    char* p = str + strlen(str) - len;
-
-    while(p >= str) {
-        if(strncmp(p, search_str, len) == 0) {
-            return p - str;
+    uniq wstring wchar_t*::substring(wchar_t* str, int head, int tail)
+    {
+        if(str == null) {
+            return wstring("");
         }
-
-        p--;
+    
+        int len = wcslen(str);
+    
+        if(head < 0) {
+            head += len;
+        }
+        if(tail < 0) {
+            tail += len + 1;
+        }
+    
+        if(head > tail) {
+            return wstring("");
+        }
+    
+        if(head < 0) {
+            head = 0;
+        }
+    
+        if(tail >= len) {
+            tail = len;
+        }
+        
+        if(head >= len) {
+            return wstring("");
+        }
+    
+        if(head == tail) {
+            return wstring("");
+        }
+    
+        if(tail-head+1 < 1) {
+            return wstring("");
+        }
+    
+        wstring result = new wchar_t[tail-head+1];
+    
+        memcpy(result, str + head, sizeof(wchar_t)*(tail-head));
+        result[tail-head] = '\0';
+    
+        return result;
     }
-
-    return default_value;
-}
-
-
-uniq int char*::rindex_count(char* str, char* search_str, int count, int default_value)
-{
-    if(str == null || search_str == null) {
+    
+    uniq int char*::index_count(char* str, char* search_str, int count, int default_value)
+    {
+        if(str == null || search_str == null) {
+            return default_value;
+        }
+        
+        int n = 0;
+        int len = strlen(str);
+        for(int i=0; i<len; i++) {
+            int len2 = strlen(search_str);
+            int j;
+            for(j=0; j<len2; j++) {
+                if(str[i+j] != search_str[j]) {
+                    break;
+                }
+            }
+            
+            if(j == len2) {
+                n++;
+                
+                if(n == count) {
+                    return i;
+                }
+            }
+        }
+        
         return default_value;
     }
-    int len = strlen(search_str);
-    char* p = str + strlen(str) - len;
     
-    int n = 0;
-
-    while(p >= str) {
-        if(strncmp(p, search_str, len) == 0) {
-            n++;
-            if(n == count) {
+    
+    uniq int char*::rindex(char* str, char* search_str, int default_value)
+    {
+        if(str == null || search_str == null) {
+            return default_value;
+        }
+        int len = strlen(search_str);
+        char* p = str + strlen(str) - len;
+    
+        while(p >= str) {
+            if(strncmp(p, search_str, len) == 0) {
                 return p - str;
             }
+    
+            p--;
         }
-
-        p--;
-    }
-
-    return default_value;
-}
-
-
-
-
-
-
-
-uniq string char*::strip(char* self)
-{
-    if(self == null) {
-        return string("");
+    
+        return default_value;
     }
     
-    string result = string(self);
     
-    int len = strlen(self);
-    
-    if(self[len-1] == '\n') {
-        result[len-1] = '\0';
-    }
-    else if(self[len-1] == '\r') {
-        result[len-1] = '\0';
-    }
-    else if(len > 2 && self[len-2] == '\r' && self[len-1] == '\n') {
-        result[len-2] = '\0';
-    }
-    
-    return result;
-}
-
-uniq string wchar_t*::to_string(wchar_t* wstr)
-{
-    if(wstr == null) {
-        return string("");
-    }
-    
-    int len = MB_LEN_MAX*(wcslen(wstr)+1);
-
-    string result = new char[len];
-
-    if(wcstombs(result, wstr, len) < 0) 
+    uniq int char*::rindex_count(char* str, char* search_str, int count, int default_value)
     {
-        strncpy(result, "", len);
+        if(str == null || search_str == null) {
+            return default_value;
+        }
+        int len = strlen(search_str);
+        char* p = str + strlen(str) - len;
+        
+        int n = 0;
+    
+        while(p >= str) {
+            if(strncmp(p, search_str, len) == 0) {
+                n++;
+                if(n == count) {
+                    return p - str;
+                }
+            }
+    
+            p--;
+        }
+    
+        return default_value;
     }
-
-    return result;
-}
-
-uniq string wchar_t[]::to_string(wchar_t* wstr)
-{
-    if(wstr == null) {
-        return string("");
+    
+    uniq string char*::strip(char* self)
+    {
+        if(self == null) {
+            return string("");
+        }
+        
+        string result = string(self);
+        
+        int len = strlen(self);
+        
+        if(self[len-1] == '\n') {
+            result[len-1] = '\0';
+        }
+        else if(self[len-1] == '\r') {
+            result[len-1] = '\0';
+        }
+        else if(len > 2 && self[len-2] == '\r' && self[len-1] == '\n') {
+            result[len-2] = '\0';
+        }
+        
+        return result;
     }
-    return wchar_t*::to_string(wstr);
-}
-
-uniq wstring char*::to_wstring(char* str)
-{
-    if(str == null) {
-        return wstring("");
+    
+    uniq string wchar_t*::to_string(wchar_t* wstr)
+    {
+        if(wstr == null) {
+            return string("");
+        }
+        
+        int len = MB_LEN_MAX*(wcslen(wstr)+1);
+    
+        string result = new char[len];
+    
+        if(wcstombs(result, wstr, len) < 0) 
+        {
+            strncpy(result, "", len);
+        }
+    
+        return result;
     }
-    return wstring(str);
-}
-
-uniq wstring char[]::to_wstring(char* str)
-{
-    if(str == null) {
-        return wstring("");
+    
+    uniq string wchar_t[]::to_string(wchar_t* wstr)
+    {
+        if(wstr == null) {
+            return string("");
+        }
+        return wchar_t*::to_string(wstr);
     }
-    return wstring(str);
-}
-
-uniq wstring wchar_t*::delete(wchar_t* str, int head, int tail) 
-{
-    if(str == null) {
-        return wstring("");
+    
+    uniq wstring char*::to_wstring(char* str)
+    {
+        if(str == null) {
+            return wstring("");
+        }
+        return wstring(str);
     }
-    int len = wcslen(str);
-
-    if(len == 0) {
+    
+    uniq wstring char[]::to_wstring(char* str)
+    {
+        if(str == null) {
+            return wstring("");
+        }
+        return wstring(str);
+    }
+    
+    uniq wstring wchar_t*::delete(wchar_t* str, int head, int tail) 
+    {
+        if(str == null) {
+            return wstring("");
+        }
+        int len = wcslen(str);
+    
+        if(len == 0) {
+            return str.to_string().to_wstring();
+        }
+        
+        if(head < 0) {
+           head += len;
+        }
+        
+        if(tail < 0) {
+           tail += len + 1;
+        }
+    
+        if(head < 0) {
+            head = 0;
+        }
+    
+        if(tail < 0) {
+            return str.to_string().to_wstring();
+        }
+    
+        if(tail >= len) {
+            tail = len;
+        }
+        
+        wstring sub_str = str.substring(tail, -1);
+    
+        memcpy(str + head, sub_str, sizeof(wchar_t)*(sub_str.length()+1));
+    
         return str.to_string().to_wstring();
     }
     
-    if(head < 0) {
-       head += len;
+    uniq int wchar_t*::index(wchar_t* str, wchar_t* search_str, int default_value)
+    {
+        if(str == null || search_str == null) {
+            return default_value;
+        }
+        
+        wchar_t* head = wcsstr(str, search_str);
+    
+        if(head == null) {
+            return default_value;
+        }
+    
+        return head - str;
     }
     
-    if(tail < 0) {
-       tail += len + 1;
-    }
-
-    if(head < 0) {
-        head = 0;
-    }
-
-    if(tail < 0) {
-        return str.to_string().to_wstring();
-    }
-
-    if(tail >= len) {
-        tail = len;
-    }
+    uniq int wchar_t*::rindex(wchar_t* str, wchar_t* search_str, int default_value)
+    {
+        if(str == null || search_str == null) {
+            return default_value;
+        }
+        
+        int len = wcslen(search_str);
     
-    wstring sub_str = str.substring(tail, -1);
-
-    memcpy(str + head, sub_str, sizeof(wchar_t)*(sub_str.length()+1));
-
-    return str.to_string().to_wstring();
-}
-
-uniq int wchar_t*::index(wchar_t* str, wchar_t* search_str, int default_value)
-{
-    if(str == null || search_str == null) {
+        wchar_t* p = str + wcslen(str) - len;
+    
+        while(p >= str) {
+            int len2 = wcslen(p);
+            bool result = true;
+            int i;
+            for(i=0; i<len && i < len2; i++) {
+                if(p[i] != search_str[i]) {
+                    result = false;
+                }
+            }
+            if(result) {
+                return (p - str);
+            }
+    
+            p--;
+        }
+    
         return default_value;
     }
     
-    wchar_t* head = wcsstr(str, search_str);
-
-    if(head == null) {
-        return default_value;
-    }
-
-    return head - str;
-}
-
-uniq int wchar_t*::rindex(wchar_t* str, wchar_t* search_str, int default_value)
-{
-    if(str == null || search_str == null) {
-        return default_value;
+    uniq wstring wchar_t*::reverse(wchar_t* str) 
+    {
+        if(str == null) {
+            return wstring("");
+        }
+        
+        int len = wcslen(str);
+        wstring result = new wchar_t[len + 1];
+    
+        for(int i=0; i<len; i++) {
+            result[i] = str[len-i-1];
+        }
+    
+        result[len] = '\0';
+    
+        return result;
     }
     
-    int len = wcslen(search_str);
-
-    wchar_t* p = str + wcslen(str) - len;
-
-    while(p >= str) {
-        int len2 = wcslen(p);
-        bool result = true;
-        int i;
-        for(i=0; i<len && i < len2; i++) {
-            if(p[i] != search_str[i]) {
-                result = false;
+    uniq wstring wchar_t*::multiply(wchar_t* str, int n)
+    {
+        if(str == null) {
+            return wstring("");
+        }
+        
+        int len = wcslen(str) * n + 1;
+    
+        wstring result = new wchar_t[len];
+    
+        result[0] = '\0';
+    
+        for(int i=0; i<n; i++) {
+            wcscat(result, str);
+        }
+    
+        return result;
+    }
+    
+    uniq wstring wchar_t*::printable(wchar_t* str)
+    {
+        if(str == null) {
+            return wstring("");
+        }
+        int len = str.length();
+        wstring result = new wchar_t[len*2+1];
+    
+        int n = 0;
+        for(int i=0; i<len; i++) {
+            wchar_t c = str[i];
+    
+            if((c >= 0 && c < ' ') 
+                || c == 127)
+            {
+                result[n++] = '^';
+                result[n++] = c + 'A' - 1;
+            }
+            else {
+                result[n++] = c;
             }
         }
-        if(result) {
-            return (p - str);
-        }
-
-        p--;
-    }
-
-    return default_value;
-}
-
-uniq wstring wchar_t*::reverse(wchar_t* str) 
-{
-    if(str == null) {
-        return wstring("");
+    
+        result[n] = '\0'
+    
+        return result;
     }
     
-    int len = wcslen(str);
-    wstring result = new wchar_t[len + 1];
-
-    for(int i=0; i<len; i++) {
-        result[i] = str[len-i-1];
-    }
-
-    result[len] = '\0';
-
-    return result;
-}
-
-uniq wstring wchar_t*::multiply(wchar_t* str, int n)
-{
-    if(str == null) {
-        return wstring("");
-    }
     
-    int len = wcslen(str) * n + 1;
-
-    wstring result = new wchar_t[len];
-
-    result[0] = '\0';
-
-    for(int i=0; i<n; i++) {
-        wcscat(result, str);
-    }
-
-    return result;
-}
-
-uniq wstring wchar_t*::printable(wchar_t* str)
-{
-    if(str == null) {
-        return wstring("");
-    }
-    int len = str.length();
-    wstring result = new wchar_t[len*2+1];
-
-    int n = 0;
-    for(int i=0; i<len; i++) {
-        wchar_t c = str[i];
-
-        if((c >= 0 && c < ' ') 
-            || c == 127)
-        {
-            result[n++] = '^';
-            result[n++] = c + 'A' - 1;
-        }
-        else {
-            result[n++] = c;
-        }
-    }
-
-    result[n] = '\0'
-
-    return result;
-}
-
-
-uniq int wchar_t*::compare(wchar_t* left, wchar_t* right)
-{
-    if(left == null) {
-        if(right == null) {
-            return 0;
-        }
-        else {
-            return 1;
-        }
-    }
-    else if(right == null) {
+    uniq int wchar_t*::compare(wchar_t* left, wchar_t* right)
+    {
         if(left == null) {
-            return 0;
+            if(right == null) {
+                return 0;
+            }
+            else {
+                return 1;
+            }
         }
-        else {
-            return -1;
+        else if(right == null) {
+            if(left == null) {
+                return 0;
+            }
+            else {
+                return -1;
+            }
         }
+        return wcscmp(left, right);
     }
-    return wcscmp(left, right);
-}
-
-uniq int wstring::compare(wchar_t* left, wchar_t* right)
-{
-    if(left == null) {
-        if(right == null) {
-            return 0;
-        }
-        else {
-            return 1;
-        }
-    }
-    else if(right == null) {
+    
+    uniq int wstring::compare(wchar_t* left, wchar_t* right)
+    {
         if(left == null) {
-            return 0;
+            if(right == null) {
+                return 0;
+            }
+            else {
+                return 1;
+            }
         }
-        else {
-            return -1;
+        else if(right == null) {
+            if(left == null) {
+                return 0;
+            }
+            else {
+                return -1;
+            }
         }
+        return wcscmp(left, right);
     }
-    return wcscmp(left, right);
-}
-
-
-uniq bool wchar_t*::equals(wchar_t left, wchar_t right)
-{
-    return left == right;
-}
-
-
-uniq wstring wchar_t*::operator_mult(wchar_t* str, int n)
-{
-    return wchar_t*::multiply(str, n);
-}
-
-uniq wstring wstring::operator_mult(wchar_t* str, int n)
-{
-    return wchar_t*::multiply(str, n);
-}
-
-uniq bool wchar_t*::operator_equals(wchar_t* left, wchar_t* right)
-{
-    return wcscmp(left, right) == 0;
-}
-
-uniq bool wstring::operator_equals(wchar_t* left, wchar_t* right)
-{
-    return wcscmp(left, right) == 0;
-}
-
-uniq bool wchar_t*::operator_not_equals(wchar_t* left, wchar_t* right)
-{
-    return wcscmp(left, right) != 0;
-}
-
-uniq bool wstring::operator_not_equals(wchar_t* left, wchar_t* right)
-{
-    return wcscmp(left, right) != 0;
-}
-
-
-uniq wstring wchar_t*::operator_add(wchar_t* left, wchar_t* right)
-{
-    if(left == null || right == null) {
-        return wstring("");
-    }
-    wchar_t*% result = new wchar_t[wcslen(left) + wcslen(right) + 1];
     
-    wcscpy(result, left);
-    wcscat(result, right);
     
-    return result;
-}
-
-uniq wstring wstring::operator_add(wchar_t* left, wchar_t* right)
-{
-    if(left == null || right == null) {
-        return wstring("");
+    uniq bool wchar_t*::equals(wchar_t left, wchar_t right)
+    {
+        return left == right;
     }
-    wchar_t*% result = new wchar_t[wcslen(left) + wcslen(right) + 1];
     
-    wcscpy(result, left);
-    wcscat(result, right);
     
-    return result;
-}
-
-uniq int char*::index(char* str, char* search_str, int default_value)
-{
-    if(str == null || search_str == null) {
-        return default_value;
+    uniq wstring wchar_t*::operator_mult(wchar_t* str, int n)
+    {
+        return wchar_t*::multiply(str, n);
     }
-    char* head = strstr(str, search_str);
-
-    if(head == null) {
-        return default_value;
+    
+    uniq wstring wstring::operator_mult(wchar_t* str, int n)
+    {
+        return wchar_t*::multiply(str, n);
     }
-
-    return head - str;
-}
-
-
-
-
-uniq string char*::replace(char* self, int index, char c)
-{
-    if(self == null) {
-        return string("");
+    
+    uniq bool wchar_t*::operator_equals(wchar_t* left, wchar_t* right)
+    {
+        return wcscmp(left, right) == 0;
     }
-    int len = strlen(self);
-
-    if(strcmp(self, "") == 0) {
+    
+    uniq bool wstring::operator_equals(wchar_t* left, wchar_t* right)
+    {
+        return wcscmp(left, right) == 0;
+    }
+    
+    uniq bool wchar_t*::operator_not_equals(wchar_t* left, wchar_t* right)
+    {
+        return wcscmp(left, right) != 0;
+    }
+    
+    uniq bool wstring::operator_not_equals(wchar_t* left, wchar_t* right)
+    {
+        return wcscmp(left, right) != 0;
+    }
+    
+    
+    uniq wstring wchar_t*::operator_add(wchar_t* left, wchar_t* right)
+    {
+        if(left == null || right == null) {
+            return wstring("");
+        }
+        wchar_t*% result = new wchar_t[wcslen(left) + wcslen(right) + 1];
+        
+        wcscpy(result, left);
+        wcscat(result, right);
+        
+        return result;
+    }
+    
+    uniq wstring wstring::operator_add(wchar_t* left, wchar_t* right)
+    {
+        if(left == null || right == null) {
+            return wstring("");
+        }
+        wchar_t*% result = new wchar_t[wcslen(left) + wcslen(right) + 1];
+        
+        wcscpy(result, left);
+        wcscat(result, right);
+        
+        return result;
+    }
+    
+    uniq int char*::index(char* str, char* search_str, int default_value)
+    {
+        if(str == null || search_str == null) {
+            return default_value;
+        }
+        char* head = strstr(str, search_str);
+    
+        if(head == null) {
+            return default_value;
+        }
+    
+        return head - str;
+    }
+    
+    uniq string char*::replace(char* self, int index, char c)
+    {
+        if(self == null) {
+            return string("");
+        }
+        int len = strlen(self);
+    
+        if(strcmp(self, "") == 0) {
+            return string(self);
+        }
+        
+        if(index < 0) {
+           index += len;
+        }
+    
+        if(index >= len) {
+            index = len-1;
+        }
+    
+        if(index < 0) {
+            index = 0;
+        }
+        
+        self[index] = c;
+        
         return string(self);
     }
     
-    if(index < 0) {
-       index += len;
-    }
-
-    if(index >= len) {
-        index = len-1;
-    }
-
-    if(index < 0) {
-        index = 0;
+    uniq string char*::multiply(char* str, int n)
+    {
+        if(str == null) {
+            return string("");
+        }
+        int len = strlen(str) * n + 1;
+    
+        char*% result = new char[len];
+    
+        result[0] = '\0';
+    
+        for(int i=0; i<n; i++) {
+            strcat(result, str);
+        }
+    
+        return result;
     }
     
-    self[index] = c;
+    uniq list<string>*% char*::split_str(char* self, char* str) 
+    {
+        if(self == null || str == null) {
+            return new list<string>();
+        }
+        auto result = new list<string>.initialize();
     
-    return string(self);
-}
-
-uniq string char*::multiply(char* str, int n)
-{
-    if(str == null) {
-        return string("");
-    }
-    int len = strlen(str) * n + 1;
-
-    char*% result = new char[len];
-
-    result[0] = '\0';
-
-    for(int i=0; i<n; i++) {
-        strcat(result, str);
-    }
-
-    return result;
-}
-
-
-
-
-uniq list<string>*% char*::split_str(char* self, char* str) 
-{
-    if(self == null || str == null) {
-        return new list<string>();
-    }
-    auto result = new list<string>.initialize();
-
-    auto buf = new buffer.initialize();
-
-    for(int i=0; i<self.length(); i++) {
-        if(strstr(self + i, str) == self + i) {
+        auto buf = new buffer.initialize();
+    
+        for(int i=0; i<self.length(); i++) {
+            if(strstr(self + i, str) == self + i) {
+                result.push_back(string(buf.buf));
+                buf.reset();
+                i += strlen(str)-1;
+            }
+            else {
+                buf.append_char(self[i]);
+            }
+        }
+        if(buf.length() != 0) {
             result.push_back(string(buf.buf));
-            buf.reset();
-            i += strlen(str)-1;
         }
-        else {
-            buf.append_char(self[i]);
-        }
-    }
-    if(buf.length() != 0) {
-        result.push_back(string(buf.buf));
-    }
-
-    return result;
-}
-
-
-
-
-
-
-
-
-
-uniq unsigned int wchar_t*::get_hash_key(wchar_t* value)
-{
-    if(value == null) {
-        return 0;
-    }
-    int result = 0;
-    wchar_t* p = value;
-    while(*p) {
-        result += (*p);
-        p++;
-    }
-    return result;
-}
-
-uniq bool wchar_t*::equals(wchar_t* left, wchar_t* right)
-{
-    if(left == null && right == null) {
-        return true;
-    }
-    else if(left == null || right == null) {
-        return false;
-    }
-    return wcscmp(left, right) == 0;
-}
-
-uniq bool wstring::equals(wchar_t* left, wchar_t* right)
-{
-    if(left == null && right == null) {
-        return true;
-    }
-    else if(left == null || right == null) {
-        return false;
-    }
-    return wcscmp(left, right) == 0;
-}
-
-
-uniq bool wchar_t::operator_equals(wchar_t left, wchar_t right)
-{
-    return left == right;
-}
-
-uniq bool wchar_t::operator_not_equals(wchar_t left, wchar_t right)
-{
-    return left != right;
-}
-
-uniq unsigned int wchar_t::get_hash_key(wchar_t value)
-{
-    return value;
-}
-
-uniq bool wchar_t::equals(wchar_t left, wchar_t right)
-{
-    return left == right;
-}
-
-uniq string wchar_t::to_string(wchar_t wc)
-{
-    return xsprintf("%ls", wc);
-}
-
-uniq string xrealpath(char* path)
-{
-    if(path == null) {
-        return string("");
-    }
-    char* result = realpath(path, null);
-
-    string result2 = string(result);
-
-    free(result);
-
-    return result2;
-}
-
-uniq string xdirname(char* path)
-{
-    if(path == null) {
-        return string("");
-    }
-    return string(dirname(string(path)));
-}
-
-uniq size_t xwcslen(wchar_t* wstr)
-{
-    if(wstr == null) {
-        return 0;
-    }
-    wchar_t* p = wstr;
     
-    size_t len = 0;
-    while(*p) {
-        p++;
-        len++;
+        return result;
     }
     
-    return len;
+    uniq unsigned int wchar_t*::get_hash_key(wchar_t* value)
+    {
+        if(value == null) {
+            return 0;
+        }
+        int result = 0;
+        wchar_t* p = value;
+        while(*p) {
+            result += (*p);
+            p++;
+        }
+        return result;
+    }
+    
+    uniq bool wchar_t*::equals(wchar_t* left, wchar_t* right)
+    {
+        if(left == null && right == null) {
+            return true;
+        }
+        else if(left == null || right == null) {
+            return false;
+        }
+        return wcscmp(left, right) == 0;
+    }
+    
+    uniq bool wstring::equals(wchar_t* left, wchar_t* right)
+    {
+        if(left == null && right == null) {
+            return true;
+        }
+        else if(left == null || right == null) {
+            return false;
+        }
+        return wcscmp(left, right) == 0;
+    }
+    
+    
+    uniq bool wchar_t::operator_equals(wchar_t left, wchar_t right)
+    {
+        return left == right;
+    }
+    
+    uniq bool wchar_t::operator_not_equals(wchar_t left, wchar_t right)
+    {
+        return left != right;
+    }
+    
+    uniq unsigned int wchar_t::get_hash_key(wchar_t value)
+    {
+        return value;
+    }
+    
+    uniq bool wchar_t::equals(wchar_t left, wchar_t right)
+    {
+        return left == right;
+    }
+    
+    uniq string wchar_t::to_string(wchar_t wc)
+    {
+        return xsprintf("%ls", wc);
+    }
+    
+    uniq string xrealpath(char* path)
+    {
+        if(path == null) {
+            return string("");
+        }
+        char* result = realpath(path, null);
+    
+        string result2 = string(result);
+    
+        free(result);
+    
+        return result2;
+    }
+    
+    uniq string xdirname(char* path)
+    {
+        if(path == null) {
+            return string("");
+        }
+        return string(dirname(string(path)));
+    }
+    
+    uniq size_t xwcslen(wchar_t* wstr)
+    {
+        if(wstr == null) {
+            return 0;
+        }
+        wchar_t* p = wstr;
+        
+        size_t len = 0;
+        while(*p) {
+            p++;
+            len++;
+        }
+        
+        return len;
+    }
+    
+    uniq wstring wstring::substring(wchar_t* str, int head, int tail) 
+    {
+        return wchar_t*::substring(str, head, tail);
+    }
+    
+    uniq int string::index_count(char* str, char* search_str, int count=1, int default_value=-1)
+    {
+        return char*::index_count(str, search_str, count, default_value);
+    }
+    
+    
+    uniq int string::rindex(char* str, char* search_str, int default_value=-1) 
+    {
+        return char*::rindex(str, search_str, default_value);
+    }
+    
+    uniq int string::rindex_count(char* str, char* search_str, int count=1, int default_value=-1)
+    {
+        return char*::rindex_count(str, search_str, count, default_value);
+    }
+    
+    uniq string string::strip(char* self)
+    {
+        return char*::strip(self);
+    }
+    
+    uniq wstring string::to_wstring(char* str)
+    {
+        return char*::to_wstring(str);
+    }
+    
+    uniq string wstring::to_string(wchar_t* wstr)
+    {
+        return wchar_t*::to_string(wstr);
+    }
+    
+    uniq wstring int::to_wstring(int self)
+    {
+        return xsprintf("%d", self).to_wstring();
+    }
+    
+    uniq wstring wstring::delete(wchar_t* str, int head, int tail)
+    {
+        return wchar_t*::delete(str, head, tail);
+    }
+    
+    uniq int wstring::index(wchar_t* str, wchar_t* search_str, int default_value=1)
+    {
+        return wchar_t*::index(str, search_str, default_value);
+    }
+    
+    uniq int wstring::rindex(wchar_t* str, wchar_t* search_str, int default_value=-1)
+    {
+        return wchar_t*::rindex(str, search_str, default_value);
+    }
+    
+    uniq wstring wstring::reverse(wchar_t* str)
+    {
+        return wchar_t*::reverse(str);
+    }
+    
+    uniq wstring wstring::multiply(wchar_t* str, int n)
+    {
+        return wchar_t*::multiply(str, n);
+    }
+    
+    uniq wstring wstring::printable(wchar_t* str)
+    {
+        return wchar_t*::printable(str);
+    }
+    
+    uniq unsigned int wstring::get_hash_key(wchar_t* value)
+    {
+        return wchar_t*::get_hash_key(value);
+    }
+    
+    
+    uniq int string::index(char* str, char* search_str, int default_value=-1)
+    {
+        return char*::index(str, search_str, default_value);
+    }
+    
+    uniq string string::replace(char* self, int index, char c)
+    {
+        return char*::replace(self, index, c);
+    }
+    
+    uniq string string::multiply(char* str, int n)
+    {
+        return char*::multiply(str, n);
+    }
+    
+    uniq list<string>*% string::split_str(char* self, char* str)
+    {
+        return char*::split_str(self, str);
+    }
+    
+    uniq wstring string::to_wstring(char* str)
+    {
+        return char*::to_wstring(str);
+    }
+    
+    uniq string char*::chomp(char* str)
+    {
+        return string::chomp(str);
+    }
+    
+    uniq bool wchar_t*::equals(wchar_t* left, wchar_t* right)
+    {
+        return wcscmp(left, right) == 0;
+    }
+    
+    uniq bool wchar_t*::operator_equals(wchar_t* left, wchar_t* right)
+    {
+        return wcscmp(left, right) == 0;
+    }
+    
+    uniq bool wchar_t*::operator_not_equals(wchar_t* left, wchar_t* right)
+    {
+        return wcscmp(left, right) != 0;
+    }
 }
-
-uniq wstring wstring::substring(wchar_t* str, int head, int tail) 
-{
-    return wchar_t*::substring(str, head, tail);
-}
-
-uniq int string::index_count(char* str, char* search_str, int count=1, int default_value=-1)
-{
-    return char*::index_count(str, search_str, count, default_value);
-}
-
-
-uniq int string::rindex(char* str, char* search_str, int default_value=-1) 
-{
-    return char*::rindex(str, search_str, default_value);
-}
-
-
-uniq int string::rindex_count(char* str, char* search_str, int count=1, int default_value=-1)
-{
-    return char*::rindex_count(str, search_str, count, default_value);
-}
-
-
-
-
-
-
-uniq string string::strip(char* self)
-{
-    return char*::strip(self);
-}
-
-uniq wstring string::to_wstring(char* str)
-{
-    return char*::to_wstring(str);
-}
-
-uniq string wstring::to_string(wchar_t* wstr)
-{
-    return wchar_t*::to_string(wstr);
-}
-
-uniq wstring int::to_wstring(int self)
-{
-    return xsprintf("%d", self).to_wstring();
-}
-
-uniq wstring wstring::delete(wchar_t* str, int head, int tail)
-{
-    return wchar_t*::delete(str, head, tail);
-}
-
-uniq int wstring::index(wchar_t* str, wchar_t* search_str, int default_value=1)
-{
-    return wchar_t*::index(str, search_str, default_value);
-}
-
-uniq int wstring::rindex(wchar_t* str, wchar_t* search_str, int default_value=-1)
-{
-    return wchar_t*::rindex(str, search_str, default_value);
-}
-
-uniq wstring wstring::reverse(wchar_t* str)
-{
-    return wchar_t*::reverse(str);
-}
-
-uniq wstring wstring::multiply(wchar_t* str, int n)
-{
-    return wchar_t*::multiply(str, n);
-}
-
-uniq wstring wstring::printable(wchar_t* str)
-{
-    return wchar_t*::printable(str);
-}
-
-uniq unsigned int wstring::get_hash_key(wchar_t* value)
-{
-    return wchar_t*::get_hash_key(value);
-}
-
-
-uniq int string::index(char* str, char* search_str, int default_value=-1)
-{
-    return char*::index(str, search_str, default_value);
-}
-
-
-uniq string string::replace(char* self, int index, char c)
-{
-    return char*::replace(self, index, c);
-}
-
-uniq string string::multiply(char* str, int n)
-{
-    return char*::multiply(str, n);
-}
-
-
-
-uniq list<string>*% string::split_str(char* self, char* str)
-{
-    return char*::split_str(self, str);
-}
-
-uniq wstring string::to_wstring(char* str)
-{
-    return char*::to_wstring(str);
-}
-
-uniq string char*::chomp(char* str)
-{
-    return string::chomp(str);
-}
-
-uniq bool wchar_t*::equals(wchar_t* left, wchar_t* right)
-{
-    return wcscmp(left, right) == 0;
-}
-
-uniq bool wchar_t*::operator_equals(wchar_t* left, wchar_t* right)
-{
-    return wcscmp(left, right) == 0;
-}
-
-uniq bool wchar_t*::operator_not_equals(wchar_t* left, wchar_t* right)
-{
-    return wcscmp(left, right) != 0;
-}
-
-#endif
 
 //////////////////////////////
 /// base library(IO-FILE)
 //////////////////////////////
-#if !defined(__BARE_METAL__) && !defined(__PICO__)
-uniq string FILE*::read(FILE* f)
-{
-    if(f == null) {
-        return string("");
-    }
-    buffer*% buf = new buffer.initialize();
-    
-    while(1) {
-        char buf2[BUFSIZ];
-        
-        int size = fread(buf2, 1, BUFSIZ, f);
-        
-        buf.append(buf2, size);
-
-        if(size < BUFSIZ) {
-            break;
+if($UNIX == 1) {
+    uniq string FILE*::read(FILE* f)
+    {
+        if(f == null) {
+            return string("");
         }
+        buffer*% buf = new buffer.initialize();
+        
+        while(1) {
+            char buf2[BUFSIZ];
+            
+            int size = fread(buf2, 1, BUFSIZ, f);
+            
+            buf.append(buf2, size);
+    
+            if(size < BUFSIZ) {
+                break;
+            }
+        }
+        
+        return buf.to_string();
     }
     
-    return buf.to_string();
-}
-
-uniq int FILE*::write(FILE* f, char* str)
-{
-    if(f == null || str == null) {
-        return -1;
+    uniq int FILE*::write(FILE* f, char* str)
+    {
+        if(f == null || str == null) {
+            return -1;
+        }
+        
+        return fwrite(str, strlen(str), 1, f);
     }
     
-    return fwrite(str, strlen(str), 1, f);
-}
-
-uniq int FILE*::fclose(FILE* f) 
-{
-    if(f == null) {
-        return -1;
-    }
-    
-    int result = fclose(f);
-    
-    if(result < 0) {
+    uniq int FILE*::fclose(FILE* f) 
+    {
+        if(f == null) {
+            return -1;
+        }
+        
+        int result = fclose(f);
+        
+        if(result < 0) {
+            return result;
+        }
+        
         return result;
     }
     
-    return result;
-}
-
-uniq FILE* FILE*::fprintf(FILE* f, const char* msg, ...)
-{
-    if(f == null || msg == null) {
+    uniq FILE* FILE*::fprintf(FILE* f, const char* msg, ...)
+    {
+        if(f == null || msg == null) {
+            return f;
+        }
+        char msg2[1024*2*2*2];
+    
+        va_list` args;
+        va_start(args, msg);
+        vsnprintf(msg2, 1024*2*2*2, msg, args);
+        va_end(args);
+    
+        int result = fprintf(f, "%s", msg2);
+        
+        if(result < 0) {
+            return f;
+        }
+        
         return f;
     }
-    char msg2[1024*2*2*2];
-
-    va_list` args;
-    va_start(args, msg);
-    vsnprintf(msg2, 1024*2*2*2, msg, args);
-    va_end(args);
-
-    int result = fprintf(f, "%s", msg2);
     
-    if(result < 0) {
-        return f;
-    }
-    
-    return f;
-}
-
-uniq int char*::write(char* self, char* file_name, bool append=false) 
-{
-    if(self == null || file_name == null) {
-        return -1;
-    }
-    
-    FILE* f;
-    if(append) {
-       f = fopen(file_name, "a");
-    }
-    else {
-       f = fopen(file_name, "w");
-    }
-    
-    if(f == NULL) {
-        return -1;
-    }
-    
-    int result = fwrite(self, strlen(self), 1, f);
-    
-    if(result != 1) {
+    uniq int char*::write(char* self, char* file_name, bool append=false) 
+    {
+        if(self == null || file_name == null) {
+            return -1;
+        }
+        
+        FILE* f;
+        if(append) {
+           f = fopen(file_name, "a");
+        }
+        else {
+           f = fopen(file_name, "w");
+        }
+        
+        if(f == NULL) {
+            return -1;
+        }
+        
+        int result = fwrite(self, strlen(self), 1, f);
+        
+        if(result != 1) {
+            return result;
+        }
+        
+        int result2 = fclose(f)
+        
+        if(result2 < 0) {
+            return result2;
+        }
+        
         return result;
     }
     
-    int result2 = fclose(f)
-    
-    if(result2 < 0) {
-        return result2;
-    }
-    
-    return result;
-}
-
-uniq string char*::read(char* file_name) 
-{
-    if(file_name == null) {
-        return string("");
-    }
-    
-    FILE* f = fopen(file_name, "r");
-    
-    if(f == NULL) {
-        return string("");
-    }
-    
-    buffer*% buf = new buffer.initialize();
-    
-    while(1) {
-        char buf2[BUFSIZ];
-        
-        int size = fread(buf2, 1, BUFSIZ, f);
-        
-        buf.append(buf2, size);
-
-        if(size < BUFSIZ) {
-            break;
+    uniq string char*::read(char* file_name) 
+    {
+        if(file_name == null) {
+            return string("");
         }
-    }
+        
+        FILE* f = fopen(file_name, "r");
+        
+        if(f == NULL) {
+            return string("");
+        }
+        
+        buffer*% buf = new buffer.initialize();
+        
+        while(1) {
+            char buf2[BUFSIZ];
+            
+            int size = fread(buf2, 1, BUFSIZ, f);
+            
+            buf.append(buf2, size);
     
-    string result = buf.to_string();
-    
-    int result2 = fclose(f)
-    
-    if(result2 < 0) {
-        return string("");
-    }
-    
-    return result;
-}
-
-uniq list<string>*% FILE*::readlines(FILE* f)
-{
-    list<string>*% result = new list<string>.initialize();
-    
-    if(f == null) {
+            if(size < BUFSIZ) {
+                break;
+            }
+        }
+        
+        string result = buf.to_string();
+        
+        int result2 = fclose(f)
+        
+        if(result2 < 0) {
+            return string("");
+        }
+        
         return result;
     }
     
-    while(1) {
-        char buf[BUFSIZ];
+    uniq list<string>*% FILE*::readlines(FILE* f)
+    {
+        list<string>*% result = new list<string>.initialize();
         
-        if(fgets(buf, BUFSIZ, f) == NULL) {
-            break;
+        if(f == null) {
+            return result;
         }
         
-        result.push_back(string(buf));
+        while(1) {
+            char buf[BUFSIZ];
+            
+            if(fgets(buf, BUFSIZ, f) == NULL) {
+                break;
+            }
+            
+            result.push_back(string(buf));
+        }
+        
+        return result;
     }
     
-    return result;
+    uniq bool xiswalpha(wchar_t c)
+    {
+        bool result = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+        return result;
+    }
+    
+    uniq bool xiswblank(wchar_t c)
+    {
+        return c == ' ' || c == '\t';
+    }
+    
+    uniq bool xiswdigit(wchar_t c)
+    {
+        return (c >= '0' && c <= '9');
+    }
+    
+    uniq bool xiswalnum(wchar_t c)
+    {
+        return xiswalpha(c) || xiswdigit(c);
+    }
+    
+    uniq bool xiswascii(wchar_t c)
+    {
+        bool result = (c >= ' ' && c <= '~');
+        return result;
+    }
 }
-
-uniq bool xiswalpha(wchar_t c)
-{
-    bool result = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-    return result;
-}
-
-uniq bool xiswblank(wchar_t c)
-{
-    return c == ' ' || c == '\t';
-}
-
-uniq bool xiswdigit(wchar_t c)
-{
-    return (c >= '0' && c <= '9');
-}
-
-uniq bool xiswalnum(wchar_t c)
-{
-    return xiswalpha(c) || xiswdigit(c);
-}
-
-uniq bool xiswascii(wchar_t c)
-{
-    bool result = (c >= ' ' && c <= '~');
-    return result;
-}
-#endif
 
 #endif
