@@ -1657,6 +1657,7 @@ sNode*% string_node(char* buf, char* head, int head_sline, sInfo* info) version 
             bool come_c = gComeC;
             gComeC = true;
             
+/*
             if(*info->p == '{') {
                 sNode*% node = parse_normal_block(clang:true);
                 
@@ -1665,8 +1666,9 @@ sNode*% string_node(char* buf, char* head, int head_sline, sInfo* info) version 
                 return node;
             }
             else {
+*/
                 return create_nothing_node();
-            }
+//            }
         }
         else {
             err_msg(info, "invalid using");

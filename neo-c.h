@@ -91,8 +91,8 @@ using neo-c;
 ///////////////////////////////////////////////////////////////////////////
 #else
 
-using C
-{
+using C;
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -104,7 +104,6 @@ using C
 #include <errno.h>
 #include <assert.h>
 #include <stdbool.h>
-}
 
 using neo-c;
 
