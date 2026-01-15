@@ -1140,6 +1140,7 @@ uniq class sNothingNode extends sNodeBase
 };
 
 /// ccpp.c ///
+typedef struct MacroSnapshot MacroSnapshot;
 void preprocess_file_neo_c(const char *path, FILE *out) ;
 void init_ccpp(int argc, char** argv);
 void incldue_file_neo_c(char* path, int quoted, FILE* out);
@@ -1148,5 +1149,8 @@ void macro_define(const char *def);
 void macro_undef(const char *name);
 const char *call_func_macro(const char *macro_name, const char *args, const char *file, long line);
 void set_macro(const char *name, const char *value);
+MacroSnapshot *macro_snapshot_create(void);
+char *macro_snapshot_diff_defines(MacroSnapshot *snap);
+void macro_snapshot_free(MacroSnapshot *snap);
 
 #endif

@@ -345,6 +345,8 @@ typedef struct anonymous_typeX1 mbstate_t  ;
 
 typedef int* wstring  ;
 
+typedef struct MacroSnapshot MacroSnapshot;
+
 /// previous struct definition ///
 struct _IO_FILE;
 
@@ -2620,6 +2622,9 @@ void macro_define(const char* def);
 void macro_undef(const char* name);
 const char* call_func_macro(const char* macro_name, const char* args, const char* file, long line);
 void set_macro(const char* name, const char* value);
+struct MacroSnapshot* macro_snapshot_create();
+char* macro_snapshot_diff_defines(struct MacroSnapshot* snap  );
+void macro_snapshot_free(struct MacroSnapshot* snap  );
 static void output_union(struct sClass* klass  , struct sInfo* info  , _Bool anonymous);
 static int list$1tuple2$2char$phsType$ph$ph_length(struct list$1tuple2$2char$phsType$ph$ph* self);
 static struct tuple2$2char$phsType$ph* list$1tuple2$2char$phsType$ph$ph_begin(struct list$1tuple2$2char$phsType$ph$ph* self);

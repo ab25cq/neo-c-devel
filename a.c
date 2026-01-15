@@ -25,5 +25,7 @@ int main(int argc, char** argv)
 {
     puts("THE COMPILE TIME REFLECTION WORLDDDDDDDD!!!");
     
+    printf("%d\n", BUFSIZ);
+    
     return 0;
 }

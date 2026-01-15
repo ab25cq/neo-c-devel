@@ -345,6 +345,8 @@ typedef struct anonymous_typeX1 mbstate_t  ;
 
 typedef int* wstring  ;
 
+typedef struct MacroSnapshot MacroSnapshot;
+
 typedef unsigned long  int nfds_t;
 
 /// previous struct definition ///
@@ -2758,6 +2760,9 @@ void macro_define(const char* def);
 void macro_undef(const char* name);
 const char* call_func_macro(const char* macro_name, const char* args, const char* file, long line);
 void set_macro(const char* name, const char* value);
+struct MacroSnapshot* macro_snapshot_create();
+char* macro_snapshot_diff_defines(struct MacroSnapshot* snap  );
+void macro_snapshot_free(struct MacroSnapshot* snap  );
 int poll(struct pollfd* __fds  , unsigned long  int __nfds  , int __timeout);
 int ppoll(struct pollfd* __fds  , unsigned long  int __nfds  , const struct timespec* __timeout  , const struct anonymous_typeX7* __ss  );
 struct sReturnNode* sReturnNode_initialize(struct sReturnNode* self, struct sNode* value, char* value_source  , struct sInfo* info  );

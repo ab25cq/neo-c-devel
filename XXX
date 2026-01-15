@@ -12,41 +12,7 @@ neo-c -Sc -C -o 03output_code.c.o -c 03output_code.c -DPREFIX="\"/usr/local/\"" 
 neo-c -Sc -C -o 04heap.c.o -c 04heap.c -DPREFIX="\"/usr/local/\""  -I/usr/local/include -O2 -g -std=c11 -g -O2 
 neo-c -Sc -C  -o 05pre_op.c.o -c 05pre_op.c -DPREFIX="\"/usr/local/\""  -I/usr/local/include -O2 -g -std=c11 -g -O2 
 neo-c -Sc -C -o 05call.c.o -c 05call.c -DPREFIX="\"/usr/local/\""  -I/usr/local/include -O2 -g -std=c11 -g -O2 
-/usr/local/include/neo-c.h 223: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 234: function not found(perror) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 300: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 302: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 306: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 311: function not found(puts) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 315: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 323: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 328: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 501: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 511: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 705: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 816: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 818: function not found(puts) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 821: function not found(puts) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 3381: function not found(vasprintf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 4398: function not found(vasprintf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 4897: function not found(puts) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 4907: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 4944: function not found(vasprintf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 4947: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 4960: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 4970: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 5950: function not found(putchar) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 5952: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 5956: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 5960: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 5963: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 5967: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 5971: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 5977: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 7585(real 7585)(block 944) 1: The type of BUFSIZ is not found. so can't check the heap type
-
-/usr/local/include/neo-c.h 7587: function not found(fread) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 7587(real 7587)(block 944) 1: The type of BUFSIZ is not fou04heap.c.c:3040:13: error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+04heap.c.c:3036:13: error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
 04heap.c 214: function not found(printf) at function call(1), so no check types and no heap management
 04heap.c 445: function not found(printf) at function call(1), so no check types and no heap management
 04heap.c 544: function not found(printf) at function call(1), so no check types and no heap management
@@ -98,55 +64,30 @@ clang is faild
 03output_code.c 1592: function not found(vasprintf) at function call(1), so no check types and no heap management
 03output_code.c 1609: function not found(vasprintf) at function call(1), so no check types and no heap management
 clang is faild
-01main.c.c:2618:9: error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:2634:5: error: call to undeclared function 'perror'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:2678:17: error: call to undeclared function 'puts'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:3057:9: error: call to undeclared function 'puts'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:3060:5: error: call to undeclared function 'puts'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:3357:9: error: call to undeclared function 'vasprintf'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:5104:9: error: call to undeclared function 'vasprintf'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:5787:5: error: call to undeclared function 'puts'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:5825:5: error: call to undeclared function 'vasprintf'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:6704:13: error: call to undeclared function 'putchar'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:8440:19: error: use of undeclared identifier 'BUFSIZ'
-01main.c.c:8442:14: error: call to undeclared library function 'fread' with type 'unsigned long (void *, unsigned long, unsigned long, FILE *)' (aka 'unsigned long (void *, unsigned long, unsigned long, struct _IO_FILE *)'); ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:8442:27: error: use of undeclared identifier 'BUFSIZ'
-01main.c.c:8444:17: error: use of undeclared identifier 'BUFSIZ'
-01main.c.c:8460:12: error: call to undeclared library function 'fwrite' with type 'unsigned long (const void *, unsigned long, unsigned long, FILE *)' (aka 'unsigned long (const void *, unsigned long, unsigned long, struct _IO_FILE *)'); ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:8469:12: error: call to undeclared function 'fclose'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:8488:5: error: call to undeclared library function 'vsnprintf' with type 'int (char *restrict, unsigned long, const char *restrict, struct __va_list_tag *)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:8490:12: error: call to undeclared library function 'fprintf' with type 'int (FILE *restrict, const char *restrict, ...)' (aka 'int (struct _IO_FILE *restrict, const char *restrict, ...)'); ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-01main.c.c:8509:11: error: call to undeclared library function 'fopen' with type 'FILE *(const char *, const char *)' (aka 'struct _IO_FILE *(const char *, const char *)'); ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-fatal error: too many errors emitted, stopping now [-ferror-limit=]
-nd. so can't check the heap type
+01main.c.c:8670:19: error: use of undeclared identifier 'BUFSIZ'
+01main.c.c:8672:42: error: use of undeclared identifier 'BUFSIZ'
+01main.c.c:8674:17: error: use of undeclared identifier 'BUFSIZ'
+01main.c.c:8783:19: error: use of undeclared identifier 'BUFSIZ'
+01main.c.c:8785:42: error: use of undeclared identifier 'BUFSIZ'
+01main.c.c:8787:17: error: use of undeclared identifier 'BUFSIZ'
+01main.c.c:8822:18: error: use of undeclared identifier 'BUFSIZ'
+01main.c.c:8824:27: error: use of undeclared identifier 'BUFSIZ'
+/usr/local/include/neo-c.h 7585(real 7585)(block 944) 1: The type of BUFSIZ is not found. so can't check the heap type
+
+/usr/local/include/neo-c.h 7587(real 7587)(block 944) 1: The type of BUFSIZ is not found. so can't check the heap type
 
 /usr/local/include/neo-c.h 7591(real 7591)(block 944) 1: The type of BUFSIZ is not found. so can't check the heap type
 
-/usr/local/include/neo-c.h 7605: function not found(fwrite) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 7614: function not found(fclose) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 7632: function not found(vsnprintf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 7635: function not found(fprintf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 7652: function not found(fopen) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 7655: function not found(fopen) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 7662: function not found(fwrite) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 7670: function not found(fclose) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 7683: function not found(fopen) at function call(1), so no check types and no heap management
 /usr/local/include/neo-c.h 7692(real 7692)(block 944) 1: The type of BUFSIZ is not found. so can't check the heap type
 
-/usr/local/include/neo-c.h 7694: function not found(fread) at function call(1), so no check types and no heap management
 /usr/local/include/neo-c.h 7694(real 7694)(block 944) 1: The type of BUFSIZ is not found. so can't check the heap type
 
 /usr/local/include/neo-c.h 7698(real 7698)(block 944) 1: The type of BUFSIZ is not found. so can't check the heap type
 
-/usr/local/include/neo-c.h 7707: function not found(fclose) at function call(1), so no check types and no heap management
 /usr/local/include/neo-c.h 7723(real 7723)(block 944) 1: The type of BUFSIZ is not found. so can't check the heap type
 
-/usr/local/include/neo-c.h 7725: function not found(fgets) at function call(1), so no check types and no heap management
 /usr/local/include/neo-c.h 7725(real 7725)(block 944) 1: The type of BUFSIZ is not found. so can't check the heap type
 
-./common.h 195: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 2313: function not found(printf) at function call(1), so no check types and no heap management
-/usr/local/include/neo-c.h 2402: function not found(printf) at function call(1), so no check types and no heap management
 transpile error. err num 8
 clang is faild
 02transpile.c.c:2881:9: error: call to undeclared library function 'fopen' with type 'FILE *(const char *, const char *)' (aka 'struct _IO_FILE *(const char *, const char *)'); ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
@@ -186,4 +127,10 @@ clang is faild
 02transpile.c 1796: function not found(printf) at function call(1), so no check types and no heap management
 02transpile.c 1801: function not found(printf) at function call(1), so no check types and no heap management
 02transpile.c 1839: function not found(printf) at function call(1), so no check types and no heap management
+clang is faild
+05call.c.c:6205:9: error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+05call.c 1100: function not found(printf) at function call(1), so no check types and no heap management
+05call.c 1824: function not found(printf) at function call(1), so no check types and no heap management
+/usr/local/include/neo-c.h 2313: function not found(printf) at function call(1), so no check types and no heap management
+/usr/local/include/neo-c.h 2482: function not found(printf) at function call(1), so no check types and no heap management
 clang is faild

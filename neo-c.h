@@ -62,7 +62,7 @@ var UNIX=1
 // BARE METAL 
 ///////////////////////////////////////////////////////////////////////////
 #elif defined(__BARE_METAL__)
-    macro_include "neo-c-libc.h"
+    #include "neo-c-libc.h"
 
     using neo-c;
 ///////////////////////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ var UNIX=1
     #include <string.h>
     #include <stdarg.h>
     #undef va_start
-    #define va_start(ap, last) __builtin_va_start(ap, last)
+    #define va_start(ap, last)  __builtin_va_start(ap, last)
     #include <limits.h>
     #include <locale.h>
     #include <errno.h>
@@ -6746,8 +6746,8 @@ uniq string string::sub_block(char* self, char* reg, bool global=true, bool igno
 #endif
 
 if($UNIX == 1) {
-#include <wchar.h>
-#include <libgen.h>
+    #include <wchar.h>
+    #include <libgen.h>
     
     typedef wchar_t*% wstring;
     

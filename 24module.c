@@ -1759,11 +1759,23 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 91
         
         string path = buf.to_string();
         
+        static int macro_include_id = 0;
+        MacroSnapshot* snap = macro_snapshot_create();
         FILE* out = fopen("__ccpp_tmp", "w");
         
         incldue_file_neo_c(path, quoted, out);
         
         fclose(out);
+        
+        char* macro_defines = macro_snapshot_diff_defines(snap);
+        macro_snapshot_free(snap);
+        if(macro_defines && *macro_defines) {
+            macro_include_id++;
+            info.previous_struct_definition.insert(s"__macro_include__\{macro_include_id}", macro_defines.to_buffer());
+        }
+        if(macro_defines) {
+            free(macro_defines);
+        }
         
         buffer*% source = info.source;
         char* p = info.p;

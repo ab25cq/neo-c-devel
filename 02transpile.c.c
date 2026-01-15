@@ -345,6 +345,8 @@ typedef struct anonymous_typeX1 mbstate_t  ;
 
 typedef int* wstring  ;
 
+typedef struct MacroSnapshot MacroSnapshot;
+
 /// previous struct definition ///
 struct _IO_FILE;
 
@@ -2613,6 +2615,9 @@ void macro_define(const char* def);
 void macro_undef(const char* name);
 const char* call_func_macro(const char* macro_name, const char* args, const char* file, long line);
 void set_macro(const char* name, const char* value);
+struct MacroSnapshot* macro_snapshot_create();
+char* macro_snapshot_diff_defines(struct MacroSnapshot* snap  );
+void macro_snapshot_free(struct MacroSnapshot* snap  );
 static void write_source_file_position_to_source(struct sInfo* info  );
 _Bool node_compile(struct sNode* node, struct sInfo* info  );
 _Bool transpile_conditional_with_free_right_object_value(struct sNode* node, struct sInfo* info  );

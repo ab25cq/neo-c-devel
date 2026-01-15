@@ -25,6 +25,17 @@ typedef struct {
     size_t cap;
 } MacroTable;
 
+typedef struct {
+    char *name;
+    char *sig;
+} MacroSnapItem;
+
+typedef struct MacroSnapshot {
+    MacroSnapItem *items;
+    size_t len;
+    size_t cap;
+} MacroSnapshot;
+
 static bool macro_is_vararg_token(const Macro *m, const char *tok) {
     if (!m || !m->is_variadic || !tok) return false;
     if (strcmp(tok, "__VA_ARGS__") == 0) return true;
@@ -732,7 +743,6 @@ static FILE *open_in_search_next(const char *name,
                                  const PPOpts *opts,
                                  char **outpath);
 
-static void ensure_reflect_table(void);
 
 static bool g_keep_comments = true; // default; set per-invocation in preprocess
 // Persist block comment depth across lines
@@ -743,7 +753,6 @@ static int g_expand_pass = 0;
 static int g_preprocess_depth = 0;
 static bool g_injected_xen_types = false;
 static Str g_macro_call_out = {0};
-static bool g_reflect_inited = false;
 // Context for evaluating __has_include in #if expressions
 static const PPOpts *g_ifexpr_opts = NULL;
 static const char *g_ifexpr_curdir = NULL;
@@ -2760,7 +2769,6 @@ static void preprocess_file(const char *path, FILE *in, const char *curdir, cons
 }
 
 MacroTable tbl_global;
-static MacroTable tbl_reflect;
 PPOpts opts_global = {0};
 
 void init_ccpp(int argc, char** argv)
@@ -2815,7 +2823,6 @@ void init_ccpp(int argc, char** argv)
     }
     // Initialize the shared macro table for neo-c preprocessing once.
     apply_predefined_macros(&tbl_global, &opts_global);
-    ensure_reflect_table();
     // populate system include paths from env and defaults
     const char *envs[] = { getenv("CPATH"), getenv("C_INCLUDE_PATH") };
     for (size_t ei=0; ei<sizeof(envs)/sizeof(envs[0]); ++ei) {
@@ -2901,21 +2908,10 @@ void preprocess_file_neo_c(const char *path, FILE *out)
     preprocess_file(path, in, curdir, &opts_global, out, &tbl_global);
 }
 
-static void ensure_reflect_table(void)
-{
-    if (!g_reflect_inited) {
-        mtable_init(&tbl_reflect);
-        apply_predefined_macros(&tbl_reflect, &opts_global);
-        set_host_macros(&tbl_reflect);
-        g_reflect_inited = true;
-    }
-}
-
 const char *get_macro(const char *macro_name)
 {
     if (!macro_name || !*macro_name) return NULL;
-    ensure_reflect_table();
-    Macro *m = mtable_find(&tbl_reflect, macro_name);
+    Macro *m = mtable_find(&tbl_global, macro_name);
     if (!m) return NULL;
     return m->value ? m->value : "";
 }
@@ -2924,7 +2920,6 @@ const char *get_macro(const char *macro_name)
 void macro_define(const char *def)
 {
     if (!def || !*def) return;
-    ensure_reflect_table();
 
     const char *p = def;
     while (*p && isspace((unsigned char)*p)) p++;
@@ -2949,7 +2944,7 @@ void macro_define(const char *def)
         line[plen + len] = '\0';
     }
 
-    process_define(&tbl_reflect, line);
+    process_define(&tbl_global, line);
     free(line);
 }
 
@@ -2957,7 +2952,6 @@ void macro_define(const char *def)
 void macro_undef(const char *name)
 {
     if (!name || !*name) return;
-    ensure_reflect_table();
 
     const char *p = name;
     while (*p && isspace((unsigned char)*p)) p++;
@@ -2979,7 +2973,7 @@ void macro_undef(const char *name)
     }
     idbuf[i] = '\0';
     if (*idbuf) {
-        mtable_unset(&tbl_reflect, idbuf);
+        mtable_unset(&tbl_global, idbuf);
     }
 }
 
@@ -2987,10 +2981,9 @@ void macro_undef(const char *name)
 const char *call_func_macro(const char *macro_name, const char *args, const char *file, long line)
 {
     if (!macro_name || !*macro_name) return NULL;
-    ensure_reflect_table();
-    Macro *m = mtable_find(&tbl_reflect, macro_name);
+    Macro *m = mtable_find(&tbl_global, macro_name);
     if (!m || !m->is_func) return NULL;
-    MacroTable *tbl = &tbl_reflect;
+    MacroTable *tbl = &tbl_global;
 
     size_t name_len = strlen(macro_name);
     size_t args_len = args ? strlen(args) : 0;
@@ -3032,6 +3025,137 @@ const char *call_func_macro(const char *macro_name, const char *args, const char
     return g_macro_call_out.buf ? g_macro_call_out.buf : "";
 }
 
+static const char *snapshot_find_sig(const MacroSnapshot *snap, const char *name)
+{
+    if (!snap || !name) return NULL;
+    for (size_t i = 0; i < snap->len; ++i) {
+        if (strcmp(snap->items[i].name, name) == 0) return snap->items[i].sig;
+    }
+    return NULL;
+}
+
+static char *macro_signature(const Macro *m)
+{
+    Str s;
+    sb_init(&s);
+    if (m->is_func) {
+        sb_puts(&s, "func(");
+        for (size_t i = 0; i < m->nparams; ++i) {
+            if (i > 0) sb_putc(&s, ',');
+            sb_puts(&s, m->params[i]);
+        }
+        if (m->is_variadic) {
+            if (m->nparams > 0) sb_putc(&s, ',');
+            if (m->var_param) {
+                sb_puts(&s, m->var_param);
+                sb_puts(&s, "...");
+            } else {
+                sb_puts(&s, "...");
+            }
+        }
+        sb_puts(&s, ")=");
+    } else {
+        sb_puts(&s, "obj=");
+    }
+    if (m->value) sb_puts(&s, m->value);
+    if (!s.buf) return xstrdup("");
+    return s.buf;
+}
+
+static char *macro_define_line(const Macro *m)
+{
+    Str s;
+    sb_init(&s);
+    sb_puts(&s, "#define ");
+    sb_puts(&s, m->name);
+    if (m->is_func) {
+        sb_putc(&s, '(');
+        for (size_t i = 0; i < m->nparams; ++i) {
+            if (i > 0) sb_putc(&s, ',');
+            sb_puts(&s, m->params[i]);
+        }
+        if (m->is_variadic) {
+            if (m->nparams > 0) sb_putc(&s, ',');
+            if (m->var_param) {
+                sb_puts(&s, m->var_param);
+                sb_puts(&s, "...");
+            } else {
+                sb_puts(&s, "...");
+            }
+        }
+        sb_putc(&s, ')');
+    }
+    if (m->value && *m->value) {
+        sb_putc(&s, ' ');
+        sb_puts(&s, m->value);
+    }
+    if (!s.buf) return xstrdup("");
+    return s.buf;
+}
+
+MacroSnapshot *macro_snapshot_create(void)
+{
+    MacroSnapshot *snap = (MacroSnapshot *)malloc(sizeof(MacroSnapshot));
+    if (!snap) die("malloc");
+    snap->items = NULL;
+    snap->len = 0;
+    snap->cap = 0;
+    for (size_t i = 0; i < tbl_global.len; ++i) {
+        if (snap->len == snap->cap) {
+            size_t ncap = snap->cap ? snap->cap * 2 : 16;
+            snap->items = (MacroSnapItem *)xrealloc(snap->items, ncap * sizeof(MacroSnapItem));
+            snap->cap = ncap;
+        }
+        snap->items[snap->len].name = xstrdup(tbl_global.items[i].name);
+        snap->items[snap->len].sig = macro_signature(&tbl_global.items[i]);
+        snap->len++;
+    }
+    return snap;
+}
+
+char *macro_snapshot_diff_defines(MacroSnapshot *snap)
+{
+    if (!snap) return NULL;
+    Str out;
+    sb_init(&out);
+    for (size_t i = 0; i < tbl_global.len; ++i) {
+        Macro *m = &tbl_global.items[i];
+        const char *oldsig = snapshot_find_sig(snap, m->name);
+        char *newsig = macro_signature(m);
+        bool changed = (!oldsig || strcmp(oldsig, newsig) != 0);
+        if (changed) {
+            char *line = macro_define_line(m);
+            sb_puts(&out, line);
+            sb_putc(&out, '\n');
+            free(line);
+        }
+        free(newsig);
+    }
+    for (size_t i = 0; i < snap->len; ++i) {
+        if (!mtable_find(&tbl_global, snap->items[i].name)) {
+            sb_puts(&out, "#undef ");
+            sb_puts(&out, snap->items[i].name);
+            sb_putc(&out, '\n');
+        }
+    }
+    if (!out.buf || out.len == 0) {
+        sb_free(&out);
+        return NULL;
+    }
+    return out.buf;
+}
+
+void macro_snapshot_free(MacroSnapshot *snap)
+{
+    if (!snap) return;
+    for (size_t i = 0; i < snap->len; ++i) {
+        free(snap->items[i].name);
+        free(snap->items[i].sig);
+    }
+    free(snap->items);
+    free(snap);
+}
+
 
 void set_macro(const char *name, const char *value)
 {
@@ -3041,7 +3165,6 @@ void set_macro(const char *name, const char *value)
 void incldue_file_neo_c(char* path, int quoted, FILE* out)
 {
     char* header = path;
-    ensure_reflect_table();
     char *opened_path=NULL;
     char* curdir = getenv("PWD");
     FILE *f = NULL;
@@ -3060,7 +3183,7 @@ void incldue_file_neo_c(char* path, int quoted, FILE* out)
         }
         if (!skip) {
             char *ndir = dirname_dup(opened_path);
-            preprocess_file(opened_path, f, ndir, &opts_global, out, &tbl_reflect);
+            preprocess_file(opened_path, f, ndir, &opts_global, out, &tbl_global);
             fclose(f);
             free(ndir);
         }
