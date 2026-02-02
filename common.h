@@ -54,6 +54,10 @@ uniq class sClass
     
     list<tup: string, sType*%>*% mFields;
     
+    list<tup: string, sNode*%,string>*% mElements;
+    
+    sType*% mTypeElements;
+    
     string mParentClassName;
     
     string mAttribute;
@@ -78,6 +82,7 @@ uniq class sClass
         self.mMethodGenericsNum = method_generics_num;
         
         self.mFields = new list<tup: string, sType*%>();
+//        self.mElements = new list<tup: string, sNode*%,string>();
     }
 };
 
@@ -1008,6 +1013,7 @@ bool output_generics_struct(sType* type, sType* generics_type, sInfo* info);
 void output_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=false);
 string@code, bool@existance_generics, string@name make_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=false, int indent = 2);
 string@code, string@name make_union(sClass* klass, sInfo* info, bool anonymous=false);
+string make_enum(sClass* klass, sInfo* info=info);
 
 /////////////////////////////////////////////////////////////////////
 /// 15union.c
@@ -1020,7 +1026,7 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 97
 /// 16enum.c
 /////////////////////////////////////////////////////////////////////
 sNode*% string_node(char* buf, char* head, int head_sline, sInfo* info) version 16;
-sNode*% parse_enum(string type_name, string attribute, sInfo* info);
+sNode*% parse_enum(string type_name, string attribute, sInfo* info, bool anonymous=false);
 sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 96;
 
 /////////////////////////////////////////////////////////////////////

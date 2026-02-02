@@ -1,16 +1,113 @@
 #include "common.h"
 
+string make_enum(sClass* klass, sInfo* info=info)
+{
+    string type_name = klass.mName;
+    list<tup: string, sNode*%,string>* elements = klass.mElements;
+    sType*% type_elements = klass->mTypeElements;
+    string attribute = klass->mAttribute;
+    
+/*
+    if(elements.length() == 0) {
+        return s"";
+    }
+*/
+    
+    buffer*% buf = new buffer();
+    
+    if(klass->mAnonymous) {
+        if(type_elements) {
+            buf.append_format("enum :%s { ", make_type_name_string(type_elements));
+        }
+        else {
+            buf.append_str("enum { ");
+        }
+    }
+    else if(type_elements) {
+        buf.append_format("enum %s %s:%s { ", attribute, type_name, make_type_name_string(type_elements));
+    }
+    else if(type_name) {
+        buf.append_format("enum %s %s { ", attribute, type_name);
+    }
+    else {
+        buf.append_format("enum { ");
+    }
+    
+    int i = 0;
+    int n = 0;
+    string right_c_value = null;
+    foreach(it, elements) {
+        var name, value, attribute = it;
+        
+        if(value == null) {
+            buf.append_str(name);
+            buf.append_str(" ");
+            buf.append_str(attribute);
+            
+            if(i != elements.length()-1) {
+                buf.append_str(",");
+            }
+            
+            string c_value;
+            if(right_c_value) {
+                c_value = xsprintf("(%s+%d)", right_c_value, n);
+            }
+            else {
+                c_value = xsprintf("(%d)", n);
+            }
+            
+            add_variable_to_global_table_with_int_value(name, new sType(s"int"), c_value, info);
+        }
+        else {
+            node_compile(value).elif {
+                return s"";
+            }
+            
+            CVALUE*% right_value = get_value_from_stack(-1, info);
+            
+            string c_value = xsprintf("(%s)", right_value.c_value);
+            
+            add_variable_to_global_table_with_int_value(name, new sType(s"int"), c_value, info);
+            
+            buf.append_format("%s=(%s)", name, right_value.c_value);
+            
+            if(i != elements.length()-1) {
+                buf.append_str(",");
+            }
+            
+            right_c_value = clone right_value.c_value;
+            n = 0;
+        }
+        
+        i++;
+        n++;
+    }
+    
+    buf.append_format("}");
+    
+    return buf.to_string();
+}
+
+void output_enum(string type_name, sInfo* info=info)
+{
+    sClass* klass = info.classes[type_name];
+    
+    string output = make_enum(klass);
+    
+    output = output + ";\n";
+    
+    if(info.struct_definition[string(type_name)] == null) {
+        info.struct_definition.insert(string(type_name), output.to_buffer());
+    }
+}
+
 class sEnumNode extends sNodeBase
 {
-    new(string type_name, list<tup: string,sNode*%,string>* elements, sType*% type_elements = null, string attribute = s"", sInfo* info)
+    new(string type_name, sInfo* info)
     {
         self.super();
     
         string self.mTypeName = string(type_name);
-        list<tup: string, sNode*%,string>*% self.mElements = clone elements;
-        
-        sType*% self.mTypeElements = type_elements;
-        string self.mAttribute = attribute;
     
         return self;
     }
@@ -28,101 +125,14 @@ class sEnumNode extends sNodeBase
     bool compile(sInfo* info)
     {
         string type_name = self.mTypeName;
-        list<tup: string, sNode*%,string>* elements = self.mElements;
-        string attribute = self.mAttribute;
         
-        if(elements.length() == 0) {
-            return true;
-        }
-        
-        buffer*% buf = new buffer();
-        
-        if(type_name === "") {
-            if(self.mTypeElements) {
-                buf.append_format("enum :%s { ", make_type_name_string(self.mTypeElements));
-            }
-            else {
-                buf.append_str("enum { ");
-            }
-        }
-        else if(self.mTypeElements) {
-            buf.append_format("enum %s %s:%s { ", attribute, type_name, make_type_name_string(self.mTypeElements));
-        }
-        else {
-            buf.append_format("enum %s %s { ", attribute, type_name);
-        }
-        
-        int i = 0;
-        int n = 0;
-        string right_c_value = null;
-        foreach(it, elements) {
-            var name, value, attribute = it;
-            
-            if(value == null) {
-                buf.append_str(name);
-                buf.append_str(" ");
-                buf.append_str(attribute);
-                buf.append_str("\n");
-                
-                if(i != elements.length()-1) {
-                    buf.append_str(",");
-                }
-                
-                string c_value;
-                if(right_c_value) {
-                    c_value = xsprintf("(%s+%d)", right_c_value, n);
-                }
-                else {
-                    c_value = xsprintf("(%d)", n);
-                }
-                
-                add_variable_to_global_table_with_int_value(name, new sType(s"int"), c_value, info);
-            }
-            else {
-                node_compile(value).elif {
-                    return false;
-                }
-                
-                CVALUE*% right_value = get_value_from_stack(-1, info);
-                
-                string c_value = xsprintf("(%s)", right_value.c_value);
-                
-                add_variable_to_global_table_with_int_value(name, new sType(s"int"), c_value, info);
-                
-                buf.append_format("%s=(%s)", name, right_value.c_value);
-                
-                if(i != elements.length()-1) {
-                    buf.append_str(",");
-                }
-                
-                buf.append_str("\n");
-                
-                right_c_value = clone right_value.c_value;
-                n = 0;
-            }
-            
-            i++;
-            n++;
-        }
-        buf.append_format("};\n");
-        
-        if(info.struct_definition[string(type_name)] == null || type_name === "") {
-            if(type_name === "") {
-                static int type_name_num = 0;
-                type_name_num++;
-                type_name = xsprintf("__enum_type_name_X%d", type_name_num);
-                info.struct_definition.insert(string(type_name), buf);
-            }
-            else {
-                info.struct_definition.insert(string(type_name), buf);
-            }
-        }
+        output_enum(type_name);
     
         return true;
     }
 };
 
-sNode*% parse_enum(string type_name, string attribute, sInfo* info)
+sNode*% parse_enum(string type_name, string attribute, sInfo* info, bool anonymous=false)
 {
     sClass*% klass;
     if(info.classes.at(type_name, null) == null) {
@@ -131,16 +141,19 @@ sNode*% parse_enum(string type_name, string attribute, sInfo* info)
     }
     else {
         klass = info.classes.at(type_name, null);
+        if(!klass->mEnum) {
+            warning_msg(info, "multiple definition");
+        }
     }
+    klass->mAnonymous = anonymous;
     
-    sType*% type_elements = null;
     if(*info->p == ':') {
         info->p++;
         skip_spaces_and_lf();
         
         var type,name,err = parse_type();
         
-        type_elements = type;
+        klass->mTypeElements = type;
     }
     
     expected_next_character('{');
@@ -198,7 +211,10 @@ sNode*% parse_enum(string type_name, string attribute, sInfo* info)
     
     string attribute2 = parse_struct_attribute() + " " + attribute;
     
-    return new sEnumNode(type_name, elements, type_elements, attribute2, info) implements sNode;
+    klass->mElements = clone elements;
+    klass->mAttribute = attribute2;
+    
+    return new sEnumNode(type_name, info) implements sNode;
 }
 
 sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 96
@@ -208,6 +224,7 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 96
         
         string type_name = null;
         sType*% type_elements = null;
+        bool anonymous = false;
         
         string attribute = parse_struct_attribute();
         
@@ -220,81 +237,18 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 96
             type_elements = type;
             parse_struct_attribute();
         }
-        if(*info->p == '{') {
-            type_name = string("");
+        
+        if(xisalpha(*info->p) || *info->p == '_') {
+            type_name = parse_word();
         }
         else {
-            parse_struct_attribute();
+            static int n = 0;
             
-            type_name = parse_word();
-            
-            info.classes.insert(string(type_name), new sClass(name:string(type_name), enum_:true));
-            
-            parse_struct_attribute();
-            if(*info->p == ':') {
-                info->p++;
-                skip_spaces_and_lf();
-                
-                var type,name,err = parse_type();
-                
-                type_elements = type;
-            }
-        }
-        parse_struct_attribute();
-        
-        expected_next_character('{');
-        parse_struct_attribute();
-        
-        list<tup: string,sNode*%,string>*% elements = new list<tup: string,sNode*%, string>();
-        
-        while(true) {
-            if(*info.p == '}') {
-                info.p ++;
-                skip_spaces_and_lf();
-                break;
-            }
-            
-            parse_struct_attribute();
-            string element_name = parse_word();
-            string attribute = parse_struct_attribute();
-
-            if(*info->p == '=' && *(info->p+1) != '=') {
-                info->p++;
-                skip_spaces_and_lf();
-
-                bool no_comma = info.no_comma;
-                info.no_comma = true;
-                sNode*% element_value = expression();
-                
-                info.no_comma = no_comma;
-                
-                elements.push_back((element_name, element_value,attribute));
-            }
-            else {
-                elements.push_back((element_name, (sNode*%)null,attribute));
-            }
-            parse_struct_attribute();
-
-            if(*info->p == ',') {
-                info->p++;
-                skip_spaces_and_lf();
-            }
-            parse_struct_attribute();
-
-            if(*info->p == '}') {
-                info->p++;
-                skip_spaces_and_lf();
-                break;
-            }
+            type_name = s"__anoymous_enum_top\{n++}";
+            anonymous = true;
         }
         
-        char* source_tail = info.p;
-        
-        buffer*% header = new buffer();
-        header.append_str("enum ");
-        header.append(source_head, source_tail - source_head);
-        
-        return new sEnumNode(type_name, elements, type_elements, attribute, info) implements sNode;
+        return parse_enum(type_name, attribute, info, anonymous);
     }
     
     return inherit(buf, head, head_sline, info);

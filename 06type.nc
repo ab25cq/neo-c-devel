@@ -1462,11 +1462,8 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
         }
         else if(type_name === "enum") {
             enum_ = true;
+            union_attribute = parse_struct_attribute();
 
-            skip_spaces_and_lf();
-            
-            parse_attribute();
-            
             if(*info->p == ':') {
                 info->p++;
                 skip_spaces_and_lf();
@@ -1476,63 +1473,24 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
 
             skip_spaces_and_lf();
             
+            bool anonymous = false;
             if(*info->p == '{') {
-                char* p = info.p;
-                int sline = info.sline;
+                static int n = 0;
                 
-                skip_block(info);
-                
-                if((info->end - info->p) >= strlen("__attribute__") && memcmp(info->p, "__attribute__", strlen("__attribute__")) == 0) {
-                    parse_attribute();
-                }
-                
-                if(*info->p == ';') {
-                    info.p = head;
-                    info.sline = head_sline;
-                    //info.define_struct = true;
-                    return ((sType*%)null, (string)null, false);
-                }
-                else {
-                    anonymous_type = true;
-                    type_name = string("");
-                    info.p = p;
-                    info.sline = sline;
-                    break;
-                }
+                type_name = s"__anoymous_enum\{n++}";
+                anonymous = true;
             }
-
-            skip_spaces_and_lf();
-            
-            type_name = parse_word();
-
-            skip_spaces_and_lf();
-            
-            if(*info->p == ':') {
-                info->p++;
-                skip_spaces_and_lf();
-                
-                var type,name,err = parse_type();
+            else {
+                type_name = parse_word();
             }
-
-            skip_spaces_and_lf();
             
             if(*info->p == '{') {
-                char* p = info.p;
-                int sline = info.sline;
-                
-                skip_block(info);
-                
-                if(*info->p == ';') {
-                    info.p = head;
-                    info.sline = head_sline;
-//                    info.define_struct = true;
-                    return ((sType*%)null, (string)null, false);
-                }
-                else {
-                    anonymous_type = true;
-                    info.p = p;
-                    info.sline = sline;
-                    break;
+                sNode*% node = parse_enum(type_name, union_attribute, info, anonymous);
+                        
+                if(!info.no_output_come_code) {
+                    node_compile(node).elif {
+                        return ((sType*%)null, (string)null, false);
+                    }
                 }
             }
         }
@@ -2053,32 +2011,10 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
     }
     
     
+/*
     if(anonymous_type && *info->p == '{') {
         static int anonymous_num = 0;
         if(enum_) {
-            if(type_name === "") {
-                if(!info.no_output_err) {
-                    type_name = xsprintf("anonymous_typeYXOU%d", anonymous_num);
-                }
-                else {
-                    type_name = xsprintf("anonymous_typeYAG%d", ++anonymous_num);
-                }
-            }
-            
-            sNode*% node = parse_enum(type_name, union_attribute, info);
-            
-            if(!info.no_output_err) {
-                node_compile(node).elif {
-                    printf("%s %d: compiling is failed(X)\n", info->sname, info->sline);
-                    return ((sType*%)null, (string)null, false);
-                }
-            }
-            
-            type = clone info.types[type_name];
-            
-            if(type == null) {
-                type = new sType(string(type_name));
-            }
         }
         else {
             err_msg(info, "unexpected { character");
@@ -2095,7 +2031,8 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
             var_name = parse_variable_name_fun(type, anonymous_name:anonymous_name, var_name_between_brace:var_name_between_brace, attribute);
         }
     }
-    else if(lambda_flag) {
+    else */
+    if(lambda_flag) {
         sType*% result_type;
         if(info.types[type_name]) {
             result_type = clone info.types[type_name];

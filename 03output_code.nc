@@ -86,8 +86,15 @@ string make_type_name_string(sType* type,  sInfo* info=info, bool no_static=fals
         }
     }
     else if(type->mClass->mEnum) {
-        buf.append_str("enum ");
-        buf.append_str(class_name);
+        if(!type->mClass->mAnonymous) {
+            buf.append_str("enum ");
+            buf.append_str(class_name);
+        }
+        else {
+            var code = make_enum(type->mClass, info);
+            
+            buf.append_str(code);
+        }
     }
     else if(type->mLongLong) {
         if(class_name === "int") {

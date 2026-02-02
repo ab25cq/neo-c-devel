@@ -52,7 +52,7 @@ string@code, bool@existance_generics, string@name make_struct(sClass* klass, str
             buf.append_format("} %s;\n", klass->mAttribute);
         }
     }
-    if(pragma) {
+    if(pragma && pragma !== "") {
         buf.append_str("#pragma pack(pop)");
     }
     
@@ -258,8 +258,13 @@ sNode*% parse_struct(string type_name, string struct_attribute, sInfo* info, boo
     }
     else {
         klass = borrow info.classes.at(type_name, null);
+        
+        if(!klass->mStruct) {
+            warning_msg(info, "multiple definition");
+        }
         klass.mFields.reset();
     }
+    klass->mAnonymous = anonymous;
     
     sType*% type = new sType(type_name);
     if(info.parse_struct_recursive_count >= 2) {
