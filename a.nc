@@ -1,15 +1,4 @@
-//#include <neo-c.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdarg.h>
-#undef va_start
-#define va_start(ap, last)  __builtin_va_start(ap, last)
-#include <limits.h>
-#include <locale.h>
-#include <errno.h>
-#include <assert.h>
-#include <stdbool.h>
+#include <neo-c.h>
 
 union XYZ { int a; float b; };
 struct XYZ2 { int UHO; };
@@ -23,8 +12,14 @@ struct YYY { int a; int b; } ddd;
 
 enum XX { kA, kB, kC } AAA;
 
+typedef struct { int XXX; int YYY } sData;
+
 int main(int argc, char** argv) 
 {
+    sData a;
+    a.XXX = 111;
+    a.YYY = 222;
+    
     puts("HELLO WORLD");
     assert(1 == 1);
     return 0;

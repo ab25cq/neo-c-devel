@@ -51,12 +51,27 @@ class sTypedefNode extends sNodeBase
             type->mTypedef = true;
             info.types.insert(string(type_name), clone type);
             
+            type = info.types[string(type_name)];
+            
             if(type->mArrayNum.length() > 0 || type->mAtomic) {
-                info.struct_definition.insert(string(type_name), "typedef __builtin_va_list __darwin_va_list;\n".to_buffer());
+                if(info.struct_definition[string(type_name)]) {
+                    var d, d2 = info.struct_definition[string(type_name)];
+                    
+                    info.struct_definition.insert(string(type_name), (d, "typedef __builtin_va_list __darwin_va_list;\n".to_buffer()));
+                }
+                else {
+                    info.struct_definition.insert(string(type_name), (new buffer(), "typedef __builtin_va_list __darwin_va_list;\n".to_buffer()));
+                }
             }
             else {
-                //info.typedef_definition.insert(string(type_name), "typedef __builtin_va_list __darwin_va_list;\n".to_buffer());
-                info.struct_definition.insert(string(type_name), "typedef __builtin_va_list __darwin_va_list;\n".to_buffer());
+                if(info.struct_definition[string(type_name)]) {
+                    var d, d2 = info.struct_definition[string(type_name)];
+                    
+                    info.struct_definition.insert(string(type_name), (d, "typedef __builtin_va_list __darwin_va_list;\n".to_buffer()));
+                }
+                else {
+                    info.struct_definition.insert(string(type_name), (new buffer(), "typedef __builtin_va_list __darwin_va_list;\n".to_buffer()));
+                }
             }
         }
         else if(self.multiple_declare) {
@@ -69,15 +84,80 @@ class sTypedefNode extends sNodeBase
                 
                 type->mTypedef = true;
                 info.types.insert(string(type_name), clone type);
+            
+                type = info.types[string(type_name)];
                 
+                sClass*% klass = info.classes[string(type_name)]
+                string anonymous_code = null;
+                if(type_name === "__gnuc_va_list" || type_name === "va_list") {
+                }
+                else if(klass) {
+                    klass->mAnonymous = false;
+                    klass->mName = string(type_name);
+                    
+                    info.types[string(type_name)]->mClass = klass;
+                    
+                    var code, existance_generics, name = make_struct(klass, s"", info);
+                    
+                    anonymous_code = clone code;
+                }
+                else if(type->mClass && type->mClass.mFields.length() > 0) {
+                    info.classes.insert(string(type_name), clone type->mClass);
+                    
+                    sClass*% klass = info.classes[string(type_name)];
+                    
+                    klass->mAnonymous = false;
+                    klass->mName = string(type_name);
+                    
+                    type->mClass = klass;
+                    
+                    if(klass->mUnion) {
+                        var code, name = make_union(klass, info);
+                        
+                        anonymous_code = clone code;
+                    }
+                    else if(klass->mStruct) {
+                        var code, existance_generics, name = make_struct(klass, s"", info);
+                        
+                        anonymous_code = clone code;
+                    }
+                    else if(klass->mEnum) {
+                        string code = make_enum(klass, info);
+                        
+                        anonymous_code = clone code;
+                    }
+                }
             
                 if(!is_gcc_builtin_float_typedef(type_name, info)) {
                     if(type->mArrayNum.length() > 0 || type->mAtomic) {
-                        info.struct_definition.insert(string(type_name), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer());
+                        if(info.struct_definition[string(type_name)]) {
+                            var d, d2 = info.struct_definition[string(type_name)];
+                        
+                            info.struct_definition.insert(string(type_name), (d, xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                        }
+                        else {
+                            if(anonymous_code) {
+                                info.struct_definition.insert(string(type_name), (anonymous_code.to_buffer(), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                            }
+                            else {
+                                info.struct_definition.insert(string(type_name), (new buffer(), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                            }
+                        }
                     }
                     else {
-                        //info.typedef_definition.insert(string(type_name), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer());
-                        info.struct_definition.insert(string(type_name), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer());
+                        if(info.struct_definition[string(type_name)]) {
+                            var d, d2 = info.struct_definition[string(type_name)];
+                        
+                            info.struct_definition.insert(string(type_name), (d, xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                        }
+                        else {
+                            if(anonymous_code) {
+                                info.struct_definition.insert(string(type_name), (anonymous_code.to_buffer(), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                            }
+                            else {
+                                info.struct_definition.insert(string(type_name), (new buffer(), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                            }
+                        }
                     }
                 }
             }
@@ -92,13 +172,79 @@ class sTypedefNode extends sNodeBase
             type->mTypedef = true;
             info.types.insert(string(type_name), clone type);
             
+            type = info.types[string(type_name)];
+            
+            sClass*% klass = info.classes[string(type_name)]
+            string anonymous_code = null;
+            if(type_name === "__gnuc_va_list" || type_name === "va_list") {
+            }
+            else if(klass) {
+                klass->mAnonymous = false;
+                klass->mName = string(type_name);
+                
+                info.types[string(type_name)]->mClass = klass;
+                
+                var code, existance_generics, name = make_struct(klass, s"", info);
+                
+                anonymous_code = clone code;
+            }
+            else if(type->mClass && type->mClass.mFields.length() > 0) {
+                info.classes.insert(string(type_name), clone type->mClass);
+                
+                sClass*% klass = info.classes[string(type_name)];
+                
+                klass->mAnonymous = false;
+                klass->mName = string(type_name);
+                
+                type->mClass = klass;
+                
+                if(klass->mUnion) {
+                    var code, name = make_union(klass, info);
+                    
+                    anonymous_code = clone code;
+                }
+                else if(klass->mStruct) {
+                    var code, existance_generics, name = make_struct(klass, s"", info);
+                    
+                    anonymous_code = clone code;
+                }
+                else if(klass->mEnum) {
+                    string code = make_enum(klass, info);
+                    
+                    anonymous_code = clone code;
+                }
+            }
+            
             if(!is_gcc_builtin_float_typedef(type_name, info)) {
                 if(type->mArrayNum.length() > 0 || type->mAtomic) {
-                    info.struct_definition.insert(string(type_name), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer());
+                    if(info.struct_definition[string(type_name)]) {
+                        var d, d2 = info.struct_definition[string(type_name)];
+                        
+                        info.struct_definition.insert(string(type_name), (d, xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                    }
+                    else {
+                        if(anonymous_code) {
+                            info.struct_definition.insert(string(type_name), (anonymous_code.to_buffer(), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                        }
+                        else {
+                            info.struct_definition.insert(string(type_name), (new buffer(), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                        }
+                    }
                 }
                 else {
-                    //info.typedef_definition.insert(string(type_name), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer());
-                    info.struct_definition.insert(string(type_name), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer());
+                    if(info.struct_definition[string(type_name)]) {
+                        var d, d2 = info.struct_definition[string(type_name)];
+                        
+                        info.struct_definition.insert(string(type_name), (d, xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                    }
+                    else {
+                        if(anonymous_code) {
+                            info.struct_definition.insert(string(type_name), (anonymous_code.to_buffer(), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                        }
+                        else {
+                            info.struct_definition.insert(string(type_name), (new buffer(), xsprintf("typedef %s;\n", make_define_var(type, type_name, in_typedef:true)).to_buffer()));
+                        }
+                    }
                 }
             }
         }

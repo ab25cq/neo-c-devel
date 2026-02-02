@@ -66,7 +66,12 @@ void output_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=fal
     var code, existance_generics, name = make_struct(klass, pragma, info, anonymous);
             
     if(info.struct_definition[string(name)] == null && !existance_generics) {
-        info.struct_definition.insert(string(name), code.to_buffer());
+        info.struct_definition.insert(string(name), (code.to_buffer(), new buffer()));
+    }
+    else if(info.struct_definition[string(name)]) {
+        var d, d2 = info.struct_definition[string(name)];
+        
+        info.struct_definition.insert(string(name), (code.to_buffer(), d2));
     }
 }
 

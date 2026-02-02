@@ -76,12 +76,10 @@ var UNIX=1
     #include <stdlib.h>
     #include <string.h>
     #include <stdarg.h>
-    #undef va_start
-    #define va_start(ap, last)  __builtin_va_start(ap, last)
     #include <limits.h>
     #include <locale.h>
     #include <errno.h>
-    __c__ {#include <assert.h>}
+    #include <assert.h>
     #include <stdbool.h>
     
     #define NULL ((void*)0)

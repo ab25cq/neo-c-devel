@@ -1320,6 +1320,23 @@ struct map$2char$phsType$ph
     int it;
 };
 
+struct tuple2$2buffer$phbuffer$ph
+{
+    struct buffer* v1  ;
+    struct buffer* v2  ;
+};
+
+struct map$2char$phtuple2$2buffer$phbuffer$ph$ph
+{
+    char** keys  ;
+    _Bool* item_existance;
+    struct tuple2$2buffer$phbuffer$ph** items;
+    int size;
+    int len;
+    struct list$1char$ph* key_list;
+    int it;
+};
+
 struct map$2char$phbuffer$ph
 {
     char** keys  ;
@@ -1391,7 +1408,7 @@ struct sInfo
     struct map$2char$phsClass$ph* classes;
     struct map$2char$phsType$ph* types;
     struct map$2char$phsClass$ph* generics_classes;
-    struct map$2char$phbuffer$ph* struct_definition;
+    struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* struct_definition;
     struct map$2char$phbuffer$ph* c_include_definition;
     struct map$2char$phbuffer$ph* var_definition;
     struct map$2char$phbuffer$ph* previous_struct_definition;

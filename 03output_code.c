@@ -1318,6 +1318,23 @@ struct map$2char$phsType$ph
     int it;
 };
 
+struct tuple2$2buffer$phbuffer$ph
+{
+    struct buffer* v1  ;
+    struct buffer* v2  ;
+};
+
+struct map$2char$phtuple2$2buffer$phbuffer$ph$ph
+{
+    char** keys  ;
+    _Bool* item_existance;
+    struct tuple2$2buffer$phbuffer$ph** items;
+    int size;
+    int len;
+    struct list$1char$ph* key_list;
+    int it;
+};
+
 struct map$2char$phbuffer$ph
 {
     char** keys  ;
@@ -1389,7 +1406,7 @@ struct sInfo
     struct map$2char$phsClass$ph* classes;
     struct map$2char$phsType$ph* types;
     struct map$2char$phsClass$ph* generics_classes;
-    struct map$2char$phbuffer$ph* struct_definition;
+    struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* struct_definition;
     struct map$2char$phbuffer$ph* c_include_definition;
     struct map$2char$phbuffer$ph* var_definition;
     struct map$2char$phbuffer$ph* previous_struct_definition;
@@ -2732,6 +2749,13 @@ static char* map$2char$phbuffer$ph_next(struct map$2char$phbuffer$ph* self);
 static struct buffer* map$2char$phbuffer$ph$p_operator_load_element(struct map$2char$phbuffer$ph* self, char* key  );
 static struct buffer* map$2char$phbuffer$ph_operator_load_element(struct map$2char$phbuffer$ph* self, char* key  );
 static void map$2char$phbuffer$ph$p_finalize(struct map$2char$phbuffer$ph* self);
+static char* map$2char$phtuple2$2buffer$phbuffer$ph$ph_begin(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self);
+static _Bool map$2char$phtuple2$2buffer$phbuffer$ph$ph_end(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self);
+static char* map$2char$phtuple2$2buffer$phbuffer$ph$ph_next(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self);
+static struct tuple2$2buffer$phbuffer$ph* map$2char$phtuple2$2buffer$phbuffer$ph$ph$p_operator_load_element(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self, char* key  );
+static void tuple2$2buffer$phbuffer$ph$p_finalize(struct tuple2$2buffer$phbuffer$ph* self);
+static struct tuple2$2buffer$phbuffer$ph* map$2char$phtuple2$2buffer$phbuffer$ph$ph_operator_load_element(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self, char* key  );
+static void map$2char$phtuple2$2buffer$phbuffer$ph$ph$p_finalize(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self);
 static char* map$2char$phchar$ph_begin(struct map$2char$phchar$ph* self);
 static _Bool map$2char$phchar$ph_end(struct map$2char$phchar$ph* self);
 static char* map$2char$phchar$ph_next(struct map$2char$phchar$ph* self);
@@ -6301,30 +6325,32 @@ _Bool output_source_file(struct sInfo* info  )
     struct map$2char$phbuffer$ph* o2_saved_121;
     char* it_122  ;
     struct buffer* buf_123  ;
-    struct map$2char$phbuffer$ph* o2_saved_124;
-    char* it_125  ;
-    struct buffer* buf_126  ;
-    struct map$2char$phbuffer$ph* o2_saved_127;
-    char* it_128  ;
-    struct buffer* buf_129  ;
-    struct map$2char$phsFun$ph* o2_saved_130;
-    char* it_131  ;
-    struct sFun* it2_132  ;
+    struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* o2_saved_124;
+    char* it_126  ;
+    struct tuple2$2buffer$phbuffer$ph* multiple_assign_var3
+;    struct buffer* d  =0;
+    struct buffer* d2  =0;
+    struct map$2char$phbuffer$ph* o2_saved_129;
+    char* it_130  ;
+    struct buffer* buf_131  ;
+    struct map$2char$phsFun$ph* o2_saved_132;
+    char* it_133  ;
+    struct sFun* it2_134  ;
     _Bool contained_generics;
     char* header  ;
-    struct map$2char$phchar$ph* o2_saved_133;
-    char* it_135  ;
+    struct map$2char$phchar$ph* o2_saved_135;
+    char* it_137  ;
     char* str;
-    struct map$2char$phsFun$ph* o2_saved_138;
-    char* it_139  ;
-    struct sFun* it2_140  ;
-    _Bool contained_generics_141;
+    struct map$2char$phsFun$ph* o2_saved_140;
+    char* it_141  ;
+    struct sFun* it2_142  ;
+    _Bool contained_generics_143;
     char* output  ;
-    struct map$2char$phsFun$ph* o2_saved_142;
-    char* it_143  ;
-    struct sFun* it2_144  ;
-    _Bool contained_generics_145;
-    char* output_146  ;
+    struct map$2char$phsFun$ph* o2_saved_144;
+    char* it_145  ;
+    struct sFun* it2_146  ;
+    _Bool contained_generics_147;
+    char* output_148  ;
     _Bool __result_obj__0;
     main_fun=((struct sFun*)(__right_value2=map$2char$phsFun$ph_operator_load_element(info->funcs,((char*)(__right_value1=xsprintf("main"))))));
     (__right_value1 = come_decrement_ref_count(__right_value1, (void*)0, (void*)0, 1, 0, (void*)0));
@@ -6382,85 +6408,96 @@ _Bool output_source_file(struct sInfo* info  )
     }
     come_call_finalizer(map$2char$phbuffer$ph$p_finalize, o2_saved_121, (void*)0, (void*)0, 0, 0, 0, (void*)0);
     fprintf(f,"/// struct definition ///\n");
-    for(o2_saved_124=(struct map$2char$phbuffer$ph*)come_increment_ref_count(info->struct_definition),it_125=map$2char$phbuffer$ph_begin(o2_saved_124);!map$2char$phbuffer$ph_end(o2_saved_124);it_125=map$2char$phbuffer$ph_next(o2_saved_124)){
-        buf_126=((struct buffer*)(__right_value2=map$2char$phbuffer$ph_operator_load_element(info->struct_definition,((char*)(__right_value1=__builtin_string(it_125))))));
+    for(o2_saved_124=(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph*)come_increment_ref_count(info->struct_definition),it_126=map$2char$phtuple2$2buffer$phbuffer$ph$ph_begin(o2_saved_124);!map$2char$phtuple2$2buffer$phbuffer$ph$ph_end(o2_saved_124);it_126=map$2char$phtuple2$2buffer$phbuffer$ph$ph_next(o2_saved_124)){
+        multiple_assign_var3=((struct tuple2$2buffer$phbuffer$ph*)(__right_value2=map$2char$phtuple2$2buffer$phbuffer$ph$ph_operator_load_element(info->struct_definition,((char*)(__right_value1=__builtin_string(it_126))))));
+        d=(struct buffer*)come_increment_ref_count(multiple_assign_var3->v1);
+        d2=(struct buffer*)come_increment_ref_count(multiple_assign_var3->v2);
         (__right_value1 = come_decrement_ref_count(__right_value1, (void*)0, (void*)0, 1, 0, (void*)0));
-        fprintf(f,"%s\n",((char*)(__right_value0=buffer_to_string(buf_126))));
-        (__right_value0 = come_decrement_ref_count(__right_value0, (void*)0, (void*)0, 1, 0, (void*)0));
+        come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __right_value2, (void*)0, (void*)0, 0, 1, 0, (void*)0);
+        if(d) {
+            fprintf(f,"%s\n",((char*)(__right_value0=buffer_to_string(d))));
+            (__right_value0 = come_decrement_ref_count(__right_value0, (void*)0, (void*)0, 1, 0, (void*)0));
+        }
+        if(d2) {
+            fprintf(f,"%s\n",((char*)(__right_value0=buffer_to_string(d2))));
+            (__right_value0 = come_decrement_ref_count(__right_value0, (void*)0, (void*)0, 1, 0, (void*)0));
+        }
+        come_call_finalizer(buffer_finalize, d, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+        come_call_finalizer(buffer_finalize, d2, (void*)0, (void*)0, 0, 0, 0, (void*)0);
     }
-    come_call_finalizer(map$2char$phbuffer$ph$p_finalize, o2_saved_124, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+    come_call_finalizer(map$2char$phtuple2$2buffer$phbuffer$ph$ph$p_finalize, o2_saved_124, (void*)0, (void*)0, 0, 0, 0, (void*)0);
     fprintf(f,"/// variable definition ///\n");
-    for(o2_saved_127=(struct map$2char$phbuffer$ph*)come_increment_ref_count(info->var_definition),it_128=map$2char$phbuffer$ph_begin(o2_saved_127);!map$2char$phbuffer$ph_end(o2_saved_127);it_128=map$2char$phbuffer$ph_next(o2_saved_127)){
-        buf_129=((struct buffer*)(__right_value2=map$2char$phbuffer$ph_operator_load_element(info->var_definition,((char*)(__right_value1=__builtin_string(it_128))))));
+    for(o2_saved_129=(struct map$2char$phbuffer$ph*)come_increment_ref_count(info->var_definition),it_130=map$2char$phbuffer$ph_begin(o2_saved_129);!map$2char$phbuffer$ph_end(o2_saved_129);it_130=map$2char$phbuffer$ph_next(o2_saved_129)){
+        buf_131=((struct buffer*)(__right_value2=map$2char$phbuffer$ph_operator_load_element(info->var_definition,((char*)(__right_value1=__builtin_string(it_130))))));
         (__right_value1 = come_decrement_ref_count(__right_value1, (void*)0, (void*)0, 1, 0, (void*)0));
-        fprintf(f,"%s\n",((char*)(__right_value0=buffer_to_string(buf_129))));
+        fprintf(f,"%s\n",((char*)(__right_value0=buffer_to_string(buf_131))));
         (__right_value0 = come_decrement_ref_count(__right_value0, (void*)0, (void*)0, 1, 0, (void*)0));
     }
-    come_call_finalizer(map$2char$phbuffer$ph$p_finalize, o2_saved_127, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+    come_call_finalizer(map$2char$phbuffer$ph$p_finalize, o2_saved_129, (void*)0, (void*)0, 0, 0, 0, (void*)0);
     fprintf(f,"// source head\n");
     fprintf(f,"%s\n",((char*)(__right_value0=buffer_to_string(info->module->mSourceHead))));
     (__right_value0 = come_decrement_ref_count(__right_value0, (void*)0, (void*)0, 1, 0, (void*)0));
     fprintf(f,"// header function\n");
-    for(o2_saved_130=(struct map$2char$phsFun$ph*)come_increment_ref_count(info->funcs),it_131=map$2char$phsFun$ph_begin(o2_saved_130);!map$2char$phsFun$ph_end(o2_saved_130);it_131=map$2char$phsFun$ph_next(o2_saved_130)){
-        it2_132=((struct sFun*)(__right_value2=map$2char$phsFun$ph_operator_load_element(info->funcs,((char*)(__right_value1=__builtin_string(it_131))))));
+    for(o2_saved_132=(struct map$2char$phsFun$ph*)come_increment_ref_count(info->funcs),it_133=map$2char$phsFun$ph_begin(o2_saved_132);!map$2char$phsFun$ph_end(o2_saved_132);it_133=map$2char$phsFun$ph_next(o2_saved_132)){
+        it2_134=((struct sFun*)(__right_value2=map$2char$phsFun$ph_operator_load_element(info->funcs,((char*)(__right_value1=__builtin_string(it_133))))));
         (__right_value1 = come_decrement_ref_count(__right_value1, (void*)0, (void*)0, 1, 0, (void*)0));
-        contained_generics=is_contained_generics_funcstion(it2_132,info);
+        contained_generics=is_contained_generics_funcstion(it2_134,info);
         if(!contained_generics) {
-            header=(char*)come_increment_ref_count(header_function(it2_132,info));
-            if(it2_132->mInline) {
+            header=(char*)come_increment_ref_count(header_function(it2_134,info));
+            if(it2_134->mInline) {
             }
-            else if(string_operator_not_equals(it_131,"__builtin_va_start")&&string_operator_not_equals(it_131,"__builtin_va_end")) {
+            else if(string_operator_not_equals(it_133,"__builtin_va_start")&&string_operator_not_equals(it_133,"__builtin_va_end")) {
                 fprintf(f,"%s",header);
             }
             (header = come_decrement_ref_count(header, (void*)0, (void*)0, 0, 0, (void*)0));
         }
     }
-    come_call_finalizer(map$2char$phsFun$ph$p_finalize, o2_saved_130, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+    come_call_finalizer(map$2char$phsFun$ph$p_finalize, o2_saved_132, (void*)0, (void*)0, 0, 0, 0, (void*)0);
     fprintf(f,"// uniq global variable\n");
     if(main_module) {
-        for(o2_saved_133=(struct map$2char$phchar$ph*)come_increment_ref_count(info->uniq_definition),it_135=map$2char$phchar$ph_begin(o2_saved_133);!map$2char$phchar$ph_end(o2_saved_133);it_135=map$2char$phchar$ph_next(o2_saved_133)){
-            str=((char*)(__right_value2=map$2char$phchar$ph_operator_load_element(info->uniq_definition,((char*)(__right_value1=__builtin_string(it_135))))));
+        for(o2_saved_135=(struct map$2char$phchar$ph*)come_increment_ref_count(info->uniq_definition),it_137=map$2char$phchar$ph_begin(o2_saved_135);!map$2char$phchar$ph_end(o2_saved_135);it_137=map$2char$phchar$ph_next(o2_saved_135)){
+            str=((char*)(__right_value2=map$2char$phchar$ph_operator_load_element(info->uniq_definition,((char*)(__right_value1=__builtin_string(it_137))))));
             (__right_value1 = come_decrement_ref_count(__right_value1, (void*)0, (void*)0, 1, 0, (void*)0));
             fprintf(f,"%s\n",str);
         }
-        come_call_finalizer(map$2char$phchar$ph$p_finalize, o2_saved_133, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+        come_call_finalizer(map$2char$phchar$ph$p_finalize, o2_saved_135, (void*)0, (void*)0, 0, 0, 0, (void*)0);
     }
     fprintf(f,"// inline function\n");
-    for(o2_saved_138=(struct map$2char$phsFun$ph*)come_increment_ref_count(info->funcs),it_139=map$2char$phsFun$ph_begin(o2_saved_138);!map$2char$phsFun$ph_end(o2_saved_138);it_139=map$2char$phsFun$ph_next(o2_saved_138)){
-        it2_140=((struct sFun*)(__right_value2=map$2char$phsFun$ph_operator_load_element(info->funcs,((char*)(__right_value1=__builtin_string(it_139))))));
+    for(o2_saved_140=(struct map$2char$phsFun$ph*)come_increment_ref_count(info->funcs),it_141=map$2char$phsFun$ph_begin(o2_saved_140);!map$2char$phsFun$ph_end(o2_saved_140);it_141=map$2char$phsFun$ph_next(o2_saved_140)){
+        it2_142=((struct sFun*)(__right_value2=map$2char$phsFun$ph_operator_load_element(info->funcs,((char*)(__right_value1=__builtin_string(it_141))))));
         (__right_value1 = come_decrement_ref_count(__right_value1, (void*)0, (void*)0, 1, 0, (void*)0));
-        contained_generics_141=is_contained_generics_funcstion(it2_140,info);
-        if(contained_generics_141) {
+        contained_generics_143=is_contained_generics_funcstion(it2_142,info);
+        if(contained_generics_143) {
         }
-        else if(it2_140->mInline) {
-            output=(char*)come_increment_ref_count(output_function(it2_140,info));
+        else if(it2_142->mInline) {
+            output=(char*)come_increment_ref_count(output_function(it2_142,info));
             fprintf(f,"%s",output);
             (output = come_decrement_ref_count(output, (void*)0, (void*)0, 0, 0, (void*)0));
         }
     }
-    come_call_finalizer(map$2char$phsFun$ph$p_finalize, o2_saved_138, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+    come_call_finalizer(map$2char$phsFun$ph$p_finalize, o2_saved_140, (void*)0, (void*)0, 0, 0, 0, (void*)0);
     fprintf(f,"\n");
     fprintf(f,"// body function\n");
-    for(o2_saved_142=(struct map$2char$phsFun$ph*)come_increment_ref_count(info->funcs),it_143=map$2char$phsFun$ph_begin(o2_saved_142);!map$2char$phsFun$ph_end(o2_saved_142);it_143=map$2char$phsFun$ph_next(o2_saved_142)){
-        it2_144=((struct sFun*)(__right_value2=map$2char$phsFun$ph_operator_load_element(info->funcs,((char*)(__right_value1=__builtin_string(it_143))))));
+    for(o2_saved_144=(struct map$2char$phsFun$ph*)come_increment_ref_count(info->funcs),it_145=map$2char$phsFun$ph_begin(o2_saved_144);!map$2char$phsFun$ph_end(o2_saved_144);it_145=map$2char$phsFun$ph_next(o2_saved_144)){
+        it2_146=((struct sFun*)(__right_value2=map$2char$phsFun$ph_operator_load_element(info->funcs,((char*)(__right_value1=__builtin_string(it_145))))));
         (__right_value1 = come_decrement_ref_count(__right_value1, (void*)0, (void*)0, 1, 0, (void*)0));
-        contained_generics_145=is_contained_generics_funcstion(it2_144,info);
-        if(contained_generics_145) {
+        contained_generics_147=is_contained_generics_funcstion(it2_146,info);
+        if(contained_generics_147) {
         }
-        else if(it2_144->mExternal) {
+        else if(it2_146->mExternal) {
         }
-        else if(!main_module&&it2_144->mUniq) {
+        else if(!main_module&&it2_146->mUniq) {
         }
-        else if(it2_144->mInline) {
+        else if(it2_146->mInline) {
         }
         else {
-            output_146=(char*)come_increment_ref_count(output_function(it2_144,info));
-            fprintf(f,"%s",output_146);
+            output_148=(char*)come_increment_ref_count(output_function(it2_146,info));
+            fprintf(f,"%s",output_148);
             fprintf(f,"\n");
-            (output_146 = come_decrement_ref_count(output_146, (void*)0, (void*)0, 0, 0, (void*)0));
+            (output_148 = come_decrement_ref_count(output_148, (void*)0, (void*)0, 0, 0, (void*)0));
         }
     }
-    come_call_finalizer(map$2char$phsFun$ph$p_finalize, o2_saved_142, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+    come_call_finalizer(map$2char$phsFun$ph$p_finalize, o2_saved_144, (void*)0, (void*)0, 0, 0, 0, (void*)0);
     fclose(f);
     __result_obj__0 = (_Bool)1;
     (output_file_name = come_decrement_ref_count(output_file_name, (void*)0, (void*)0, 0, 0, (void*)0));
@@ -7440,12 +7477,12 @@ static void map$2char$phbuffer$ph$p_finalize(struct map$2char$phbuffer$ph* self)
     neo_current_frame = fr.prev;
 }
 
-static char* map$2char$phchar$ph_begin(struct map$2char$phchar$ph* self)
+static char* map$2char$phtuple2$2buffer$phbuffer$ph$ph_begin(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self)
 {
-    struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "map$2char$phchar$ph_begin"; neo_current_frame = &fr;
+    struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "map$2char$phtuple2$2buffer$phbuffer$ph$ph_begin"; neo_current_frame = &fr;
     char* result  ;
     char* __result_obj__0  ;
-    char* result_134  ;
+    char* result_125  ;
     if(self==((void*)0)) {
         memset(&result,0,sizeof(char*));
         __result_obj__0 = result;
@@ -7458,8 +7495,208 @@ static char* map$2char$phchar$ph_begin(struct map$2char$phchar$ph* self)
         neo_current_frame = fr.prev;
         return __result_obj__0;
     }
-    memset(&result_134,0,sizeof(char*));
-    __result_obj__0 = result_134;
+    memset(&result_125,0,sizeof(char*));
+    __result_obj__0 = result_125;
+    neo_current_frame = fr.prev;
+    return __result_obj__0;
+}
+
+static _Bool map$2char$phtuple2$2buffer$phbuffer$ph$ph_end(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self)
+{
+    struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "map$2char$phtuple2$2buffer$phbuffer$ph$ph_end"; neo_current_frame = &fr;
+    neo_current_frame = fr.prev;
+    return self==((void*)0)||self->key_list==((void*)0)||self->key_list->it==((void*)0);
+    neo_current_frame = fr.prev;
+}
+
+static char* map$2char$phtuple2$2buffer$phbuffer$ph$ph_next(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self)
+{
+    struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "map$2char$phtuple2$2buffer$phbuffer$ph$ph_next"; neo_current_frame = &fr;
+    char* result  ;
+    char* __result_obj__0  ;
+    char* result_127  ;
+    if(self==((void*)0)||self->key_list->it==((void*)0)) {
+        memset(&result,0,sizeof(char*));
+        __result_obj__0 = result;
+        neo_current_frame = fr.prev;
+        return __result_obj__0;
+    }
+    self->key_list->it=self->key_list->it->next;
+    if(self->key_list->it) {
+        __result_obj__0 = self->key_list->it->item;
+        neo_current_frame = fr.prev;
+        return __result_obj__0;
+    }
+    memset(&result_127,0,sizeof(char*));
+    __result_obj__0 = result_127;
+    neo_current_frame = fr.prev;
+    return __result_obj__0;
+}
+
+static struct tuple2$2buffer$phbuffer$ph* map$2char$phtuple2$2buffer$phbuffer$ph$ph$p_operator_load_element(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self, char* key  )
+{
+    struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "map$2char$phtuple2$2buffer$phbuffer$ph$ph$p_operator_load_element"; neo_current_frame = &fr;
+    struct tuple2$2buffer$phbuffer$ph* default_value;
+    struct tuple2$2buffer$phbuffer$ph* __result_obj__0;
+    unsigned int hash;
+    unsigned int it;
+    memset(&default_value,0,sizeof(struct tuple2$2buffer$phbuffer$ph*));
+    if(self==((void*)0)) {
+        __result_obj__0 = (struct tuple2$2buffer$phbuffer$ph*)come_increment_ref_count(default_value);
+        come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, default_value, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+        neo_current_frame = fr.prev;
+        come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+        return __result_obj__0;
+    }
+    hash=string_get_hash_key(((char*)key))%self->size;
+    it=hash;
+    while((_Bool)1) {
+        if(self->item_existance[it]) {
+            if(string_equals(self->keys[it],key)) {
+                __result_obj__0 = (struct tuple2$2buffer$phbuffer$ph*)come_increment_ref_count(self->items[it]);
+                come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, default_value, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+                neo_current_frame = fr.prev;
+                come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+                return __result_obj__0;
+            }
+            it++;
+            if(it>=self->size) {
+                it=0;
+            }
+            else if(it==hash) {
+                __result_obj__0 = (struct tuple2$2buffer$phbuffer$ph*)come_increment_ref_count(default_value);
+                come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, default_value, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+                neo_current_frame = fr.prev;
+                come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+                return __result_obj__0;
+            }
+        }
+        else {
+            __result_obj__0 = (struct tuple2$2buffer$phbuffer$ph*)come_increment_ref_count(default_value);
+            come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, default_value, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+            neo_current_frame = fr.prev;
+            come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+            return __result_obj__0;
+        }
+    }
+    __result_obj__0 = (struct tuple2$2buffer$phbuffer$ph*)come_increment_ref_count(default_value);
+    come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, default_value, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+    neo_current_frame = fr.prev;
+    come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+    return __result_obj__0;
+}
+
+static void tuple2$2buffer$phbuffer$ph$p_finalize(struct tuple2$2buffer$phbuffer$ph* self)
+{
+    struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "tuple2$2buffer$phbuffer$ph$p_finalize"; neo_current_frame = &fr;
+    if(self!=((void*)0)&&self->v1!=((void*)0)) {
+        come_call_finalizer(buffer_finalize, self->v1, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+    }
+    if(self!=((void*)0)&&self->v2!=((void*)0)) {
+        come_call_finalizer(buffer_finalize, self->v2, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+    }
+    neo_current_frame = fr.prev;
+}
+
+static struct tuple2$2buffer$phbuffer$ph* map$2char$phtuple2$2buffer$phbuffer$ph$ph_operator_load_element(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self, char* key  )
+{
+    struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "map$2char$phtuple2$2buffer$phbuffer$ph$ph_operator_load_element"; neo_current_frame = &fr;
+    struct tuple2$2buffer$phbuffer$ph* default_value;
+    struct tuple2$2buffer$phbuffer$ph* __result_obj__0;
+    unsigned int hash;
+    unsigned int it;
+    memset(&default_value,0,sizeof(struct tuple2$2buffer$phbuffer$ph*));
+    if(self==((void*)0)) {
+        __result_obj__0 = (struct tuple2$2buffer$phbuffer$ph*)come_increment_ref_count(default_value);
+        come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, default_value, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+        neo_current_frame = fr.prev;
+        come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+        return __result_obj__0;
+    }
+    hash=string_get_hash_key(((char*)key))%self->size;
+    it=hash;
+    while((_Bool)1) {
+        if(self->item_existance[it]) {
+            if(string_equals(self->keys[it],key)) {
+                __result_obj__0 = (struct tuple2$2buffer$phbuffer$ph*)come_increment_ref_count(self->items[it]);
+                come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, default_value, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+                neo_current_frame = fr.prev;
+                come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+                return __result_obj__0;
+            }
+            it++;
+            if(it>=self->size) {
+                it=0;
+            }
+            else if(it==hash) {
+                __result_obj__0 = (struct tuple2$2buffer$phbuffer$ph*)come_increment_ref_count(default_value);
+                come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, default_value, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+                neo_current_frame = fr.prev;
+                come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+                return __result_obj__0;
+            }
+        }
+        else {
+            __result_obj__0 = (struct tuple2$2buffer$phbuffer$ph*)come_increment_ref_count(default_value);
+            come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, default_value, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+            neo_current_frame = fr.prev;
+            come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+            return __result_obj__0;
+        }
+    }
+    __result_obj__0 = (struct tuple2$2buffer$phbuffer$ph*)come_increment_ref_count(default_value);
+    come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, default_value, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+    neo_current_frame = fr.prev;
+    come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+    return __result_obj__0;
+}
+
+static void map$2char$phtuple2$2buffer$phbuffer$ph$ph$p_finalize(struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* self)
+{
+    struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "map$2char$phtuple2$2buffer$phbuffer$ph$ph$p_finalize"; neo_current_frame = &fr;
+    int i;
+    int i_128;
+    for(i=0;i<self->size;i++){
+        if(self->item_existance[i]) {
+            if(1) {
+                come_call_finalizer(tuple2$2buffer$phbuffer$ph$p_finalize, self->items[i], (void*)0, (void*)0, 0, 0, 0, (void*)0);
+            }
+        }
+    }
+    come_free((char*)self->items);
+    for(i_128=0;i_128<self->size;i_128++){
+        if(self->item_existance[i_128]) {
+            if(1) {
+                (self->keys[i_128] = come_decrement_ref_count(self->keys[i_128], (void*)0, (void*)0, 0, 0, (void*)0));
+            }
+        }
+    }
+    come_free((char*)self->keys);
+    come_call_finalizer(list$1char$ph$p_finalize, self->key_list, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+    (self->item_existance = come_decrement_ref_count(self->item_existance, (void*)0, (void*)0, 0, 0, (void*)0));
+    neo_current_frame = fr.prev;
+}
+
+static char* map$2char$phchar$ph_begin(struct map$2char$phchar$ph* self)
+{
+    struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "map$2char$phchar$ph_begin"; neo_current_frame = &fr;
+    char* result  ;
+    char* __result_obj__0  ;
+    char* result_136  ;
+    if(self==((void*)0)) {
+        memset(&result,0,sizeof(char*));
+        __result_obj__0 = result;
+        neo_current_frame = fr.prev;
+        return __result_obj__0;
+    }
+    self->key_list->it=self->key_list->head;
+    if(self->key_list->it) {
+        __result_obj__0 = self->key_list->it->item;
+        neo_current_frame = fr.prev;
+        return __result_obj__0;
+    }
+    memset(&result_136,0,sizeof(char*));
+    __result_obj__0 = result_136;
     neo_current_frame = fr.prev;
     return __result_obj__0;
 }
@@ -7477,7 +7714,7 @@ static char* map$2char$phchar$ph_next(struct map$2char$phchar$ph* self)
     struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "map$2char$phchar$ph_next"; neo_current_frame = &fr;
     char* result  ;
     char* __result_obj__0  ;
-    char* result_136  ;
+    char* result_138  ;
     if(self==((void*)0)||self->key_list->it==((void*)0)) {
         memset(&result,0,sizeof(char*));
         __result_obj__0 = result;
@@ -7490,8 +7727,8 @@ static char* map$2char$phchar$ph_next(struct map$2char$phchar$ph* self)
         neo_current_frame = fr.prev;
         return __result_obj__0;
     }
-    memset(&result_136,0,sizeof(char*));
-    __result_obj__0 = result_136;
+    memset(&result_138,0,sizeof(char*));
+    __result_obj__0 = result_138;
     neo_current_frame = fr.prev;
     return __result_obj__0;
 }
@@ -7606,7 +7843,7 @@ static void map$2char$phchar$ph$p_finalize(struct map$2char$phchar$ph* self)
 {
     struct neo_frame fr; fr.prev = neo_current_frame; fr.fun_name = "map$2char$phchar$ph$p_finalize"; neo_current_frame = &fr;
     int i;
-    int i_137;
+    int i_139;
     for(i=0;i<self->size;i++){
         if(self->item_existance[i]) {
             if(1) {
@@ -7615,10 +7852,10 @@ static void map$2char$phchar$ph$p_finalize(struct map$2char$phchar$ph* self)
         }
     }
     come_free((char*)self->items);
-    for(i_137=0;i_137<self->size;i_137++){
-        if(self->item_existance[i_137]) {
+    for(i_139=0;i_139<self->size;i_139++){
+        if(self->item_existance[i_139]) {
             if(1) {
-                (self->keys[i_137] = come_decrement_ref_count(self->keys[i_137], (void*)0, (void*)0, 0, 0, (void*)0));
+                (self->keys[i_139] = come_decrement_ref_count(self->keys[i_139], (void*)0, (void*)0, 0, 0, (void*)0));
             }
         }
     }
@@ -7765,14 +8002,14 @@ static struct list$1CVALUE$ph* list$1CVALUE$ph_delete(struct list$1CVALUE$ph* se
     struct list_item$1CVALUE$ph* it;
     int i;
     struct list_item$1CVALUE$ph* prev_it;
-    struct list_item$1CVALUE$ph* it_147;
-    int i_148;
-    struct list_item$1CVALUE$ph* prev_it_149;
-    struct list_item$1CVALUE$ph* it_150;
+    struct list_item$1CVALUE$ph* it_149;
+    int i_150;
+    struct list_item$1CVALUE$ph* prev_it_151;
+    struct list_item$1CVALUE$ph* it_152;
     struct list_item$1CVALUE$ph* head_prev_it;
     struct list_item$1CVALUE$ph* tail_it;
-    int i_151;
-    struct list_item$1CVALUE$ph* prev_it_152;
+    int i_153;
+    struct list_item$1CVALUE$ph* prev_it_154;
     if(self==((void*)0)) {
         __result_obj__0 = self;
         neo_current_frame = fr.prev;
@@ -7831,48 +8068,48 @@ static struct list$1CVALUE$ph* list$1CVALUE$ph_delete(struct list$1CVALUE$ph* se
         }
     }
     else if(tail==self->len) {
-        it_147=self->head;
-        i_148=0;
-        while(it_147!=((void*)0)) {
-            if(i_148==head) {
-                self->tail=it_147->prev;
+        it_149=self->head;
+        i_150=0;
+        while(it_149!=((void*)0)) {
+            if(i_150==head) {
+                self->tail=it_149->prev;
                 self->tail->next=((void*)0);
             }
-            if(i_148>=head) {
-                prev_it_149=it_147;
-                it_147=it_147->next;
-                i_148++;
-                come_call_finalizer(list_item$1CVALUE$ph$p_finalize, prev_it_149, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+            if(i_150>=head) {
+                prev_it_151=it_149;
+                it_149=it_149->next;
+                i_150++;
+                come_call_finalizer(list_item$1CVALUE$ph$p_finalize, prev_it_151, (void*)0, (void*)0, 0, 0, 0, (void*)0);
                 self->len--;
             }
             else {
-                it_147=it_147->next;
-                i_148++;
+                it_149=it_149->next;
+                i_150++;
             }
         }
     }
     else {
-        it_150=self->head;
+        it_152=self->head;
         head_prev_it=((void*)0);
         tail_it=((void*)0);
-        i_151=0;
-        while(it_150!=((void*)0)) {
-            if(i_151==head) {
-                head_prev_it=it_150->prev;
+        i_153=0;
+        while(it_152!=((void*)0)) {
+            if(i_153==head) {
+                head_prev_it=it_152->prev;
             }
-            if(i_151==tail) {
-                tail_it=it_150;
+            if(i_153==tail) {
+                tail_it=it_152;
             }
-            if(i_151>=head&&i_151<tail) {
-                prev_it_152=it_150;
-                it_150=it_150->next;
-                i_151++;
-                come_call_finalizer(list_item$1CVALUE$ph$p_finalize, prev_it_152, (void*)0, (void*)0, 0, 0, 0, (void*)0);
+            if(i_153>=head&&i_153<tail) {
+                prev_it_154=it_152;
+                it_152=it_152->next;
+                i_153++;
+                come_call_finalizer(list_item$1CVALUE$ph$p_finalize, prev_it_154, (void*)0, (void*)0, 0, 0, 0, (void*)0);
                 self->len--;
             }
             else {
-                it_150=it_150->next;
-                i_151++;
+                it_152=it_152->next;
+                i_153++;
             }
         }
         if(head_prev_it!=((void*)0)) {
@@ -7953,7 +8190,7 @@ static struct CVALUE* list$1CVALUE$ph$p_operator_load_element(struct list$1CVALU
     struct CVALUE* __result_obj__0  ;
     struct list_item$1CVALUE$ph* it;
     int i;
-    struct CVALUE* default_value_153  ;
+    struct CVALUE* default_value_155  ;
     if(self==((void*)0)) {
         memset(&default_value,0,sizeof(struct CVALUE*));
         __result_obj__0 = (struct CVALUE*)come_increment_ref_count(default_value);
@@ -7978,9 +8215,9 @@ static struct CVALUE* list$1CVALUE$ph$p_operator_load_element(struct list$1CVALU
         it=it->next;
         i++;
     }
-    memset(&default_value_153,0,sizeof(struct CVALUE*));
-    __result_obj__0 = (struct CVALUE*)come_increment_ref_count(default_value_153);
-    come_call_finalizer(CVALUE_finalize, default_value_153, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+    memset(&default_value_155,0,sizeof(struct CVALUE*));
+    __result_obj__0 = (struct CVALUE*)come_increment_ref_count(default_value_155);
+    come_call_finalizer(CVALUE_finalize, default_value_155, (void*)0, (void*)0, 0, 0, 1, (void*)0);
     neo_current_frame = fr.prev;
     come_call_finalizer(CVALUE_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
     return __result_obj__0;
@@ -7993,7 +8230,7 @@ static struct CVALUE* list$1CVALUE$ph_operator_load_element(struct list$1CVALUE$
     struct CVALUE* __result_obj__0  ;
     struct list_item$1CVALUE$ph* it;
     int i;
-    struct CVALUE* default_value_154  ;
+    struct CVALUE* default_value_156  ;
     if(self==((void*)0)) {
         memset(&default_value,0,sizeof(struct CVALUE*));
         __result_obj__0 = (struct CVALUE*)come_increment_ref_count(default_value);
@@ -8018,9 +8255,9 @@ static struct CVALUE* list$1CVALUE$ph_operator_load_element(struct list$1CVALUE$
         it=it->next;
         i++;
     }
-    memset(&default_value_154,0,sizeof(struct CVALUE*));
-    __result_obj__0 = (struct CVALUE*)come_increment_ref_count(default_value_154);
-    come_call_finalizer(CVALUE_finalize, default_value_154, (void*)0, (void*)0, 0, 0, 1, (void*)0);
+    memset(&default_value_156,0,sizeof(struct CVALUE*));
+    __result_obj__0 = (struct CVALUE*)come_increment_ref_count(default_value_156);
+    come_call_finalizer(CVALUE_finalize, default_value_156, (void*)0, (void*)0, 0, 0, 1, (void*)0);
     neo_current_frame = fr.prev;
     come_call_finalizer(CVALUE_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
     return __result_obj__0;

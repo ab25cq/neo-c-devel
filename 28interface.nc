@@ -38,7 +38,14 @@ class sInterfaceNode extends sNodeBase
         buf.append_str("};\n");
         
         if(self.mOutput) {
-            info.struct_definition.insert(string(name), buf);
+            if(info.struct_definition[string(name)]) {
+                var d, d2 = info.struct_definition[string(name)];
+                
+                info.struct_definition.insert(string(name), (buf, d2));
+            }
+            else {
+                info.struct_definition.insert(string(name), (buf, new buffer()));
+            }
             info.classes.insert(string(name), klass);
         }
         

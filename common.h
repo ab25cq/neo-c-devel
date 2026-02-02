@@ -489,7 +489,7 @@ struct sInfo
     map<string, sClass*%>*% classes;
     map<string, sType*%>*% types;
     map<string, sClass*%>*% generics_classes;
-    map<string, buffer*%>*% struct_definition;
+    map<string, tuple2<buffer*%,buffer*%>*%>*% struct_definition;
     map<string, buffer*%>*% c_include_definition;
     map<string, buffer*%>*% var_definition;
     map<string, buffer*%>*% previous_struct_definition;

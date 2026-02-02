@@ -317,7 +317,7 @@ int come_main(int argc, char** argv)
         info.err_num = 0;
         info.funcs = new map<string, sFun*%>();
         info.uniq_funcs = new map<string, sFun*%>();
-        info.struct_definition = new map<string, buffer*%>();
+        info.struct_definition = new map<string, tuple2<buffer*%,buffer*%>*%>();
         info.var_definition = new map<string, buffer*%>();
         info.uniq_definition = new map<string, string>();
         info.previous_struct_definition = new map<string, buffer*%>();

@@ -59,7 +59,12 @@ void output_union(sClass* klass, sInfo* info, bool anonymous=false)
     var code, name = make_union(klass, info, anonymous);
     
     if(info.struct_definition[string(name)] == null) {
-        info.struct_definition.insert(string(name), code.to_buffer());
+        info.struct_definition.insert(string(name), (code.to_buffer(), new buffer()));
+    }
+    else if(info.struct_definition[string(name)]) {
+        var d, d2 = info.struct_definition[string(name)];
+        
+        info.struct_definition.insert(string(name), (code.to_buffer(), d2));
     }
 }
 
@@ -250,6 +255,7 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 97
                 type->mTypedef = typedef_;
             }
             info.types.insert(type_name, clone type);
+            klass.mFields.reset();
         }
         
         expected_next_character('{');

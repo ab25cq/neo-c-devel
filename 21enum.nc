@@ -97,7 +97,12 @@ void output_enum(string type_name, sInfo* info=info)
     output = output + ";\n";
     
     if(info.struct_definition[string(type_name)] == null) {
-        info.struct_definition.insert(string(type_name), output.to_buffer());
+        info.struct_definition.insert(string(type_name), (output.to_buffer(), new buffer()));
+    }
+    else if(info.struct_definition[string(type_name)]) {
+        var d, d2 = info.struct_definition[string(type_name)];
+        
+        info.struct_definition.insert(string(type_name), (output.to_buffer(), d2));
     }
 }
 

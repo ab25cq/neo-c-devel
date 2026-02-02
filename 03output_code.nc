@@ -1532,8 +1532,14 @@ bool output_source_file(sInfo* info)
     
     fprintf(f, "/// struct definition ///\n");
     foreach(it, info.struct_definition) {
-        buffer* buf = borrow info.struct_definition[string(it)];
-        fprintf(f, "%s\n", buf.to_string());
+        var d, d2 = info.struct_definition[string(it)];
+        
+        if(d) {
+            fprintf(f, "%s\n", d.to_string());
+        }
+        if(d2) {
+            fprintf(f, "%s\n", d2.to_string());
+        }
     }
     
     fprintf(f, "/// variable definition ///\n");
