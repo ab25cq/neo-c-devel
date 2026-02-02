@@ -1,5 +1,69 @@
 #include "common.h"
 
+string@code, string@name make_union(sClass* klass, sInfo* info, bool anonymous=false)
+{
+/*
+    if(info->no_output_come_code) {
+        return;
+    }
+*/
+    if(klass.mFields.length() == 0) {
+        return (s"", s"");
+    }
+    
+    string name = klass.mName;
+    
+    buffer*% buf = new buffer();
+    
+    if(klass->mAnonymous) {
+        buf.append_format("union { ", klass.mName);
+    }
+    else {
+        buf.append_format("union %s {", klass.mName);
+    }
+    
+    bool existance_generics = false;
+    bool named_child = false;
+    foreach(it, klass.mFields) {
+        var name, type = it;
+        
+        buf.append_str(make_define_var(type, name));
+        buf.append_str("; ");
+    }
+    
+    if(klass->mAnonymous) {
+        if(klass->mAttribute == null) {
+            buf.append_str("} ");
+        }
+        else {
+            buf.append_format("} %s ", klass->mAttribute);
+        }
+    }
+    else {
+        if(klass->mAttribute == null) {
+            buf.append_str("};\n");
+        }
+        else {
+            buf.append_format("} %s;\n", klass->mAttribute);
+        }
+    }
+    
+    if(anonymous && named_child) return (s"", s"");
+    
+    
+    return (buf.to_string(), name);
+}
+
+void output_union(sClass* klass, sInfo* info, bool anonymous=false)
+{ 
+    var name, code = make_union(klass, info, anonymous);
+    
+    if(info.struct_definition[string(name)] == null) {
+        info.struct_definition.insert(string(name), code.to_buffer());
+    }
+}
+
+/*
 static void output_union(sClass* klass, sInfo* info, bool anonymous=false)
 {
 /*
@@ -70,6 +134,7 @@ static void output_union(sClass* klass, sInfo* info, bool anonymous=false)
         info.struct_definition.insert(string(name), clone buf);
     }
 }
+*/
 
 class sUnionNode extends sNodeBase
 {
@@ -98,7 +163,9 @@ class sUnionNode extends sNodeBase
         string name = string(self.name);
         bool anonymous = self.anonymous;
         
-        output_union(klass, info, anonymous);
+        if(!klass->mAnonymous) {
+            output_union(klass, info, anonymous);
+        }
     
         return true;
     }
@@ -107,6 +174,7 @@ class sUnionNode extends sNodeBase
 sNode*% parse_union(string type_name, string union_attribute, sInfo* info, bool anonymous=false)
 {
     info.parse_struct_recursive_count++;
+    
     sClass* klass;
     if(info.classes.at(type_name, null) == null) {
         info.classes.insert(string(type_name), new sClass(name:string(type_name), union_:true));
@@ -139,6 +207,7 @@ sNode*% parse_union(string type_name, string union_attribute, sInfo* info, bool 
         }
         info.types.insert(type_name, clone type);
     }
+    klass->mAnonymous = anonymous;
     skip_spaces_and_lf();
     
     if(union_attribute === "") {

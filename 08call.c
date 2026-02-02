@@ -1539,6 +1539,13 @@ struct list$1tuple3$3sType$phchar$phsNode$ph$ph
     struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* it;
 };
 
+struct tuple3$3char$ph_Bool$char$ph
+{
+    char* v1  ;
+    _Bool v2;
+    char* v3  ;
+};
+
 struct tuple3$3char$phsFun$psGenericsFun$p
 {
     char* v1  ;
@@ -2675,6 +2682,8 @@ struct sNode* parse_struct(char* type_name  , char* struct_attribute  , struct s
 struct sNode* top_level_v98(char* buf, char* head, int head_sline, struct sInfo* info  );
 _Bool output_generics_struct(struct sType* type  , struct sType* generics_type  , struct sInfo* info  );
 void output_struct(struct sClass* klass  , char* pragma  , struct sInfo* info  , _Bool anonymous);
+struct tuple3$3char$ph_Bool$char$ph* make_struct(struct sClass* klass  , char* pragma  , struct sInfo* info  , _Bool anonymous, int indent);
+struct tuple2$2char$phchar$ph* make_union(struct sClass* klass  , struct sInfo* info  , _Bool anonymous);
 struct sNode* string_node_v15(char* buf, char* head, int head_sline, struct sInfo* info  );
 struct sNode* parse_union(char* type_name  , char* union_attribute  , struct sInfo* info  , _Bool anonymous);
 struct sNode* top_level_v97(char* buf, char* head, int head_sline, struct sInfo* info  );

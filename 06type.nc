@@ -879,9 +879,7 @@ sType*%, string parse_variable_name_on_multiple_declare(sType* base_type_name, b
         var_name = parse_word();
     }
     else {
-        static int num_anonymous_var_name = 0;
-        num_anonymous_var_name++;
-        var_name = xsprintf("anonymous_var_nameYYY%d", num_anonymous_var_name);
+        var_name = s"";
     }
     
     if(between_brace && *info->p == ')') {
@@ -1207,10 +1205,13 @@ string parse_variable_name_fun(sType* type, bool anonymous_name, bool var_name_b
         var_name = parse_word();
     }
     else {
+        /*
         static int num_anonymous_var_name = 0;
         num_anonymous_var_name++;
-        var_name = xsprintf("anonymous_var_nameY%d", num_anonymous_var_name);
+        var_name = xsprintf("anonymous_var_nameYXXXXX%d", num_anonymous_var_name);
         type->mAnonymousVarName = true;
+        */
+        var_name = s"";
     }
             
     if(var_name_between_brace && *info->p == ')') {
@@ -1246,7 +1247,7 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
 {
     char* head = info.p;
     int head_sline = info.sline;
-    info.define_struct = false;
+    //info.define_struct = false;
     
     string type_name = parse_word();
     
@@ -1407,90 +1408,26 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
             struct_ = true;
             union_attribute = parse_struct_attribute();
             
+            bool anonymous = false;
+            if(*info->p == '{') {
+                static int n = 0;
+                
+                type_name = s"__anoymous_struct\{n++}";
+                anonymous = true;
+            }
+            else {
+                type_name = parse_word();
+            }
+            
             if(*info->p == '{') {
                 char* p = info.p;
                 int sline = info.sline;
                 
-                skip_block(info);
-                
-                if(*info->p == ';') {
-                    anonymous_name = true;
-                    anonymous_type = true;
-                    type_name = string("");
-                    info.p = p;
-                    info.sline = sline;
-                    break;
-                } 
-                else {
-                    anonymous_type = true;
-                    type_name = string("");
-                    info.p = p;
-                    info.sline = sline;
-                    break;
-                }
-            }
-
-            skip_spaces_and_lf();
-            
-            if(*info->p != '>') {
-                type_name = parse_word();
-                
-                skip_spaces_and_lf();
-                
-                if(*info->p == '<') {
-                    char* p = info.p;
-                    int sline = info.sline;
-                    
-                    info->p++;
-                    skip_spaces_and_lf();
-                    
-                    while(true) {
-                        if(*info->p == '>') {
-                            info->p++;
-                            skip_spaces_and_lf();
-                            
-                            if(*info->p == '{') {
-                            }
-                            else {
-                                info.p = p;
-                                info.sline = sline;
-                            }
-                            break;
-                        }
-                        else if(*info->p == '\0') {
-                            err_msg(info, "invalid struct definition");
-                            return ((sType*%)null, (string)null, false);
-                        }
-                        else {
-                            info->p++;
-                        }
-                    }
-                }
-                
-                if(*info->p == '{') {
-                    char* p = info.p;
-                    int sline = info.sline;
-                    
-                    skip_block(info);
-                    
-                    (void)parse_struct_attribute();
-                    
-                    if(*info->p == ';') {
-                        info.p = head;
-                        info.sline = head_sline;
-                        info.define_struct = true;
+                sNode*% node = parse_struct(type_name, union_attribute, info, anonymous);
+                        
+                if(!info.no_output_come_code) {
+                    node_compile(node).elif {
                         return ((sType*%)null, (string)null, false);
-                    }
-                    else {
-                        info.p = p;
-                        info.sline = sline;
-                        
-                        sNode*% node = parse_struct(type_name, union_attribute, info);
-                        
-                        node_compile(node).elif {
-                            return ((sType*%)null, (string)null, false);
-                        }
-                        break;
                     }
                 }
             }
@@ -1499,59 +1436,27 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
             union_ = true;
             union_attribute = parse_struct_attribute();
            
+            bool anonymous = false;
             if(*info->p == '{') {
-                char* p = info.p;
-                int sline = info.sline;
+                static int n = 0;
                 
-                skip_block(info);
-                
-                if((info->end - info->p) >= strlen("__attribute__") && memcmp(info->p, "__attribute__", strlen("__attribute__")) == 0) {
-                    parse_attribute();
-                }
-                
-                if(*info->p == ';') {
-                    info.p = head;
-                    info.sline = head_sline;
-                    //info.define_struct = true;
-                    info.define_struct = false;
-                    anonymous_type = true;
-                    type_name = string("");
-                    info.p = p;
-                    info.sline = sline;
-                    break;
-                }
-                else {
-                    anonymous_type = true;
-                    type_name = string("");
-                    info.p = p;
-                    info.sline = sline;
-                    break;
-                }
+                type_name = s"__anoymous_union\{n++}";
+                anonymous = true;
             }
-
-            skip_spaces_and_lf();
-            
-            type_name = parse_word();
-
-            skip_spaces_and_lf();
+            else {
+                type_name = parse_word();
+            }
             
             if(*info->p == '{') {
                 char* p = info.p;
                 int sline = info.sline;
                 
-                skip_block(info);
-                
-                if(*info->p == ';') {
-                    info.p = head;
-                    info.sline = head_sline;
-                    info.define_struct = true;
-                    return ((sType*%)null, (string)null, false);
-                } 
-                else {
-                    anonymous_type = true;
-                    info.p = p;
-                    info.sline = sline;
-                    break;
+                sNode*% node = parse_union(type_name, union_attribute, info, anonymous:anonymous);
+                        
+                if(!info.no_output_come_code) {
+                    node_compile(node).elif {
+                        return ((sType*%)null, (string)null, false);
+                    }
                 }
             }
         }
@@ -1584,7 +1489,7 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
                 if(*info->p == ';') {
                     info.p = head;
                     info.sline = head_sline;
-                    info.define_struct = true;
+                    //info.define_struct = true;
                     return ((sType*%)null, (string)null, false);
                 }
                 else {
@@ -1620,7 +1525,7 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
                 if(*info->p == ';') {
                     info.p = head;
                     info.sline = head_sline;
-                    info.define_struct = true;
+//                    info.define_struct = true;
                     return ((sType*%)null, (string)null, false);
                 }
                 else {
@@ -2150,51 +2055,13 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
     
     if(anonymous_type && *info->p == '{') {
         static int anonymous_num = 0;
-        if(struct_) {
-            bool anonymous = false;
-            if(type_name === "") {
-                anonymous = true;
-                type_name = xsprintf("anonymous_typeX%d", ++anonymous_num);
-            }
-            
-            sNode*% node = parse_struct(type_name, union_attribute, info, anonymous);
-            
-            node_compile(node).elif {
-                err_msg(info, "parse_struct is failed");
-                return ((sType*%)null, (string)null, false);
-            }
-            
-            int pointer_num = 0;
-            while(*info->p == '*') {
-                info->p++
-                skip_spaces_and_lf(info);
-                
-                skip_pointer_attribute();
-                
-                pointer_num++;
-            }
-            
-            //type = new sType(string(type_name));
-            type = clone info.types[type_name];
-            
-            if(type == null) {
-                type = new sType(string(type_name));
-            }
-            sClass*% klass = info.classes[type_name];
-            klass->mAnonymous = true;
-            type->mAnonymous = anonymous;
-            type->mAnonymous = anonymous;
-            type->mAnonymousName = string(type_name);
-            
-            type->mPointerNum = pointer_num;
-        }
-        else if(enum_) {
+        if(enum_) {
             if(type_name === "") {
                 if(!info.no_output_err) {
-                    type_name = xsprintf("anonymous_typeY%d", anonymous_num);
+                    type_name = xsprintf("anonymous_typeYXOU%d", anonymous_num);
                 }
                 else {
-                    type_name = xsprintf("anonymous_typeY%d", ++anonymous_num);
+                    type_name = xsprintf("anonymous_typeYAG%d", ++anonymous_num);
                 }
             }
             
@@ -2212,45 +2079,6 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
             if(type == null) {
                 type = new sType(string(type_name));
             }
-        }
-        else if(union_) {
-            bool anonymous = false;
-            if(type_name === "") {
-                type_name = xsprintf("anonymous_typeZ%d", ++anonymous_num);
-                anonymous = true;
-            }
-            
-            sNode*% node = parse_union(type_name, union_attribute, info, true@anoymous);
-            
-            node_compile(node).elif {
-                printf("%s %d: compiling is failed(X)\n", info->sname, info->sline);
-                return ((sType*%)null, (string)null, false);
-            }
-            
-            int pointer_num = 0;
-            while(*info->p == '*') {
-                info->p++
-                skip_spaces_and_lf(info);
-                
-                skip_pointer_attribute();
-                
-                pointer_num++;
-            }
-            
-            
-            type = clone info.types[type_name];
-            
-            if(type == null) {
-                type = new sType(string(type_name));
-            }
-            //type = new sType(string(type_name));
-            
-            sClass*% klass = info.classes[type_name];
-            klass->mAnonymous = true;
-            
-            type->mPointerNum = pointer_num;
-            type->mAnonymous = anonymous;
-            type->mAnonymousName = string(type_name);
         }
         else {
             err_msg(info, "unexpected { character");

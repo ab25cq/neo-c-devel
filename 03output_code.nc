@@ -64,12 +64,26 @@ string make_type_name_string(sType* type,  sInfo* info=info, bool no_static=fals
         buf.append_str("__builtin_va_list");
     }
     else if(type->mClass->mStruct) {
-        buf.append_str("struct ");
-        buf.append_str(class_name);
+        if(!type->mClass->mAnonymous) {
+            buf.append_str("struct ");
+            buf.append_str(class_name);
+        }
+        else {
+            var code, existance_generics, name = make_struct(type->mClass, pragma:s"", info);
+            
+            buf.append_str(code);
+        }
     }
     else if(type->mClass->mUnion) {
-        buf.append_str("union ");
-        buf.append_str(class_name);
+        if(!type->mClass->mAnonymous) {
+            buf.append_str("union ");
+            buf.append_str(class_name);
+        }
+        else {
+            var code, name = make_union(type->mClass, info);
+            
+            buf.append_str(code);
+        }
     }
     else if(type->mClass->mEnum) {
         buf.append_str("enum ");
@@ -609,6 +623,11 @@ string make_define_var(sType* type, char* name, sInfo* info=info, bool no_static
         
         if(!type2->mAnonymousVarName) {
             buf.append_format("%s", name);
+        }
+        else {
+            if(type2->mClass->mAnonymous) {
+                buf.append_format(";");
+            }
         }
         
         if(type2->mSizeNum != null) {

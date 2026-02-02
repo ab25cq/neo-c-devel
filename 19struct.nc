@@ -1,97 +1,12 @@
 #include "common.h"
 
-void child_output_struct(sType* type, string struct_name, buffer* buf, bool* existance_generics, string name, int indent, sInfo* info, bool* named_child)
-{
-    sClass* klass = type->mClass;
-    
-    if(struct_name !== "") {
-        if(klass.mStruct) {
-            buf.append_str("    " * indent);
-            buf.append_format("struct %s {\n", struct_name);
-        }
-        else if(klass.mUnion) {
-            buf.append_str("    " * indent);
-            buf.append_format("union %s {\n", struct_name);
-        }
-    }
-    else {
-        if(klass.mStruct) {
-            buf.append_str("    " * indent);
-            buf.append_str("struct {\n");
-        }
-        else if(klass.mUnion) {
-            buf.append_str("    " * indent);
-            buf.append_str("union {\n");
-        }
-    }
-            
-    indent++;
-    foreach(it, klass.mFields) {
-        var name2, type2 = it;
-            
-        if(is_contained_generics_class(type2, info)) {
-            *existance_generics = true;
-        }
-        
-        type2->mStatic = false;
-        
-        sClass* klass = type2->mClass;
-        
-        if(type2->mAnonymous) {
-        //if(type2->mAnonymous && name !== name2) {
-            //info.struct_definition.remove(type2->mAnonymousName);
-            child_output_struct(type2, s"", buf, existance_generics, name2, indent, info, named_child);
-        }
-        else if(type2->mInnerStruct) {
-            sType*% already_defined_child_type = info.named_child_struct[type2->mInnerStructName];
-            
-            if(already_defined_child_type && ((already_defined_child_type->mClass->mStruct && type2->mClass->mStruct) || (already_defined_child_type->mClass->mUnion && type2->mClass->mUnion)))
-            {
-            //    info.struct_definition.remove(type2->mInnerStructName);
-                buf.append_str("    " * indent);
-                if(type2->mClass->mStruct) {
-                    buf.append_str("struct " + type2->mInnerStructName);
-                }
-                else {
-                    buf.append_str("union " + type2->mInnerStructName);
-                }
-                
-                buf.append_str(" " + name2);
-                
-                buf.append_str(";\n");
-            }
-            else {
-                info.named_child_struct.insert(string(type2->mInnerStructName), clone type2);
-                info.struct_definition.remove(type2->mInnerStructName);
-                child_output_struct(type2, type2->mInnerStructName, buf, existance_generics, name2, indent, info, named_child);
-            }
-            
-            *named_child = true;
-        }
-        else {
-            buf.append_str("    " * indent);
-            buf.append_str(make_define_var(type2, name2));
-            buf.append_str(";\n");
-        }
-    }
-            
-    if(type->mAnonymousVarName) {
-        buf.append_str("    " * (indent-1));
-        buf.append_format("};\n");
-    }
-    else {
-        buf.append_str("    " * (indent-1));
-        buf.append_format("} %s;\n", name);
-    }
-}
-
-void output_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=false)
+string@code, bool@existance_generics, string@name make_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=false)
 {
     if(klass->mFields.length() == 0) {
-        return;
+        return (s"", false, s"");
     }
     
-    char* name = klass.mName;
+    string name = string(klass.mName);
     bool current_stack = strlen(name) > strlen("__current_stack") && memcmp(name,"__current_stack", strlen("__current_stack")) == 0;
     
     buffer*% buf = new buffer();
@@ -99,7 +14,12 @@ void output_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=fal
     if(pragma) {
         buf.append_str(pragma);
     }
-    buf.append_format("struct %s\n{\n", klass.mName);
+    if(klass->mAnonymous) {
+        buf.append_format("struct { ", klass.mName);
+    }
+    else {
+        buf.append_format("struct %s {", klass.mName);
+    }
             
     bool existance_generics = false;
     bool named_child = false;
@@ -112,56 +32,41 @@ void output_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=fal
         
         type->mStatic = false;
         
-        if(type->mAnonymous && !current_stack) {
-            //info.struct_definition.remove(type->mAnonymousName);
-            child_output_struct(type, s"", buf, &existance_generics, name, 1, info, &named_child);
-        }
-        else if(type->mInnerStruct && !current_stack) {
-            sType*% already_defined_child_type = info.named_child_struct[type->mInnerStructName];
+        buf.append_str(make_define_var(type, name));
+        buf.append_str("; ");
+    }
             
-            if(already_defined_child_type && ((already_defined_child_type->mClass->mStruct && type->mClass->mStruct) || (already_defined_child_type->mClass->mUnion && type->mClass->mUnion)))
-            {
- //               info.struct_definition.remove(type->mInnerStructName);
-                buf.append_str("    ");
-                if(type->mClass->mStruct) {
-                    buf.append_str("struct " + type->mInnerStructName);
-                }
-                else {
-                    buf.append_str("union " + type->mInnerStructName);
-                }
-                
-                buf.append_str(" " + name);
-                
-                buf.append_str(";\n");
-            }
-            else {
-                info.named_child_struct.insert(string(type->mInnerStructName), clone type);
-                info.struct_definition.remove(type->mInnerStructName);
-                child_output_struct(type, type->mInnerStructName, buf, &existance_generics, name, 1, info, &named_child);
-            }
-            named_child = true;
+    if(klass->mAnonymous) {
+        if(klass->mAttribute == null) {
+            buf.append_str("} ");
         }
         else {
-            buf.append_str("    ");
-            buf.append_str(make_define_var(type, name));
-            buf.append_str(";\n");
+            buf.append_format("} %s ", klass->mAttribute);
         }
     }
-            
-    if(klass->mAttribute == null) {
-        buf.append_str("};\n");
-    }
     else {
-        buf.append_format("} %s;\n", klass->mAttribute);
+        if(klass->mAttribute == null) {
+            buf.append_str("};\n");
+        }
+        else {
+            buf.append_format("} %s;\n", klass->mAttribute);
+        }
     }
     if(pragma) {
         buf.append_str("#pragma pack(pop)");
     }
     
-    if(anonymous && named_child) return;
+    if(anonymous && named_child) return (s"", false, s"");
+    
+    return (buf.to_string(), existance_generics, name);
+}
+
+void output_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=false)
+{
+    var code, existance_generics, name = make_struct(klass, pragma, info, anonymous);
             
     if(info.struct_definition[string(name)] == null && !existance_generics) {
-        info.struct_definition.insert(string(name), buf);
+        info.struct_definition.insert(string(name), code.to_buffer());
     }
 }
 
@@ -240,7 +145,9 @@ class sStructNode extends sNodeBase
         string pragma = self.pragma;
         bool anonymous = self.anonymous;
         
-        output_struct(klass, pragma, info, anonymous);
+        if(!klass->mAnonymous) {
+            output_struct(klass, pragma, info, anonymous);
+        }
     
         return true;
     }

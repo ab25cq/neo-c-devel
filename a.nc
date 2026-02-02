@@ -1,43 +1,16 @@
-#include <neo-c.h>
+//#include <neo-c.h>
 
-#module FUN(o) {
-    int a = o;
-    /*
-    if(a == 3) { 
-        printf("%d\n", a);
-    }
-    puts("aaa");
-    */
-    puts("""
-    
+//union { int a; float b; } aaa;
+struct {
+    union { int a; double x; };
+    struct { int b; double c };
+} bbb;
 
-    
-#define aaa aaa        
-            
-                    
-abc\{a}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-""");
-}
+//union XXX { int a; int b; } ccc;
+//struct YYY { int a; int b; } ddd;
 
 int main(int argc, char** argv) 
 {
-    FUN(3)
-    
     return 0;
 }
 

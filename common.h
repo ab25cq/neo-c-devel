@@ -1006,6 +1006,8 @@ string get_none_generics_name(char* class_name);
 sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 98;
 bool output_generics_struct(sType* type, sType* generics_type, sInfo* info);
 void output_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=false);
+string@code, bool@existance_generics, string@name make_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=false, int indent = 2);
+string@code, string@name make_union(sClass* klass, sInfo* info, bool anonymous=false);
 
 /////////////////////////////////////////////////////////////////////
 /// 15union.c
