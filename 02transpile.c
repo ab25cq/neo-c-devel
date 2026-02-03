@@ -737,7 +737,7 @@ struct list_item$1sNode$ph {struct sNode* item; struct list_item$1sNode$ph* prev
 struct list$1sNode$ph {struct list_item$1sNode$ph* head; struct list_item$1sNode$ph* tail; int len; struct list_item$1sNode$ph* it; };
 
 
-struct sType {struct sClass* mClass  ; struct sType* mOriginalLoadVarType  ; struct sType* mChannelType  ; struct list$1sType$ph* mGenericsTypes; struct sType* mNoSolvedGenericsType  ; struct sNode* mSizeNum; struct sNode* mAlignas; _Bool mAlignasDouble; char* mTupleName  ; char* mAttribute  ; char* mVarAttribute  ; _Bool mAllocaValue; _Bool mUnsigned; _Bool mShort; _Bool mLong; _Bool mLongLong; _Bool mConstant; _Bool mAtomic; _Bool mThreadLocal; _Bool mThread; _Bool mComplex; _Bool mRegister; _Bool mVolatile; _Bool mNoreturn; _Bool mStatic; _Bool mUniq; _Bool mExtern; _Bool mRestrict; _Bool mHeap; _Bool mChannel; _Bool mDefferRightValue; _Bool mNoHeap; _Bool mNoCallingDestructor; _Bool mTypeName; _Bool mAnonymous; char* mAnonymousName  ; _Bool mInnerStruct; char* mInnerStructName  ; _Bool mAnonymousVarName; _Bool mInline; char* mAsmName  ; _Bool mTypedef; _Bool mMultipleTypes; struct list$1sNode$ph* mArrayNum; struct list$1sNode$ph* mVarNameArrayNum; struct list$1int$* mArrayStatic; struct list$1int$* mArrayRestrict; int mPointerNum; int mFunctionPointerNum; int mArrayPointerNum; _Bool mPointerParen; struct sType* mTypedefOriginalType  ; char* mOriginalTypeName  ; int mOriginalTypePointerNum; int mOriginalTypePointerHeap; _Bool mArrayPointerType; struct list$1sType$ph* mParamTypes; struct list$1char$ph* mParamNames; struct sType* mResultType  ; _Bool mVarArgs; struct sNode* mTypeOfNode; };
+struct sType {struct sClass* mClass  ; struct sType* mOriginalLoadVarType  ; struct sType* mChannelType  ; struct list$1sType$ph* mGenericsTypes; struct sType* mNoSolvedGenericsType  ; struct sNode* mSizeNum; struct sNode* mAlignas; _Bool mAlignasDouble; char* mTupleName  ; char* mAttribute  ; char* mVarAttribute  ; _Bool mAllocaValue; _Bool mUnsigned; _Bool mShort; _Bool mLong; _Bool mLongLong; _Bool mConstant; _Bool mAtomic; _Bool mThreadLocal; _Bool mThread; _Bool mComplex; _Bool mRegister; _Bool mVolatile; _Bool mNoreturn; _Bool mStatic; _Bool mUniq; _Bool mExtern; _Bool mRestrict; _Bool mHeap; _Bool mChannel; _Bool mDefferRightValue; _Bool mNoHeap; _Bool mNoCallingDestructor; _Bool mTypeName; _Bool mAnonymous; char* mAnonymousName  ; _Bool mInnerStruct; char* mInnerStructName  ; _Bool mAnonymousVarName; _Bool mInline; char* mAsmName  ; _Bool mTypedef; _Bool mMultipleTypes; struct list$1sNode$ph* mArrayNum; struct list$1sNode$ph* mVarNameArrayNum; struct list$1int$* mArrayStatic; struct list$1int$* mArrayRestrict; int mPointerNum; int mFunctionPointerNum; int mArrayPointerNum; _Bool mPointerParen; struct sType* mTypedefOriginalType  ; char* mOriginalTypeName  ; int mOriginalTypePointerNum; int mOriginalTypePointerHeap; _Bool mArrayPointerType; struct list$1sType$ph* mParamTypes; struct list$1char$ph* mParamNames; struct sType* mResultType  ; _Bool mVarArgs; struct sNode* mTypeOfNode; char* mTypeOfNodeValue  ; };
 
 
 struct sVar {char* mName  ; char* mCValueName  ; struct sType* mType  ; _Bool mGlobal; _Bool mAllocaValue; _Bool mNoFree; char* mFunName  ; };
@@ -1841,8 +1841,8 @@ _Bool add_typedef(char* type_name  , struct sType* type  , struct sInfo* info  )
 struct sNode* top_level_v95(char* buf, char* head, int head_sline, struct sInfo* info  );
 struct sNode* string_node_v17(char* buf, char* head, int head_sline, struct sInfo* info  );
 struct sNode* create_nullable_node(struct sNode* left, struct sInfo* info  );
-struct sNode* load_field(struct sNode* left, char* name  , struct sInfo* info  );
-struct sNode* store_field(struct sNode* left, struct sNode* right, char* name  , struct sInfo* info  );
+struct sNode* load_field(struct sNode* left, char* name  , struct sInfo* info  , _Bool arrow_);
+struct sNode* store_field(struct sNode* left, struct sNode* right, char* name  , struct sInfo* info  , _Bool arrow_);
 struct sNode* post_position_operator_v99(struct sNode* node, struct sInfo* info  );
 struct sNode* parse_method_call_v18(struct sNode* obj, char* fun_name  , struct sInfo* info  );
 struct sNode* post_position_operator_v19(struct sNode* node, struct sInfo* info  );
@@ -2196,6 +2196,9 @@ static void sType_finalize(struct sType* self  )
     }
     if(self!=((void*)0)&&self->mTypeOfNode!=((void*)0)) {
         ((self->mTypeOfNode) ? self->mTypeOfNode = come_decrement_ref_count(self->mTypeOfNode, ((struct sNode*)self->mTypeOfNode)->finalize, ((struct sNode*)self->mTypeOfNode)->_protocol_obj, 0, 0,(void*)0):(void*)0);
+    }
+    if(self!=((void*)0)&&self->mTypeOfNodeValue!=((void*)0)) {
+        (self->mTypeOfNodeValue = come_decrement_ref_count(self->mTypeOfNodeValue, (void*)0, (void*)0, 0, 0, (void*)0));
     }
     neo_current_frame = fr.prev;
 }

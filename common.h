@@ -166,6 +166,7 @@ uniq class sType
     bool mVarArgs;
     
     sNode*% mTypeOfNode;
+    string mTypeOfNodeValue;
     
     new(string name, bool heap=false, sInfo* info=info, bool unsinged_=false) 
     {
@@ -1040,8 +1041,8 @@ sNode*% string_node(char* buf, char* head, int head_sline, sInfo* info) version 
 /// 18field.c
 /////////////////////////////////////////////////////////////////////
 sNode*% create_nullable_node(sNode* left, sInfo* info=info);
-sNode*% load_field(sNode*% left, string name, sInfo* info=info);
-sNode*% store_field(sNode* left, sNode*% right, string name, sInfo* info);
+sNode*% load_field(sNode*% left, string name, sInfo* info=info, bool arrow_=false);
+sNode*% store_field(sNode* left, sNode*% right, string name, sInfo* info, bool arrow_=false);
 
 sNode*% post_position_operator(sNode*% node, sInfo* info) version 99;
 sNode*% parse_method_call(sNode*% obj, string fun_name, sInfo* info) version 18;

@@ -82,13 +82,14 @@ sType*% get_field_type(sClass* klass, string name, sInfo* info)
 
 class sStoreFieldNode extends sNodeBase
 {
-    new(sNode* left, sNode*% right, string name, sInfo* info)
+    new(sNode* left, sNode*% right, string name, sInfo* info, bool arrow_=false)
     {
         self.super();
     
         sNode*% self.mLeft = clone left;
         sNode*% self.mRight = clone right;
         string self.mName = string(name);
+        bool self.mArrow = arrow_;
     }
     
     string kind()
@@ -101,6 +102,7 @@ class sStoreFieldNode extends sNodeBase
         sNode* left = self.mLeft;
         sNode* right = self.mRight;
         string name = string(self.mName);
+        bool arrow_ = self.mArrow;
         
         node_compile(left).elif {
             return false;
@@ -158,7 +160,12 @@ class sStoreFieldNode extends sNodeBase
             
             CVALUE*% come_value = new CVALUE();
             
-            come_value.c_value = xsprintf("%s.%s=%s", left_value.c_value, name, right_value.c_value);
+            if(arrow_) {
+                come_value.c_value = xsprintf("%s->%s=%s", left_value.c_value, name, right_value.c_value);
+            }
+            else {
+                come_value.c_value = xsprintf("%s.%s=%s", left_value.c_value, name, right_value.c_value);
+            }
             come_value.type = clone right_value.type;
             come_value.var = right_value.var;
             
@@ -358,12 +365,13 @@ class sStoreFieldNode extends sNodeBase
 
 class sLoadFieldNode extends sNodeBase
 {
-    new(sNode* left, string name, sInfo* info)
+    new(sNode* left, string name, sInfo* info, bool arrow_=false)
     {
         self.super();
     
         sNode*% self.mLeft = clone left;
         string self.mName = string(name);
+        bool self.mArrow = arrow_;
     }
     
     string kind()
@@ -375,6 +383,7 @@ class sLoadFieldNode extends sNodeBase
     {
         sNode* left = self.mLeft;
         string name = string(self.mName);
+        bool arrow_ = self.mArrow;
         
         node_compile(left).elif {
             return false;
@@ -420,7 +429,12 @@ class sLoadFieldNode extends sNodeBase
             
             CVALUE*% come_value = new CVALUE();
             
-            come_value.c_value = xsprintf("%s.%s", left_value.c_value, name);
+            if(arrow_) {
+                come_value.c_value = xsprintf("%s->%s", left_value.c_value, name);
+            }
+            else {
+                come_value.c_value = xsprintf("%s.%s", left_value.c_value, name);
+            }
             come_value.type = new sType(s"void");
             come_value.type.mPointerNum = 1;
             come_value.var = left_value.var;
@@ -477,9 +491,9 @@ class sLoadFieldNode extends sNodeBase
     }
 };
 
-sNode*% load_field(sNode*% left, string name, sInfo* info=info)
+sNode*% load_field(sNode*% left, string name, sInfo* info=info, bool arrow_=false)
 {
-    return new sLoadFieldNode(left, name, info) implements sNode;
+    return new sLoadFieldNode(left, name, info, arrow_) implements sNode;
 }
 
 class sStoreArrayNode extends sNodeBase
@@ -878,9 +892,9 @@ sNode*% parse_method_call(sNode*% obj, string fun_name, sInfo* info) version 18
     return (sNode*%)null;
 }
 
-sNode*% store_field(sNode* left, sNode*% right, string name, sInfo* info)
+sNode*% store_field(sNode* left, sNode*% right, string name, sInfo* info, bool arrow_=false)
 {
-    return new sStoreFieldNode(left, right, name, info) implements sNode;
+    return new sStoreFieldNode(left, right, name, info, arrow_) implements sNode;
 }
 
 sNode*% post_position_operator(sNode*% node, sInfo* info) version 99
@@ -1022,6 +1036,7 @@ sNode*% post_position_operator(sNode*% node, sInfo* info) version 99
             }
         }
         else if((*info->p == '.' && *(info->p+1) != '.') || (*info->p == '-' && *(info->p+1) == '>')) {
+            bool arrow_ = false;
             if(*info->p == '.') {
                 info->p++;
                 skip_spaces_and_lf();
@@ -1029,6 +1044,7 @@ sNode*% post_position_operator(sNode*% node, sInfo* info) version 99
             else {
                 info->p+=2;
                 skip_spaces_and_lf();
+                arrow_ = true;
             }
             
             skip_spaces_and_lf();
@@ -1066,7 +1082,7 @@ sNode*% post_position_operator(sNode*% node, sInfo* info) version 99
                 
                 sNode*% right_node = expression();
                 
-                node = new sStoreFieldNode(node, right_node, field_name, info) implements sNode;
+                node = new sStoreFieldNode(node, right_node, field_name, info, arrow_) implements sNode;
             }
             else if(!gComeC && (*info->p == '(' || *info->p == '{' || parse_method_generics_type)) {
                 if(field_name === "if") 
@@ -1087,7 +1103,7 @@ sNode*% post_position_operator(sNode*% node, sInfo* info) version 99
                 }
             }
             else {
-                node = new sLoadFieldNode(node, field_name, info) implements sNode;
+                node = new sLoadFieldNode(node, field_name, info, arrow_) implements sNode;
             }
         }
         else {

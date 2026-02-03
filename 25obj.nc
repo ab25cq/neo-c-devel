@@ -711,6 +711,7 @@ class sTypeOfNode extends sNodeBase
     }
 };
 
+/*
 class sTypeOfExpNode extends sNodeBase
 {
     new(sNode*% exp, sInfo* info)
@@ -735,24 +736,28 @@ class sTypeOfExpNode extends sNodeBase
         
         CVALUE*% come_value = get_value_from_stack(-1, info);
         
+/*
         sType*% type = clone come_value.type;
         
         var type2_ = solve_generics(type, info->generics_type, info);
         sType*% type2 = solve_method_generics(type2_, info);
         
         string type_name = make_type_name_string(type2);
+*/
         
-        come_value.c_value = xsprintf("\"%s\"", type_name);
-        come_value.type = new sType(s"char*");
-        come_value.var = null;
+        CVALUE*% come_value2 = new CVALUE();
+        come_value2.c_value = xsprintf("typeof(%s)", come_value.c_value);
+        come_value2.type = new sType(s"char*");
+        come_value2.var = null;
         
-        add_come_last_code(info, "%s", come_value.c_value);
+        add_come_last_code(info, "%s", come_value2.c_value);
         
-        info.stack.push_back(come_value);
+        info.stack.push_back(come_value2);
         
         return true;
     }
 };
+*/
 
 class sDynamicTypeOf extends sNodeBase
 {
@@ -1877,7 +1882,7 @@ sNode*% string_node(char* buf, char* head, int head_sline, sInfo* info) version 
             return new sTypeOfExpNode(exp, info) implements sNode;
         }
     }
-*/
+    */
     else if(buf === "dynamic_typeof") {
         //expected_next_character('(');
         

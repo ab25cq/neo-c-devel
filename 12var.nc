@@ -143,7 +143,12 @@ class sStoreNode extends sNodeBase
             
             static int num_multiple_var = 0;
             string multiple_var_name = xsprintf("multiple_assign_var%d", ++num_multiple_var);
-            add_come_code_at_function_head(info, "%s\n;", make_define_var(right_value.type, multiple_var_name));
+            if(right_value.type.mTypeOfNodeValue) {
+                add_come_code(info, "%s\n;", make_define_var(right_value.type, multiple_var_name));
+            }
+            else {
+                add_come_code_at_function_head(info, "%s\n;", make_define_var(right_value.type, multiple_var_name));
+            }
             
             add_come_code(info, "%s=%s;\n", multiple_var_name, right_value.c_value);
             
@@ -355,7 +360,12 @@ class sStoreNode extends sNodeBase
                     return true;
                 }
                 
-                add_come_code_at_function_head(info, "%s;\n", make_define_var(left_type, var_->mCValueName));
+                if(left_type->mTypeOfNodeValue) {
+                    add_come_code(info, "%s;\n", make_define_var(left_type, var_->mCValueName));
+                }
+                else {
+                    add_come_code_at_function_head(info, "%s;\n", make_define_var(left_type, var_->mCValueName));
+                }
                 
                 CVALUE*% come_value = new CVALUE();
                 
@@ -1270,6 +1280,7 @@ sNode*% string_node(char* buf, char* head, int head_sline, sInfo* info) version 
     }
     
     err_msg(info, "unexpected word(%s)(1)", buf);
+    stackframe();
     exit(2);
 }
 

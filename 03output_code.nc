@@ -26,7 +26,7 @@ string make_type_name_string(sType* type,  sInfo* info=info, bool no_static=fals
     if(type->mStatic && !no_static) {
         buf.append_str("static ");
     }
-    if(type->mAtomic) {
+    if(type->mAtomic && !type->mTypedef) {
         buf.append_str("_Atomic(");
     }
     if(type->mThreadLocal) {
@@ -54,7 +54,10 @@ string make_type_name_string(sType* type,  sInfo* info=info, bool no_static=fals
         buf.append_str("short ");
     }
     
-    if(type->mOriginalTypeName === "va_list") {
+    if(type->mTypeOfNodeValue) {
+        buf.append_str("typeof(" + type->mTypeOfNodeValue + ") ");
+    }
+    else if(type->mOriginalTypeName === "va_list") {
         buf.append_str("va_list");
     }
     else if(type->mOriginalTypeName === "__builtin_va_list") {
@@ -62,6 +65,9 @@ string make_type_name_string(sType* type,  sInfo* info=info, bool no_static=fals
     }
     else if(class_name === "__builtin_va_list") {
         buf.append_str("__builtin_va_list");
+    }
+    else if(type->mAtomic && type->mTypedef) {
+        buf.append_str(class_name + " ");
     }
     else if(type->mClass->mStruct) {
         if(!type->mClass->mAnonymous) {
@@ -235,7 +241,7 @@ string make_type_name_string(sType* type,  sInfo* info=info, bool no_static=fals
             buf.append_str("]");
         }
     }
-    if(type->mAtomic) {
+    if(type->mAtomic && !type->mTypedef) {
         buf.append_str(")");
     }
     

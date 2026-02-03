@@ -41,6 +41,9 @@ sType*% solve_generics(sType* type, sType* generics_type, sInfo* info)
         
         CVALUE*% come_value = get_value_from_stack(-1, info);
         
+        result->mTypeOfNodeValue = clone come_value.c_value;
+        
+        /*
         result = come_value.type;
         if(result.mArrayNum.length() > 0) {
             if(pointer_num > 0) {
@@ -55,6 +58,8 @@ sType*% solve_generics(sType* type, sType* generics_type, sInfo* info)
         if(heap) {
             result.mHeap = true;
         }
+        */
+        return result;
     }
     if(generics_type == null) {
         return result;

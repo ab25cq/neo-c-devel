@@ -1,0 +1,11 @@
+c_test_compat27.c:19:1: warning: typedef requires a name [-Wmissing-declarations]
+   19 | typedef unsigned long  long   ;
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+c_test_compat27.c:502:17: error: must use 'struct' tag to refer to type 'atomic_intbox'
+  502 | typedef _Atomic(atomic_intbox ) atomic_intbox  ;
+      |                 ^
+      |                 struct 
+c_test_compat27.c:509:8: error: _Atomic cannot be applied to atomic type 'atomic_intbox' (aka '_Atomic(struct atomic_intbox)') 
+  509 | static _Atomic(atomic_intbox ) g_box  =((struct IntBox){ .v = 1 });
+      |        ^
+1 warning and 2 errors generated.

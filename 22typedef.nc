@@ -51,10 +51,10 @@ class sTypedefNode extends sNodeBase
             sType*% type = new sType(s"__darwin_va_list");
             type->mOriginalTypeName = string("__darwin_va_list");
             
-            type->mTypedef = true;
             info.types.insert(string(type_name), clone type);
             
             type = info.types[string(type_name)];
+            type->mTypedef = true;
             
             if(type->mArrayNum.length() > 0 || type->mAtomic) {
                 if(info.struct_definition[string(type_name)]) {
@@ -85,10 +85,10 @@ class sTypedefNode extends sNodeBase
                     type->mOriginalTypeName = string(type_name);
                 }
                 
-                type->mTypedef = true;
                 info.types.insert(string(type_name), clone type);
             
                 type = info.types[string(type_name)];
+                type->mTypedef = true;
                 
                 sClass*% klass = info.classes[string(type_name)]
                 string anonymous_code = null;
@@ -185,10 +185,10 @@ class sTypedefNode extends sNodeBase
                 type->mOriginalTypeName = string(type_name);
             }
             
-            type->mTypedef = true;
             info.types.insert(string(type_name), clone type);
             
             type = info.types[string(type_name)];
+            type->mTypedef = true;
             
             sClass*% klass = info.classes[string(type_name)]
             string anonymous_code = null;

@@ -1,0 +1,16 @@
+codex.c:19:1: warning: typedef requires a name [-Wmissing-declarations]
+   19 | typedef unsigned long  long   ;
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+codex.c:2676:5: error: address argument to atomic operation must be a pointer to _Atomic type ('unsigned int *' invalid)
+ 2676 |     __c11_atomic_init(&au32,0u);
+      |     ^                 ~~~~~
+codex.c:2677:10: error: address argument to atomic operation must be a pointer to _Atomic type ('unsigned int *' invalid)
+ 2677 |     prev=__c11_atomic_fetch_add(&au32,5u,(4));
+      |          ^                      ~~~~~
+codex.c:2696:38: error: address argument to atomic operation must be a pointer to _Atomic type ('unsigned int *' invalid)
+ 2696 |         _g_139=(unsigned long  long)(__c11_atomic_load(&au32,(0)));
+      |                                      ^                 ~~~~~
+codex.c:2705:9: error: address argument to atomic operation must be a pointer to _Atomic type ('unsigned int *' invalid)
+ 2705 |     ok2=__c11_atomic_compare_exchange_strong(&au32,&expu,42u,(3),(0));
+      |         ^                                    ~~~~~
+1 warning and 4 errors generated.

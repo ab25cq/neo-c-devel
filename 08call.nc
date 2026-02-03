@@ -3039,6 +3039,7 @@ string create_method_name_using_class(sClass* obj_class, const char* fun_name, s
 sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 1
 {
     err_msg(info, "unexpected word(%s)(2)", buf);
+    stackframe();
     exit(2);
     
     return (sNode*%)null;

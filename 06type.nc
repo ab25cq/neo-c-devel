@@ -2003,9 +2003,11 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
         bool no_output_come_code = info.no_output_come_code
         info.no_output_come_code = true;
         
-        if(*info->p == '(') {
-            info->p++;
-            skip_spaces_and_lf();
+        if(*info->p == '(' || info.in_typedef) {
+            if(*info->p == '(') {
+                info->p++;
+                skip_spaces_and_lf();
+            }
         
             skip_pointer_attribute();
             
@@ -2049,16 +2051,19 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
                     if(*info->p == ')') {
                         info->p++;
                         skip_spaces_and_lf();
-                        
-                        if(*info->p == '(') {
-                            function_pointer_flag = true;
-                            pointer_to_array_flag = false;
-                        }
-                        else if(*info->p == '[') {
-                            function_pointer_flag = false;
-                            pointer_to_array_flag = true;
-                        }
                     }
+                        
+                    if(*info->p == '(') {
+                        function_pointer_flag = true;
+                        pointer_to_array_flag = false;
+                    }
+                    else if(*info->p == '[') {
+                        function_pointer_flag = false;
+                        pointer_to_array_flag = true;
+                    }
+                }
+                else if(*info->p == '(' && info.in_typedef) {
+                    function_pointer_flag = false;
                 }
                 else if(*info->p == ')') {
                     info->p++;

@@ -139,7 +139,10 @@ sNode*% parse_global_variable(sInfo* info)
             var type, name, err = parse_type();
             skip_spaces_and_lf();
             
-            if(err) {
+            if(type->mClass->mName === "lambda" && !type->mTypedef) {
+                multiple_declare = true;
+            }
+            else if(err) {
                 skip_spaces_and_lf();
                 var type,name = parse_variable_name_on_multiple_declare(type@base_type_name, true@first, info);
                 skip_spaces_and_lf();
