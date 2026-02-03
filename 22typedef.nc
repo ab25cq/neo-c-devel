@@ -42,6 +42,9 @@ class sTypedefNode extends sNodeBase
     {
         string type_name = string(self.mTypeName);
         
+        bool in_typedef = info.in_typedef;
+        info.in_typedef = true;
+        
         if(type_name === "__darwin_va_list") {
             info.classes.insert(string("__darwin_va_list"), new sClass(s"__darwin_va_list", number:true));
             
@@ -103,31 +106,42 @@ class sTypedefNode extends sNodeBase
                     anonymous_code = clone code;
                 }
 */
-                else if(type->mClass && type->mClass.mFields.length() > 0) {
-                    info.classes.insert(string(type_name), clone type->mClass);
-                    
-                    sClass*% klass = info.classes[string(type_name)];
-                    
-                    klass->mAnonymous = false;
-                    klass->mName = string(type_name);
-                    
-                    type->mClass = klass;
-                    
-                    if(klass->mUnion) {
+                else if(type->mClass && (type->mClass.mFields.length() > 0 || type->mClass->mElements.length() > 0)) {
+                    if(type->mClass->mUnion) {
+                        info.classes.insert(string(type_name), clone type->mClass);
+                        
+                        sClass*% klass = info.classes[string(type_name)];
+                        
+                        klass->mAnonymous = false;
+                        klass->mName = string(type_name);
+                        
+                        type->mClass = klass;
+                
                         var code, name = make_union(klass, info);
                         
                         anonymous_code = clone code;
                     }
-                    else if(klass->mStruct) {
+                    else if(type->mClass->mStruct) {
+                        info.classes.insert(string(type_name), clone type->mClass);
+                        
+                        sClass*% klass = info.classes[string(type_name)];
+                        
+                        klass->mAnonymous = false;
+                        klass->mName = string(type_name);
+                        
+                        type->mClass = klass;
+                        
                         var code, existance_generics, name = make_struct(klass, s"", info);
                         
                         anonymous_code = clone code;
                     }
-                    else if(klass->mEnum) {
+/*
+                    else if(type->mClass->mEnum) {
                         string code = make_enum(klass, info);
                         
                         anonymous_code = clone code;
                     }
+*/
                 }
             
                 if(!is_gcc_builtin_float_typedef(type_name, info)) {
@@ -192,31 +206,49 @@ class sTypedefNode extends sNodeBase
                 anonymous_code = clone code;
             }
 */
-            else if(type->mClass && type->mClass.mFields.length() > 0) {
-                info.classes.insert(string(type_name), clone type->mClass);
+            else if(type->mClass && (type->mClass.mFields.length() > 0 || type->mClass.mElements.length() > 0)) {
+                if(type->mClass->mUnion) {
+                    info.classes.insert(string(type_name), clone type->mClass);
+                    
+                    sClass*% klass = info.classes[string(type_name)];
+                    
+                    klass->mAnonymous = false;
+                    klass->mName = string(type_name);
+                    
+                    type->mClass = klass;
                 
-                sClass*% klass = info.classes[string(type_name)];
-                
-                klass->mAnonymous = false;
-                klass->mName = string(type_name);
-                
-                type->mClass = klass;
-                
-                if(klass->mUnion) {
                     var code, name = make_union(klass, info);
                     
                     anonymous_code = clone code;
                 }
-                else if(klass->mStruct) {
+                else if(type->mClass->mStruct) {
+                    info.classes.insert(string(type_name), clone type->mClass);
+                    
+                    sClass*% klass = info.classes[string(type_name)];
+                    
+                    klass->mAnonymous = false;
+                    klass->mName = string(type_name);
+                    
+                    type->mClass = klass;
                     var code, existance_generics, name = make_struct(klass, s"", info);
                     
                     anonymous_code = clone code;
                 }
+/*
                 else if(klass->mEnum) {
+                    info.classes.insert(string(type_name), clone type->mClass);
+                    
+                    sClass*% klass = info.classes[string(type_name)];
+                    
+                    klass->mAnonymous = false;
+                    klass->mName = string(type_name);
+                    
+                    type->mClass = klass;
                     string code = make_enum(klass, info);
                     
                     anonymous_code = clone code;
                 }
+*/
             }
             
             if(!is_gcc_builtin_float_typedef(type_name, info)) {
@@ -252,6 +284,7 @@ class sTypedefNode extends sNodeBase
                 }
             }
         }
+        info.in_typedef = in_typedef;
     
         return true;
     }

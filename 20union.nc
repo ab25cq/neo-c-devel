@@ -58,14 +58,19 @@ void output_union(sClass* klass, sInfo* info, bool anonymous=false)
 { 
     var code, name = make_union(klass, info, anonymous);
     
-    if(info.struct_definition[string(name)] == null) {
-        info.struct_definition.insert(string(name), (code.to_buffer(), new buffer()));
-    }
-    else if(info.struct_definition[string(name)]) {
-        var d, d2 = info.struct_definition[string(name)];
-        
-        info.struct_definition.insert(string(name), (code.to_buffer(), d2));
-    }
+//    if(!info.no_output_come_code) {
+        if(info.struct_definition[string(name)] == null) {
+            info.struct_definition.insert(string(name), (code.to_buffer(), new buffer()));
+        }
+        else if(info.struct_definition[string(name)] == null || info.struct_definition[string(name)].v1.to_string() === "") {
+            var d, d2 = info.struct_definition[string(name)];
+            
+            info.struct_definition.insert(string(name), (code.to_buffer(), d2));
+        }
+        else if(anonymous) {
+            info.struct_definition.insert(string(name), (code.to_buffer(), new buffer()));
+        }
+//    }
 }
 
 class sUnionNode extends sNodeBase

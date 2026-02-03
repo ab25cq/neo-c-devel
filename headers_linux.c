@@ -187,9 +187,6 @@ struct flock64 {short l_type; short l_whence; long long l_start  ; long long l_l
 struct open_how {unsigned long  long flags  ; unsigned long  long mode  ; unsigned long  long resolve  ; };
 
 
-struct iovec {void* iov_base; unsigned long  int iov_len  ; };
-
-
 struct dmabuf_cmsg {unsigned long  long frag_offset  ; unsigned int frag_size  ; unsigned int frag_token  ; unsigned int dmabuf_id  ; unsigned int flags  ; };
 
 
@@ -215,9 +212,6 @@ struct __kernel_sock_timeval {long long tv_sec  ; long long tv_usec  ; };
 
 
 struct timespec {long tv_sec  ; long tv_nsec; };
-
-
-struct timeval {long tv_sec  ; long tv_usec  ; };
 
 
 struct itimerspec {struct timespec it_interval  ; struct timespec it_value  ; };
@@ -1207,6 +1201,9 @@ struct ethhdr {unsigned char h_dest[6]; unsigned char h_source[6]; unsigned shor
 
 typedef unsigned long  long   ;
 
+struct iovec {void* iov_base; unsigned long iov_len  ; };
+
+
 
 typedef unsigned char __u_char;
 
@@ -1529,6 +1526,9 @@ struct sigset_t {unsigned long  int __val[(1024/(8*sizeof(unsigned long  int)))]
 
 typedef struct sigset_t sigset_t  ;
 
+struct timeval {long  int tv_sec  ; long  int tv_usec  ; };
+
+
 
 typedef long  int __fd_mask;
 
@@ -1775,7 +1775,7 @@ struct ip_mreqn {struct in_addr imr_multiaddr  ; struct in_addr imr_address  ; i
 struct ip_mreq_source {unsigned int imr_multiaddr  ; unsigned int imr_interface  ; unsigned int imr_sourceaddr  ; };
 
 
-struct ip_msfilter {unsigned int imsf_multiaddr  ; unsigned int imsf_interface  ; unsigned int imsf_fmode  ; unsigned int imsf_numsrc  ; union { unsigned int imsf_slist[1]  ; struct { struct {} __empty_imsf_slist_flex  ; unsigned int imsf_slist_flex[]  ; }    ; }    ; };
+struct ip_msfilter {unsigned int imsf_multiaddr  ; unsigned int imsf_interface  ; unsigned int imsf_fmode  ; unsigned int imsf_numsrc  ; union { unsigned int imsf_slist[1]  ; struct {  __empty_imsf_slist_flex  ; unsigned int imsf_slist_flex[]  ; }    ; }    ; };
 
 
 struct group_req {unsigned int gr_interface  ; struct __kernel_sockaddr_storage gr_group  ; };

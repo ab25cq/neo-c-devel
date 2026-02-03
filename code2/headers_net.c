@@ -937,10 +937,13 @@ struct ifreq {union { char ifrn_name[16]; }  ifr_ifrn  ; union { struct sockaddr
 struct ifconf {int ifc_len; union { char* ifcu_buf  ; struct ifreq* ifcu_req  ; }  ifc_ifcu  ; };
 
 
+struct sockaddr_ll {unsigned short int sll_family; unsigned short int sll_protocol; int sll_ifindex; unsigned short int sll_hatype; unsigned char sll_pkttype; unsigned char sll_halen; unsigned char sll_addr[8]; };
+
+
+struct packet_mreq {int mr_ifindex; unsigned short int mr_type; unsigned short int mr_alen; unsigned char mr_address[8]; };
+
+
 struct sockaddr_pkt {unsigned short int spkt_family; unsigned char spkt_device[14]; unsigned short int spkt_protocol  ; };
-
-
-struct sockaddr_ll {unsigned short int sll_family; unsigned short int sll_protocol  ; int sll_ifindex; unsigned short int sll_hatype; unsigned char sll_pkttype; unsigned char sll_halen; unsigned char sll_addr[8]; };
 
 
 struct tpacket_stats {unsigned int tp_packets; unsigned int tp_drops; };
@@ -992,9 +995,6 @@ struct tpacket_req3 {unsigned int tp_block_size; unsigned int tp_block_nr; unsig
 
 
 union tpacket_req_u {struct tpacket_req req  ; struct tpacket_req3 req3  ; };
-
-
-struct packet_mreq {int mr_ifindex; unsigned short int mr_type; unsigned short int mr_alen; unsigned char mr_address[8]; };
 
 
 struct fanout_args {unsigned short int id  ; unsigned short int type_flags  ; unsigned int max_num_members  ; };

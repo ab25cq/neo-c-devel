@@ -3,7 +3,12 @@
 string@code, bool@existance_generics, string@name make_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=false)
 {
     if(klass->mFields.length() == 0) {
-        return (s"", false, s"");
+        if(klass->mAnonymous) {
+            return (s"struct {}", false, s"");
+        }
+        else {
+            return (s"struct \{klass.mName} {};", false, string(klass.mName));
+        }
     }
     
     string name = string(klass.mName);
@@ -65,14 +70,19 @@ void output_struct(sClass* klass, string pragma, sInfo* info, bool anonymous=fal
 {
     var code, existance_generics, name = make_struct(klass, pragma, info, anonymous);
             
-    if(info.struct_definition[string(name)] == null && !existance_generics) {
-        info.struct_definition.insert(string(name), (code.to_buffer(), new buffer()));
-    }
-    else if(info.struct_definition[string(name)]) {
-        var d, d2 = info.struct_definition[string(name)];
-        
-        info.struct_definition.insert(string(name), (code.to_buffer(), d2));
-    }
+//    if(!info.no_output_come_code) {
+        if(info.struct_definition[string(name)] == null && !existance_generics) {
+            info.struct_definition.insert(string(name), (code.to_buffer(), new buffer()));
+        }
+        else if(info.struct_definition[string(name)] == null || info.struct_definition[string(name)].v1.to_string() === "") {
+            var d, d2 = info.struct_definition[string(name)];
+            
+            info.struct_definition.insert(string(name), (code.to_buffer(), d2));
+        }
+        else if(anonymous) {
+            info.struct_definition.insert(string(name), (code.to_buffer(), new buffer()));
+        }
+//    }
 }
 
 bool output_generics_struct(sType* type, sType* generics_type, sInfo* info)
@@ -386,8 +396,9 @@ sNode*% parse_struct(string type_name, string struct_attribute, sInfo* info, boo
         klass->mAttribute = struct_attribute + " " + struct_attribute2;
     }
     
-    sNode*% node = new sStructNode(string(type_name), klass, info, anonymous) implements sNode;
+    return new sStructNode(string(type_name), klass, info, anonymous) implements sNode;
     
+/*
     node_compile(node, info).elif {
         info.parse_struct_recursive_count--;
         return null;
@@ -395,6 +406,7 @@ sNode*% parse_struct(string type_name, string struct_attribute, sInfo* info, boo
     
     info.parse_struct_recursive_count--;
     return new sNothingNode(info) implements sNode;
+*/
 }
 
 

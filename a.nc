@@ -1,35 +1,49 @@
-typedef enum { aaa = 1, bbb = 0, ccc } XXX;
 
-XXX UHO;
+/*
+typedef long		__kernel_long_t;
+typedef __kernel_long_t	__kernel_old_time_t;
+typedef __kernel_long_t	__kernel_time_t;
+typedef __kernel_long_t	__kernel_old_time_t;
+typedef __kernel_long_t		__kernel_suseconds_t;
+struct timeval {
+	__kernel_old_time_t	tv_sec;		
+	__kernel_suseconds_t	tv_usec;	
+};
 
-typedef enum GEGE
-{
-  _REG_ENOSYS = -1,	
-  _REG_NOERROR = 0,	
-  _REG_NOMATCH,		
+struct itimerspec {
+	struct timespec it_interval;
+	struct timespec it_value;	
+};
 
-  
+struct itimerval {
+	struct timeval it_interval;
+	struct timeval it_value;	
+};
+*/
+struct r_debug
+  {
+    
+    int r_version;
 
-  _REG_BADPAT,		
-  _REG_ECOLLATE,	
-  _REG_ECTYPE,		
-  _REG_EESCAPE,		
-  _REG_ESUBREG,		
-  _REG_EBRACK,		
-  _REG_EPAREN,		
-  _REG_EBRACE,		
-  _REG_BADBR,		
-  _REG_ERANGE,		
-  _REG_ESPACE,		
-  _REG_BADRPT,		
+    struct link_map *r_map;	
 
-  
-  _REG_EEND,		
-  _REG_ESIZE,		
-  _REG_ERPAREN		
-} reg_errcode_t;
+    
 
-reg_errcode_t XXXXXX;
+
+
+
+    int r_brk;
+    enum
+      {
+	
+
+	RT_CONSISTENT,		
+	RT_ADD,			
+	RT_DELETE		
+      } r_state;
+
+    int r_ldbase;	
+  };
 
 int main(int argc, char** argv) 
 {

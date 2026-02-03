@@ -102,7 +102,8 @@ void output_enum(string type_name, sInfo* info=info)
     if(info.struct_definition[string(type_name)] == null) {
         info.struct_definition.insert(string(type_name), (output.to_buffer(), new buffer()));
     }
-    else if(info.struct_definition[string(type_name)]) {
+    else if(info.struct_definition[string(type_name)] && info.struct_definition[string(type_name)].v1.to_string() === "") 
+    {
         var d, d2 = info.struct_definition[string(type_name)];
         
         info.struct_definition.insert(string(type_name), (output.to_buffer(), d2));
@@ -134,7 +135,7 @@ class sEnumNode extends sNodeBase
     {
         string type_name = self.mTypeName;
         
-        if(info.struct_definition[string(type_name)] == null) {
+        if(info.struct_definition[string(type_name)] == null) { // && !info.in_typedef) {
             output_enum(type_name);
         }
     
