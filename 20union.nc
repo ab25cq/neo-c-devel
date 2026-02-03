@@ -62,7 +62,7 @@ void output_union(sClass* klass, sInfo* info, bool anonymous=false)
         if(info.struct_definition[string(name)] == null) {
             info.struct_definition.insert(string(name), (code.to_buffer(), new buffer()));
         }
-        else if(info.struct_definition[string(name)] == null || info.struct_definition[string(name)].v1.to_string() === "") {
+        else if(info.struct_definition[string(name)] && info.struct_definition[string(name)].v1.to_string() === "") {
             var d, d2 = info.struct_definition[string(name)];
             
             info.struct_definition.insert(string(name), (code.to_buffer(), d2));

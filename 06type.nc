@@ -1,5 +1,6 @@
 #include "common.h"
 
+
 bool is_type_name(char* buf, sInfo* info=info)
 {
     sClass* klass = borrow info.classes[buf];
