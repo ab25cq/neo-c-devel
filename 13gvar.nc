@@ -174,9 +174,7 @@ sNode*% parse_global_variable(sInfo* info)
         info.sline = sline;
     }
     
-puts("AAA");
     if(multiple_declare) {
-puts("OK");
         list<tup: sType*%,string,string>*% multiple_declare = new list<tup: sType*%,string,string>();
         
         skip_spaces_and_lf();
@@ -187,10 +185,24 @@ puts("OK");
             printf("%s %d: parse_type failed\n", info->sname, info->sline);
             exit(2);
         }
-        
-        skip_spaces_and_lf();
-        var type2, var_name = parse_variable_name_on_multiple_declare(base_type, true@first, info);
-        skip_spaces_and_lf();
+        string var_name;
+        sType*% type2;
+        if(base_type->mClass->mName === "lambda") {
+            type2 = clone base_type;
+            
+            sType*% result_type = clone base_type->mResultType;
+            base_type = result_type;
+            
+            var_name = clone name;
+        }
+        else {
+            skip_spaces_and_lf();
+            var type2_, var_name_ = parse_variable_name_on_multiple_declare(base_type, true@first, info);
+            skip_spaces_and_lf();
+            
+            type2 = type2_;
+            var_name = var_name_
+        }
         
         if(*info->p == '=' && *(info->p+1) != '=') {
             info->p++;
@@ -232,10 +244,8 @@ puts("OK");
             info->p++;
             skip_spaces_and_lf();
             
-puts("1");
             var type2, var_name = parse_variable_name_on_multiple_declare(base_type, false@first, info);
             
-puts("2");
             if(*info->p == '=' && *(info->p+1) != '=')  {
                 info->p++;
                 skip_spaces_and_lf();
@@ -272,13 +282,11 @@ puts("2");
                 multiple_declare.push_back((type2, var_name, (string)null));
             }
         }
-puts("3");
         
         sNode*% right_node = null;
         string array_initializer = null;
         string var_name2 = string("");
         
-puts("4");
         if(base_type->mExtern) {
             if(right_node) {
                 err_msg(info, "invalid right value");
@@ -291,7 +299,6 @@ puts("4");
         }
     }
     else {
-puts("NO");
 //        bool no_output_come_code = info.no_output_come_code;
 //        info.no_output_come_code = true;
         skip_spaces_and_lf();

@@ -1138,9 +1138,7 @@ void transpile_toplevel(bool block=false, sInfo* info=info)
         
         char* head = info.p;
         int head_sline = info.sline;
-printf("%c\n", *info->p);
         string buf = parse_word();
-puts(buf);
         
         skip_spaces_and_lf();
         
@@ -1592,8 +1590,6 @@ sNode*% top_level(char* buf, char* head, int head_sline, sInfo* info) version 99
         info.p = head;
         info.sline = sline;
         
-puts("UHOX");
-printf("%d\n", info.no_output_come_code);
         return parse_global_variable(info);
     }
     else if(define_function_pointer_result_function) {
@@ -1779,9 +1775,6 @@ printf("%d\n", info.no_output_come_code);
         info.p = head;
         info.sline = sline;
         
-puts("UHO");
-printf("%d\n", info.no_output_come_code);
-stackframe();
         sNode*% node = parse_global_variable(info);
         
         char* source_tail = info.p;
