@@ -1237,6 +1237,134 @@ string parse_variable_name_fun(sType* type, bool var_name_between_brace, string 
     return var_name;
 }
 
+#module input_type(type)
+{
+    type->mNoHeap = type->mNoHeap || no_heap;
+    type->mAtomic = type->mAtomic || atomic_;
+    type->mThreadLocal = type->mThreadLocal || thread_local;
+    type->mThread = type->mThread || thread_;
+    type->mConstant = type->mConstant || constant;
+    type->mComplex = type->mComplex || complex_;
+    type->mAlignas = alignas_;
+    type->mAlignasDouble = type->mAlignasDouble || alignas_double;
+    type->mRegister = type->mRegister || register_;
+    type->mUnsigned = type->mUnsigned || unsigned_;
+    type->mNoreturn = type->mNoreturn || noreturn_;
+    type->mVolatile = type->mVolatile || volatile_;
+    type->mUniq = type->mUniq || uniq_;
+    type->mStatic = static_ || type->mStatic;
+    type->mExtern = type->mExtern || extern_;
+    type->mInline = type->mInline || inline_;
+    type->mRestrict = type->mRestrict || restrict_;
+    type->mLongLong = type->mLongLong || long_long;
+    type->mLong = type->mLong || long_;
+    type->mShort = type->mShort || short_;
+}
+
+#module parse_multiple_type_fun()
+{
+    if(parse_multiple_type && *info->p == ',' && !info.in_offsetof) {
+        list<sType*%>*% types = new list<sType*%>();
+        
+        types.push_back(clone type);
+        
+        while(*info->p == ',') {
+            info->p++;
+            skip_spaces_and_lf();
+            
+            var type2, name, err = parse_type(parse_multiple_type:false);
+            
+            if(!err) {
+                return ((sType*%)null, (string)null, false);
+            }
+                
+            types.push_back(clone type2);
+        }
+        
+        if(*info->p == ')') {
+            info->p++;
+            skip_spaces_and_lf();
+        }
+        
+        int num_tuples = types.length();
+        
+        type = new sType(xsprintf("tuple%d", num_tuples));
+        type->mPointerNum++;
+        type->mHeap = true;
+        
+        foreach(it, types) {
+            type->mGenericsTypes.push_back((clone it));
+        }
+        
+        
+        type = parse_pointer_attribute(type);
+        
+        if(is_contained_generics_class(type, info)) {
+            type = solve_generics(type, info.generics_type, info);
+        }
+        else {
+            if(!output_generics_struct(type, type, info))
+            {
+                string new_name = create_generics_name(type, info);
+                printf("output generics is failed(%s)\n", new_name);
+                exit(9);
+            }
+        }
+        type->mMultipleTypes = true;
+        
+        type_name = type->mClass->mName;
+    }
+}
+
+/*
+#module parse_array_num(type)
+{
+    while(*info->p == '[') {
+        info->p++;
+        skip_spaces_and_lf();
+        
+        bool array_static = false;
+        bool array_restrict = false;
+        while(1) {
+            if(parsecmp("static")) {
+                info->p += strlen("static");
+                skip_spaces_and_lf();
+                
+                array_static = true;
+            }
+            else if(parsecmp("restrict")) {
+                info->p += strlen("restrict");
+                skip_spaces_and_lf();
+                
+                array_restrict = true;
+            }
+            else {
+                break;
+            }
+        }
+        
+        skip_pointer_attribute();
+        
+        if(*info->p == ']') {
+            info->p++;
+            skip_spaces_and_lf();
+            
+            type->mArrayPointerType = true;
+            //type->mPointerNum++;
+            break;
+        }
+        skip_spaces_and_lf();
+        
+        sNode*% node = expression();
+        type.mArrayNum.push_back(node);
+        type.mArrayStatic.push_back(array_static);
+        type.mArrayRestrict.push_back(array_restrict);
+        
+        expected_next_character(']');
+    }
+}
+*/
+
 tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_name=false, bool parse_multiple_type=true, bool in_function_parametor=false)
 {
     char* head = info.p;
@@ -1871,6 +1999,8 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
     {
         char* p = info.p;
         int sline = info.sline;
+        bool no_output_come_code = info.no_output_come_code
+        info.no_output_come_code = true;
         
         if(*info->p == '(') {
             info->p++;
@@ -1907,10 +2037,7 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
                             skip_spaces_and_lf();
                             break;
                         }
-                        bool no_output_come_code = info.no_output_come_code
-                        info.no_output_come_code = true;
                         sNode*% exp = expression();
-                        info.no_output_come_code = no_output_come_code;
                         
                         if(*info->p == ']') {
                             info->p++;
@@ -1968,6 +2095,7 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
         
         info.p = p;
         info.sline = sline;
+        info.no_output_come_code = no_output_come_code;
     }
     
     bool var_name_between_brace = false;
@@ -2031,29 +2159,13 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
             }
         }
         
-        result_type->mAtomic = result_type->mAtomic || atomic_;
-        result_type->mThreadLocal = result_type->mThreadLocal || thread_local;
-        result_type->mThread = result_type->mThread || thread_;
-        result_type->mConstant = result_type->mConstant || constant;
-        result_type->mComplex = result_type->mComplex || complex_;
-        result_type->mAlignas = alignas_;
-        result_type->mAlignasDouble = alignas_double;
-        result_type->mRegister = register_;
-        result_type->mUnsigned = result_type->mUnsigned || unsigned_;
-        result_type->mNoreturn = result_type->mNoreturn || noreturn_;
-        result_type->mVolatile = volatile_;
-        result_type->mUniq = result_type->mUniq || uniq_;
-        result_type->mStatic = (result_type->mStatic || static_) && !result_type->mUniq;
-        result_type->mExtern = result_type->mExtern || extern_;
-        result_type->mInline = result_type->mInline || inline_;
-        result_type->mRestrict = result_type->mRestrict || restrict_;
-        result_type->mLongLong = result_type->mLongLong || long_long;
-        result_type->mLong = result_type->mLong || long_;
-        result_type->mShort = result_type->mShort || short_;
+        input_type(result_type)
+        
         result_type->mPointerNum = pointer_num;
         result_type->mHeap = result_type->mHeap || heap;
         result_type->mChannel = result_type->mChannel || channel;
         result_type->mDefferRightValue = result_type->mDefferRightValue || deffer_;
+        result_type->mTupleName = tuple_name;
         
         var_name = parse_word();
         
@@ -2097,25 +2209,8 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
             type = new sType(string(type_name));
         }
         
-        type->mConstant = type->mConstant || constant;
-        type->mComplex = type->mComplex || complex_;
-        type->mAtomic = type->mAtomic || atomic_;
-        type->mThreadLocal = type->mThreadLocal || thread_local;
-        type->mThread = type->mThread || thread_;
-        type->mAlignas = alignas_;
-        type->mAlignasDouble = alignas_double;
-        type->mRegister = register_;
-        type->mUnsigned = type->mUnsigned || unsigned_;
-        type->mNoreturn = type->mNoreturn || noreturn_;
-        type->mVolatile = volatile_;
-        type->mUniq = type->mUniq || uniq_;
-        type->mStatic = (type->mStatic || static_) && !type->mUniq;
-        type->mExtern = type->mExtern || extern_;
-        type->mInline = type->mInline || inline_;
-        type->mRestrict = type->mRestrict || restrict_;
-        type->mLongLong = type->mLongLong || long_long;
-        type->mLong = type->mLong || long_;
-        type->mShort = type->mShort || short_;
+        input_type(type)
+        
         type->mPointerNum += pointer_num;
         type->mHeap = type->mHeap || heap;
         type->mChannel = type->mChannel || channel;
@@ -2227,25 +2322,8 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
             }
         }
         
-        result_type->mConstant = result_type->mConstant || constant;
-        result_type->mComplex = result_type->mComplex || complex_;
-        result_type->mAtomic = result_type->mAtomic || atomic_;
-        result_type->mThreadLocal = result_type->mThreadLocal || thread_local;
-        result_type->mThread = result_type->mThread || thread_;
-        result_type->mAlignas = alignas_;
-        result_type->mAlignasDouble = alignas_double;
-        result_type->mRegister = register_;
-        result_type->mUnsigned = result_type->mUnsigned || unsigned_;
-        result_type->mNoreturn = result_type->mNoreturn || noreturn_;
-        result_type->mVolatile = volatile_;
-        result_type->mUniq = result_type->mUniq || uniq_;
-        result_type->mStatic = (result_type->mStatic || static_) && !result_type->mUniq;
-        result_type->mExtern = result_type->mExtern || extern_;
-        result_type->mInline = result_type->mInline || inline_;
-        result_type->mRestrict = result_type->mRestrict || restrict_;
-        result_type->mLongLong = result_type->mLongLong || long_long;
-        result_type->mLong = result_type->mLong || long_;
-        result_type->mShort = result_type->mShort || short_;
+        input_type(result_type)
+        
         result_type->mPointerNum += pointer_num;
         result_type->mHeap = result_type->mHeap || heap;
         result_type->mChannel = result_type->mChannel || channel;
@@ -2350,25 +2428,8 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
             type->mAttribute = s"";
             type->mVarAttribute = s"";
             
-            type->mConstant = type->mConstant || constant;
-            type->mComplex = type->mComplex || complex_;
-            type->mAtomic = type->mAtomic || atomic_;
-            type->mThreadLocal = type->mThreadLocal || thread_local;
-            type->mThread = type->mThread || thread_;
-            type->mAlignas = alignas_;
-            type->mAlignasDouble = alignas_double;
-            type->mRegister = register_;
-            type->mUnsigned = type->mUnsigned || unsigned_;
-            type->mNoreturn = type->mNoreturn || noreturn_;
-            type->mVolatile = volatile_;
-            type->mUniq = type->mUniq || uniq_;
-            type->mStatic = (type->mStatic || static_) && !type->mUniq;
-            type->mExtern = type->mExtern || extern_;
-            type->mInline = type->mInline || inline_;
-            type->mRestrict = type->mRestrict || restrict_;
-            type->mLongLong = type->mLongLong || long_long;
-            type->mLong = type->mLong || long_;
-            type->mShort = type->mShort || short_;
+            input_type(type)
+            
             if(type.mClass.mName === "lambda" || type.mArrayNum.length() > 0) {
                 type->mArrayPointerNum += pointer_num;
             }
@@ -2387,25 +2448,8 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
                 }
             }
             
-            type->mConstant = type->mConstant || constant;
-            type->mComplex = type->mComplex || complex_;
-            type->mAtomic = type->mAtomic || atomic_;
-            type->mThreadLocal = type->mThreadLocal || thread_local;
-            type->mThread = type->mThread || thread_;
-            type->mAlignas = alignas_;
-            type->mAlignasDouble = alignas_double;
-            type->mRegister = register_;
-            type->mUnsigned = type->mUnsigned || unsigned_;
-            type->mNoreturn = type->mNoreturn || noreturn_;
-            type->mVolatile = volatile_;
-            type->mUniq = type->mUniq || uniq_;
-            type->mStatic = (type->mStatic || static_) && !type->mUniq;
-            type->mExtern = type->mExtern || extern_;
-            type->mInline = type->mInline || inline_;
-            type->mRestrict = type->mRestrict || restrict_;
-            type->mLongLong = type->mLongLong || long_long;
-            type->mLong = type->mLong || long_;
-            type->mShort = type->mShort || short_;
+            input_type(type)
+            
             type->mPointerNum += pointer_num;
             type->mHeap = type->mHeap || heap;
             type->mChannel = type->mChannel || channel;
@@ -2419,25 +2463,8 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
                 }
             }
             
-            type->mConstant = type->mConstant || constant;
-            type->mComplex = type->mComplex || complex_;
-            type->mAtomic = type->mAtomic || atomic_;
-            type->mThreadLocal = type->mThreadLocal || thread_local;
-            type->mThread = type->mThread || thread_;
-            type->mAlignas = alignas_;
-            type->mAlignasDouble = alignas_double;
-            type->mRegister = register_;
-            type->mUnsigned = type->mUnsigned || unsigned_;
-            type->mNoreturn = type->mNoreturn || noreturn_;
-            type->mVolatile = volatile_;
-            type->mUniq = type->mUniq || uniq_;
-            type->mStatic = (type->mStatic || static_) && !type->mUniq;
-            type->mExtern = type->mExtern || extern_;
-            type->mInline = type->mInline || inline_;
-            type->mRestrict = type->mRestrict || restrict_;
-            type->mLongLong = type->mLongLong || long_long;
-            type->mLong = type->mLong || long_;
-            type->mShort = type->mShort || short_;
+            input_type(type)
+            
             type->mPointerNum += pointer_num;
             type->mHeap = type->mHeap || heap;
             type->mChannel = type->mChannel || channel;
@@ -2498,25 +2525,8 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
                 }
             }
             
-            type->mConstant = type->mConstant || constant;
-            type->mComplex = type->mComplex || complex_;
-            type->mAtomic = type->mAtomic || atomic_;
-            type->mThreadLocal = type->mThreadLocal || thread_local;
-            type->mThread = type->mThread || thread_;
-            type->mAlignas = alignas_;
-            type->mAlignasDouble = alignas_double;
-            type->mRegister = register_;
-            type->mUnsigned = type->mUnsigned || unsigned_;
-            type->mNoreturn = type->mNoreturn || noreturn_;
-            type->mVolatile = volatile_;
-            type->mUniq = type->mUniq || uniq_;
-            type->mStatic = (type->mStatic || static_) && !type->mUniq;
-            type->mExtern = type->mExtern || extern_;
-            type->mInline = type->mInline || inline_;
-            type->mRestrict = type->mRestrict || restrict_;
-            type->mLongLong = type->mLongLong || long_long;
-            type->mLong = type->mLong || long_;
-            type->mShort = type->mShort || short_;
+            input_type(type)
+            
             type->mPointerNum += pointer_num;
             type->mHeap = type->mHeap || heap;
             type->mChannel = type->mChannel || channel;
@@ -2549,25 +2559,8 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
                 type = new sType(string(type_name));
             }
             
-            type->mConstant = type->mConstant || constant;
-            type->mComplex = type->mComplex || complex_;
-            type->mAtomic = type->mAtomic || atomic_;
-            type->mThreadLocal = type->mThreadLocal || thread_local;
-            type->mThread = type->mThread || thread_;
-            type->mAlignas = alignas_;
-            type->mAlignasDouble = alignas_double;
-            type->mRegister = register_;
-            type->mUnsigned = type->mUnsigned || unsigned_;
-            type->mNoreturn = type->mNoreturn || noreturn_;
-            type->mVolatile = volatile_;
-            type->mUniq = type->mUniq || uniq_;
-            type->mStatic = (type->mStatic || static_) && !type->mUniq;
-            type->mExtern = type->mExtern || extern_;
-            type->mInline = type->mInline || inline_;
-            type->mRestrict = type->mRestrict || restrict_;
-            type->mLongLong = type->mLongLong || long_long;
-            type->mLong = type->mLong || long_;
-            type->mShort = type->mShort || short_;
+            input_type(type)
+            
             type->mPointerNum += pointer_num;
             type->mHeap = type->mHeap || heap;
             type->mChannel = type->mChannel || channel;
@@ -2577,57 +2570,7 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
         
         type = parse_pointer_attribute(type);
         
-        if(parse_multiple_type && *info->p == ',' && !info.in_offsetof) {
-            list<sType*%>*% types = new list<sType*%>();
-            
-            types.push_back(clone type);
-            
-            while(*info->p == ',') {
-                info->p++;
-                skip_spaces_and_lf();
-                
-                var type2, name, err = parse_type(parse_multiple_type:false);
-                
-                if(!err) {
-                    return ((sType*%)null, (string)null, false);
-                }
-                    
-                types.push_back(clone type2);
-            }
-            
-            if(*info->p == ')') {
-                info->p++;
-                skip_spaces_and_lf();
-            }
-            
-            int num_tuples = types.length();
-            
-            type = new sType(xsprintf("tuple%d", num_tuples));
-            type->mPointerNum++;
-            type->mHeap = true;
-            
-            foreach(it, types) {
-                type->mGenericsTypes.push_back((clone it));
-            }
-            
-            
-            type = parse_pointer_attribute(type);
-            
-            if(is_contained_generics_class(type, info)) {
-                type = solve_generics(type, info.generics_type, info);
-            }
-            else {
-                if(!output_generics_struct(type, type, info))
-                {
-                    string new_name = create_generics_name(type, info);
-                    printf("output generics is failed(%s)\n", new_name);
-                    exit(9);
-                }
-            }
-            type->mMultipleTypes = true;
-            
-            type_name = type->mClass->mName;
-        }
+        parse_multiple_type_fun();
         
         string attribute = parse_struct_attribute();
         
