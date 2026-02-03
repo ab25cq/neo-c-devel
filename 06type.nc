@@ -1184,7 +1184,7 @@ sType*% parse_pointer_attribute(sType* type, sInfo* info=info)
     return clone type;
 }
 
-string parse_variable_name_fun(sType* type, bool anonymous_name, bool var_name_between_brace, string attribute, sInfo* info=info)
+string parse_variable_name_fun(sType* type, bool var_name_between_brace, string attribute, sInfo* info=info)
 {
     string var_name = s"";
     if(var_name_between_brace && *info->p == '(') {
@@ -1194,12 +1194,6 @@ string parse_variable_name_fun(sType* type, bool anonymous_name, bool var_name_b
     
     if(*info->p == ':') {
         var_name = string("");
-    }
-    else if(anonymous_name) {
-        static int num_anonymous_var_name = 0;
-        num_anonymous_var_name++;
-        var_name = xsprintf("anonymous_var_nameXYZ%d", num_anonymous_var_name);
-        type->mAnonymousVarName = true;
     }
     else if(xisalnum(*info.p) || *info->p == '_') {
         var_name = parse_word();
@@ -1272,17 +1266,14 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
     bool complex_ = false;
     bool type_name_ = false;
     bool noreturn_ = false;
+    bool atomic_ = false;
+    bool thread_local = false;
+    bool thread_ = false;
     
     sNode*% alignas_ = null;
     bool alignas_double = false;
     
     string union_attribute = s"";
-    
-    bool anonymous_type = false;
-    bool anonymous_name = false;
-    bool atomic_ = false;
-    bool thread_local = false;
-    bool thread_ = false;
     while(true) {
         if(type_name === "__type__") {
             if(*info->p == '(') {
@@ -1788,7 +1779,7 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
         string attribute = null;
         
         if(parse_variable_name) {
-            var_name = parse_variable_name_fun(type, anonymous_name:anonymous_name, var_name_between_brace:false, attribute);
+            var_name = parse_variable_name_fun(type, var_name_between_brace:false, attribute);
         }
         return (type, var_name, true);
     }
@@ -2011,27 +2002,6 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
     }
     
     
-/*
-    if(anonymous_type && *info->p == '{') {
-        static int anonymous_num = 0;
-        if(enum_) {
-        }
-        else {
-            err_msg(info, "unexpected { character");
-            return ((sType*%)null, (string)null, false);
-        }
-        
-        string attribute = parse_struct_attribute();
-        
-        if(attribute !== "") {
-            type->mAttribute = attribute;
-        }
-        
-        if(parse_variable_name) {
-            var_name = parse_variable_name_fun(type, anonymous_name:anonymous_name, var_name_between_brace:var_name_between_brace, attribute);
-        }
-    }
-    else */
     if(lambda_flag) {
         sType*% result_type;
         if(info.types[type_name]) {
@@ -2666,7 +2636,7 @@ tuple3<sType*%,string,bool>*% parse_type(sInfo* info=info, bool parse_variable_n
         }
 
         if(parse_variable_name) {
-            var_name = parse_variable_name_fun(type, anonymous_name:anonymous_name, var_name_between_brace:var_name_between_brace, attribute);
+            var_name = parse_variable_name_fun(type, var_name_between_brace:var_name_between_brace, attribute);
         }
     }
     skip_spaces_and_lf();
