@@ -15,6 +15,7 @@ string make_enum(sClass* klass, sInfo* info=info)
     
     buffer*% buf = new buffer();
     
+    /*
     if(klass->mAnonymous) {
         if(type_elements) {
             buf.append_format("enum :%s { ", make_type_name_string(type_elements));
@@ -23,7 +24,9 @@ string make_enum(sClass* klass, sInfo* info=info)
             buf.append_str("enum { ");
         }
     }
-    else if(type_elements) {
+    else 
+    */
+    if(type_elements) {
         buf.append_format("enum %s %s:%s { ", attribute, type_name, make_type_name_string(type_elements));
     }
     else if(type_name) {
@@ -94,7 +97,7 @@ void output_enum(string type_name, sInfo* info=info)
     
     string output = make_enum(klass);
     
-    output = output + ";\n";
+    output = output + ";/* b */\n";
     
     if(info.struct_definition[string(type_name)] == null) {
         info.struct_definition.insert(string(type_name), (output.to_buffer(), new buffer()));
@@ -131,7 +134,9 @@ class sEnumNode extends sNodeBase
     {
         string type_name = self.mTypeName;
         
-        output_enum(type_name);
+        if(info.struct_definition[string(type_name)] == null) {
+            output_enum(type_name);
+        }
     
         return true;
     }

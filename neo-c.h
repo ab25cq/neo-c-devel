@@ -79,7 +79,7 @@ var UNIX=1
     #include <limits.h>
     #include <locale.h>
     #include <errno.h>
-    #include <assert.h>
+__c__ {#include <assert.h>}
     #include <stdbool.h>
     
     #define NULL ((void*)0)

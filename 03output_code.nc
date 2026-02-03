@@ -86,7 +86,7 @@ string make_type_name_string(sType* type,  sInfo* info=info, bool no_static=fals
         }
     }
     else if(type->mClass->mEnum) {
-        if(!type->mClass->mAnonymous) {
+        if(!type->mClass->mAnonymous || (strlen(type->mClass->mName) > strlen("__anoymous_enum") && memcmp(type->mClass->mName, "__anoymous_enum", strlen("__anoymous_enum")) == 0)) {
             buf.append_str("enum ");
             buf.append_str(class_name);
         }

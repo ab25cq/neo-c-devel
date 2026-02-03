@@ -1,0 +1,31 @@
+test_comelang2.c:26:1: warning: typedef requires a name [-Wmissing-declarations]
+   26 | typedef unsigned long  long   ;
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+test_comelang2.c:1550:28: warning: incompatible pointer types assigning to 'struct (unnamed struct at test_comelang2.c:678:53) *' from 'struct (unnamed struct at test_comelang2.c:1527:5) *' [-Wincompatible-pointer-types]
+ 1550 |     __current_stack1__.aaa = &aaa;
+      |                            ^ ~~~~
+test_comelang2.c:1574:13: error: conflicting types for '__anoymous_struct27_finalize'
+ 1574 | static void __anoymous_struct27_finalize(struct { int aaa; struct { int bbb; }  ccc  ; } * self  )
+      |             ^
+test_comelang2.c:1163:13: note: previous declaration is here
+ 1163 | static void __anoymous_struct27_finalize(struct { int aaa; struct { int bbb; }  ccc  ; } * self  );
+      |             ^
+test_comelang2.c:2555:21: warning: assigning to 'unsigned char *' from 'char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+ 2555 |     __result_obj__0 = self->buf;
+      |                     ^ ~~~~~~~~~
+test_comelang2.c:4027:31: warning: cast to smaller integer type 'int' from 'void *' [-Wvoid-pointer-to-int-cast]
+ 4027 |     return (int_get_hash_key(((int)value)));
+      |                               ^~~~~~~~~~
+test_comelang2.c:5293:12: warning: comparison between pointer and integer ('int' and 'void *') [-Wpointer-integer-compare]
+ 5293 |     if(self==((void*)0)) {
+      |        ~~~~^ ~~~~~~~~~~
+test_comelang2.c:5306:12: warning: comparison between pointer and integer ('long' and 'void *') [-Wpointer-integer-compare]
+ 5306 |     if(self==((void*)0)) {
+      |        ~~~~^ ~~~~~~~~~~
+test_comelang2.c:7519:12: warning: passing 'const int *' to parameter of type 'void *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+ 7519 |     memcpy(str+head,sub_str,sizeof(int)*(wstring_length(sub_str)+1));
+      |            ^~~~~~~~
+test_comelang2.c:959:20: note: passing argument to parameter '__dest' here
+  959 | void* memcpy(void* __dest, const void* __src, unsigned long __n  );
+      |                    ^
+7 warnings and 1 error generated.

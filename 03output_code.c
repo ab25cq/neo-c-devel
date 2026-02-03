@@ -11,6 +11,7 @@ struct _IO_wide_data;
 
 struct obstack;
 
+#include <assert.h>
 struct re_program;
 
 struct tm;
@@ -657,7 +658,7 @@ struct re_capture {int start; int length; };
 
 typedef struct re_capture re_capture  ;
 
-enum { RE_UNUSED ,RE_DOT ,RE_BEGIN ,RE_END ,RE_QUESTIONMARK ,RE_STAR ,RE_PLUS ,RE_CHAR ,RE_CHAR_CLASS ,RE_INV_CHAR_CLASS ,RE_DIGIT ,RE_NOT_DIGIT ,RE_ALPHA ,RE_NOT_ALPHA ,RE_WHITESPACE ,RE_NOT_WHITESPACE ,RE_GROUP ,RE_GROUP_END };
+enum   __anoymous_enum_top0 { RE_UNUSED ,RE_DOT ,RE_BEGIN ,RE_END ,RE_QUESTIONMARK ,RE_STAR ,RE_PLUS ,RE_CHAR ,RE_CHAR_CLASS ,RE_INV_CHAR_CLASS ,RE_DIGIT ,RE_NOT_DIGIT ,RE_ALPHA ,RE_NOT_ALPHA ,RE_WHITESPACE ,RE_NOT_WHITESPACE ,RE_GROUP ,RE_GROUP_END };/* b */
 
 
 struct regex_t {unsigned char type; union { unsigned char ch; unsigned char* ccl; struct { struct regex_t* first  ; struct regex_t* last  ; int id; }  group  ; }  u  ; struct regex_t* next  ; };
@@ -1245,9 +1246,6 @@ struct locale_t* duplocale(struct locale_t* __dataset  );
 void freelocale(struct locale_t* __dataset  );
 struct locale_t* uselocale(struct locale_t* __dataset  );
 int* __errno_location();
-void __assert_fail(const char* __assertion, const char* __file, unsigned int __line, const char* __function);
-void __assert_perror_fail(int __errnum, const char* __file, unsigned int __line, const char* __function);
-void __assert(const char* __assertion, const char* __file, int __line);
 void stackframe();
 _Bool die(const char* msg);
 void come_heap_init(int come_debug);
@@ -2159,7 +2157,7 @@ char* make_type_name_string(struct sType* type  , struct sInfo* info  , _Bool no
         }
     }
     else if(type->mClass->mEnum) {
-        if(!type->mClass->mAnonymous) {
+        if(!type->mClass->mAnonymous||(strlen(type->mClass->mName)>strlen("__anoymous_enum")&&memcmp(type->mClass->mName,"__anoymous_enum",strlen("__anoymous_enum"))==0)) {
             buffer_append_str(buf,"enum ");
             buffer_append_str(buf,class_name);
         }

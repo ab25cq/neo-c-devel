@@ -1,509 +1,5 @@
 /// c_include definition ///
 /// typedef definition ///
-typedef unsigned long size_t;
-
-typedef unsigned char __u_char;
-
-typedef unsigned short int __u_short;
-
-typedef unsigned int __u_int;
-
-typedef unsigned long  int __u_long;
-
-typedef char __int8_t;
-
-typedef unsigned char __uint8_t;
-
-typedef short int __int16_t;
-
-typedef unsigned short int __uint16_t;
-
-typedef int __int32_t;
-
-typedef unsigned int __uint32_t;
-
-typedef long  int __int64_t;
-
-typedef unsigned long  int __uint64_t;
-
-typedef char __int_least8_t  ;
-
-typedef unsigned char __uint_least8_t  ;
-
-typedef short int __int_least16_t  ;
-
-typedef unsigned short int __uint_least16_t  ;
-
-typedef int __int_least32_t  ;
-
-typedef unsigned int __uint_least32_t  ;
-
-typedef long  int __int_least64_t  ;
-
-typedef unsigned long  int __uint_least64_t  ;
-
-typedef long  int __quad_t;
-
-typedef unsigned long  int __u_quad_t;
-
-typedef long  int __intmax_t;
-
-typedef unsigned long  int __uintmax_t;
-
-typedef unsigned long  int __dev_t;
-
-typedef unsigned int __uid_t;
-
-typedef unsigned int __gid_t;
-
-typedef unsigned long  int __ino_t;
-
-typedef unsigned long  int __ino64_t;
-
-typedef unsigned int __mode_t;
-
-typedef unsigned long  int __nlink_t;
-
-typedef long  int __off_t;
-
-typedef long  int __off64_t;
-
-typedef int __pid_t;
-
-typedef struct __fsid_t __fsid_t  ;
-
-typedef long  int __clock_t;
-
-typedef unsigned long  int __rlim_t;
-
-typedef unsigned long  int __rlim64_t;
-
-typedef unsigned int __id_t;
-
-typedef long  int __time_t;
-
-typedef unsigned int __useconds_t;
-
-typedef long  int __suseconds_t;
-
-typedef long  int __suseconds64_t;
-
-typedef int __daddr_t;
-
-typedef int __key_t;
-
-typedef int __clockid_t;
-
-typedef void* __timer_t;
-
-typedef long  int __blksize_t;
-
-typedef long  int __blkcnt_t;
-
-typedef long  int __blkcnt64_t;
-
-typedef unsigned long  int __fsblkcnt_t;
-
-typedef unsigned long  int __fsblkcnt64_t;
-
-typedef unsigned long  int __fsfilcnt_t;
-
-typedef unsigned long  int __fsfilcnt64_t;
-
-typedef long  int __fsword_t;
-
-typedef long  int __ssize_t;
-
-typedef long  int __syscall_slong_t;
-
-typedef unsigned long  int __syscall_ulong_t;
-
-typedef long  int __loff_t  ;
-
-typedef char* __caddr_t;
-
-typedef long  int __intptr_t;
-
-typedef unsigned int __socklen_t;
-
-typedef int __sig_atomic_t;
-
-typedef unsigned long  int ino_t  ;
-
-typedef unsigned long  int ino64_t  ;
-
-typedef struct __dirstream DIR;
-
-typedef unsigned long  long   ;
-
-typedef unsigned short int fexcept_t;
-
-typedef struct anonymous_typeX1 fenv_t;
-
-typedef struct anonymous_typeX2 femode_t;
-
-typedef unsigned long  int __size_t;
-
-typedef unsigned long  long   ;
-
-typedef struct anonymous_typeX3 glob_t;
-
-typedef struct anonymous_typeX4 glob64_t;
-
-typedef void* iconv_t;
-
-typedef void* nl_catd;
-
-typedef int nl_item;
-
-typedef struct __locale_struct* __locale_t  ;
-
-typedef struct __locale_struct* locale_t  ;
-
-typedef long ptrdiff_t;
-
-typedef int wchar_t;
-
-typedef struct anonymous_typeX5 max_align_t;
-
-typedef char int8_t  ;
-
-typedef short int int16_t  ;
-
-typedef int int32_t  ;
-
-typedef long  int int64_t  ;
-
-typedef unsigned char uint8_t  ;
-
-typedef unsigned short int uint16_t  ;
-
-typedef unsigned int uint32_t  ;
-
-typedef unsigned long  int uint64_t  ;
-
-typedef char int_least8_t  ;
-
-typedef short int int_least16_t  ;
-
-typedef int int_least32_t  ;
-
-typedef long  int int_least64_t  ;
-
-typedef unsigned char uint_least8_t  ;
-
-typedef unsigned short int uint_least16_t  ;
-
-typedef unsigned int uint_least32_t  ;
-
-typedef unsigned long  int uint_least64_t  ;
-
-typedef char int_fast8_t;
-
-typedef long  int int_fast16_t;
-
-typedef long  int int_fast32_t;
-
-typedef long  int int_fast64_t;
-
-typedef unsigned char uint_fast8_t;
-
-typedef unsigned long  int uint_fast16_t;
-
-typedef unsigned long  int uint_fast32_t;
-
-typedef unsigned long  int uint_fast64_t;
-
-typedef long  int intptr_t;
-
-typedef unsigned long  int uintptr_t;
-
-typedef long  int intmax_t  ;
-
-typedef unsigned long  int uintmax_t  ;
-
-typedef enum memory_order memory_order;
-
-typedef struct atomic_flag atomic_flag  ;
-
-typedef __builtin_va_list __gnuc_va_list;
-
-typedef float float_t;
-
-typedef double double_t;
-
-typedef struct anonymous_typeX6 __mbstate_t;
-
-typedef struct _G_fpos_t __fpos_t  ;
-
-typedef struct _G_fpos64_t __fpos64_t  ;
-
-typedef struct _IO_FILE __FILE  ;
-
-typedef struct _IO_FILE FILE  ;
-
-typedef void _IO_lock_t;
-
-typedef long  int (*cookie_read_function_t)(void*,char*,unsigned long);
-
-typedef long  int (*cookie_write_function_t)(void*,const char*,unsigned long);
-
-typedef int (*cookie_seek_function_t)(void*,long  int*,int);
-
-typedef int (*cookie_close_function_t)(void*);
-
-typedef struct _IO_cookie_io_functions_t cookie_io_functions_t  ;
-
-typedef __builtin_va_list va_list  ;
-
-typedef long  int off_t  ;
-
-typedef long  int off64_t  ;
-
-typedef long  int ssize_t  ;
-
-typedef struct _G_fpos_t fpos_t  ;
-
-typedef struct _G_fpos64_t fpos64_t  ;
-
-typedef long  int time_t  ;
-
-typedef int pid_t  ;
-
-typedef char __s8;
-
-typedef unsigned char __u8;
-
-typedef short __s16;
-
-typedef unsigned short int __u16;
-
-typedef int __s32;
-
-typedef unsigned int __u32;
-
-typedef long long __s64;
-
-typedef unsigned long  long __u64;
-
-typedef struct anonymous_typeX9 __kernel_fd_set;
-
-typedef void (*__kernel_sighandler_t)(int);
-
-typedef int __kernel_key_t;
-
-typedef int __kernel_mqd_t;
-
-typedef unsigned short int __kernel_old_uid_t;
-
-typedef unsigned short int __kernel_old_gid_t;
-
-typedef unsigned long  int __kernel_old_dev_t;
-
-typedef long __kernel_long_t;
-
-typedef unsigned long  int __kernel_ulong_t;
-
-typedef unsigned long  int __kernel_ino_t  ;
-
-typedef unsigned int __kernel_mode_t;
-
-typedef int __kernel_pid_t;
-
-typedef int __kernel_ipc_pid_t;
-
-typedef unsigned int __kernel_uid_t;
-
-typedef unsigned int __kernel_gid_t;
-
-typedef long __kernel_suseconds_t  ;
-
-typedef int __kernel_daddr_t;
-
-typedef unsigned int __kernel_uid32_t;
-
-typedef unsigned int __kernel_gid32_t;
-
-typedef unsigned long  int __kernel_size_t  ;
-
-typedef long __kernel_ssize_t  ;
-
-typedef long __kernel_ptrdiff_t  ;
-
-typedef struct anonymous_typeX10 __kernel_fsid_t;
-
-typedef long __kernel_off_t  ;
-
-typedef long long __kernel_loff_t;
-
-typedef long __kernel_old_time_t  ;
-
-typedef long __kernel_time_t  ;
-
-typedef long long __kernel_time64_t;
-
-typedef long __kernel_clock_t  ;
-
-typedef int __kernel_timer_t;
-
-typedef int __kernel_clockid_t;
-
-typedef char* __kernel_caddr_t;
-
-typedef unsigned short int __kernel_uid16_t;
-
-typedef unsigned short int __kernel_gid16_t;
-
-typedef unsigned short int __le16  ;
-
-typedef unsigned short int __be16  ;
-
-typedef unsigned int __le32  ;
-
-typedef unsigned int __be32  ;
-
-typedef unsigned long  long __le64  ;
-
-typedef unsigned long  long __be64  ;
-
-typedef unsigned short int __sum16  ;
-
-typedef unsigned int __wsum  ;
-
-typedef unsigned int __poll_t;
-
-typedef unsigned long  int __cpu_mask;
-
-typedef struct anonymous_typeX11 cpu_set_t;
-
-typedef unsigned char u_char  ;
-
-typedef unsigned short int u_short  ;
-
-typedef unsigned int u_int  ;
-
-typedef unsigned long  int u_long  ;
-
-typedef long  int quad_t  ;
-
-typedef unsigned long  int u_quad_t  ;
-
-typedef struct __fsid_t fsid_t  ;
-
-typedef long  int loff_t  ;
-
-typedef unsigned long  int dev_t  ;
-
-typedef unsigned int gid_t  ;
-
-typedef unsigned int mode_t  ;
-
-typedef unsigned long  int nlink_t  ;
-
-typedef unsigned int uid_t  ;
-
-typedef unsigned int id_t  ;
-
-typedef int daddr_t  ;
-
-typedef char* caddr_t  ;
-
-typedef int key_t  ;
-
-typedef long  int clock_t  ;
-
-typedef int clockid_t  ;
-
-typedef void* timer_t  ;
-
-typedef unsigned int useconds_t  ;
-
-typedef long  int suseconds_t  ;
-
-typedef unsigned long  int ulong;
-
-typedef unsigned short int ushort;
-
-typedef unsigned int uint;
-
-typedef unsigned char u_int8_t  ;
-
-typedef unsigned short int u_int16_t  ;
-
-typedef unsigned int u_int32_t  ;
-
-typedef unsigned long  int u_int64_t  ;
-
-typedef int register_t __attribute__ ((__mode__ (__word__)));
-
-typedef struct anonymous_typeX12 __sigset_t;
-
-typedef struct anonymous_typeX12 sigset_t  ;
-
-typedef long  int __fd_mask;
-
-typedef struct anonymous_typeX13 fd_set;
-
-typedef long  int fd_mask  ;
-
-typedef long  int blksize_t  ;
-
-typedef long  int blkcnt_t  ;
-
-typedef unsigned long  int fsblkcnt_t  ;
-
-typedef unsigned long  int fsfilcnt_t  ;
-
-typedef long  int blkcnt64_t  ;
-
-typedef unsigned long  int fsblkcnt64_t  ;
-
-typedef unsigned long  int fsfilcnt64_t  ;
-
-typedef union anonymous_typeZ14 __atomic_wide_counter;
-
-typedef struct __pthread_internal_list __pthread_list_t  ;
-
-typedef struct __pthread_internal_slist __pthread_slist_t  ;
-
-typedef unsigned int __tss_t;
-
-typedef unsigned long  int __thrd_t;
-
-typedef struct anonymous_typeX16 __once_flag;
-
-typedef unsigned long  int pthread_t;
-
-typedef union anonymous_typeZ17 pthread_mutexattr_t;
-
-typedef union anonymous_typeZ18 pthread_condattr_t;
-
-typedef unsigned int pthread_key_t;
-
-typedef int pthread_once_t;
-
-typedef union pthread_attr_t pthread_attr_t  ;
-
-typedef union anonymous_typeZ19 pthread_mutex_t;
-
-typedef union anonymous_typeZ20 pthread_cond_t;
-
-typedef union anonymous_typeZ21 pthread_rwlock_t;
-
-typedef union anonymous_typeZ22 pthread_rwlockattr_t;
-
-typedef int pthread_spinlock_t;
-
-typedef union anonymous_typeZ23 pthread_barrier_t;
-
-typedef union anonymous_typeZ24 pthread_barrierattr_t;
-
-typedef struct anonymous_typeX25 posix_spawnattr_t;
-
-typedef struct anonymous_typeX26 posix_spawn_file_actions_t;
-
-typedef struct anonymous_typeX27 wordexp_t;
-
 /// previous struct definition ///
 struct stat;
 
@@ -520,966 +16,986 @@ struct _IO_wide_data;
 struct obstack;
 
 /// struct definition ///
-struct __fsid_t
-{
-    int __val[2];
-};
 
-struct dirent
-{
-    unsigned long  int d_ino  ;
-    long  int d_off  ;
-    unsigned short int d_reclen;
-    unsigned char d_type;
-    char d_name[256];
-};
+typedef unsigned long size_t;
 
-struct dirent64
-{
-    unsigned long  int d_ino  ;
-    long  int d_off  ;
-    unsigned short int d_reclen;
-    unsigned char d_type;
-    char d_name[256];
-};
 
-enum { DT_UNKNOWN=(0),
-DT_FIFO=(1),
-DT_CHR=(2),
-DT_DIR=(4),
-DT_BLK=(6),
-DT_REG=(8),
-DT_LNK=(10),
-DT_SOCK=(12),
-DT_WHT=(14)
-};
+typedef unsigned char __u_char;
 
-enum { FE_INVALID=(0x01),
-__FE_DENORM=(0x02),
-FE_DIVBYZERO=(0x04),
-FE_OVERFLOW=(0x08),
-FE_UNDERFLOW=(0x10),
-FE_INEXACT=(0x20)
-};
 
-enum { FE_TONEAREST=(0),
-FE_DOWNWARD=(0x400),
-FE_UPWARD=(0x800),
-FE_TOWARDZERO=(0xc00)
-};
+typedef unsigned short int __u_short;
 
-struct anonymous_typeX1
-{
-    unsigned short int __control_word;
-    unsigned short int __glibc_reserved1;
-    unsigned short int __status_word;
-    unsigned short int __glibc_reserved2;
-    unsigned short int __tags;
-    unsigned short int __glibc_reserved3;
-    unsigned int __eip;
-    unsigned short int __cs_selector;
-    unsigned int __opcode:11;
-    unsigned int __glibc_reserved4:5;
-    unsigned int __data_offset;
-    unsigned short int __data_selector;
-    unsigned short int __glibc_reserved5;
-    unsigned int __mxcsr;
-};
 
-struct anonymous_typeX2
-{
-    unsigned short int __control_word;
-    unsigned short int __glibc_reserved;
-    unsigned int __mxcsr;
-};
+typedef unsigned int __u_int;
 
-struct anonymous_typeX3
-{
-    unsigned long  int gl_pathc  ;
-    char** gl_pathv;
-    unsigned long  int gl_offs  ;
-    int gl_flags;
-    void (*gl_closedir)(void*);
-    struct dirent* (*gl_readdir)(void*);
-    void* (*gl_opendir)(const char*);
-    int (*gl_lstat)(const char*,struct stat*);
-    int (*gl_stat)(const char*,struct stat*);
-};
 
-struct anonymous_typeX4
-{
-    unsigned long  int gl_pathc  ;
-    char** gl_pathv;
-    unsigned long  int gl_offs  ;
-    int gl_flags;
-    void (*gl_closedir)(void*);
-    struct dirent64* (*gl_readdir)(void*);
-    void* (*gl_opendir)(const char*);
-    int (*gl_lstat)(const char*,struct stat64*);
-    int (*gl_stat)(const char*,struct stat64*);
-};
+typedef unsigned long  int __u_long;
 
-enum { ABDAY_1=((((2)<<16)|(0))),
-ABDAY_2 
-,ABDAY_3 
-,ABDAY_4 
-,ABDAY_5 
-,ABDAY_6 
-,ABDAY_7 
-,DAY_1 
-,DAY_2 
-,DAY_3 
-,DAY_4 
-,DAY_5 
-,DAY_6 
-,DAY_7 
-,ABMON_1 
-,ABMON_2 
-,ABMON_3 
-,ABMON_4 
-,ABMON_5 
-,ABMON_6 
-,ABMON_7 
-,ABMON_8 
-,ABMON_9 
-,ABMON_10 
-,ABMON_11 
-,ABMON_12 
-,MON_1 
-,MON_2 
-,MON_3 
-,MON_4 
-,MON_5 
-,MON_6 
-,MON_7 
-,MON_8 
-,MON_9 
-,MON_10 
-,MON_11 
-,MON_12 
-,AM_STR 
-,PM_STR 
-,D_T_FMT 
-,D_FMT 
-,T_FMT 
-,T_FMT_AMPM 
-,ERA 
-,__ERA_YEAR 
-,ERA_D_FMT 
-,ALT_DIGITS 
-,ERA_D_T_FMT 
-,ERA_T_FMT 
-,_NL_TIME_ERA_NUM_ENTRIES 
-,_NL_TIME_ERA_ENTRIES 
-,_NL_WABDAY_1 
-,_NL_WABDAY_2 
-,_NL_WABDAY_3 
-,_NL_WABDAY_4 
-,_NL_WABDAY_5 
-,_NL_WABDAY_6 
-,_NL_WABDAY_7 
-,_NL_WDAY_1 
-,_NL_WDAY_2 
-,_NL_WDAY_3 
-,_NL_WDAY_4 
-,_NL_WDAY_5 
-,_NL_WDAY_6 
-,_NL_WDAY_7 
-,_NL_WABMON_1 
-,_NL_WABMON_2 
-,_NL_WABMON_3 
-,_NL_WABMON_4 
-,_NL_WABMON_5 
-,_NL_WABMON_6 
-,_NL_WABMON_7 
-,_NL_WABMON_8 
-,_NL_WABMON_9 
-,_NL_WABMON_10 
-,_NL_WABMON_11 
-,_NL_WABMON_12 
-,_NL_WMON_1 
-,_NL_WMON_2 
-,_NL_WMON_3 
-,_NL_WMON_4 
-,_NL_WMON_5 
-,_NL_WMON_6 
-,_NL_WMON_7 
-,_NL_WMON_8 
-,_NL_WMON_9 
-,_NL_WMON_10 
-,_NL_WMON_11 
-,_NL_WMON_12 
-,_NL_WAM_STR 
-,_NL_WPM_STR 
-,_NL_WD_T_FMT 
-,_NL_WD_FMT 
-,_NL_WT_FMT 
-,_NL_WT_FMT_AMPM 
-,_NL_WERA_YEAR 
-,_NL_WERA_D_FMT 
-,_NL_WALT_DIGITS 
-,_NL_WERA_D_T_FMT 
-,_NL_WERA_T_FMT 
-,_NL_TIME_WEEK_NDAYS 
-,_NL_TIME_WEEK_1STDAY 
-,_NL_TIME_WEEK_1STWEEK 
-,_NL_TIME_FIRST_WEEKDAY 
-,_NL_TIME_FIRST_WORKDAY 
-,_NL_TIME_CAL_DIRECTION 
-,_NL_TIME_TIMEZONE 
-,_DATE_FMT 
-,_NL_W_DATE_FMT 
-,_NL_TIME_CODESET 
-,__ALTMON_1 
-,__ALTMON_2 
-,__ALTMON_3 
-,__ALTMON_4 
-,__ALTMON_5 
-,__ALTMON_6 
-,__ALTMON_7 
-,__ALTMON_8 
-,__ALTMON_9 
-,__ALTMON_10 
-,__ALTMON_11 
-,__ALTMON_12 
-,_NL_WALTMON_1 
-,_NL_WALTMON_2 
-,_NL_WALTMON_3 
-,_NL_WALTMON_4 
-,_NL_WALTMON_5 
-,_NL_WALTMON_6 
-,_NL_WALTMON_7 
-,_NL_WALTMON_8 
-,_NL_WALTMON_9 
-,_NL_WALTMON_10 
-,_NL_WALTMON_11 
-,_NL_WALTMON_12 
-,_NL_ABALTMON_1 
-,_NL_ABALTMON_2 
-,_NL_ABALTMON_3 
-,_NL_ABALTMON_4 
-,_NL_ABALTMON_5 
-,_NL_ABALTMON_6 
-,_NL_ABALTMON_7 
-,_NL_ABALTMON_8 
-,_NL_ABALTMON_9 
-,_NL_ABALTMON_10 
-,_NL_ABALTMON_11 
-,_NL_ABALTMON_12 
-,_NL_WABALTMON_1 
-,_NL_WABALTMON_2 
-,_NL_WABALTMON_3 
-,_NL_WABALTMON_4 
-,_NL_WABALTMON_5 
-,_NL_WABALTMON_6 
-,_NL_WABALTMON_7 
-,_NL_WABALTMON_8 
-,_NL_WABALTMON_9 
-,_NL_WABALTMON_10 
-,_NL_WABALTMON_11 
-,_NL_WABALTMON_12 
-,_NL_NUM_LC_TIME 
-,_NL_COLLATE_NRULES=((((3)<<16)|(0))),
-_NL_COLLATE_RULESETS 
-,_NL_COLLATE_TABLEMB 
-,_NL_COLLATE_WEIGHTMB 
-,_NL_COLLATE_EXTRAMB 
-,_NL_COLLATE_INDIRECTMB 
-,_NL_COLLATE_GAP1 
-,_NL_COLLATE_GAP2 
-,_NL_COLLATE_GAP3 
-,_NL_COLLATE_TABLEWC 
-,_NL_COLLATE_WEIGHTWC 
-,_NL_COLLATE_EXTRAWC 
-,_NL_COLLATE_INDIRECTWC 
-,_NL_COLLATE_SYMB_HASH_SIZEMB 
-,_NL_COLLATE_SYMB_TABLEMB 
-,_NL_COLLATE_SYMB_EXTRAMB 
-,_NL_COLLATE_COLLSEQMB 
-,_NL_COLLATE_COLLSEQWC 
-,_NL_COLLATE_CODESET 
-,_NL_NUM_LC_COLLATE 
-,_NL_CTYPE_CLASS=((((0)<<16)|(0))),
-_NL_CTYPE_TOUPPER 
-,_NL_CTYPE_GAP1 
-,_NL_CTYPE_TOLOWER 
-,_NL_CTYPE_GAP2 
-,_NL_CTYPE_CLASS32 
-,_NL_CTYPE_GAP3 
-,_NL_CTYPE_GAP4 
-,_NL_CTYPE_GAP5 
-,_NL_CTYPE_GAP6 
-,_NL_CTYPE_CLASS_NAMES 
-,_NL_CTYPE_MAP_NAMES 
-,_NL_CTYPE_WIDTH 
-,_NL_CTYPE_MB_CUR_MAX 
-,_NL_CTYPE_CODESET_NAME 
-,CODESET=(((((0)<<16)|(0))+14)),
-_NL_CTYPE_TOUPPER32 
-,_NL_CTYPE_TOLOWER32 
-,_NL_CTYPE_CLASS_OFFSET 
-,_NL_CTYPE_MAP_OFFSET 
-,_NL_CTYPE_INDIGITS_MB_LEN 
-,_NL_CTYPE_INDIGITS0_MB 
-,_NL_CTYPE_INDIGITS1_MB 
-,_NL_CTYPE_INDIGITS2_MB 
-,_NL_CTYPE_INDIGITS3_MB 
-,_NL_CTYPE_INDIGITS4_MB 
-,_NL_CTYPE_INDIGITS5_MB 
-,_NL_CTYPE_INDIGITS6_MB 
-,_NL_CTYPE_INDIGITS7_MB 
-,_NL_CTYPE_INDIGITS8_MB 
-,_NL_CTYPE_INDIGITS9_MB 
-,_NL_CTYPE_INDIGITS_WC_LEN 
-,_NL_CTYPE_INDIGITS0_WC 
-,_NL_CTYPE_INDIGITS1_WC 
-,_NL_CTYPE_INDIGITS2_WC 
-,_NL_CTYPE_INDIGITS3_WC 
-,_NL_CTYPE_INDIGITS4_WC 
-,_NL_CTYPE_INDIGITS5_WC 
-,_NL_CTYPE_INDIGITS6_WC 
-,_NL_CTYPE_INDIGITS7_WC 
-,_NL_CTYPE_INDIGITS8_WC 
-,_NL_CTYPE_INDIGITS9_WC 
-,_NL_CTYPE_OUTDIGIT0_MB 
-,_NL_CTYPE_OUTDIGIT1_MB 
-,_NL_CTYPE_OUTDIGIT2_MB 
-,_NL_CTYPE_OUTDIGIT3_MB 
-,_NL_CTYPE_OUTDIGIT4_MB 
-,_NL_CTYPE_OUTDIGIT5_MB 
-,_NL_CTYPE_OUTDIGIT6_MB 
-,_NL_CTYPE_OUTDIGIT7_MB 
-,_NL_CTYPE_OUTDIGIT8_MB 
-,_NL_CTYPE_OUTDIGIT9_MB 
-,_NL_CTYPE_OUTDIGIT0_WC 
-,_NL_CTYPE_OUTDIGIT1_WC 
-,_NL_CTYPE_OUTDIGIT2_WC 
-,_NL_CTYPE_OUTDIGIT3_WC 
-,_NL_CTYPE_OUTDIGIT4_WC 
-,_NL_CTYPE_OUTDIGIT5_WC 
-,_NL_CTYPE_OUTDIGIT6_WC 
-,_NL_CTYPE_OUTDIGIT7_WC 
-,_NL_CTYPE_OUTDIGIT8_WC 
-,_NL_CTYPE_OUTDIGIT9_WC 
-,_NL_CTYPE_TRANSLIT_TAB_SIZE 
-,_NL_CTYPE_TRANSLIT_FROM_IDX 
-,_NL_CTYPE_TRANSLIT_FROM_TBL 
-,_NL_CTYPE_TRANSLIT_TO_IDX 
-,_NL_CTYPE_TRANSLIT_TO_TBL 
-,_NL_CTYPE_TRANSLIT_DEFAULT_MISSING_LEN 
-,_NL_CTYPE_TRANSLIT_DEFAULT_MISSING 
-,_NL_CTYPE_TRANSLIT_IGNORE_LEN 
-,_NL_CTYPE_TRANSLIT_IGNORE 
-,_NL_CTYPE_MAP_TO_NONASCII 
-,_NL_CTYPE_NONASCII_CASE 
-,_NL_CTYPE_EXTRA_MAP_1 
-,_NL_CTYPE_EXTRA_MAP_2 
-,_NL_CTYPE_EXTRA_MAP_3 
-,_NL_CTYPE_EXTRA_MAP_4 
-,_NL_CTYPE_EXTRA_MAP_5 
-,_NL_CTYPE_EXTRA_MAP_6 
-,_NL_CTYPE_EXTRA_MAP_7 
-,_NL_CTYPE_EXTRA_MAP_8 
-,_NL_CTYPE_EXTRA_MAP_9 
-,_NL_CTYPE_EXTRA_MAP_10 
-,_NL_CTYPE_EXTRA_MAP_11 
-,_NL_CTYPE_EXTRA_MAP_12 
-,_NL_CTYPE_EXTRA_MAP_13 
-,_NL_CTYPE_EXTRA_MAP_14 
-,_NL_NUM_LC_CTYPE 
-,__INT_CURR_SYMBOL=((((4)<<16)|(0))),
-__CURRENCY_SYMBOL 
-,__MON_DECIMAL_POINT 
-,__MON_THOUSANDS_SEP 
-,__MON_GROUPING 
-,__POSITIVE_SIGN 
-,__NEGATIVE_SIGN 
-,__INT_FRAC_DIGITS 
-,__FRAC_DIGITS 
-,__P_CS_PRECEDES 
-,__P_SEP_BY_SPACE 
-,__N_CS_PRECEDES 
-,__N_SEP_BY_SPACE 
-,__P_SIGN_POSN 
-,__N_SIGN_POSN 
-,_NL_MONETARY_CRNCYSTR 
-,__INT_P_CS_PRECEDES 
-,__INT_P_SEP_BY_SPACE 
-,__INT_N_CS_PRECEDES 
-,__INT_N_SEP_BY_SPACE 
-,__INT_P_SIGN_POSN 
-,__INT_N_SIGN_POSN 
-,_NL_MONETARY_DUO_INT_CURR_SYMBOL 
-,_NL_MONETARY_DUO_CURRENCY_SYMBOL 
-,_NL_MONETARY_DUO_INT_FRAC_DIGITS 
-,_NL_MONETARY_DUO_FRAC_DIGITS 
-,_NL_MONETARY_DUO_P_CS_PRECEDES 
-,_NL_MONETARY_DUO_P_SEP_BY_SPACE 
-,_NL_MONETARY_DUO_N_CS_PRECEDES 
-,_NL_MONETARY_DUO_N_SEP_BY_SPACE 
-,_NL_MONETARY_DUO_INT_P_CS_PRECEDES 
-,_NL_MONETARY_DUO_INT_P_SEP_BY_SPACE 
-,_NL_MONETARY_DUO_INT_N_CS_PRECEDES 
-,_NL_MONETARY_DUO_INT_N_SEP_BY_SPACE 
-,_NL_MONETARY_DUO_P_SIGN_POSN 
-,_NL_MONETARY_DUO_N_SIGN_POSN 
-,_NL_MONETARY_DUO_INT_P_SIGN_POSN 
-,_NL_MONETARY_DUO_INT_N_SIGN_POSN 
-,_NL_MONETARY_UNO_VALID_FROM 
-,_NL_MONETARY_UNO_VALID_TO 
-,_NL_MONETARY_DUO_VALID_FROM 
-,_NL_MONETARY_DUO_VALID_TO 
-,_NL_MONETARY_CONVERSION_RATE 
-,_NL_MONETARY_DECIMAL_POINT_WC 
-,_NL_MONETARY_THOUSANDS_SEP_WC 
-,_NL_MONETARY_CODESET 
-,_NL_NUM_LC_MONETARY 
-,__DECIMAL_POINT=((((1)<<16)|(0))),
-RADIXCHAR=(((((1)<<16)|(0)))),
-__THOUSANDS_SEP 
-,THOUSEP=((((((1)<<16)|(0)))+1)),
-__GROUPING 
-,_NL_NUMERIC_DECIMAL_POINT_WC 
-,_NL_NUMERIC_THOUSANDS_SEP_WC 
-,_NL_NUMERIC_CODESET 
-,_NL_NUM_LC_NUMERIC 
-,__YESEXPR=((((5)<<16)|(0))),
-__NOEXPR 
-,__YESSTR 
-,__NOSTR 
-,_NL_MESSAGES_CODESET 
-,_NL_NUM_LC_MESSAGES 
-,_NL_PAPER_HEIGHT=((((7)<<16)|(0))),
-_NL_PAPER_WIDTH 
-,_NL_PAPER_CODESET 
-,_NL_NUM_LC_PAPER 
-,_NL_NAME_NAME_FMT=((((8)<<16)|(0))),
-_NL_NAME_NAME_GEN 
-,_NL_NAME_NAME_MR 
-,_NL_NAME_NAME_MRS 
-,_NL_NAME_NAME_MISS 
-,_NL_NAME_NAME_MS 
-,_NL_NAME_CODESET 
-,_NL_NUM_LC_NAME 
-,_NL_ADDRESS_POSTAL_FMT=((((9)<<16)|(0))),
-_NL_ADDRESS_COUNTRY_NAME 
-,_NL_ADDRESS_COUNTRY_POST 
-,_NL_ADDRESS_COUNTRY_AB2 
-,_NL_ADDRESS_COUNTRY_AB3 
-,_NL_ADDRESS_COUNTRY_CAR 
-,_NL_ADDRESS_COUNTRY_NUM 
-,_NL_ADDRESS_COUNTRY_ISBN 
-,_NL_ADDRESS_LANG_NAME 
-,_NL_ADDRESS_LANG_AB 
-,_NL_ADDRESS_LANG_TERM 
-,_NL_ADDRESS_LANG_LIB 
-,_NL_ADDRESS_CODESET 
-,_NL_NUM_LC_ADDRESS 
-,_NL_TELEPHONE_TEL_INT_FMT=((((10)<<16)|(0))),
-_NL_TELEPHONE_TEL_DOM_FMT 
-,_NL_TELEPHONE_INT_SELECT 
-,_NL_TELEPHONE_INT_PREFIX 
-,_NL_TELEPHONE_CODESET 
-,_NL_NUM_LC_TELEPHONE 
-,_NL_MEASUREMENT_MEASUREMENT=((((11)<<16)|(0))),
-_NL_MEASUREMENT_CODESET 
-,_NL_NUM_LC_MEASUREMENT 
-,_NL_IDENTIFICATION_TITLE=((((12)<<16)|(0))),
-_NL_IDENTIFICATION_SOURCE 
-,_NL_IDENTIFICATION_ADDRESS 
-,_NL_IDENTIFICATION_CONTACT 
-,_NL_IDENTIFICATION_EMAIL 
-,_NL_IDENTIFICATION_TEL 
-,_NL_IDENTIFICATION_FAX 
-,_NL_IDENTIFICATION_LANGUAGE 
-,_NL_IDENTIFICATION_TERRITORY 
-,_NL_IDENTIFICATION_AUDIENCE 
-,_NL_IDENTIFICATION_APPLICATION 
-,_NL_IDENTIFICATION_ABBREVIATION 
-,_NL_IDENTIFICATION_REVISION 
-,_NL_IDENTIFICATION_DATE 
-,_NL_IDENTIFICATION_CATEGORY 
-,_NL_IDENTIFICATION_CODESET 
-,_NL_NUM_LC_IDENTIFICATION 
-,_NL_NUM 
-};
 
-struct __locale_struct
-{
-    struct __locale_data* __locales[13];
-    const unsigned short int* __ctype_b;
-    const int* __ctype_tolower;
-    const int* __ctype_toupper;
-    const char* __names[13];
-};
+typedef char __int8_t;
 
-struct anonymous_typeX5
-{
-    long long __clang_max_align_nonce1 __attribute__((__aligned__(__alignof__(long long))));
-    long  double __clang_max_align_nonce2 __attribute__((__aligned__(__alignof__(long double))));
-};
 
-enum   memory_order { memory_order_relaxed=(0),
-memory_order_consume=(1),
-memory_order_acquire=(2),
-memory_order_release=(3),
-memory_order_acq_rel=(4),
-memory_order_seq_cst=(5)
-};
+typedef unsigned char __uint8_t;
+
+
+typedef short int __int16_t;
+
+
+typedef unsigned short int __uint16_t;
+
+
+typedef int __int32_t;
+
+
+typedef unsigned int __uint32_t;
+
+
+typedef long  int __int64_t;
+
+
+typedef unsigned long  int __uint64_t;
+
+
+typedef char __int_least8_t  ;
+
+
+typedef unsigned char __uint_least8_t  ;
+
+
+typedef short int __int_least16_t  ;
+
+
+typedef unsigned short int __uint_least16_t  ;
+
+
+typedef int __int_least32_t  ;
+
+
+typedef unsigned int __uint_least32_t  ;
+
+
+typedef long  int __int_least64_t  ;
+
+
+typedef unsigned long  int __uint_least64_t  ;
+
+
+typedef long  int __quad_t;
+
+
+typedef unsigned long  int __u_quad_t;
+
+
+typedef long  int __intmax_t;
+
+
+typedef unsigned long  int __uintmax_t;
+
+
+typedef unsigned long  int __dev_t;
+
+
+typedef unsigned int __uid_t;
+
+
+typedef unsigned int __gid_t;
+
+
+typedef unsigned long  int __ino_t;
+
+
+typedef unsigned long  int __ino64_t;
+
+
+typedef unsigned int __mode_t;
+
+
+typedef unsigned long  int __nlink_t;
+
+
+typedef long  int __off_t;
+
+
+typedef long  int __off64_t;
+
+
+typedef int __pid_t;
+
+struct __fsid_t {int __val[2]; };
+
+typedef struct __fsid_t __fsid_t  ;
+
+
+typedef long  int __clock_t;
+
+
+typedef unsigned long  int __rlim_t;
+
+
+typedef unsigned long  int __rlim64_t;
+
+
+typedef unsigned int __id_t;
+
+
+typedef long  int __time_t;
+
+
+typedef unsigned int __useconds_t;
+
+
+typedef long  int __suseconds_t;
+
+
+typedef long  int __suseconds64_t;
+
+
+typedef int __daddr_t;
+
+
+typedef int __key_t;
+
+
+typedef int __clockid_t;
+
+
+typedef void* __timer_t;
+
+
+typedef long  int __blksize_t;
+
+
+typedef long  int __blkcnt_t;
+
+
+typedef long  int __blkcnt64_t;
+
+
+typedef unsigned long  int __fsblkcnt_t;
+
+
+typedef unsigned long  int __fsblkcnt64_t;
+
+
+typedef unsigned long  int __fsfilcnt_t;
+
+
+typedef unsigned long  int __fsfilcnt64_t;
+
+
+typedef long  int __fsword_t;
+
+
+typedef long  int __ssize_t;
+
+
+typedef long  int __syscall_slong_t;
+
+
+typedef unsigned long  int __syscall_ulong_t;
+
+
+typedef long  int __loff_t  ;
+
+
+typedef char* __caddr_t;
+
+
+typedef long  int __intptr_t;
+
+
+typedef unsigned int __socklen_t;
+
+
+typedef int __sig_atomic_t;
+
+
+typedef unsigned long  int ino_t  ;
+
+
+typedef unsigned long  int ino64_t  ;
+
+struct dirent {unsigned long  int d_ino  ; long  int d_off  ; unsigned short int d_reclen; unsigned char d_type; char d_name[256]; };
+
+
+struct dirent64 {unsigned long  int d_ino  ; long  int d_off  ; unsigned short int d_reclen; unsigned char d_type; char d_name[256]; };
+
+
+enum   __anoymous_enum_top0 { DT_UNKNOWN=(0),DT_FIFO=(1),DT_CHR=(2),DT_DIR=(4),DT_BLK=(6),DT_REG=(8),DT_LNK=(10),DT_SOCK=(12),DT_WHT=(14)};/* b */
+
+
+
+typedef struct __dirstream DIR;
+
+enum   __anoymous_enum_top1 { FE_INVALID=(0x01),__FE_DENORM=(0x02),FE_DIVBYZERO=(0x04),FE_OVERFLOW=(0x08),FE_UNDERFLOW=(0x10),FE_INEXACT=(0x20)};/* b */
+
+
+enum   __anoymous_enum_top2 { FE_TONEAREST=(0),FE_DOWNWARD=(0x400),FE_UPWARD=(0x800),FE_TOWARDZERO=(0xc00)};/* b */
+
+
+
+typedef unsigned short int fexcept_t;
+
+struct fenv_t {unsigned short int __control_word; unsigned short int __glibc_reserved1; unsigned short int __status_word; unsigned short int __glibc_reserved2; unsigned short int __tags; unsigned short int __glibc_reserved3; unsigned int __eip; unsigned short int __cs_selector; unsigned int __opcode:11; unsigned int __glibc_reserved4:5; unsigned int __data_offset; unsigned short int __data_selector; unsigned short int __glibc_reserved5; unsigned int __mxcsr; };
+
+typedef struct fenv_t fenv_t  ;
+
+struct femode_t {unsigned short int __control_word; unsigned short int __glibc_reserved; unsigned int __mxcsr; };
+
+typedef struct femode_t femode_t  ;
+
+
+typedef unsigned long  int __size_t;
+
+
+typedef unsigned long  long   ;
+
+struct glob_t {unsigned long  int gl_pathc  ; char** gl_pathv; unsigned long  int gl_offs  ; int gl_flags; void (*gl_closedir)(void*); struct dirent* (*gl_readdir)(void*); void* (*gl_opendir)(const char*); int (*gl_lstat)(const char*,struct stat*); int (*gl_stat)(const char*,struct stat*); };
+
+typedef struct glob_t glob_t  ;
+
+struct glob64_t {unsigned long  int gl_pathc  ; char** gl_pathv; unsigned long  int gl_offs  ; int gl_flags; void (*gl_closedir)(void*); struct dirent64* (*gl_readdir)(void*); void* (*gl_opendir)(const char*); int (*gl_lstat)(const char*,struct stat64*); int (*gl_stat)(const char*,struct stat64*); };
+
+typedef struct glob64_t glob64_t  ;
+
+
+typedef void* iconv_t;
+
+
+typedef void* nl_catd;
+
+
+typedef int nl_item;
+
+enum   __anoymous_enum_top3 { ABDAY_1=((((2)<<16)|(0))),ABDAY_2 ,ABDAY_3 ,ABDAY_4 ,ABDAY_5 ,ABDAY_6 ,ABDAY_7 ,DAY_1 ,DAY_2 ,DAY_3 ,DAY_4 ,DAY_5 ,DAY_6 ,DAY_7 ,ABMON_1 ,ABMON_2 ,ABMON_3 ,ABMON_4 ,ABMON_5 ,ABMON_6 ,ABMON_7 ,ABMON_8 ,ABMON_9 ,ABMON_10 ,ABMON_11 ,ABMON_12 ,MON_1 ,MON_2 ,MON_3 ,MON_4 ,MON_5 ,MON_6 ,MON_7 ,MON_8 ,MON_9 ,MON_10 ,MON_11 ,MON_12 ,AM_STR ,PM_STR ,D_T_FMT ,D_FMT ,T_FMT ,T_FMT_AMPM ,ERA ,__ERA_YEAR ,ERA_D_FMT ,ALT_DIGITS ,ERA_D_T_FMT ,ERA_T_FMT ,_NL_TIME_ERA_NUM_ENTRIES ,_NL_TIME_ERA_ENTRIES ,_NL_WABDAY_1 ,_NL_WABDAY_2 ,_NL_WABDAY_3 ,_NL_WABDAY_4 ,_NL_WABDAY_5 ,_NL_WABDAY_6 ,_NL_WABDAY_7 ,_NL_WDAY_1 ,_NL_WDAY_2 ,_NL_WDAY_3 ,_NL_WDAY_4 ,_NL_WDAY_5 ,_NL_WDAY_6 ,_NL_WDAY_7 ,_NL_WABMON_1 ,_NL_WABMON_2 ,_NL_WABMON_3 ,_NL_WABMON_4 ,_NL_WABMON_5 ,_NL_WABMON_6 ,_NL_WABMON_7 ,_NL_WABMON_8 ,_NL_WABMON_9 ,_NL_WABMON_10 ,_NL_WABMON_11 ,_NL_WABMON_12 ,_NL_WMON_1 ,_NL_WMON_2 ,_NL_WMON_3 ,_NL_WMON_4 ,_NL_WMON_5 ,_NL_WMON_6 ,_NL_WMON_7 ,_NL_WMON_8 ,_NL_WMON_9 ,_NL_WMON_10 ,_NL_WMON_11 ,_NL_WMON_12 ,_NL_WAM_STR ,_NL_WPM_STR ,_NL_WD_T_FMT ,_NL_WD_FMT ,_NL_WT_FMT ,_NL_WT_FMT_AMPM ,_NL_WERA_YEAR ,_NL_WERA_D_FMT ,_NL_WALT_DIGITS ,_NL_WERA_D_T_FMT ,_NL_WERA_T_FMT ,_NL_TIME_WEEK_NDAYS ,_NL_TIME_WEEK_1STDAY ,_NL_TIME_WEEK_1STWEEK ,_NL_TIME_FIRST_WEEKDAY ,_NL_TIME_FIRST_WORKDAY ,_NL_TIME_CAL_DIRECTION ,_NL_TIME_TIMEZONE ,_DATE_FMT ,_NL_W_DATE_FMT ,_NL_TIME_CODESET ,__ALTMON_1 ,__ALTMON_2 ,__ALTMON_3 ,__ALTMON_4 ,__ALTMON_5 ,__ALTMON_6 ,__ALTMON_7 ,__ALTMON_8 ,__ALTMON_9 ,__ALTMON_10 ,__ALTMON_11 ,__ALTMON_12 ,_NL_WALTMON_1 ,_NL_WALTMON_2 ,_NL_WALTMON_3 ,_NL_WALTMON_4 ,_NL_WALTMON_5 ,_NL_WALTMON_6 ,_NL_WALTMON_7 ,_NL_WALTMON_8 ,_NL_WALTMON_9 ,_NL_WALTMON_10 ,_NL_WALTMON_11 ,_NL_WALTMON_12 ,_NL_ABALTMON_1 ,_NL_ABALTMON_2 ,_NL_ABALTMON_3 ,_NL_ABALTMON_4 ,_NL_ABALTMON_5 ,_NL_ABALTMON_6 ,_NL_ABALTMON_7 ,_NL_ABALTMON_8 ,_NL_ABALTMON_9 ,_NL_ABALTMON_10 ,_NL_ABALTMON_11 ,_NL_ABALTMON_12 ,_NL_WABALTMON_1 ,_NL_WABALTMON_2 ,_NL_WABALTMON_3 ,_NL_WABALTMON_4 ,_NL_WABALTMON_5 ,_NL_WABALTMON_6 ,_NL_WABALTMON_7 ,_NL_WABALTMON_8 ,_NL_WABALTMON_9 ,_NL_WABALTMON_10 ,_NL_WABALTMON_11 ,_NL_WABALTMON_12 ,_NL_NUM_LC_TIME ,_NL_COLLATE_NRULES=((((3)<<16)|(0))),_NL_COLLATE_RULESETS ,_NL_COLLATE_TABLEMB ,_NL_COLLATE_WEIGHTMB ,_NL_COLLATE_EXTRAMB ,_NL_COLLATE_INDIRECTMB ,_NL_COLLATE_GAP1 ,_NL_COLLATE_GAP2 ,_NL_COLLATE_GAP3 ,_NL_COLLATE_TABLEWC ,_NL_COLLATE_WEIGHTWC ,_NL_COLLATE_EXTRAWC ,_NL_COLLATE_INDIRECTWC ,_NL_COLLATE_SYMB_HASH_SIZEMB ,_NL_COLLATE_SYMB_TABLEMB ,_NL_COLLATE_SYMB_EXTRAMB ,_NL_COLLATE_COLLSEQMB ,_NL_COLLATE_COLLSEQWC ,_NL_COLLATE_CODESET ,_NL_NUM_LC_COLLATE ,_NL_CTYPE_CLASS=((((0)<<16)|(0))),_NL_CTYPE_TOUPPER ,_NL_CTYPE_GAP1 ,_NL_CTYPE_TOLOWER ,_NL_CTYPE_GAP2 ,_NL_CTYPE_CLASS32 ,_NL_CTYPE_GAP3 ,_NL_CTYPE_GAP4 ,_NL_CTYPE_GAP5 ,_NL_CTYPE_GAP6 ,_NL_CTYPE_CLASS_NAMES ,_NL_CTYPE_MAP_NAMES ,_NL_CTYPE_WIDTH ,_NL_CTYPE_MB_CUR_MAX ,_NL_CTYPE_CODESET_NAME ,CODESET=(((((0)<<16)|(0))+14)),_NL_CTYPE_TOUPPER32 ,_NL_CTYPE_TOLOWER32 ,_NL_CTYPE_CLASS_OFFSET ,_NL_CTYPE_MAP_OFFSET ,_NL_CTYPE_INDIGITS_MB_LEN ,_NL_CTYPE_INDIGITS0_MB ,_NL_CTYPE_INDIGITS1_MB ,_NL_CTYPE_INDIGITS2_MB ,_NL_CTYPE_INDIGITS3_MB ,_NL_CTYPE_INDIGITS4_MB ,_NL_CTYPE_INDIGITS5_MB ,_NL_CTYPE_INDIGITS6_MB ,_NL_CTYPE_INDIGITS7_MB ,_NL_CTYPE_INDIGITS8_MB ,_NL_CTYPE_INDIGITS9_MB ,_NL_CTYPE_INDIGITS_WC_LEN ,_NL_CTYPE_INDIGITS0_WC ,_NL_CTYPE_INDIGITS1_WC ,_NL_CTYPE_INDIGITS2_WC ,_NL_CTYPE_INDIGITS3_WC ,_NL_CTYPE_INDIGITS4_WC ,_NL_CTYPE_INDIGITS5_WC ,_NL_CTYPE_INDIGITS6_WC ,_NL_CTYPE_INDIGITS7_WC ,_NL_CTYPE_INDIGITS8_WC ,_NL_CTYPE_INDIGITS9_WC ,_NL_CTYPE_OUTDIGIT0_MB ,_NL_CTYPE_OUTDIGIT1_MB ,_NL_CTYPE_OUTDIGIT2_MB ,_NL_CTYPE_OUTDIGIT3_MB ,_NL_CTYPE_OUTDIGIT4_MB ,_NL_CTYPE_OUTDIGIT5_MB ,_NL_CTYPE_OUTDIGIT6_MB ,_NL_CTYPE_OUTDIGIT7_MB ,_NL_CTYPE_OUTDIGIT8_MB ,_NL_CTYPE_OUTDIGIT9_MB ,_NL_CTYPE_OUTDIGIT0_WC ,_NL_CTYPE_OUTDIGIT1_WC ,_NL_CTYPE_OUTDIGIT2_WC ,_NL_CTYPE_OUTDIGIT3_WC ,_NL_CTYPE_OUTDIGIT4_WC ,_NL_CTYPE_OUTDIGIT5_WC ,_NL_CTYPE_OUTDIGIT6_WC ,_NL_CTYPE_OUTDIGIT7_WC ,_NL_CTYPE_OUTDIGIT8_WC ,_NL_CTYPE_OUTDIGIT9_WC ,_NL_CTYPE_TRANSLIT_TAB_SIZE ,_NL_CTYPE_TRANSLIT_FROM_IDX ,_NL_CTYPE_TRANSLIT_FROM_TBL ,_NL_CTYPE_TRANSLIT_TO_IDX ,_NL_CTYPE_TRANSLIT_TO_TBL ,_NL_CTYPE_TRANSLIT_DEFAULT_MISSING_LEN ,_NL_CTYPE_TRANSLIT_DEFAULT_MISSING ,_NL_CTYPE_TRANSLIT_IGNORE_LEN ,_NL_CTYPE_TRANSLIT_IGNORE ,_NL_CTYPE_MAP_TO_NONASCII ,_NL_CTYPE_NONASCII_CASE ,_NL_CTYPE_EXTRA_MAP_1 ,_NL_CTYPE_EXTRA_MAP_2 ,_NL_CTYPE_EXTRA_MAP_3 ,_NL_CTYPE_EXTRA_MAP_4 ,_NL_CTYPE_EXTRA_MAP_5 ,_NL_CTYPE_EXTRA_MAP_6 ,_NL_CTYPE_EXTRA_MAP_7 ,_NL_CTYPE_EXTRA_MAP_8 ,_NL_CTYPE_EXTRA_MAP_9 ,_NL_CTYPE_EXTRA_MAP_10 ,_NL_CTYPE_EXTRA_MAP_11 ,_NL_CTYPE_EXTRA_MAP_12 ,_NL_CTYPE_EXTRA_MAP_13 ,_NL_CTYPE_EXTRA_MAP_14 ,_NL_NUM_LC_CTYPE ,__INT_CURR_SYMBOL=((((4)<<16)|(0))),__CURRENCY_SYMBOL ,__MON_DECIMAL_POINT ,__MON_THOUSANDS_SEP ,__MON_GROUPING ,__POSITIVE_SIGN ,__NEGATIVE_SIGN ,__INT_FRAC_DIGITS ,__FRAC_DIGITS ,__P_CS_PRECEDES ,__P_SEP_BY_SPACE ,__N_CS_PRECEDES ,__N_SEP_BY_SPACE ,__P_SIGN_POSN ,__N_SIGN_POSN ,_NL_MONETARY_CRNCYSTR ,__INT_P_CS_PRECEDES ,__INT_P_SEP_BY_SPACE ,__INT_N_CS_PRECEDES ,__INT_N_SEP_BY_SPACE ,__INT_P_SIGN_POSN ,__INT_N_SIGN_POSN ,_NL_MONETARY_DUO_INT_CURR_SYMBOL ,_NL_MONETARY_DUO_CURRENCY_SYMBOL ,_NL_MONETARY_DUO_INT_FRAC_DIGITS ,_NL_MONETARY_DUO_FRAC_DIGITS ,_NL_MONETARY_DUO_P_CS_PRECEDES ,_NL_MONETARY_DUO_P_SEP_BY_SPACE ,_NL_MONETARY_DUO_N_CS_PRECEDES ,_NL_MONETARY_DUO_N_SEP_BY_SPACE ,_NL_MONETARY_DUO_INT_P_CS_PRECEDES ,_NL_MONETARY_DUO_INT_P_SEP_BY_SPACE ,_NL_MONETARY_DUO_INT_N_CS_PRECEDES ,_NL_MONETARY_DUO_INT_N_SEP_BY_SPACE ,_NL_MONETARY_DUO_P_SIGN_POSN ,_NL_MONETARY_DUO_N_SIGN_POSN ,_NL_MONETARY_DUO_INT_P_SIGN_POSN ,_NL_MONETARY_DUO_INT_N_SIGN_POSN ,_NL_MONETARY_UNO_VALID_FROM ,_NL_MONETARY_UNO_VALID_TO ,_NL_MONETARY_DUO_VALID_FROM ,_NL_MONETARY_DUO_VALID_TO ,_NL_MONETARY_CONVERSION_RATE ,_NL_MONETARY_DECIMAL_POINT_WC ,_NL_MONETARY_THOUSANDS_SEP_WC ,_NL_MONETARY_CODESET ,_NL_NUM_LC_MONETARY ,__DECIMAL_POINT=((((1)<<16)|(0))),RADIXCHAR=(((((1)<<16)|(0)))),__THOUSANDS_SEP ,THOUSEP=((((((1)<<16)|(0)))+1)),__GROUPING ,_NL_NUMERIC_DECIMAL_POINT_WC ,_NL_NUMERIC_THOUSANDS_SEP_WC ,_NL_NUMERIC_CODESET ,_NL_NUM_LC_NUMERIC ,__YESEXPR=((((5)<<16)|(0))),__NOEXPR ,__YESSTR ,__NOSTR ,_NL_MESSAGES_CODESET ,_NL_NUM_LC_MESSAGES ,_NL_PAPER_HEIGHT=((((7)<<16)|(0))),_NL_PAPER_WIDTH ,_NL_PAPER_CODESET ,_NL_NUM_LC_PAPER ,_NL_NAME_NAME_FMT=((((8)<<16)|(0))),_NL_NAME_NAME_GEN ,_NL_NAME_NAME_MR ,_NL_NAME_NAME_MRS ,_NL_NAME_NAME_MISS ,_NL_NAME_NAME_MS ,_NL_NAME_CODESET ,_NL_NUM_LC_NAME ,_NL_ADDRESS_POSTAL_FMT=((((9)<<16)|(0))),_NL_ADDRESS_COUNTRY_NAME ,_NL_ADDRESS_COUNTRY_POST ,_NL_ADDRESS_COUNTRY_AB2 ,_NL_ADDRESS_COUNTRY_AB3 ,_NL_ADDRESS_COUNTRY_CAR ,_NL_ADDRESS_COUNTRY_NUM ,_NL_ADDRESS_COUNTRY_ISBN ,_NL_ADDRESS_LANG_NAME ,_NL_ADDRESS_LANG_AB ,_NL_ADDRESS_LANG_TERM ,_NL_ADDRESS_LANG_LIB ,_NL_ADDRESS_CODESET ,_NL_NUM_LC_ADDRESS ,_NL_TELEPHONE_TEL_INT_FMT=((((10)<<16)|(0))),_NL_TELEPHONE_TEL_DOM_FMT ,_NL_TELEPHONE_INT_SELECT ,_NL_TELEPHONE_INT_PREFIX ,_NL_TELEPHONE_CODESET ,_NL_NUM_LC_TELEPHONE ,_NL_MEASUREMENT_MEASUREMENT=((((11)<<16)|(0))),_NL_MEASUREMENT_CODESET ,_NL_NUM_LC_MEASUREMENT ,_NL_IDENTIFICATION_TITLE=((((12)<<16)|(0))),_NL_IDENTIFICATION_SOURCE ,_NL_IDENTIFICATION_ADDRESS ,_NL_IDENTIFICATION_CONTACT ,_NL_IDENTIFICATION_EMAIL ,_NL_IDENTIFICATION_TEL ,_NL_IDENTIFICATION_FAX ,_NL_IDENTIFICATION_LANGUAGE ,_NL_IDENTIFICATION_TERRITORY ,_NL_IDENTIFICATION_AUDIENCE ,_NL_IDENTIFICATION_APPLICATION ,_NL_IDENTIFICATION_ABBREVIATION ,_NL_IDENTIFICATION_REVISION ,_NL_IDENTIFICATION_DATE ,_NL_IDENTIFICATION_CATEGORY ,_NL_IDENTIFICATION_CODESET ,_NL_NUM_LC_IDENTIFICATION ,_NL_NUM };/* b */
+
+
+struct __locale_struct {struct __locale_data* __locales[13]; const unsigned short int* __ctype_b; const int* __ctype_tolower; const int* __ctype_toupper; const char* __names[13]; };
+
+
+struct __locale_t {struct __locale_data* __locales[13]; const unsigned short int* __ctype_b; const int* __ctype_tolower; const int* __ctype_toupper; const char* __names[13]; };
+
+typedef struct __locale_t* __locale_t  ;
+
+struct locale_t {struct __locale_data* __locales[13]; const unsigned short int* __ctype_b; const int* __ctype_tolower; const int* __ctype_toupper; const char* __names[13]; };
+
+typedef struct locale_t* locale_t  ;
+
+
+typedef long ptrdiff_t;
+
+
+typedef int wchar_t;
+
+struct max_align_t {long long __clang_max_align_nonce1 __attribute__((__aligned__(__alignof__(long long)))); long  double __clang_max_align_nonce2 __attribute__((__aligned__(__alignof__(long double)))); };
+
+typedef struct max_align_t max_align_t  ;
+
+
+typedef char int8_t  ;
+
+
+typedef short int int16_t  ;
+
+
+typedef int int32_t  ;
+
+
+typedef long  int int64_t  ;
+
+
+typedef unsigned char uint8_t  ;
+
+
+typedef unsigned short int uint16_t  ;
+
+
+typedef unsigned int uint32_t  ;
+
+
+typedef unsigned long  int uint64_t  ;
+
+
+typedef char int_least8_t  ;
+
+
+typedef short int int_least16_t  ;
+
+
+typedef int int_least32_t  ;
+
+
+typedef long  int int_least64_t  ;
+
+
+typedef unsigned char uint_least8_t  ;
+
+
+typedef unsigned short int uint_least16_t  ;
+
+
+typedef unsigned int uint_least32_t  ;
+
+
+typedef unsigned long  int uint_least64_t  ;
+
+
+typedef char int_fast8_t;
+
+
+typedef long  int int_fast16_t;
+
+
+typedef long  int int_fast32_t;
+
+
+typedef long  int int_fast64_t;
+
+
+typedef unsigned char uint_fast8_t;
+
+
+typedef unsigned long  int uint_fast16_t;
+
+
+typedef unsigned long  int uint_fast32_t;
+
+
+typedef unsigned long  int uint_fast64_t;
+
+
+typedef long  int intptr_t;
+
+
+typedef unsigned long  int uintptr_t;
+
+
+typedef long  int intmax_t  ;
+
+
+typedef unsigned long  int uintmax_t  ;
+
+enum   memory_order { memory_order_relaxed=(0),memory_order_consume=(1),memory_order_acquire=(2),memory_order_release=(3),memory_order_acq_rel=(4),memory_order_seq_cst=(5)};/* b */
+
+typedef enum memory_order memory_order;
+
 
 typedef _Atomic(_Bool) atomic_bool;
 
+
 typedef _Atomic(char) atomic_char;
+
 
 typedef _Atomic(char) atomic_schar;
 
+
 typedef _Atomic(unsigned char) atomic_uchar;
+
 
 typedef _Atomic(short) atomic_short;
 
+
 typedef _Atomic(unsigned short int) atomic_ushort;
+
 
 typedef _Atomic(int) atomic_int;
 
+
 typedef _Atomic(unsigned int) atomic_uint;
+
 
 typedef _Atomic(long) atomic_long;
 
+
 typedef _Atomic(unsigned long  int) atomic_ulong;
+
 
 typedef _Atomic(long  long) atomic_llong;
 
+
 typedef _Atomic(unsigned long  long) atomic_ullong;
+
 
 typedef _Atomic(unsigned short int) atomic_char16_t  ;
 
+
 typedef _Atomic(unsigned int) atomic_char32_t  ;
+
 
 typedef _Atomic(int) atomic_wchar_t  ;
 
+
 typedef _Atomic(char) atomic_int_least8_t  ;
+
 
 typedef _Atomic(unsigned char) atomic_uint_least8_t  ;
 
+
 typedef _Atomic(short int) atomic_int_least16_t  ;
+
 
 typedef _Atomic(unsigned short int) atomic_uint_least16_t  ;
 
+
 typedef _Atomic(int) atomic_int_least32_t  ;
+
 
 typedef _Atomic(unsigned int) atomic_uint_least32_t  ;
 
+
 typedef _Atomic(long  int) atomic_int_least64_t  ;
+
 
 typedef _Atomic(unsigned long  int) atomic_uint_least64_t  ;
 
+
 typedef _Atomic(char) atomic_int_fast8_t  ;
+
 
 typedef _Atomic(unsigned char) atomic_uint_fast8_t  ;
 
+
 typedef _Atomic(long  int) atomic_int_fast16_t  ;
+
 
 typedef _Atomic(unsigned long  int) atomic_uint_fast16_t  ;
 
+
 typedef _Atomic(long  int) atomic_int_fast32_t  ;
+
 
 typedef _Atomic(unsigned long  int) atomic_uint_fast32_t  ;
 
+
 typedef _Atomic(long  int) atomic_int_fast64_t  ;
+
 
 typedef _Atomic(unsigned long  int) atomic_uint_fast64_t  ;
 
+
 typedef _Atomic(long  int) atomic_intptr_t  ;
+
 
 typedef _Atomic(unsigned long  int) atomic_uintptr_t  ;
 
+
 typedef _Atomic(unsigned long) atomic_size_t  ;
+
 
 typedef _Atomic(long) atomic_ptrdiff_t  ;
 
+
 typedef _Atomic(long  int) atomic_intmax_t  ;
+
 
 typedef _Atomic(unsigned long  int) atomic_uintmax_t  ;
 
-struct atomic_flag
-{
-    _Atomic(_Bool) _Value  ;
-};
+struct atomic_flag {_Atomic(_Bool) _Value  ; };
 
-enum { FP_INT_UPWARD=(0),
-FP_INT_DOWNWARD=(1),
-FP_INT_TOWARDZERO=(2),
-FP_INT_TONEARESTFROMZERO=(3),
-FP_INT_TONEAREST=(4)
-};
+typedef struct atomic_flag atomic_flag  ;
 
-enum { FP_NAN=(0),
-FP_INFINITE=(1),
-FP_ZERO=(2),
-FP_SUBNORMAL=(3),
-FP_NORMAL=(4)
-};
 
-union anonymous_typeZ7
-{
-unsigned int __wch;
-char __wchb[4];
-};
+typedef __builtin_va_list __gnuc_va_list;
 
-union anonymous_typeZ8
-{
-unsigned int __wch;
-char __wchb[4];
-};
 
-struct anonymous_typeX6
-{
-    int __count;
-    union {
-        unsigned int __wch;
-        char __wchb[4];
-    } __value;
-};
+typedef float float_t;
 
-struct _G_fpos_t
-{
-    long  int __pos  ;
-    struct {
-        int __count;
-        union {
-            unsigned int __wch;
-            char __wchb[4];
-        } __value;
-    } __state;
-};
 
-struct _G_fpos64_t
-{
-    long  int __pos  ;
-    struct {
-        int __count;
-        union {
-            unsigned int __wch;
-            char __wchb[4];
-        } __value;
-    } __state;
-};
+typedef double double_t;
 
-struct _IO_FILE
-{
-    int _flags;
-    char* _IO_read_ptr;
-    char* _IO_read_end;
-    char* _IO_read_base;
-    char* _IO_write_base;
-    char* _IO_write_ptr;
-    char* _IO_write_end;
-    char* _IO_buf_base;
-    char* _IO_buf_end;
-    char* _IO_save_base;
-    char* _IO_backup_base;
-    char* _IO_save_end;
-    struct _IO_marker* _markers  ;
-    struct _IO_FILE* _chain  ;
-    int _fileno;
-    int _flags2:24;
-    char _short_backupbuf[1];
-    long  int _old_offset  ;
-    unsigned short int _cur_column;
-    char _vtable_offset;
-    char _shortbuf[1];
-    void* _lock  ;
-    long  int _offset  ;
-    struct _IO_codecvt* _codecvt  ;
-    struct _IO_wide_data* _wide_data  ;
-    struct _IO_FILE* _freeres_list  ;
-    void* _freeres_buf;
-    struct _IO_FILE** _prevchain  ;
-    int _mode;
-    int _unused3;
-    unsigned long  int _total_written  ;
-    char _unused2[12*sizeof(int)-5*sizeof(void*)];
-};
+enum   __anoymous_enum_top4 { FP_INT_UPWARD=(0),FP_INT_DOWNWARD=(1),FP_INT_TOWARDZERO=(2),FP_INT_TONEARESTFROMZERO=(3),FP_INT_TONEAREST=(4)};/* b */
 
-struct _IO_cookie_io_functions_t
-{
-    long  int (*(*read))(void*,char*,unsigned long)  ;
-    long  int (*(*write))(void*,const char*,unsigned long)  ;
-    int (*(*seek))(void*,long  int*,int)  ;
-    int (*(*close))(void*)  ;
-};
 
-struct mallinfo
-{
-    int arena;
-    int ordblks;
-    int smblks;
-    int hblks;
-    int hblkhd;
-    int usmblks;
-    int fsmblks;
-    int uordblks;
-    int fordblks;
-    int keepcost;
-};
+enum   __anoymous_enum_top5 { FP_NAN=(0),FP_INFINITE=(1),FP_ZERO=(2),FP_SUBNORMAL=(3),FP_NORMAL=(4)};/* b */
 
-struct mallinfo2
-{
-    unsigned long arena  ;
-    unsigned long ordblks  ;
-    unsigned long smblks  ;
-    unsigned long hblks  ;
-    unsigned long hblkhd  ;
-    unsigned long usmblks  ;
-    unsigned long fsmblks  ;
-    unsigned long uordblks  ;
-    unsigned long fordblks  ;
-    unsigned long keepcost  ;
-};
 
-struct timespec
-{
-    long  int tv_sec  ;
-    long  int tv_nsec  ;
-};
+struct __mbstate_t {int __count; union { unsigned int __wch; char __wchb[4]; }  __value  ; };
 
-struct anonymous_typeX9
-{
-    unsigned long  int fds_bits[1024/(8*sizeof(long))];
-};
+typedef struct __mbstate_t __mbstate_t  ;
 
-struct anonymous_typeX10
-{
-    int val[2];
-};
+struct _G_fpos_t {long  int __pos  ; struct __mbstate_t __state  ; };
 
-struct sched_attr
-{
-    unsigned int size  ;
-    unsigned int sched_policy  ;
-    unsigned long  long sched_flags  ;
-    int sched_nice  ;
-    unsigned int sched_priority  ;
-    unsigned long  long sched_runtime  ;
-    unsigned long  long sched_deadline  ;
-    unsigned long  long sched_period  ;
-    unsigned int sched_util_min  ;
-    unsigned int sched_util_max  ;
-};
 
-struct sched_param
-{
-    int sched_priority;
-};
+struct __fpos_t {long  int __pos  ; struct __mbstate_t __state  ; };
 
-struct anonymous_typeX11
-{
-    unsigned long  int __bits[1024/(8*sizeof(unsigned long  int))]  ;
-};
+typedef struct __fpos_t __fpos_t  ;
 
-struct anonymous_typeX12
-{
-    unsigned long  int __val[(1024/(8*sizeof(unsigned long  int)))];
-};
+struct _G_fpos64_t {long  int __pos  ; struct __mbstate_t __state  ; };
 
-struct timeval
-{
-    long  int tv_sec  ;
-    long  int tv_usec  ;
-};
 
-struct anonymous_typeX13
-{
-    long  int fds_bits[1024/(8*(int)sizeof(long  int))]  ;
-};
+struct __fpos64_t {long  int __pos  ; struct __mbstate_t __state  ; };
 
-struct anonymous_typeX15
-{
-    unsigned int __low;
-    unsigned int __high;
-};
+typedef struct __fpos64_t __fpos64_t  ;
 
-union anonymous_typeZ14
-{
-unsigned long long int __value64;
-    struct {
-        unsigned int __low;
-        unsigned int __high;
-    } __value32;
-};
 
-struct __pthread_internal_list
-{
-    struct __pthread_internal_list* __prev  ;
-    struct __pthread_internal_list* __next  ;
-};
+typedef struct _IO_FILE __FILE  ;
 
-struct __pthread_internal_slist
-{
-    struct __pthread_internal_slist* __next  ;
-};
 
-struct __pthread_mutex_s
-{
-    int __lock;
-    unsigned int __count;
-    int __owner;
-    unsigned int __nusers;
-    int __kind;
-    short __spins;
-    short __elision;
-    struct __pthread_internal_list __list  ;
-};
+typedef struct _IO_FILE FILE  ;
 
-struct __pthread_rwlock_arch_t
-{
-    unsigned int __readers;
-    unsigned int __writers;
-    unsigned int __wrphase_futex;
-    unsigned int __writers_futex;
-    unsigned int __pad3;
-    unsigned int __pad4;
-    int __cur_writer;
-    int __shared;
-    char __rwelision;
-    unsigned char __pad1[7];
-    unsigned long  int __pad2;
-    unsigned int __flags;
-};
 
-struct __pthread_cond_s
-{
-    union {
-        unsigned long long int __value64;
-        struct {
-            unsigned int __low;
-            unsigned int __high;
-        } __value32;
-    } __wseq;
-    union {
-        unsigned long long int __value64;
-        struct {
-            unsigned int __low;
-            unsigned int __high;
-        } __value32;
-    } __g1_start;
-    unsigned int __g_size[2];
-    unsigned int __g1_orig_size;
-    unsigned int __wrefs;
-    unsigned int __g_signals[2];
-    unsigned int __unused_initialized_1;
-    unsigned int __unused_initialized_2;
-};
+typedef void _IO_lock_t;
 
-struct anonymous_typeX16
-{
-    int __data;
-};
+struct _IO_FILE {int _flags; char* _IO_read_ptr; char* _IO_read_end; char* _IO_read_base; char* _IO_write_base; char* _IO_write_ptr; char* _IO_write_end; char* _IO_buf_base; char* _IO_buf_end; char* _IO_save_base; char* _IO_backup_base; char* _IO_save_end; struct _IO_marker* _markers  ; struct _IO_FILE* _chain  ; int _fileno; int _flags2:24; char _short_backupbuf[1]; long  int _old_offset  ; unsigned short int _cur_column; char _vtable_offset; char _shortbuf[1]; void* _lock  ; long  int _offset  ; struct _IO_codecvt* _codecvt  ; struct _IO_wide_data* _wide_data  ; struct _IO_FILE* _freeres_list  ; void* _freeres_buf; struct _IO_FILE** _prevchain  ; int _mode; int _unused3; unsigned long  int _total_written  ; char _unused2[12*sizeof(int)-5*sizeof(void*)]; };
 
-union anonymous_typeZ17
-{
-char __size[4];
-int __align;
-};
 
-union anonymous_typeZ18
-{
-char __size[4];
-int __align;
-};
 
-union pthread_attr_t
-{
-char __size[56];
-long  int __align;
-};
+typedef long  int (*cookie_read_function_t)(void*,char*,unsigned long);
 
-union anonymous_typeZ19
-{
-struct __pthread_mutex_s __data  ;
-char __size[40];
-long  int __align;
-};
 
-union anonymous_typeZ20
-{
-struct __pthread_cond_s __data  ;
-char __size[48];
-long long int __align;
-};
+typedef long  int (*cookie_write_function_t)(void*,const char*,unsigned long);
 
-union anonymous_typeZ21
-{
-struct __pthread_rwlock_arch_t __data  ;
-char __size[56];
-long  int __align;
-};
 
-union anonymous_typeZ22
-{
-char __size[8];
-long  int __align;
-};
+typedef int (*cookie_seek_function_t)(void*,long  int*,int);
 
-union anonymous_typeZ23
-{
-char __size[32];
-long  int __align;
-};
 
-union anonymous_typeZ24
-{
-char __size[4];
-int __align;
-};
+typedef int (*cookie_close_function_t)(void*);
 
-struct anonymous_typeX25
-{
-    short int __flags;
-    int __pgrp  ;
-    struct {
-        unsigned long  int __val[(1024/(8*sizeof(unsigned long  int)))];
-    } __sd;
-    struct {
-        unsigned long  int __val[(1024/(8*sizeof(unsigned long  int)))];
-    } __ss;
-    struct sched_param __sp  ;
-    int __policy;
-    int __cgroup;
-    int __pad[15];
-};
+struct _IO_cookie_io_functions_t {long  int (*(*read))(void*,char*,unsigned long)  ; long  int (*(*write))(void*,const char*,unsigned long)  ; int (*(*seek))(void*,long  int*,int)  ; int (*(*close))(void*)  ; };
 
-struct anonymous_typeX26
-{
-    int __allocated;
-    int __used;
-    struct __spawn_action* __actions;
-    int __pad[16];
-};
 
-enum { WRDE_DOOFFS=((1<<0)),
-WRDE_APPEND=((1<<1)),
-WRDE_NOCMD=((1<<2)),
-WRDE_REUSE=((1<<3)),
-WRDE_SHOWERR=((1<<4)),
-WRDE_UNDEF=((1<<5)),
-__WRDE_FLAGS=((((1<<0))|((1<<1))|((1<<2))|((1<<3))|((1<<4))|((1<<5))))
-};
+struct cookie_io_functions_t {long  int (*(*read))(void*,char*,unsigned long)  ; long  int (*(*write))(void*,const char*,unsigned long)  ; int (*(*seek))(void*,long  int*,int)  ; int (*(*close))(void*)  ; };
 
-struct anonymous_typeX27
-{
-    unsigned long we_wordc  ;
-    char** we_wordv;
-    unsigned long we_offs  ;
-};
+typedef struct cookie_io_functions_t cookie_io_functions_t  ;
 
-enum { WRDE_NOSYS=(-1),
-WRDE_NOSPACE=(1),
-WRDE_BADCHAR 
-,WRDE_BADVAL 
-,WRDE_CMDSUB 
-,WRDE_SYNTAX 
-};
+
+typedef __builtin_va_list va_list  ;
+
+
+typedef long  int off_t  ;
+
+
+typedef long  int off64_t  ;
+
+
+typedef long  int ssize_t  ;
+
+struct fpos_t {long  int __pos  ; struct __mbstate_t __state  ; };
+
+typedef struct fpos_t fpos_t  ;
+
+struct fpos64_t {long  int __pos  ; struct __mbstate_t __state  ; };
+
+typedef struct fpos64_t fpos64_t  ;
+
+struct mallinfo {int arena; int ordblks; int smblks; int hblks; int hblkhd; int usmblks; int fsmblks; int uordblks; int fordblks; int keepcost; };
+
+
+struct mallinfo2 {unsigned long arena  ; unsigned long ordblks  ; unsigned long smblks  ; unsigned long hblks  ; unsigned long hblkhd  ; unsigned long usmblks  ; unsigned long fsmblks  ; unsigned long uordblks  ; unsigned long fordblks  ; unsigned long keepcost  ; };
+
+
+
+typedef long  int time_t  ;
+
+struct timespec {long  int tv_sec  ; long  int tv_nsec  ; };
+
+
+
+typedef int pid_t  ;
+
+
+typedef char __s8;
+
+
+typedef unsigned char __u8;
+
+
+typedef short __s16;
+
+
+typedef unsigned short int __u16;
+
+
+typedef int __s32;
+
+
+typedef unsigned int __u32;
+
+
+typedef long long __s64;
+
+
+typedef unsigned long  long __u64;
+
+struct __kernel_fd_set {unsigned long  int fds_bits[1024/(8*sizeof(long))]; };
+
+typedef struct __kernel_fd_set __kernel_fd_set  ;
+
+
+typedef void (*__kernel_sighandler_t)(int);
+
+
+typedef int __kernel_key_t;
+
+
+typedef int __kernel_mqd_t;
+
+
+typedef unsigned short int __kernel_old_uid_t;
+
+
+typedef unsigned short int __kernel_old_gid_t;
+
+
+typedef unsigned long  int __kernel_old_dev_t;
+
+
+typedef long __kernel_long_t;
+
+
+typedef unsigned long  int __kernel_ulong_t;
+
+
+typedef unsigned long  int __kernel_ino_t  ;
+
+
+typedef unsigned int __kernel_mode_t;
+
+
+typedef int __kernel_pid_t;
+
+
+typedef int __kernel_ipc_pid_t;
+
+
+typedef unsigned int __kernel_uid_t;
+
+
+typedef unsigned int __kernel_gid_t;
+
+
+typedef long __kernel_suseconds_t  ;
+
+
+typedef int __kernel_daddr_t;
+
+
+typedef unsigned int __kernel_uid32_t;
+
+
+typedef unsigned int __kernel_gid32_t;
+
+
+typedef unsigned long  int __kernel_size_t  ;
+
+
+typedef long __kernel_ssize_t  ;
+
+
+typedef long __kernel_ptrdiff_t  ;
+
+struct __kernel_fsid_t {int val[2]; };
+
+typedef struct __kernel_fsid_t __kernel_fsid_t  ;
+
+
+typedef long __kernel_off_t  ;
+
+
+typedef long long __kernel_loff_t;
+
+
+typedef long __kernel_old_time_t  ;
+
+
+typedef long __kernel_time_t  ;
+
+
+typedef long long __kernel_time64_t;
+
+
+typedef long __kernel_clock_t  ;
+
+
+typedef int __kernel_timer_t;
+
+
+typedef int __kernel_clockid_t;
+
+
+typedef char* __kernel_caddr_t;
+
+
+typedef unsigned short int __kernel_uid16_t;
+
+
+typedef unsigned short int __kernel_gid16_t;
+
+
+typedef unsigned short int __le16  ;
+
+
+typedef unsigned short int __be16  ;
+
+
+typedef unsigned int __le32  ;
+
+
+typedef unsigned int __be32  ;
+
+
+typedef unsigned long  long __le64  ;
+
+
+typedef unsigned long  long __be64  ;
+
+
+typedef unsigned short int __sum16  ;
+
+
+typedef unsigned int __wsum  ;
+
+
+typedef unsigned int __poll_t;
+
+struct sched_attr {unsigned int size  ; unsigned int sched_policy  ; unsigned long  long sched_flags  ; int sched_nice  ; unsigned int sched_priority  ; unsigned long  long sched_runtime  ; unsigned long  long sched_deadline  ; unsigned long  long sched_period  ; unsigned int sched_util_min  ; unsigned int sched_util_max  ; };
+
+
+struct sched_param {int sched_priority; };
+
+
+
+typedef unsigned long  int __cpu_mask;
+
+struct cpu_set_t {unsigned long  int __bits[1024/(8*sizeof(unsigned long  int))]  ; };
+
+typedef struct cpu_set_t cpu_set_t  ;
+
+
+typedef unsigned char u_char  ;
+
+
+typedef unsigned short int u_short  ;
+
+
+typedef unsigned int u_int  ;
+
+
+typedef unsigned long  int u_long  ;
+
+
+typedef long  int quad_t  ;
+
+
+typedef unsigned long  int u_quad_t  ;
+
+struct fsid_t {int __val[2]; };
+
+typedef struct fsid_t fsid_t  ;
+
+
+typedef long  int loff_t  ;
+
+
+typedef unsigned long  int dev_t  ;
+
+
+typedef unsigned int gid_t  ;
+
+
+typedef unsigned int mode_t  ;
+
+
+typedef unsigned long  int nlink_t  ;
+
+
+typedef unsigned int uid_t  ;
+
+
+typedef unsigned int id_t  ;
+
+
+typedef int daddr_t  ;
+
+
+typedef char* caddr_t  ;
+
+
+typedef int key_t  ;
+
+
+typedef long  int clock_t  ;
+
+
+typedef int clockid_t  ;
+
+
+typedef void* timer_t  ;
+
+
+typedef unsigned int useconds_t  ;
+
+
+typedef long  int suseconds_t  ;
+
+
+typedef unsigned long  int ulong;
+
+
+typedef unsigned short int ushort;
+
+
+typedef unsigned int uint;
+
+
+typedef unsigned char u_int8_t  ;
+
+
+typedef unsigned short int u_int16_t  ;
+
+
+typedef unsigned int u_int32_t  ;
+
+
+typedef unsigned long  int u_int64_t  ;
+
+
+typedef int register_t __attribute__ ((__mode__ (__word__)));
+
+struct __sigset_t {unsigned long  int __val[(1024/(8*sizeof(unsigned long  int)))]; };
+
+typedef struct __sigset_t __sigset_t  ;
+
+struct sigset_t {unsigned long  int __val[(1024/(8*sizeof(unsigned long  int)))]; };
+
+typedef struct sigset_t sigset_t  ;
+
+struct timeval {long  int tv_sec  ; long  int tv_usec  ; };
+
+
+
+typedef long  int __fd_mask;
+
+struct fd_set {long  int fds_bits[1024/(8*(int)sizeof(long  int))]  ; };
+
+typedef struct fd_set fd_set  ;
+
+
+typedef long  int fd_mask  ;
+
+
+typedef long  int blksize_t  ;
+
+
+typedef long  int blkcnt_t  ;
+
+
+typedef unsigned long  int fsblkcnt_t  ;
+
+
+typedef unsigned long  int fsfilcnt_t  ;
+
+
+typedef long  int blkcnt64_t  ;
+
+
+typedef unsigned long  int fsblkcnt64_t  ;
+
+
+typedef unsigned long  int fsfilcnt64_t  ;
+
+union __atomic_wide_counter {unsigned long long int __value64; struct { unsigned int __low; unsigned int __high; }  __value32  ; };
+
+typedef union __atomic_wide_counter __atomic_wide_counter  ;
+
+struct __pthread_internal_list {struct __pthread_internal_list* __prev  ; struct __pthread_internal_list* __next  ; };
+
+
+struct __pthread_list_t {struct __pthread_internal_list* __prev  ; struct __pthread_internal_list* __next  ; };
+
+typedef struct __pthread_list_t __pthread_list_t  ;
+
+struct __pthread_internal_slist {struct __pthread_internal_slist* __next  ; };
+
+
+struct __pthread_slist_t {struct __pthread_internal_slist* __next  ; };
+
+typedef struct __pthread_slist_t __pthread_slist_t  ;
+
+struct __pthread_mutex_s {int __lock; unsigned int __count; int __owner; unsigned int __nusers; int __kind; short __spins; short __elision; struct __pthread_list_t __list  ; };
+
+
+struct __pthread_rwlock_arch_t {unsigned int __readers; unsigned int __writers; unsigned int __wrphase_futex; unsigned int __writers_futex; unsigned int __pad3; unsigned int __pad4; int __cur_writer; int __shared; char __rwelision; unsigned char __pad1[7]; unsigned long  int __pad2; unsigned int __flags; };
+
+
+struct __pthread_cond_s {union __atomic_wide_counter __wseq  ; union __atomic_wide_counter __g1_start  ; unsigned int __g_size[2]; unsigned int __g1_orig_size; unsigned int __wrefs; unsigned int __g_signals[2]; unsigned int __unused_initialized_1; unsigned int __unused_initialized_2; };
+
+
+
+typedef unsigned int __tss_t;
+
+
+typedef unsigned long  int __thrd_t;
+
+struct __once_flag {int __data; };
+
+typedef struct __once_flag __once_flag  ;
+
+
+typedef unsigned long  int pthread_t;
+
+union pthread_mutexattr_t {char __size[4]; int __align; };
+
+typedef union pthread_mutexattr_t pthread_mutexattr_t  ;
+
+union pthread_condattr_t {char __size[4]; int __align; };
+
+typedef union pthread_condattr_t pthread_condattr_t  ;
+
+
+typedef unsigned int pthread_key_t;
+
+
+typedef int pthread_once_t;
+
+union pthread_attr_t {char __size[56]; long  int __align; };
+
+typedef union pthread_attr_t pthread_attr_t  ;
+
+union pthread_mutex_t {struct __pthread_mutex_s __data  ; char __size[40]; long  int __align; };
+
+typedef union pthread_mutex_t pthread_mutex_t  ;
+
+union pthread_cond_t {struct __pthread_cond_s __data  ; char __size[48]; long long int __align; };
+
+typedef union pthread_cond_t pthread_cond_t  ;
+
+union pthread_rwlock_t {struct __pthread_rwlock_arch_t __data  ; char __size[56]; long  int __align; };
+
+typedef union pthread_rwlock_t pthread_rwlock_t  ;
+
+union pthread_rwlockattr_t {char __size[8]; long  int __align; };
+
+typedef union pthread_rwlockattr_t pthread_rwlockattr_t  ;
+
+
+typedef int pthread_spinlock_t;
+
+union pthread_barrier_t {char __size[32]; long  int __align; };
+
+typedef union pthread_barrier_t pthread_barrier_t  ;
+
+union pthread_barrierattr_t {char __size[4]; int __align; };
+
+typedef union pthread_barrierattr_t pthread_barrierattr_t  ;
+
+struct posix_spawnattr_t {short int __flags; int __pgrp  ; struct sigset_t __sd  ; struct sigset_t __ss  ; struct sched_param __sp  ; int __policy; int __cgroup; int __pad[15]; };
+
+typedef struct posix_spawnattr_t posix_spawnattr_t  ;
+
+struct posix_spawn_file_actions_t {int __allocated; int __used; struct __spawn_action* __actions; int __pad[16]; };
+
+typedef struct posix_spawn_file_actions_t posix_spawn_file_actions_t  ;
+
+enum   __anoymous_enum_top6 { WRDE_DOOFFS=((1<<0)),WRDE_APPEND=((1<<1)),WRDE_NOCMD=((1<<2)),WRDE_REUSE=((1<<3)),WRDE_SHOWERR=((1<<4)),WRDE_UNDEF=((1<<5)),__WRDE_FLAGS=((((1<<0))|((1<<1))|((1<<2))|((1<<3))|((1<<4))|((1<<5))))};/* b */
+
+
+struct wordexp_t {unsigned long we_wordc  ; char** we_wordv; unsigned long we_offs  ; };
+
+typedef struct wordexp_t wordexp_t  ;
+
+enum   __anoymous_enum_top7 { WRDE_NOSYS=(-1),WRDE_NOSPACE=(1),WRDE_BADCHAR ,WRDE_BADVAL ,WRDE_CMDSUB ,WRDE_SYNTAX };/* b */
+
 
 /// variable definition ///
 extern int signgam;
@@ -1844,20 +1360,20 @@ int fetestexcept(int __excepts);
 int fetestexceptflag(const unsigned short int* __flagp  , int __excepts);
 int fegetround();
 int fesetround(int __rounding_direction);
-int fegetenv(struct anonymous_typeX1* __envp  );
-int feholdexcept(struct anonymous_typeX1* __envp  );
-int fesetenv(const struct anonymous_typeX1* __envp  );
-int feupdateenv(const struct anonymous_typeX1* __envp  );
-int fegetmode(struct anonymous_typeX2* __modep  );
-int fesetmode(const struct anonymous_typeX2* __modep  );
+int fegetenv(struct fenv_t* __envp  );
+int feholdexcept(struct fenv_t* __envp  );
+int fesetenv(const struct fenv_t* __envp  );
+int feupdateenv(const struct fenv_t* __envp  );
+int fegetmode(struct femode_t* __modep  );
+int fesetmode(const struct femode_t* __modep  );
 int feenableexcept(int __excepts);
 int fedisableexcept(int __excepts);
 int fegetexcept();
 int fnmatch(const char* __pattern, const char* __name, int __flags);
-int glob(const char* __pattern, int __flags, int (*__errfunc)(const char*,int), struct anonymous_typeX3* __pglob  );
-void globfree(struct anonymous_typeX3* __pglob  );
-int glob64(const char* __pattern, int __flags, int (*__errfunc)(const char*,int), struct anonymous_typeX4* __pglob  );
-void globfree64(struct anonymous_typeX4* __pglob  );
+int glob(const char* __pattern, int __flags, int (*__errfunc)(const char*,int), struct glob_t* __pglob  );
+void globfree(struct glob_t* __pglob  );
+int glob64(const char* __pattern, int __flags, int (*__errfunc)(const char*,int), struct glob64_t* __pglob  );
+void globfree64(struct glob64_t* __pglob  );
 int glob_pattern_p(const char* __pattern, int __quote);
 int iconv_close(void* __cd  );
 void* iconv_open(const char* __tocode, const char* __fromcode);
@@ -1866,7 +1382,7 @@ void* catopen(const char* __cat_name, int __flag);
 char* catgets(void* __catalog  , int __set, int __number, const char* __string);
 int catclose(void* __catalog  );
 char* nl_langinfo(int __item  );
-char* nl_langinfo_l(int __item  , struct __locale_struct* __l  );
+char* nl_langinfo_l(int __item  , struct locale_t* __l  );
 void atomic_thread_fence(enum memory_order   );
 void atomic_signal_fence(enum memory_order   );
 _Bool atomic_flag_test_and_set(struct atomic_flag*   );
@@ -3330,7 +2846,7 @@ struct _IO_FILE* freopen(const char* __filename, const char* __modes, struct _IO
 struct _IO_FILE* fopen64(const char* __filename, const char* __modes);
 struct _IO_FILE* freopen64(const char* __filename, const char* __modes, struct _IO_FILE* __stream  );
 struct _IO_FILE* fdopen(int __fd, const char* __modes);
-struct _IO_FILE* fopencookie(void* __magic_cookie, const char* __modes, struct _IO_cookie_io_functions_t __io_funcs  );
+struct _IO_FILE* fopencookie(void* __magic_cookie, const char* __modes, struct cookie_io_functions_t __io_funcs  );
 struct _IO_FILE* fmemopen(void* __s, unsigned long __len  , const char* __modes);
 struct _IO_FILE* open_memstream(char** __bufloc, unsigned long* __sizeloc  );
 void setbuf(struct _IO_FILE* __stream  , char* __buf);
@@ -3394,12 +2910,12 @@ long  int ftell(struct _IO_FILE* __stream  );
 void rewind(struct _IO_FILE* __stream  );
 int fseeko(struct _IO_FILE* __stream  , long  int __off  , int __whence);
 long  int ftello(struct _IO_FILE* __stream  );
-int fgetpos(struct _IO_FILE* __stream  , struct _G_fpos_t* __pos  );
-int fsetpos(struct _IO_FILE* __stream  , const struct _G_fpos_t* __pos  );
+int fgetpos(struct _IO_FILE* __stream  , struct fpos_t* __pos  );
+int fsetpos(struct _IO_FILE* __stream  , const struct fpos_t* __pos  );
 int fseeko64(struct _IO_FILE* __stream  , long  int __off  , int __whence);
 long  int ftello64(struct _IO_FILE* __stream  );
-int fgetpos64(struct _IO_FILE* __stream  , struct _G_fpos64_t* __pos  );
-int fsetpos64(struct _IO_FILE* __stream  , const struct _G_fpos64_t* __pos  );
+int fgetpos64(struct _IO_FILE* __stream  , struct fpos64_t* __pos  );
+int fsetpos64(struct _IO_FILE* __stream  , const struct fpos64_t* __pos  );
 void clearerr(struct _IO_FILE* __stream  );
 int feof(struct _IO_FILE* __stream  );
 int ferror(struct _IO_FILE* __stream  );
@@ -3442,9 +2958,9 @@ int getcpu(unsigned int* , unsigned int* );
 int setns(int __fd, int __nstype);
 int sched_setattr(int tid  , struct sched_attr* attr  , unsigned int flags);
 int sched_getattr(int tid  , struct sched_attr* attr  , unsigned int size, unsigned int flags);
-int __sched_cpucount(unsigned long __setsize  , const struct anonymous_typeX11* __setp  );
-struct anonymous_typeX11* __sched_cpualloc(unsigned long __count  );
-void __sched_cpufree(struct anonymous_typeX11* __set  );
+int __sched_cpucount(unsigned long __setsize  , const struct cpu_set_t* __setp  );
+struct cpu_set_t* __sched_cpualloc(unsigned long __count  );
+void __sched_cpufree(struct cpu_set_t* __set  );
 int sched_setparam(int __pid  , const struct sched_param* __param  );
 int sched_getparam(int __pid  , struct sched_param* __param  );
 int sched_setscheduler(int __pid  , int __policy, const struct sched_param* __param  );
@@ -3453,41 +2969,41 @@ int sched_yield();
 int sched_get_priority_max(int __algorithm);
 int sched_get_priority_min(int __algorithm);
 int sched_rr_get_interval(int __pid  , struct timespec* __t  );
-int sched_setaffinity(int __pid  , unsigned long __cpusetsize  , const struct anonymous_typeX11* __cpuset  );
-int sched_getaffinity(int __pid  , unsigned long __cpusetsize  , struct anonymous_typeX11* __cpuset  );
-int select(int __nfds, struct anonymous_typeX13* __readfds  , struct anonymous_typeX13* __writefds  , struct anonymous_typeX13* __exceptfds  , struct timeval* __timeout  );
-int pselect(int __nfds, struct anonymous_typeX13* __readfds  , struct anonymous_typeX13* __writefds  , struct anonymous_typeX13* __exceptfds  , const struct timespec* __timeout  , const struct anonymous_typeX12* __sigmask  );
-int posix_spawn(int* __pid  , const char* __path, const struct anonymous_typeX26* __file_actions  , const struct anonymous_typeX25* __attrp  , char* __argv[], char* __envp[]);
-int posix_spawnp(int* __pid  , const char* __file, const struct anonymous_typeX26* __file_actions  , const struct anonymous_typeX25* __attrp  , char* __argv[], char* __envp[]);
-int posix_spawnattr_init(struct anonymous_typeX25* __attr  );
-int posix_spawnattr_destroy(struct anonymous_typeX25* __attr  );
-int posix_spawnattr_getsigdefault(const struct anonymous_typeX25* __attr  , struct anonymous_typeX12* __sigdefault  );
-int posix_spawnattr_setsigdefault(struct anonymous_typeX25* __attr  , const struct anonymous_typeX12* __sigdefault  );
-int posix_spawnattr_getsigmask(const struct anonymous_typeX25* __attr  , struct anonymous_typeX12* __sigmask  );
-int posix_spawnattr_setsigmask(struct anonymous_typeX25* __attr  , const struct anonymous_typeX12* __sigmask  );
-int posix_spawnattr_getflags(const struct anonymous_typeX25* __attr  , short int* __flags);
-int posix_spawnattr_setflags(struct anonymous_typeX25* _attr  , short int __flags);
-int posix_spawnattr_getpgroup(const struct anonymous_typeX25* __attr  , int* __pgroup  );
-int posix_spawnattr_setpgroup(struct anonymous_typeX25* __attr  , int __pgroup  );
-int posix_spawnattr_getschedpolicy(const struct anonymous_typeX25* __attr  , int* __schedpolicy);
-int posix_spawnattr_setschedpolicy(struct anonymous_typeX25* __attr  , int __schedpolicy);
-int posix_spawnattr_getschedparam(const struct anonymous_typeX25* __attr  , struct sched_param* __schedparam  );
-int posix_spawnattr_setschedparam(struct anonymous_typeX25* __attr  , const struct sched_param* __schedparam  );
-int posix_spawn_file_actions_init(struct anonymous_typeX26* __file_actions  );
-int posix_spawn_file_actions_destroy(struct anonymous_typeX26* __file_actions  );
-int posix_spawn_file_actions_addopen(struct anonymous_typeX26* __file_actions  , int __fd, const char* __path, int __oflag, unsigned int __mode  );
-int posix_spawn_file_actions_addclose(struct anonymous_typeX26* __file_actions  , int __fd);
-int posix_spawn_file_actions_adddup2(struct anonymous_typeX26* __file_actions  , int __fd, int __newfd);
-int posix_spawn_file_actions_addchdir_np(struct anonymous_typeX26* __actions  , const char* __path);
-int posix_spawn_file_actions_addfchdir_np(struct anonymous_typeX26*   , int __fd);
-int posix_spawn_file_actions_addclosefrom_np(struct anonymous_typeX26*   , int __from);
-int posix_spawn_file_actions_addtcsetpgrp_np(struct anonymous_typeX26*   , int __tcfd);
-int posix_spawnattr_getcgroup_np(const struct anonymous_typeX25* __attr  , int* __cgroup);
-int posix_spawnattr_setcgroup_np(struct anonymous_typeX25* __attr  , int __cgroup);
-int pidfd_spawn(int* __pidfd, const char* __path, const struct anonymous_typeX26* __facts  , const struct anonymous_typeX25* __attrp  , char* __argv[], char* __envp[]);
-int pidfd_spawnp(int* __pidfd, const char* __file, const struct anonymous_typeX26* __facts  , const struct anonymous_typeX25* __attrp  , char* __argv[], char* __envp[]);
-int wordexp(const char* __words, struct anonymous_typeX27* __pwordexp  , int __flags);
-void wordfree(struct anonymous_typeX27* __wordexp  );
+int sched_setaffinity(int __pid  , unsigned long __cpusetsize  , const struct cpu_set_t* __cpuset  );
+int sched_getaffinity(int __pid  , unsigned long __cpusetsize  , struct cpu_set_t* __cpuset  );
+int select(int __nfds, struct fd_set* __readfds  , struct fd_set* __writefds  , struct fd_set* __exceptfds  , struct timeval* __timeout  );
+int pselect(int __nfds, struct fd_set* __readfds  , struct fd_set* __writefds  , struct fd_set* __exceptfds  , const struct timespec* __timeout  , const struct __sigset_t* __sigmask  );
+int posix_spawn(int* __pid  , const char* __path, const struct posix_spawn_file_actions_t* __file_actions  , const struct posix_spawnattr_t* __attrp  , char* __argv[], char* __envp[]);
+int posix_spawnp(int* __pid  , const char* __file, const struct posix_spawn_file_actions_t* __file_actions  , const struct posix_spawnattr_t* __attrp  , char* __argv[], char* __envp[]);
+int posix_spawnattr_init(struct posix_spawnattr_t* __attr  );
+int posix_spawnattr_destroy(struct posix_spawnattr_t* __attr  );
+int posix_spawnattr_getsigdefault(const struct posix_spawnattr_t* __attr  , struct sigset_t* __sigdefault  );
+int posix_spawnattr_setsigdefault(struct posix_spawnattr_t* __attr  , const struct sigset_t* __sigdefault  );
+int posix_spawnattr_getsigmask(const struct posix_spawnattr_t* __attr  , struct sigset_t* __sigmask  );
+int posix_spawnattr_setsigmask(struct posix_spawnattr_t* __attr  , const struct sigset_t* __sigmask  );
+int posix_spawnattr_getflags(const struct posix_spawnattr_t* __attr  , short int* __flags);
+int posix_spawnattr_setflags(struct posix_spawnattr_t* _attr  , short int __flags);
+int posix_spawnattr_getpgroup(const struct posix_spawnattr_t* __attr  , int* __pgroup  );
+int posix_spawnattr_setpgroup(struct posix_spawnattr_t* __attr  , int __pgroup  );
+int posix_spawnattr_getschedpolicy(const struct posix_spawnattr_t* __attr  , int* __schedpolicy);
+int posix_spawnattr_setschedpolicy(struct posix_spawnattr_t* __attr  , int __schedpolicy);
+int posix_spawnattr_getschedparam(const struct posix_spawnattr_t* __attr  , struct sched_param* __schedparam  );
+int posix_spawnattr_setschedparam(struct posix_spawnattr_t* __attr  , const struct sched_param* __schedparam  );
+int posix_spawn_file_actions_init(struct posix_spawn_file_actions_t* __file_actions  );
+int posix_spawn_file_actions_destroy(struct posix_spawn_file_actions_t* __file_actions  );
+int posix_spawn_file_actions_addopen(struct posix_spawn_file_actions_t* __file_actions  , int __fd, const char* __path, int __oflag, unsigned int __mode  );
+int posix_spawn_file_actions_addclose(struct posix_spawn_file_actions_t* __file_actions  , int __fd);
+int posix_spawn_file_actions_adddup2(struct posix_spawn_file_actions_t* __file_actions  , int __fd, int __newfd);
+int posix_spawn_file_actions_addchdir_np(struct posix_spawn_file_actions_t* __actions  , const char* __path);
+int posix_spawn_file_actions_addfchdir_np(struct posix_spawn_file_actions_t*   , int __fd);
+int posix_spawn_file_actions_addclosefrom_np(struct posix_spawn_file_actions_t*   , int __from);
+int posix_spawn_file_actions_addtcsetpgrp_np(struct posix_spawn_file_actions_t*   , int __tcfd);
+int posix_spawnattr_getcgroup_np(const struct posix_spawnattr_t* __attr  , int* __cgroup);
+int posix_spawnattr_setcgroup_np(struct posix_spawnattr_t* __attr  , int __cgroup);
+int pidfd_spawn(int* __pidfd, const char* __path, const struct posix_spawn_file_actions_t* __facts  , const struct posix_spawnattr_t* __attrp  , char* __argv[], char* __envp[]);
+int pidfd_spawnp(int* __pidfd, const char* __file, const struct posix_spawn_file_actions_t* __facts  , const struct posix_spawnattr_t* __attrp  , char* __argv[], char* __envp[]);
+int wordexp(const char* __words, struct wordexp_t* __pwordexp  , int __flags);
+void wordfree(struct wordexp_t* __wordexp  );
 int test_headers_misc();
 // uniq global variable
 // inline function

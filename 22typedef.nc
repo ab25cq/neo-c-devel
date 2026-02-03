@@ -91,6 +91,7 @@ class sTypedefNode extends sNodeBase
                 string anonymous_code = null;
                 if(type_name === "__gnuc_va_list" || type_name === "va_list") {
                 }
+/*
                 else if(klass) {
                     klass->mAnonymous = false;
                     klass->mName = string(type_name);
@@ -101,6 +102,7 @@ class sTypedefNode extends sNodeBase
                     
                     anonymous_code = clone code;
                 }
+*/
                 else if(type->mClass && type->mClass.mFields.length() > 0) {
                     info.classes.insert(string(type_name), clone type->mClass);
                     
@@ -178,6 +180,7 @@ class sTypedefNode extends sNodeBase
             string anonymous_code = null;
             if(type_name === "__gnuc_va_list" || type_name === "va_list") {
             }
+/*
             else if(klass) {
                 klass->mAnonymous = false;
                 klass->mName = string(type_name);
@@ -188,6 +191,7 @@ class sTypedefNode extends sNodeBase
                 
                 anonymous_code = clone code;
             }
+*/
             else if(type->mClass && type->mClass.mFields.length() > 0) {
                 info.classes.insert(string(type_name), clone type->mClass);
                 

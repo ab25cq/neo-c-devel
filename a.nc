@@ -1,27 +1,38 @@
-#include <neo-c.h>
+typedef enum { aaa = 1, bbb = 0, ccc } XXX;
 
-union XYZ { int a; float b; };
-struct XYZ2 { int UHO; };
-struct {
-    union XYZ XXX;
-    struct XYZ2 YYY;
-} bbb;
+XXX UHO;
 
-union XXX { int a; int b; } ccc;
-struct YYY { int a; int b; } ddd;
+typedef enum GEGE
+{
+  _REG_ENOSYS = -1,	
+  _REG_NOERROR = 0,	
+  _REG_NOMATCH,		
 
-enum XX { kA, kB, kC } AAA;
+  
 
-typedef struct { int XXX; int YYY } sData;
+  _REG_BADPAT,		
+  _REG_ECOLLATE,	
+  _REG_ECTYPE,		
+  _REG_EESCAPE,		
+  _REG_ESUBREG,		
+  _REG_EBRACK,		
+  _REG_EPAREN,		
+  _REG_EBRACE,		
+  _REG_BADBR,		
+  _REG_ERANGE,		
+  _REG_ESPACE,		
+  _REG_BADRPT,		
+
+  
+  _REG_EEND,		
+  _REG_ESIZE,		
+  _REG_ERPAREN		
+} reg_errcode_t;
+
+reg_errcode_t XXXXXX;
 
 int main(int argc, char** argv) 
 {
-    sData a;
-    a.XXX = 111;
-    a.YYY = 222;
-    
-    puts("HELLO WORLD");
-    assert(1 == 1);
     return 0;
 }
 
