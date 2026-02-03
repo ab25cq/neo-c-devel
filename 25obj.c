@@ -1,351 +1,5 @@
 /// c_include definition ///
 /// typedef definition ///
-typedef unsigned long size_t;
-
-typedef char* string;
-
-typedef unsigned long  long   ;
-
-typedef __builtin_va_list __gnuc_va_list;
-
-typedef unsigned char __u_char;
-
-typedef unsigned short int __u_short;
-
-typedef unsigned int __u_int;
-
-typedef unsigned long  int __u_long;
-
-typedef char __int8_t;
-
-typedef unsigned char __uint8_t;
-
-typedef short int __int16_t;
-
-typedef unsigned short int __uint16_t;
-
-typedef int __int32_t;
-
-typedef unsigned int __uint32_t;
-
-typedef long  int __int64_t;
-
-typedef unsigned long  int __uint64_t;
-
-typedef char __int_least8_t  ;
-
-typedef unsigned char __uint_least8_t  ;
-
-typedef short int __int_least16_t  ;
-
-typedef unsigned short int __uint_least16_t  ;
-
-typedef int __int_least32_t  ;
-
-typedef unsigned int __uint_least32_t  ;
-
-typedef long  int __int_least64_t  ;
-
-typedef unsigned long  int __uint_least64_t  ;
-
-typedef long  int __quad_t;
-
-typedef unsigned long  int __u_quad_t;
-
-typedef long  int __intmax_t;
-
-typedef unsigned long  int __uintmax_t;
-
-typedef unsigned long  int __dev_t;
-
-typedef unsigned int __uid_t;
-
-typedef unsigned int __gid_t;
-
-typedef unsigned long  int __ino_t;
-
-typedef unsigned long  int __ino64_t;
-
-typedef unsigned int __mode_t;
-
-typedef unsigned long  int __nlink_t;
-
-typedef long  int __off_t;
-
-typedef long  int __off64_t;
-
-typedef int __pid_t;
-
-typedef struct __fsid_t __fsid_t  ;
-
-typedef long  int __clock_t;
-
-typedef unsigned long  int __rlim_t;
-
-typedef unsigned long  int __rlim64_t;
-
-typedef unsigned int __id_t;
-
-typedef long  int __time_t;
-
-typedef unsigned int __useconds_t;
-
-typedef long  int __suseconds_t;
-
-typedef long  int __suseconds64_t;
-
-typedef int __daddr_t;
-
-typedef int __key_t;
-
-typedef int __clockid_t;
-
-typedef void* __timer_t;
-
-typedef long  int __blksize_t;
-
-typedef long  int __blkcnt_t;
-
-typedef long  int __blkcnt64_t;
-
-typedef unsigned long  int __fsblkcnt_t;
-
-typedef unsigned long  int __fsblkcnt64_t;
-
-typedef unsigned long  int __fsfilcnt_t;
-
-typedef unsigned long  int __fsfilcnt64_t;
-
-typedef long  int __fsword_t;
-
-typedef long  int __ssize_t;
-
-typedef long  int __syscall_slong_t;
-
-typedef unsigned long  int __syscall_ulong_t;
-
-typedef long  int __loff_t  ;
-
-typedef char* __caddr_t;
-
-typedef long  int __intptr_t;
-
-typedef unsigned int __socklen_t;
-
-typedef int __sig_atomic_t;
-
-typedef struct anonymous_typeX1 __mbstate_t;
-
-typedef struct _G_fpos_t __fpos_t  ;
-
-typedef struct _G_fpos64_t __fpos64_t  ;
-
-typedef struct _IO_FILE __FILE  ;
-
-typedef struct _IO_FILE FILE  ;
-
-typedef void _IO_lock_t;
-
-typedef long  int (*cookie_read_function_t)(void*,char*,unsigned long);
-
-typedef long  int (*cookie_write_function_t)(void*,const char*,unsigned long);
-
-typedef int (*cookie_seek_function_t)(void*,long  int*,int);
-
-typedef int (*cookie_close_function_t)(void*);
-
-typedef struct _IO_cookie_io_functions_t cookie_io_functions_t  ;
-
-typedef long  int off_t  ;
-
-typedef long  int off64_t  ;
-
-typedef long  int ssize_t  ;
-
-typedef struct _G_fpos_t fpos_t  ;
-
-typedef struct _G_fpos64_t fpos64_t  ;
-
-typedef int wchar_t;
-
-typedef struct anonymous_typeX4 div_t;
-
-typedef struct anonymous_typeX5 ldiv_t;
-
-typedef struct anonymous_typeX6 lldiv_t;
-
-typedef struct __locale_struct* __locale_t  ;
-
-typedef struct __locale_struct* locale_t  ;
-
-typedef unsigned char u_char  ;
-
-typedef unsigned short int u_short  ;
-
-typedef unsigned int u_int  ;
-
-typedef unsigned long  int u_long  ;
-
-typedef long  int quad_t  ;
-
-typedef unsigned long  int u_quad_t  ;
-
-typedef struct __fsid_t fsid_t  ;
-
-typedef long  int loff_t  ;
-
-typedef unsigned long  int ino_t  ;
-
-typedef unsigned long  int ino64_t  ;
-
-typedef unsigned long  int dev_t  ;
-
-typedef unsigned int gid_t  ;
-
-typedef unsigned int mode_t  ;
-
-typedef unsigned long  int nlink_t  ;
-
-typedef unsigned int uid_t  ;
-
-typedef int pid_t  ;
-
-typedef unsigned int id_t  ;
-
-typedef int daddr_t  ;
-
-typedef char* caddr_t  ;
-
-typedef int key_t  ;
-
-typedef long  int clock_t  ;
-
-typedef int clockid_t  ;
-
-typedef long  int time_t  ;
-
-typedef void* timer_t  ;
-
-typedef unsigned int useconds_t  ;
-
-typedef long  int suseconds_t  ;
-
-typedef unsigned long  int ulong;
-
-typedef unsigned short int ushort;
-
-typedef unsigned int uint;
-
-typedef char int8_t  ;
-
-typedef short int int16_t  ;
-
-typedef int int32_t  ;
-
-typedef long  int int64_t  ;
-
-typedef unsigned char u_int8_t  ;
-
-typedef unsigned short int u_int16_t  ;
-
-typedef unsigned int u_int32_t  ;
-
-typedef unsigned long  int u_int64_t  ;
-
-typedef int register_t __attribute__ ((__mode__ (__word__)));
-
-typedef struct anonymous_typeX7 __sigset_t;
-
-typedef struct anonymous_typeX7 sigset_t  ;
-
-typedef long  int __fd_mask;
-
-typedef struct anonymous_typeX8 fd_set;
-
-typedef long  int fd_mask  ;
-
-typedef long  int blksize_t  ;
-
-typedef long  int blkcnt_t  ;
-
-typedef unsigned long  int fsblkcnt_t  ;
-
-typedef unsigned long  int fsfilcnt_t  ;
-
-typedef long  int blkcnt64_t  ;
-
-typedef unsigned long  int fsblkcnt64_t  ;
-
-typedef unsigned long  int fsfilcnt64_t  ;
-
-typedef union anonymous_typeZ9 __atomic_wide_counter;
-
-typedef struct __pthread_internal_list __pthread_list_t  ;
-
-typedef struct __pthread_internal_slist __pthread_slist_t  ;
-
-typedef unsigned int __tss_t;
-
-typedef unsigned long  int __thrd_t;
-
-typedef struct anonymous_typeX11 __once_flag;
-
-typedef unsigned long  int pthread_t;
-
-typedef union anonymous_typeZ12 pthread_mutexattr_t;
-
-typedef union anonymous_typeZ13 pthread_condattr_t;
-
-typedef unsigned int pthread_key_t;
-
-typedef int pthread_once_t;
-
-typedef union pthread_attr_t pthread_attr_t  ;
-
-typedef union anonymous_typeZ14 pthread_mutex_t;
-
-typedef union anonymous_typeZ15 pthread_cond_t;
-
-typedef union anonymous_typeZ16 pthread_rwlock_t;
-
-typedef union anonymous_typeZ17 pthread_rwlockattr_t;
-
-typedef int pthread_spinlock_t;
-
-typedef union anonymous_typeZ18 pthread_barrier_t;
-
-typedef union anonymous_typeZ19 pthread_barrierattr_t;
-
-typedef int (*__compar_fn_t)(const void*,const void*);
-
-typedef int (*comparison_fn_t)(const void*,const void*)  ;
-
-typedef int (*__compar_d_fn_t)(const void*,const void*,void*);
-
-typedef __builtin_va_list va_list;
-
-typedef int error_t;
-
-typedef struct re_program* re_t  ;
-
-typedef struct re_capture re_capture  ;
-
-typedef struct regex_t regex_t;
-
-typedef struct re_program regex_program_t  ;
-
-typedef struct anonymous_typeX24 compiler_state;
-
-typedef struct anonymous_typeX25 match_context;
-
-typedef unsigned int wint_t;
-
-typedef struct anonymous_typeX1 mbstate_t  ;
-
-typedef int* wstring  ;
-
-typedef struct MacroSnapshot MacroSnapshot;
-
 /// previous struct definition ///
 struct _IO_FILE;
 
@@ -357,7 +11,6 @@ struct _IO_wide_data;
 
 struct obstack;
 
-#include <assert.h>
 struct re_program;
 
 struct tm;
@@ -377,583 +30,664 @@ struct sVarTable;
 struct sBlock;
 
 /// struct definition ///
-struct __fsid_t
-{
-    int __val[2];
-};
-
-union anonymous_typeZ2
-{
-unsigned int __wch;
-char __wchb[4];
-};
-
-union anonymous_typeZ3
-{
-unsigned int __wch;
-char __wchb[4];
-};
-
-struct anonymous_typeX1
-{
-    int __count;
-    union {
-        unsigned int __wch;
-        char __wchb[4];
-    } __value;
-};
-
-struct _G_fpos_t
-{
-    long  int __pos  ;
-    struct {
-        int __count;
-        union {
-            unsigned int __wch;
-            char __wchb[4];
-        } __value;
-    } __state;
-};
-
-struct _G_fpos64_t
-{
-    long  int __pos  ;
-    struct {
-        int __count;
-        union {
-            unsigned int __wch;
-            char __wchb[4];
-        } __value;
-    } __state;
-};
-
-struct _IO_FILE
-{
-    int _flags;
-    char* _IO_read_ptr;
-    char* _IO_read_end;
-    char* _IO_read_base;
-    char* _IO_write_base;
-    char* _IO_write_ptr;
-    char* _IO_write_end;
-    char* _IO_buf_base;
-    char* _IO_buf_end;
-    char* _IO_save_base;
-    char* _IO_backup_base;
-    char* _IO_save_end;
-    struct _IO_marker* _markers  ;
-    struct _IO_FILE* _chain  ;
-    int _fileno;
-    int _flags2:24;
-    char _short_backupbuf[1];
-    long  int _old_offset  ;
-    unsigned short int _cur_column;
-    char _vtable_offset;
-    char _shortbuf[1];
-    void* _lock  ;
-    long  int _offset  ;
-    struct _IO_codecvt* _codecvt  ;
-    struct _IO_wide_data* _wide_data  ;
-    struct _IO_FILE* _freeres_list  ;
-    void* _freeres_buf;
-    struct _IO_FILE** _prevchain  ;
-    int _mode;
-    int _unused3;
-    unsigned long  int _total_written  ;
-    char _unused2[12*sizeof(int)-5*sizeof(void*)];
-};
-
-struct _IO_cookie_io_functions_t
-{
-    long  int (*(*read))(void*,char*,unsigned long)  ;
-    long  int (*(*write))(void*,const char*,unsigned long)  ;
-    int (*(*seek))(void*,long  int*,int)  ;
-    int (*(*close))(void*)  ;
-};
-
-struct anonymous_typeX4
-{
-    int quot;
-    int rem;
-};
-
-struct anonymous_typeX5
-{
-    long  int quot;
-    long  int rem;
-};
-
-struct anonymous_typeX6
-{
-    long long int quot;
-    long long int rem;
-};
-
-struct __locale_struct
-{
-    struct __locale_data* __locales[13];
-    const unsigned short int* __ctype_b;
-    const int* __ctype_tolower;
-    const int* __ctype_toupper;
-    const char* __names[13];
-};
-
-struct anonymous_typeX7
-{
-    unsigned long  int __val[(1024/(8*sizeof(unsigned long  int)))];
-};
-
-struct timeval
-{
-    long  int tv_sec  ;
-    long  int tv_usec  ;
-};
-
-struct timespec
-{
-    long  int tv_sec  ;
-    long  int tv_nsec  ;
-};
-
-struct anonymous_typeX8
-{
-    long  int fds_bits[1024/(8*(int)sizeof(long  int))]  ;
-};
-
-struct anonymous_typeX10
-{
-    unsigned int __low;
-    unsigned int __high;
-};
-
-union anonymous_typeZ9
-{
-unsigned long long int __value64;
-    struct {
-        unsigned int __low;
-        unsigned int __high;
-    } __value32;
-};
-
-struct __pthread_internal_list
-{
-    struct __pthread_internal_list* __prev  ;
-    struct __pthread_internal_list* __next  ;
-};
-
-struct __pthread_internal_slist
-{
-    struct __pthread_internal_slist* __next  ;
-};
-
-struct __pthread_mutex_s
-{
-    int __lock;
-    unsigned int __count;
-    int __owner;
-    unsigned int __nusers;
-    int __kind;
-    short __spins;
-    short __elision;
-    struct __pthread_internal_list __list  ;
-};
-
-struct __pthread_rwlock_arch_t
-{
-    unsigned int __readers;
-    unsigned int __writers;
-    unsigned int __wrphase_futex;
-    unsigned int __writers_futex;
-    unsigned int __pad3;
-    unsigned int __pad4;
-    int __cur_writer;
-    int __shared;
-    char __rwelision;
-    unsigned char __pad1[7];
-    unsigned long  int __pad2;
-    unsigned int __flags;
-};
-
-struct __pthread_cond_s
-{
-    union {
-        unsigned long long int __value64;
-        struct {
-            unsigned int __low;
-            unsigned int __high;
-        } __value32;
-    } __wseq;
-    union {
-        unsigned long long int __value64;
-        struct {
-            unsigned int __low;
-            unsigned int __high;
-        } __value32;
-    } __g1_start;
-    unsigned int __g_size[2];
-    unsigned int __g1_orig_size;
-    unsigned int __wrefs;
-    unsigned int __g_signals[2];
-    unsigned int __unused_initialized_1;
-    unsigned int __unused_initialized_2;
-};
-
-struct anonymous_typeX11
-{
-    int __data;
-};
-
-union anonymous_typeZ12
-{
-char __size[4];
-int __align;
-};
-
-union anonymous_typeZ13
-{
-char __size[4];
-int __align;
-};
-
-union pthread_attr_t
-{
-char __size[56];
-long  int __align;
-};
-
-union anonymous_typeZ14
-{
-struct __pthread_mutex_s __data  ;
-char __size[40];
-long  int __align;
-};
-
-union anonymous_typeZ15
-{
-struct __pthread_cond_s __data  ;
-char __size[48];
-long long int __align;
-};
-
-union anonymous_typeZ16
-{
-struct __pthread_rwlock_arch_t __data  ;
-char __size[56];
-long  int __align;
-};
-
-union anonymous_typeZ17
-{
-char __size[8];
-long  int __align;
-};
-
-union anonymous_typeZ18
-{
-char __size[32];
-long  int __align;
-};
-
-union anonymous_typeZ19
-{
-char __size[4];
-int __align;
-};
-
-struct random_data
-{
-    int* fptr  ;
-    int* rptr  ;
-    int* state  ;
-    int rand_type;
-    int rand_deg;
-    int rand_sep;
-    int* end_ptr  ;
-};
-
-struct drand48_data
-{
-    unsigned short int __x[3];
-    unsigned short int __old_x[3];
-    unsigned short int __c;
-    unsigned short int __init;
-    unsigned long long int __a;
-};
-
-struct lconv
-{
-    char* decimal_point;
-    char* thousands_sep;
-    char* grouping;
-    char* int_curr_symbol;
-    char* currency_symbol;
-    char* mon_decimal_point;
-    char* mon_thousands_sep;
-    char* mon_grouping;
-    char* positive_sign;
-    char* negative_sign;
-    char int_frac_digits;
-    char frac_digits;
-    char p_cs_precedes;
-    char p_sep_by_space;
-    char n_cs_precedes;
-    char n_sep_by_space;
-    char p_sign_posn;
-    char n_sign_posn;
-    char int_p_cs_precedes;
-    char int_p_sep_by_space;
-    char int_n_cs_precedes;
-    char int_n_sep_by_space;
-    char int_p_sign_posn;
-    char int_n_sign_posn;
-};
-
-struct buffer
-{
-    char* buf;
-    int len;
-    int size;
-};
-
-struct neo_frame
-{
-    struct neo_frame* prev  ;
-    char* fun_name;
-};
-
-struct sMemHeader
-{
-    long size;
-    int allocated;
-    struct sMemHeader* next  ;
-    struct sMemHeader* prev  ;
-    struct sMemHeader* free_next  ;
-    char* fun_name[8];
-    const char* class_name;
-};
-
-struct list_item$1char$
-{
-    char item;
-    struct list_item$1char$* prev;
-    struct list_item$1char$* next;
-};
-
-struct list$1char$
-{
-    struct list_item$1char$* head;
-    struct list_item$1char$* tail;
-    int len;
-    struct list_item$1char$* it;
-};
-
-struct list_item$1char$p
-{
-    char* item;
-    struct list_item$1char$p* prev;
-    struct list_item$1char$p* next;
-};
-
-struct list$1char$p
-{
-    struct list_item$1char$p* head;
-    struct list_item$1char$p* tail;
-    int len;
-    struct list_item$1char$p* it;
-};
-
-struct list_item$1short$
-{
-    short item;
-    struct list_item$1short$* prev;
-    struct list_item$1short$* next;
-};
-
-struct list$1short$
-{
-    struct list_item$1short$* head;
-    struct list_item$1short$* tail;
-    int len;
-    struct list_item$1short$* it;
-};
-
-struct list_item$1int$
-{
-    int item;
-    struct list_item$1int$* prev;
-    struct list_item$1int$* next;
-};
-
-struct list$1int$
-{
-    struct list_item$1int$* head;
-    struct list_item$1int$* tail;
-    int len;
-    struct list_item$1int$* it;
-};
-
-struct list_item$1long$
-{
-    long item;
-    struct list_item$1long$* prev;
-    struct list_item$1long$* next;
-};
-
-struct list$1long$
-{
-    struct list_item$1long$* head;
-    struct list_item$1long$* tail;
-    int len;
-    struct list_item$1long$* it;
-};
-
-struct list_item$1float$
-{
-    float item;
-    struct list_item$1float$* prev;
-    struct list_item$1float$* next;
-};
-
-struct list$1float$
-{
-    struct list_item$1float$* head;
-    struct list_item$1float$* tail;
-    int len;
-    struct list_item$1float$* it;
-};
-
-struct list_item$1double$
-{
-    double item;
-    struct list_item$1double$* prev;
-    struct list_item$1double$* next;
-};
-
-struct list$1double$
-{
-    struct list_item$1double$* head;
-    struct list_item$1double$* tail;
-    int len;
-    struct list_item$1double$* it;
-};
-
-struct list_item$1char$ph
-{
-    char* item  ;
-    struct list_item$1char$ph* prev;
-    struct list_item$1char$ph* next;
-};
-
-struct list$1char$ph
-{
-    struct list_item$1char$ph* head;
-    struct list_item$1char$ph* tail;
-    int len;
-    struct list_item$1char$ph* it;
-};
-
-struct re_capture
-{
-    int start;
-    int length;
-};
-
-enum { RE_UNUSED 
-,RE_DOT 
-,RE_BEGIN 
-,RE_END 
-,RE_QUESTIONMARK 
-,RE_STAR 
-,RE_PLUS 
-,RE_CHAR 
-,RE_CHAR_CLASS 
-,RE_INV_CHAR_CLASS 
-,RE_DIGIT 
-,RE_NOT_DIGIT 
-,RE_ALPHA 
-,RE_NOT_ALPHA 
-,RE_WHITESPACE 
-,RE_NOT_WHITESPACE 
-,RE_GROUP 
-,RE_GROUP_END 
-};
-
-struct anonymous_typeX21
-{
-    struct regex_t* first  ;
-    struct regex_t* last  ;
-    int id;
-};
-
-union anonymous_typeZ20
-{
-unsigned char ch;
-unsigned char* ccl;
-    struct {
-        struct regex_t* first  ;
-        struct regex_t* last  ;
-        int id;
-    } group;
-};
-
-struct anonymous_typeX23
-{
-    struct regex_t* first  ;
-    struct regex_t* last  ;
-    int id;
-};
-
-union anonymous_typeZ22
-{
-unsigned char ch;
-unsigned char* ccl;
-    struct {
-        struct regex_t* first  ;
-        struct regex_t* last  ;
-        int id;
-    } group;
-};
-
-struct regex_t
-{
-    unsigned char type;
-    union {
-        unsigned char ch;
-        unsigned char* ccl;
-        struct {
-            struct regex_t* first  ;
-            struct regex_t* last  ;
-            int id;
-        } group;
-    } u;
-    struct regex_t* next  ;
-};
-
-struct re_program
-{
-    struct regex_t* start  ;
-    int group_count;
-};
-
-struct anonymous_typeX24
-{
-    struct regex_t* pool  ;
-    int pool_capacity;
-    int pool_size;
-    unsigned char* ccl_buf;
-    int ccl_capacity;
-    int ccl_idx;
-    int group_count;
-};
-
-struct anonymous_typeX25
-{
-    const char* base;
-    struct re_capture* captures  ;
-    int capture_capacity;
-    int total_groups;
-    _Bool ignore_case;
-};
+
+typedef unsigned long size_t;
+
+
+typedef char* string;
+
+
+typedef unsigned long  long   ;
+
+
+typedef __builtin_va_list __gnuc_va_list;
+
+
+typedef unsigned char __u_char;
+
+
+typedef unsigned short int __u_short;
+
+
+typedef unsigned int __u_int;
+
+
+typedef unsigned long  int __u_long;
+
+
+typedef char __int8_t;
+
+
+typedef unsigned char __uint8_t;
+
+
+typedef short int __int16_t;
+
+
+typedef unsigned short int __uint16_t;
+
+
+typedef int __int32_t;
+
+
+typedef unsigned int __uint32_t;
+
+
+typedef long  int __int64_t;
+
+
+typedef unsigned long  int __uint64_t;
+
+
+typedef char __int_least8_t  ;
+
+
+typedef unsigned char __uint_least8_t  ;
+
+
+typedef short int __int_least16_t  ;
+
+
+typedef unsigned short int __uint_least16_t  ;
+
+
+typedef int __int_least32_t  ;
+
+
+typedef unsigned int __uint_least32_t  ;
+
+
+typedef long  int __int_least64_t  ;
+
+
+typedef unsigned long  int __uint_least64_t  ;
+
+
+typedef long  int __quad_t;
+
+
+typedef unsigned long  int __u_quad_t;
+
+
+typedef long  int __intmax_t;
+
+
+typedef unsigned long  int __uintmax_t;
+
+
+typedef unsigned long  int __dev_t;
+
+
+typedef unsigned int __uid_t;
+
+
+typedef unsigned int __gid_t;
+
+
+typedef unsigned long  int __ino_t;
+
+
+typedef unsigned long  int __ino64_t;
+
+
+typedef unsigned int __mode_t;
+
+
+typedef unsigned long  int __nlink_t;
+
+
+typedef long  int __off_t;
+
+
+typedef long  int __off64_t;
+
+
+typedef int __pid_t;
+
+struct __fsid_t {int __val[2]; };
+
+typedef struct __fsid_t __fsid_t  ;
+
+
+typedef long  int __clock_t;
+
+
+typedef unsigned long  int __rlim_t;
+
+
+typedef unsigned long  int __rlim64_t;
+
+
+typedef unsigned int __id_t;
+
+
+typedef long  int __time_t;
+
+
+typedef unsigned int __useconds_t;
+
+
+typedef long  int __suseconds_t;
+
+
+typedef long  int __suseconds64_t;
+
+
+typedef int __daddr_t;
+
+
+typedef int __key_t;
+
+
+typedef int __clockid_t;
+
+
+typedef void* __timer_t;
+
+
+typedef long  int __blksize_t;
+
+
+typedef long  int __blkcnt_t;
+
+
+typedef long  int __blkcnt64_t;
+
+
+typedef unsigned long  int __fsblkcnt_t;
+
+
+typedef unsigned long  int __fsblkcnt64_t;
+
+
+typedef unsigned long  int __fsfilcnt_t;
+
+
+typedef unsigned long  int __fsfilcnt64_t;
+
+
+typedef long  int __fsword_t;
+
+
+typedef long  int __ssize_t;
+
+
+typedef long  int __syscall_slong_t;
+
+
+typedef unsigned long  int __syscall_ulong_t;
+
+
+typedef long  int __loff_t  ;
+
+
+typedef char* __caddr_t;
+
+
+typedef long  int __intptr_t;
+
+
+typedef unsigned int __socklen_t;
+
+
+typedef int __sig_atomic_t;
+
+struct __mbstate_t {int __count; union { unsigned int __wch; char __wchb[4]; }  __value  ; };
+
+typedef struct __mbstate_t __mbstate_t  ;
+
+struct _G_fpos_t {long  int __pos  ; struct __mbstate_t __state  ; };
+
+
+struct __fpos_t {long  int __pos  ; struct __mbstate_t __state  ; };
+
+typedef struct __fpos_t __fpos_t  ;
+
+struct _G_fpos64_t {long  int __pos  ; struct __mbstate_t __state  ; };
+
+
+struct __fpos64_t {long  int __pos  ; struct __mbstate_t __state  ; };
+
+typedef struct __fpos64_t __fpos64_t  ;
+
+
+typedef struct _IO_FILE __FILE  ;
+
+
+typedef struct _IO_FILE FILE  ;
+
+
+typedef void _IO_lock_t;
+
+struct _IO_FILE {int _flags; char* _IO_read_ptr; char* _IO_read_end; char* _IO_read_base; char* _IO_write_base; char* _IO_write_ptr; char* _IO_write_end; char* _IO_buf_base; char* _IO_buf_end; char* _IO_save_base; char* _IO_backup_base; char* _IO_save_end; struct _IO_marker* _markers  ; struct _IO_FILE* _chain  ; int _fileno; int _flags2:24; char _short_backupbuf[1]; long  int _old_offset  ; unsigned short int _cur_column; char _vtable_offset; char _shortbuf[1]; void* _lock  ; long  int _offset  ; struct _IO_codecvt* _codecvt  ; struct _IO_wide_data* _wide_data  ; struct _IO_FILE* _freeres_list  ; void* _freeres_buf; struct _IO_FILE** _prevchain  ; int _mode; int _unused3; unsigned long  int _total_written  ; char _unused2[12*sizeof(int)-5*sizeof(void*)]; };
+
+
+
+typedef long  int (*cookie_read_function_t)(void*,char*,unsigned long);
+
+
+typedef long  int (*cookie_write_function_t)(void*,const char*,unsigned long);
+
+
+typedef int (*cookie_seek_function_t)(void*,long  int*,int);
+
+
+typedef int (*cookie_close_function_t)(void*);
+
+struct _IO_cookie_io_functions_t {long  int (*(*read))(void*,char*,unsigned long)  ; long  int (*(*write))(void*,const char*,unsigned long)  ; int (*(*seek))(void*,long  int*,int)  ; int (*(*close))(void*)  ; };
+
+
+struct cookie_io_functions_t {long  int (*(*read))(void*,char*,unsigned long)  ; long  int (*(*write))(void*,const char*,unsigned long)  ; int (*(*seek))(void*,long  int*,int)  ; int (*(*close))(void*)  ; };
+
+typedef struct cookie_io_functions_t cookie_io_functions_t  ;
+
+
+typedef long  int off_t  ;
+
+
+typedef long  int off64_t  ;
+
+
+typedef long  int ssize_t  ;
+
+struct fpos_t {long  int __pos  ; struct __mbstate_t __state  ; };
+
+typedef struct fpos_t fpos_t  ;
+
+struct fpos64_t {long  int __pos  ; struct __mbstate_t __state  ; };
+
+typedef struct fpos64_t fpos64_t  ;
+
+
+typedef int wchar_t;
+
+struct div_t {int quot; int rem; };
+
+typedef struct div_t div_t  ;
+
+struct ldiv_t {long  int quot; long  int rem; };
+
+typedef struct ldiv_t ldiv_t  ;
+
+struct lldiv_t {long long int quot; long long int rem; };
+
+typedef struct lldiv_t lldiv_t  ;
+
+struct __locale_struct {struct __locale_data* __locales[13]; const unsigned short int* __ctype_b; const int* __ctype_tolower; const int* __ctype_toupper; const char* __names[13]; };
+
+
+struct __locale_t {struct __locale_data* __locales[13]; const unsigned short int* __ctype_b; const int* __ctype_tolower; const int* __ctype_toupper; const char* __names[13]; };
+
+typedef struct __locale_t* __locale_t  ;
+
+struct locale_t {struct __locale_data* __locales[13]; const unsigned short int* __ctype_b; const int* __ctype_tolower; const int* __ctype_toupper; const char* __names[13]; };
+
+typedef struct locale_t* locale_t  ;
+
+
+typedef unsigned char u_char  ;
+
+
+typedef unsigned short int u_short  ;
+
+
+typedef unsigned int u_int  ;
+
+
+typedef unsigned long  int u_long  ;
+
+
+typedef long  int quad_t  ;
+
+
+typedef unsigned long  int u_quad_t  ;
+
+struct fsid_t {int __val[2]; };
+
+typedef struct fsid_t fsid_t  ;
+
+
+typedef long  int loff_t  ;
+
+
+typedef unsigned long  int ino_t  ;
+
+
+typedef unsigned long  int ino64_t  ;
+
+
+typedef unsigned long  int dev_t  ;
+
+
+typedef unsigned int gid_t  ;
+
+
+typedef unsigned int mode_t  ;
+
+
+typedef unsigned long  int nlink_t  ;
+
+
+typedef unsigned int uid_t  ;
+
+
+typedef int pid_t  ;
+
+
+typedef unsigned int id_t  ;
+
+
+typedef int daddr_t  ;
+
+
+typedef char* caddr_t  ;
+
+
+typedef int key_t  ;
+
+
+typedef long  int clock_t  ;
+
+
+typedef int clockid_t  ;
+
+
+typedef long  int time_t  ;
+
+
+typedef void* timer_t  ;
+
+
+typedef unsigned int useconds_t  ;
+
+
+typedef long  int suseconds_t  ;
+
+
+typedef unsigned long  int ulong;
+
+
+typedef unsigned short int ushort;
+
+
+typedef unsigned int uint;
+
+
+typedef char int8_t  ;
+
+
+typedef short int int16_t  ;
+
+
+typedef int int32_t  ;
+
+
+typedef long  int int64_t  ;
+
+
+typedef unsigned char u_int8_t  ;
+
+
+typedef unsigned short int u_int16_t  ;
+
+
+typedef unsigned int u_int32_t  ;
+
+
+typedef unsigned long  int u_int64_t  ;
+
+
+typedef int register_t __attribute__ ((__mode__ (__word__)));
+
+struct __sigset_t {unsigned long  int __val[(1024/(8*sizeof(unsigned long  int)))]; };
+
+typedef struct __sigset_t __sigset_t  ;
+
+struct sigset_t {unsigned long  int __val[(1024/(8*sizeof(unsigned long  int)))]; };
+
+typedef struct sigset_t sigset_t  ;
+
+struct timeval {long  int tv_sec  ; long  int tv_usec  ; };
+
+
+struct timespec {long  int tv_sec  ; long  int tv_nsec  ; };
+
+
+
+typedef long  int __fd_mask;
+
+struct fd_set {long  int fds_bits[1024/(8*(int)sizeof(long  int))]  ; };
+
+typedef struct fd_set fd_set  ;
+
+
+typedef long  int fd_mask  ;
+
+
+typedef long  int blksize_t  ;
+
+
+typedef long  int blkcnt_t  ;
+
+
+typedef unsigned long  int fsblkcnt_t  ;
+
+
+typedef unsigned long  int fsfilcnt_t  ;
+
+
+typedef long  int blkcnt64_t  ;
+
+
+typedef unsigned long  int fsblkcnt64_t  ;
+
+
+typedef unsigned long  int fsfilcnt64_t  ;
+
+union __atomic_wide_counter {unsigned long long int __value64; struct { unsigned int __low; unsigned int __high; }  __value32  ; };
+
+typedef union __atomic_wide_counter __atomic_wide_counter  ;
+
+struct __pthread_internal_list {struct __pthread_internal_list* __prev  ; struct __pthread_internal_list* __next  ; };
+
+
+struct __pthread_list_t {struct __pthread_internal_list* __prev  ; struct __pthread_internal_list* __next  ; };
+
+typedef struct __pthread_list_t __pthread_list_t  ;
+
+struct __pthread_internal_slist {struct __pthread_internal_slist* __next  ; };
+
+
+struct __pthread_slist_t {struct __pthread_internal_slist* __next  ; };
+
+typedef struct __pthread_slist_t __pthread_slist_t  ;
+
+struct __pthread_mutex_s {int __lock; unsigned int __count; int __owner; unsigned int __nusers; int __kind; short __spins; short __elision; struct __pthread_list_t __list  ; };
+
+
+struct __pthread_rwlock_arch_t {unsigned int __readers; unsigned int __writers; unsigned int __wrphase_futex; unsigned int __writers_futex; unsigned int __pad3; unsigned int __pad4; int __cur_writer; int __shared; char __rwelision; unsigned char __pad1[7]; unsigned long  int __pad2; unsigned int __flags; };
+
+
+struct __pthread_cond_s {union __atomic_wide_counter __wseq  ; union __atomic_wide_counter __g1_start  ; unsigned int __g_size[2]; unsigned int __g1_orig_size; unsigned int __wrefs; unsigned int __g_signals[2]; unsigned int __unused_initialized_1; unsigned int __unused_initialized_2; };
+
+
+
+typedef unsigned int __tss_t;
+
+
+typedef unsigned long  int __thrd_t;
+
+struct __once_flag {int __data; };
+
+typedef struct __once_flag __once_flag  ;
+
+
+typedef unsigned long  int pthread_t;
+
+union pthread_mutexattr_t {char __size[4]; int __align; };
+
+typedef union pthread_mutexattr_t pthread_mutexattr_t  ;
+
+union pthread_condattr_t {char __size[4]; int __align; };
+
+typedef union pthread_condattr_t pthread_condattr_t  ;
+
+
+typedef unsigned int pthread_key_t;
+
+
+typedef int pthread_once_t;
+
+union pthread_attr_t {char __size[56]; long  int __align; };
+
+typedef union pthread_attr_t pthread_attr_t  ;
+
+union pthread_mutex_t {struct __pthread_mutex_s __data  ; char __size[40]; long  int __align; };
+
+typedef union pthread_mutex_t pthread_mutex_t  ;
+
+union pthread_cond_t {struct __pthread_cond_s __data  ; char __size[48]; long long int __align; };
+
+typedef union pthread_cond_t pthread_cond_t  ;
+
+union pthread_rwlock_t {struct __pthread_rwlock_arch_t __data  ; char __size[56]; long  int __align; };
+
+typedef union pthread_rwlock_t pthread_rwlock_t  ;
+
+union pthread_rwlockattr_t {char __size[8]; long  int __align; };
+
+typedef union pthread_rwlockattr_t pthread_rwlockattr_t  ;
+
+
+typedef int pthread_spinlock_t;
+
+union pthread_barrier_t {char __size[32]; long  int __align; };
+
+typedef union pthread_barrier_t pthread_barrier_t  ;
+
+union pthread_barrierattr_t {char __size[4]; int __align; };
+
+typedef union pthread_barrierattr_t pthread_barrierattr_t  ;
+
+struct random_data {int* fptr  ; int* rptr  ; int* state  ; int rand_type; int rand_deg; int rand_sep; int* end_ptr  ; };
+
+
+struct drand48_data {unsigned short int __x[3]; unsigned short int __old_x[3]; unsigned short int __c; unsigned short int __init; unsigned long long int __a; };
+
+
+
+typedef int (*__compar_fn_t)(const void*,const void*);
+
+
+typedef int (*comparison_fn_t)(const void*,const void*)  ;
+
+
+typedef int (*__compar_d_fn_t)(const void*,const void*,void*);
+
+
+typedef __builtin_va_list va_list;
+
+struct lconv {char* decimal_point; char* thousands_sep; char* grouping; char* int_curr_symbol; char* currency_symbol; char* mon_decimal_point; char* mon_thousands_sep; char* mon_grouping; char* positive_sign; char* negative_sign; char int_frac_digits; char frac_digits; char p_cs_precedes; char p_sep_by_space; char n_cs_precedes; char n_sep_by_space; char p_sign_posn; char n_sign_posn; char int_p_cs_precedes; char int_p_sep_by_space; char int_n_cs_precedes; char int_n_sep_by_space; char int_p_sign_posn; char int_n_sign_posn; };
+
+
+
+typedef int error_t;
+
+struct buffer {char* buf; int len; int size; };
+
+
+struct neo_frame {struct neo_frame* prev  ; char* fun_name; };
+
+
+struct sMemHeader {long size; int allocated; struct sMemHeader* next  ; struct sMemHeader* prev  ; struct sMemHeader* free_next  ; char* fun_name[8]; const char* class_name; };
+
+
+struct list_item$1char$ {char item; struct list_item$1char$* prev; struct list_item$1char$* next; };
+
+
+struct list$1char$ {struct list_item$1char$* head; struct list_item$1char$* tail; int len; struct list_item$1char$* it; };
+
+
+struct list_item$1char$p {char* item; struct list_item$1char$p* prev; struct list_item$1char$p* next; };
+
+
+struct list$1char$p {struct list_item$1char$p* head; struct list_item$1char$p* tail; int len; struct list_item$1char$p* it; };
+
+
+struct list_item$1short$ {short item; struct list_item$1short$* prev; struct list_item$1short$* next; };
+
+
+struct list$1short$ {struct list_item$1short$* head; struct list_item$1short$* tail; int len; struct list_item$1short$* it; };
+
+
+struct list_item$1int$ {int item; struct list_item$1int$* prev; struct list_item$1int$* next; };
+
+
+struct list$1int$ {struct list_item$1int$* head; struct list_item$1int$* tail; int len; struct list_item$1int$* it; };
+
+
+struct list_item$1long$ {long item; struct list_item$1long$* prev; struct list_item$1long$* next; };
+
+
+struct list$1long$ {struct list_item$1long$* head; struct list_item$1long$* tail; int len; struct list_item$1long$* it; };
+
+
+struct list_item$1float$ {float item; struct list_item$1float$* prev; struct list_item$1float$* next; };
+
+
+struct list$1float$ {struct list_item$1float$* head; struct list_item$1float$* tail; int len; struct list_item$1float$* it; };
+
+
+struct list_item$1double$ {double item; struct list_item$1double$* prev; struct list_item$1double$* next; };
+
+
+struct list$1double$ {struct list_item$1double$* head; struct list_item$1double$* tail; int len; struct list_item$1double$* it; };
+
+
+struct list_item$1char$ph {char* item  ; struct list_item$1char$ph* prev; struct list_item$1char$ph* next; };
+
+
+struct list$1char$ph {struct list_item$1char$ph* head; struct list_item$1char$ph* tail; int len; struct list_item$1char$ph* it; };
+
+
+
+typedef struct re_program* re_t  ;
+
+struct re_capture {int start; int length; };
+
+typedef struct re_capture re_capture  ;
+
+enum { RE_UNUSED ,RE_DOT ,RE_BEGIN ,RE_END ,RE_QUESTIONMARK ,RE_STAR ,RE_PLUS ,RE_CHAR ,RE_CHAR_CLASS ,RE_INV_CHAR_CLASS ,RE_DIGIT ,RE_NOT_DIGIT ,RE_ALPHA ,RE_NOT_ALPHA ,RE_WHITESPACE ,RE_NOT_WHITESPACE ,RE_GROUP ,RE_GROUP_END };
+
+
+struct regex_t {unsigned char type; union { unsigned char ch; unsigned char* ccl; struct { struct regex_t* first  ; struct regex_t* last  ; int id; }  group  ; }  u  ; struct regex_t* next  ; };
+
+typedef struct regex_t regex_t;
+
+struct re_program {struct regex_t* start  ; int group_count; };
+
+
+struct regex_program_t {struct regex_t* start  ; int group_count; };
+
+typedef struct regex_program_t regex_program_t  ;
+
+struct compiler_state {struct regex_t* pool  ; int pool_capacity; int pool_size; unsigned char* ccl_buf; int ccl_capacity; int ccl_idx; int group_count; };
+
+typedef struct compiler_state compiler_state  ;
+
+struct match_context {const char* base; struct re_capture* captures  ; int capture_capacity; int total_groups; _Bool ignore_case; };
+
+typedef struct match_context match_context  ;
+
+
+typedef unsigned int wint_t;
+
+struct mbstate_t {int __count; union { unsigned int __wch; char __wchb[4]; }  __value  ; };
+
+typedef struct mbstate_t mbstate_t  ;
+
+
+typedef int* wstring  ;
 
 struct sNode
 {
@@ -968,878 +702,255 @@ struct sNode
     char* (*kind)(void*);
 };
 
-struct tuple2$2char$phsType$ph
-{
-    char* v1  ;
-    struct sType* v2  ;
-};
-
-struct list_item$1tuple2$2char$phsType$ph$ph
-{
-    struct tuple2$2char$phsType$ph* item;
-    struct list_item$1tuple2$2char$phsType$ph$ph* prev;
-    struct list_item$1tuple2$2char$phsType$ph$ph* next;
-};
-
-struct list$1tuple2$2char$phsType$ph$ph
-{
-    struct list_item$1tuple2$2char$phsType$ph$ph* head;
-    struct list_item$1tuple2$2char$phsType$ph$ph* tail;
-    int len;
-    struct list_item$1tuple2$2char$phsType$ph$ph* it;
-};
-
-struct tuple3$3char$phsNode$phchar$ph
-{
-    char* v1  ;
-    struct sNode* v2;
-    char* v3  ;
-};
-
-struct list_item$1tuple3$3char$phsNode$phchar$ph$ph
-{
-    struct tuple3$3char$phsNode$phchar$ph* item;
-    struct list_item$1tuple3$3char$phsNode$phchar$ph$ph* prev;
-    struct list_item$1tuple3$3char$phsNode$phchar$ph$ph* next;
-};
-
-struct list$1tuple3$3char$phsNode$phchar$ph$ph
-{
-    struct list_item$1tuple3$3char$phsNode$phchar$ph$ph* head;
-    struct list_item$1tuple3$3char$phsNode$phchar$ph$ph* tail;
-    int len;
-    struct list_item$1tuple3$3char$phsNode$phchar$ph$ph* it;
-};
-
-struct sClass
-{
-    _Bool mStruct;
-    _Bool mFloat;
-    _Bool mUnion;
-    _Bool mGenerics;
-    _Bool mMethodGenerics;
-    _Bool mEnum;
-    _Bool mProtocol;
-    _Bool mNumber;
-    _Bool mUniq;
-    _Bool mTypeName;
-    _Bool mAnonymous;
-    char* mName  ;
-    int mGenericsNum;
-    int mMethodGenericsNum;
-    struct list$1tuple2$2char$phsType$ph$ph* mFields;
-    struct list$1tuple3$3char$phsNode$phchar$ph$ph* mElements;
-    struct sType* mTypeElements  ;
-    char* mParentClassName  ;
-    char* mAttribute  ;
-};
-
-struct list_item$1sType$ph
-{
-    struct sType* item  ;
-    struct list_item$1sType$ph* prev;
-    struct list_item$1sType$ph* next;
-};
-
-struct list$1sType$ph
-{
-    struct list_item$1sType$ph* head;
-    struct list_item$1sType$ph* tail;
-    int len;
-    struct list_item$1sType$ph* it;
-};
-
-struct list_item$1sNode$ph
-{
-    struct sNode* item;
-    struct list_item$1sNode$ph* prev;
-    struct list_item$1sNode$ph* next;
-};
-
-struct list$1sNode$ph
-{
-    struct list_item$1sNode$ph* head;
-    struct list_item$1sNode$ph* tail;
-    int len;
-    struct list_item$1sNode$ph* it;
-};
-
-struct sType
-{
-    struct sClass* mClass  ;
-    struct sType* mOriginalLoadVarType  ;
-    struct sType* mChannelType  ;
-    struct list$1sType$ph* mGenericsTypes;
-    struct sType* mNoSolvedGenericsType  ;
-    struct sNode* mSizeNum;
-    struct sNode* mAlignas;
-    _Bool mAlignasDouble;
-    char* mTupleName  ;
-    char* mAttribute  ;
-    char* mVarAttribute  ;
-    _Bool mAllocaValue;
-    _Bool mUnsigned;
-    _Bool mShort;
-    _Bool mLong;
-    _Bool mLongLong;
-    _Bool mConstant;
-    _Bool mAtomic;
-    _Bool mThreadLocal;
-    _Bool mThread;
-    _Bool mComplex;
-    _Bool mRegister;
-    _Bool mVolatile;
-    _Bool mNoreturn;
-    _Bool mStatic;
-    _Bool mUniq;
-    _Bool mExtern;
-    _Bool mRestrict;
-    _Bool mHeap;
-    _Bool mChannel;
-    _Bool mDefferRightValue;
-    _Bool mNoHeap;
-    _Bool mNoCallingDestructor;
-    _Bool mTypeName;
-    _Bool mAnonymous;
-    char* mAnonymousName  ;
-    _Bool mInnerStruct;
-    char* mInnerStructName  ;
-    _Bool mAnonymousVarName;
-    _Bool mInline;
-    char* mAsmName  ;
-    _Bool mTypedef;
-    _Bool mMultipleTypes;
-    struct list$1sNode$ph* mArrayNum;
-    struct list$1sNode$ph* mVarNameArrayNum;
-    struct list$1int$* mArrayStatic;
-    struct list$1int$* mArrayRestrict;
-    int mPointerNum;
-    int mFunctionPointerNum;
-    int mArrayPointerNum;
-    _Bool mPointerParen;
-    struct sType* mTypedefOriginalType  ;
-    char* mOriginalTypeName  ;
-    int mOriginalTypePointerNum;
-    int mOriginalTypePointerHeap;
-    _Bool mArrayPointerType;
-    struct list$1sType$ph* mParamTypes;
-    struct list$1char$ph* mParamNames;
-    struct sType* mResultType  ;
-    _Bool mVarArgs;
-    struct sNode* mTypeOfNode;
-};
-
-struct sVar
-{
-    char* mName  ;
-    char* mCValueName  ;
-    struct sType* mType  ;
-    _Bool mGlobal;
-    _Bool mAllocaValue;
-    _Bool mNoFree;
-    char* mFunName  ;
-};
-
-struct list_item$1sVar$ph
-{
-    struct sVar* item  ;
-    struct list_item$1sVar$ph* prev;
-    struct list_item$1sVar$ph* next;
-};
-
-struct list$1sVar$ph
-{
-    struct list_item$1sVar$ph* head;
-    struct list_item$1sVar$ph* tail;
-    int len;
-    struct list_item$1sVar$ph* it;
-};
-
-struct sFun
-{
-    char* mName  ;
-    struct sType* mResultType  ;
-    struct list$1sType$ph* mParamTypes;
-    struct list$1char$ph* mParamNames;
-    struct list$1char$ph* mParamDefaultParametors;
-    struct sType* mLambdaType  ;
-    struct list$1sVar$ph* mAllVar;
-    struct sBlock* mBlock  ;
-    char* mTextBlock  ;
-    char* mTextBlockSName  ;
-    int mTextBlockSline;
-    struct buffer* mSource  ;
-    struct buffer* mSourceHead  ;
-    struct buffer* mSourceHead2  ;
-    _Bool mStatic;
-    _Bool mInline;
-    _Bool mUniq;
-    _Bool mExternal;
-    _Bool mVarArgs;
-    _Bool mNoResultType;
-    _Bool mConstFun;
-    char* mAttribute  ;
-    char* mFunAttribute  ;
-    _Bool mGenericsFun;
-    _Bool mDefineReturnVar;
-};
-
-struct sGenericsFun
-{
-    struct sType* mImplType  ;
-    struct list$1char$ph* mGenericsTypeNames;
-    struct list$1char$ph* mMethodGenericsTypeNames;
-    char* mName  ;
-    struct sType* mResultType  ;
-    struct list$1sType$ph* mParamTypes;
-    struct list$1char$ph* mParamNames;
-    struct list$1char$ph* mParamDefaultParametors;
-    char* mBlock  ;
-    int mSLine;
-    _Bool mVarArgs;
-    _Bool mGenerate;
-    char* mGenericsSName  ;
-    int mGenericsSLine;
-    _Bool mConstFun;
-};
-
-struct CVALUE
-{
-    char* c_value  ;
-    struct sType* type  ;
-    struct sVar* var  ;
-    struct sRightValueObject* right_value_objects  ;
-    char* c_value_without_right_value_objects  ;
-    char* c_value_without_cast_object_value  ;
-};
-
-struct map$2char$phchar$ph
-{
-    char** keys  ;
-    _Bool* item_existance;
-    char** items  ;
-    int size;
-    int len;
-    struct list$1char$ph* key_list;
-    int it;
-};
-
-struct sModule
-{
-    struct buffer* mSourceHead  ;
-    struct buffer* mSource  ;
-    char* mLastCode  ;
-    char* mLastCode2  ;
-    struct map$2char$phchar$ph* mHeader;
-};
-
-struct map$2char$phsVar$ph
-{
-    char** keys  ;
-    _Bool* item_existance;
-    struct sVar** items  ;
-    int size;
-    int len;
-    struct list$1char$ph* key_list;
-    int it;
-};
-
-struct sVarTable
-{
-    struct map$2char$phsVar$ph* mVars;
-    _Bool mGlobal;
-    struct sVarTable* mParent  ;
-};
-
-struct sBlock
-{
-    struct list$1sNode$ph* mNodes;
-    struct sVarTable* mVarTable  ;
-    _Bool mOmitSemicolon;
-};
-
-struct sRightValueObject
-{
-    struct sType* mType  ;
-    char* mVarName  ;
-    char* mFunName  ;
-    _Bool mFreed;
-    int mID;
-    int mBlockLevel;
-    _Bool mStored;
-    _Bool mDecrementRefCount;
-    struct sType* mObjType  ;
-    char* mObjValue  ;
-    struct sVar* mObjVar  ;
-    _Bool mNoFree;
-};
-
-struct map$2char$phsFun$ph
-{
-    char** keys  ;
-    _Bool* item_existance;
-    struct sFun** items  ;
-    int size;
-    int len;
-    struct list$1char$ph* key_list;
-    int it;
-};
-
-struct map$2char$phsGenericsFun$ph
-{
-    char** keys  ;
-    _Bool* item_existance;
-    struct sGenericsFun** items  ;
-    int size;
-    int len;
-    struct list$1char$ph* key_list;
-    int it;
-};
-
-struct map$2char$phsClass$ph
-{
-    char** keys  ;
-    _Bool* item_existance;
-    struct sClass** items  ;
-    int size;
-    int len;
-    struct list$1char$ph* key_list;
-    int it;
-};
-
-struct map$2char$phsType$ph
-{
-    char** keys  ;
-    _Bool* item_existance;
-    struct sType** items  ;
-    int size;
-    int len;
-    struct list$1char$ph* key_list;
-    int it;
-};
-
-struct tuple2$2buffer$phbuffer$ph
-{
-    struct buffer* v1  ;
-    struct buffer* v2  ;
-};
-
-struct map$2char$phtuple2$2buffer$phbuffer$ph$ph
-{
-    char** keys  ;
-    _Bool* item_existance;
-    struct tuple2$2buffer$phbuffer$ph** items;
-    int size;
-    int len;
-    struct list$1char$ph* key_list;
-    int it;
-};
-
-struct map$2char$phbuffer$ph
-{
-    char** keys  ;
-    _Bool* item_existance;
-    struct buffer** items  ;
-    int size;
-    int len;
-    struct list$1char$ph* key_list;
-    int it;
-};
-
-struct list_item$1sRightValueObject$ph
-{
-    struct sRightValueObject* item  ;
-    struct list_item$1sRightValueObject$ph* prev;
-    struct list_item$1sRightValueObject$ph* next;
-};
-
-struct list$1sRightValueObject$ph
-{
-    struct list_item$1sRightValueObject$ph* head;
-    struct list_item$1sRightValueObject$ph* tail;
-    int len;
-    struct list_item$1sRightValueObject$ph* it;
-};
-
-struct list_item$1CVALUE$ph
-{
-    struct CVALUE* item  ;
-    struct list_item$1CVALUE$ph* prev;
-    struct list_item$1CVALUE$ph* next;
-};
-
-struct list$1CVALUE$ph
-{
-    struct list_item$1CVALUE$ph* head;
-    struct list_item$1CVALUE$ph* tail;
-    int len;
-    struct list_item$1CVALUE$ph* it;
-};
-
-struct sInfo
-{
-    char* p;
-    char* head;
-    struct buffer* source  ;
-    char* end;
-    char* sname  ;
-    char* sname_at_head  ;
-    char* base_sname  ;
-    int sline;
-    int err_num;
-    int warning_num;
-    char* clang_option  ;
-    char* cpp_option  ;
-    char* linker_option  ;
-    char* linker_option2  ;
-    _Bool no_output_err;
-    _Bool no_output_come_code;
-    _Bool undefined_array_num_var;
-    struct sFun* come_fun  ;
-    struct sFun* caller_fun  ;
-    int caller_line;
-    char* caller_sname;
-    int block_level;
-    struct map$2char$phsFun$ph* funcs;
-    struct map$2char$phsFun$ph* uniq_funcs;
-    struct map$2char$phsGenericsFun$ph* generics_funcs;
-    struct map$2char$phsClass$ph* classes;
-    struct map$2char$phsType$ph* types;
-    struct map$2char$phsClass$ph* generics_classes;
-    struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* struct_definition;
-    struct map$2char$phbuffer$ph* c_include_definition;
-    struct map$2char$phbuffer$ph* var_definition;
-    struct map$2char$phbuffer$ph* previous_struct_definition;
-    struct map$2char$phbuffer$ph* typedef_definition;
-    struct map$2char$phsType$ph* named_child_struct;
-    struct map$2char$phchar$ph* reflection_vars;
-    struct sModule* module  ;
-    struct sType* type  ;
-    struct list$1sRightValueObject$ph* right_value_objects;
-    struct sType* generics_type  ;
-    struct list$1sType$ph* method_generics_types;
-    struct list$1CVALUE$ph* stack;
-    struct sType* come_function_result_type  ;
-    struct sType* come_method_block_function_result_type  ;
-    struct sVarTable* lv_table  ;
-    struct sVarTable* gv_table  ;
-    _Bool no_comma;
-    _Bool no_assign;
-    _Bool no_label;
-    _Bool last_statment_is_return;
-    struct list$1char$ph* generics_type_names;
-    struct list$1char$ph* method_generics_type_names;
-    struct sType* impl_type  ;
-    struct sType* class_type  ;
-    int current_stack_num;
-    int num_method_block;
-    struct sClass* current_stack_frame_struct  ;
-    _Bool define_struct;
-    _Bool in_typedef;
-    char* output_file_name  ;
-    struct sVarTable* current_loop_vtable  ;
-    _Bool verbose;
-    int num_current_stack;
-    int num_source_files;
-    int max_source_files;
-    _Bool writing_source_file_position;
-    struct sType* function_result_type  ;
-    _Bool in_class;
-    struct map$2char$phchar$ph* module_params;
-    _Bool constructor_;
-    struct sClass* defining_class  ;
-    _Bool array_initializer;
-    _Bool va_arg;
-    _Bool in_fun_param;
-    _Bool inhibits_output_code;
-    _Bool inhibits_output_code2;
-    _Bool in_generics_fun;
-    _Bool in_clone_object;
-    _Bool in_conditional_operator;
-    struct list$1sVar$ph* match_it_var;
-    int sline_top;
-    struct sFun* calling_fun  ;
-    struct map$2char$phchar$ph* uniq_definition;
-    _Bool in_top_level;
-    _Bool remove_comment;
-    int sline_real;
-    int sline_block;
-    _Bool m5stack_cpp;
-    _Bool pico_cpp;
-    _Bool baremetal_cpp;
-    _Bool gcc_compiler;
-    _Bool in_method_block;
-    _Bool in_offsetof;
-    int right_value_num;
-    int right_value_max;
-    _Bool in_conditional;
-    int num_conditional;
-    int max_conditional;
-    char* pragma  ;
-    _Bool in_refference;
-    struct buffer* paren_block_buffer  ;
-    _Bool in_typeof;
-    _Bool in_store_array;
-    int parse_struct_recursive_count;
-    _Bool exp_value;
-    struct buffer* if_expression_buffer  ;
-    char* if_result_value_name  ;
-    _Bool if_result_value_name_defined;
-    struct sType* if_result_type  ;
-};
-
-struct sNodeBase
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-};
-
-struct sCurrentNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-};
-
-struct tuple2$2sType$phchar$ph
-{
-    struct sType* v1  ;
-    char* v2  ;
-};
-
-struct tuple2$2char$phsGenericsFun$p
-{
-    char* v1  ;
-    struct sGenericsFun* v2  ;
-};
-
-struct tuple3$3sType$phchar$ph_Bool$
-{
-    struct sType* v1  ;
-    char* v2  ;
-    _Bool v3;
-};
-
-struct tuple2$2char$phchar$ph
-{
-    char* v1  ;
-    char* v2  ;
-};
-
-struct tuple4$4list$1sType$ph$phlist$1char$ph$phlist$1char$ph$ph_Bool$
-{
-    struct list$1sType$ph* v1;
-    struct list$1char$ph* v2;
-    struct list$1char$ph* v3;
-    _Bool v4;
-};
-
-struct tuple2$2sFun$pchar$ph
-{
-    struct sFun* v1  ;
-    char* v2  ;
-};
-
-struct tuple2$2char$ph_Bool$
-{
-    char* v1  ;
-    _Bool v2;
-};
-
-struct tuple5$5_Bool$_Bool$_Bool$_Bool$_Bool$
-{
-    _Bool v1;
-    _Bool v2;
-    _Bool v3;
-    _Bool v4;
-    _Bool v5;
-};
-
-struct tuple3$3sType$phchar$phsNode$ph
-{
-    struct sType* v1  ;
-    char* v2  ;
-    struct sNode* v3;
-};
-
-struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph
-{
-    struct tuple3$3sType$phchar$phsNode$ph* item;
-    struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* prev;
-    struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* next;
-};
-
-struct list$1tuple3$3sType$phchar$phsNode$ph$ph
-{
-    struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* head;
-    struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* tail;
-    int len;
-    struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* it;
-};
-
-struct tuple3$3char$ph_Bool$char$ph
-{
-    char* v1  ;
-    _Bool v2;
-    char* v3  ;
-};
-
-struct tuple3$3char$phsFun$psGenericsFun$p
-{
-    char* v1  ;
-    struct sFun* v2  ;
-    struct sGenericsFun* v3  ;
-};
-
-struct tuple2$2char$phsNode$ph
-{
-    char* v1  ;
-    struct sNode* v2;
-};
-
-struct list_item$1tuple2$2char$phsNode$ph$ph
-{
-    struct tuple2$2char$phsNode$ph* item;
-    struct list_item$1tuple2$2char$phsNode$ph$ph* prev;
-    struct list_item$1tuple2$2char$phsNode$ph$ph* next;
-};
-
-struct list$1tuple2$2char$phsNode$ph$ph
-{
-    struct list_item$1tuple2$2char$phsNode$ph$ph* head;
-    struct list_item$1tuple2$2char$phsNode$ph$ph* tail;
-    int len;
-    struct list_item$1tuple2$2char$phsNode$ph$ph* it;
-};
-
-struct sNothingNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-};
-
-struct sNewNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sType* type  ;
-    struct list$1tuple2$2char$phsNode$ph$ph* initializer;
-    struct sNode* initializer_num;
-};
-
-struct sImplementsNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* obj_exp;
-    struct sType* inf_type  ;
-};
-
-struct sTrueNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-};
-
-struct sFalseNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-};
-
-struct sGeneric
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* exp;
-    struct list$1sType$ph* types;
-    struct list$1sNode$ph* exps;
-    struct sNode* default_exp;
-};
-
-struct sSizeOfNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sType* type  ;
-};
-
-struct sOffsetOf
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sType* type  ;
-    char* name  ;
-};
-
-struct sSizeOfExpNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* exp;
-};
-
-struct sTypeOfNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sType* type  ;
-};
-
-struct sTypeOfExpNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* exp;
-};
-
-struct sDynamicTypeOf
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* exp;
-};
-
-struct sAlignOfNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sType* type  ;
-};
-
-struct sAlignOfExpNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* exp;
-};
-
-struct sAlignOfNode2
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sType* type  ;
-};
-
-struct sAlignOfExpNode2
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* exp;
-};
-
-struct sAlignAsNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sType* type  ;
-};
-
-struct sAlignAsExpNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* exp;
-};
-
-struct sDeleteNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* node;
-};
-
-struct sBorrowNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* node;
-};
-
-struct sCloneNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* node;
-};
-
-struct sDupeNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* node;
-};
-
-struct sDummyHeapNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* node;
-};
-
-struct sGCIncNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* node;
-};
-
-struct sGCDecNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* node;
-};
-
-struct sIsHeap
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sType* type  ;
-};
-
-struct sIsPointer
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sType* type  ;
-};
-
-struct sGCDecNoFreeNode
-{
-    int sline;
-    char* sname  ;
-    int sline_real;
-    struct sNode* node;
-};
+
+struct tuple2$2char$phsType$ph {char* v1  ; struct sType* v2  ; };
+
+
+struct list_item$1tuple2$2char$phsType$ph$ph {struct tuple2$2char$phsType$ph* item; struct list_item$1tuple2$2char$phsType$ph$ph* prev; struct list_item$1tuple2$2char$phsType$ph$ph* next; };
+
+
+struct list$1tuple2$2char$phsType$ph$ph {struct list_item$1tuple2$2char$phsType$ph$ph* head; struct list_item$1tuple2$2char$phsType$ph$ph* tail; int len; struct list_item$1tuple2$2char$phsType$ph$ph* it; };
+
+
+struct tuple3$3char$phsNode$phchar$ph {char* v1  ; struct sNode* v2; char* v3  ; };
+
+
+struct list_item$1tuple3$3char$phsNode$phchar$ph$ph {struct tuple3$3char$phsNode$phchar$ph* item; struct list_item$1tuple3$3char$phsNode$phchar$ph$ph* prev; struct list_item$1tuple3$3char$phsNode$phchar$ph$ph* next; };
+
+
+struct list$1tuple3$3char$phsNode$phchar$ph$ph {struct list_item$1tuple3$3char$phsNode$phchar$ph$ph* head; struct list_item$1tuple3$3char$phsNode$phchar$ph$ph* tail; int len; struct list_item$1tuple3$3char$phsNode$phchar$ph$ph* it; };
+
+
+struct sClass {_Bool mStruct; _Bool mFloat; _Bool mUnion; _Bool mGenerics; _Bool mMethodGenerics; _Bool mEnum; _Bool mProtocol; _Bool mNumber; _Bool mUniq; _Bool mTypeName; _Bool mAnonymous; char* mName  ; int mGenericsNum; int mMethodGenericsNum; struct list$1tuple2$2char$phsType$ph$ph* mFields; struct list$1tuple3$3char$phsNode$phchar$ph$ph* mElements; struct sType* mTypeElements  ; char* mParentClassName  ; char* mAttribute  ; };
+
+
+struct list_item$1sType$ph {struct sType* item  ; struct list_item$1sType$ph* prev; struct list_item$1sType$ph* next; };
+
+
+struct list$1sType$ph {struct list_item$1sType$ph* head; struct list_item$1sType$ph* tail; int len; struct list_item$1sType$ph* it; };
+
+
+struct list_item$1sNode$ph {struct sNode* item; struct list_item$1sNode$ph* prev; struct list_item$1sNode$ph* next; };
+
+
+struct list$1sNode$ph {struct list_item$1sNode$ph* head; struct list_item$1sNode$ph* tail; int len; struct list_item$1sNode$ph* it; };
+
+
+struct sType {struct sClass* mClass  ; struct sType* mOriginalLoadVarType  ; struct sType* mChannelType  ; struct list$1sType$ph* mGenericsTypes; struct sType* mNoSolvedGenericsType  ; struct sNode* mSizeNum; struct sNode* mAlignas; _Bool mAlignasDouble; char* mTupleName  ; char* mAttribute  ; char* mVarAttribute  ; _Bool mAllocaValue; _Bool mUnsigned; _Bool mShort; _Bool mLong; _Bool mLongLong; _Bool mConstant; _Bool mAtomic; _Bool mThreadLocal; _Bool mThread; _Bool mComplex; _Bool mRegister; _Bool mVolatile; _Bool mNoreturn; _Bool mStatic; _Bool mUniq; _Bool mExtern; _Bool mRestrict; _Bool mHeap; _Bool mChannel; _Bool mDefferRightValue; _Bool mNoHeap; _Bool mNoCallingDestructor; _Bool mTypeName; _Bool mAnonymous; char* mAnonymousName  ; _Bool mInnerStruct; char* mInnerStructName  ; _Bool mAnonymousVarName; _Bool mInline; char* mAsmName  ; _Bool mTypedef; _Bool mMultipleTypes; struct list$1sNode$ph* mArrayNum; struct list$1sNode$ph* mVarNameArrayNum; struct list$1int$* mArrayStatic; struct list$1int$* mArrayRestrict; int mPointerNum; int mFunctionPointerNum; int mArrayPointerNum; _Bool mPointerParen; struct sType* mTypedefOriginalType  ; char* mOriginalTypeName  ; int mOriginalTypePointerNum; int mOriginalTypePointerHeap; _Bool mArrayPointerType; struct list$1sType$ph* mParamTypes; struct list$1char$ph* mParamNames; struct sType* mResultType  ; _Bool mVarArgs; struct sNode* mTypeOfNode; };
+
+
+struct sVar {char* mName  ; char* mCValueName  ; struct sType* mType  ; _Bool mGlobal; _Bool mAllocaValue; _Bool mNoFree; char* mFunName  ; };
+
+
+struct list_item$1sVar$ph {struct sVar* item  ; struct list_item$1sVar$ph* prev; struct list_item$1sVar$ph* next; };
+
+
+struct list$1sVar$ph {struct list_item$1sVar$ph* head; struct list_item$1sVar$ph* tail; int len; struct list_item$1sVar$ph* it; };
+
+
+struct sFun {char* mName  ; struct sType* mResultType  ; struct list$1sType$ph* mParamTypes; struct list$1char$ph* mParamNames; struct list$1char$ph* mParamDefaultParametors; struct sType* mLambdaType  ; struct list$1sVar$ph* mAllVar; struct sBlock* mBlock  ; char* mTextBlock  ; char* mTextBlockSName  ; int mTextBlockSline; struct buffer* mSource  ; struct buffer* mSourceHead  ; struct buffer* mSourceHead2  ; _Bool mStatic; _Bool mInline; _Bool mUniq; _Bool mExternal; _Bool mVarArgs; _Bool mNoResultType; _Bool mConstFun; char* mAttribute  ; char* mFunAttribute  ; _Bool mGenericsFun; _Bool mDefineReturnVar; };
+
+
+struct sGenericsFun {struct sType* mImplType  ; struct list$1char$ph* mGenericsTypeNames; struct list$1char$ph* mMethodGenericsTypeNames; char* mName  ; struct sType* mResultType  ; struct list$1sType$ph* mParamTypes; struct list$1char$ph* mParamNames; struct list$1char$ph* mParamDefaultParametors; char* mBlock  ; int mSLine; _Bool mVarArgs; _Bool mGenerate; char* mGenericsSName  ; int mGenericsSLine; _Bool mConstFun; };
+
+
+struct CVALUE {char* c_value  ; struct sType* type  ; struct sVar* var  ; struct sRightValueObject* right_value_objects  ; char* c_value_without_right_value_objects  ; char* c_value_without_cast_object_value  ; };
+
+
+struct map$2char$phchar$ph {char** keys  ; _Bool* item_existance; char** items  ; int size; int len; struct list$1char$ph* key_list; int it; };
+
+
+struct sModule {struct buffer* mSourceHead  ; struct buffer* mSource  ; char* mLastCode  ; char* mLastCode2  ; struct map$2char$phchar$ph* mHeader; };
+
+
+struct map$2char$phsVar$ph {char** keys  ; _Bool* item_existance; struct sVar** items  ; int size; int len; struct list$1char$ph* key_list; int it; };
+
+
+struct sVarTable {struct map$2char$phsVar$ph* mVars; _Bool mGlobal; struct sVarTable* mParent  ; };
+
+
+struct sBlock {struct list$1sNode$ph* mNodes; struct sVarTable* mVarTable  ; _Bool mOmitSemicolon; };
+
+
+struct sRightValueObject {struct sType* mType  ; char* mVarName  ; char* mFunName  ; _Bool mFreed; int mID; int mBlockLevel; _Bool mStored; _Bool mDecrementRefCount; struct sType* mObjType  ; char* mObjValue  ; struct sVar* mObjVar  ; _Bool mNoFree; };
+
+
+struct map$2char$phsFun$ph {char** keys  ; _Bool* item_existance; struct sFun** items  ; int size; int len; struct list$1char$ph* key_list; int it; };
+
+
+struct map$2char$phsGenericsFun$ph {char** keys  ; _Bool* item_existance; struct sGenericsFun** items  ; int size; int len; struct list$1char$ph* key_list; int it; };
+
+
+struct map$2char$phsClass$ph {char** keys  ; _Bool* item_existance; struct sClass** items  ; int size; int len; struct list$1char$ph* key_list; int it; };
+
+
+struct map$2char$phsType$ph {char** keys  ; _Bool* item_existance; struct sType** items  ; int size; int len; struct list$1char$ph* key_list; int it; };
+
+
+struct tuple2$2buffer$phbuffer$ph {struct buffer* v1  ; struct buffer* v2  ; };
+
+
+struct map$2char$phtuple2$2buffer$phbuffer$ph$ph {char** keys  ; _Bool* item_existance; struct tuple2$2buffer$phbuffer$ph** items; int size; int len; struct list$1char$ph* key_list; int it; };
+
+
+struct map$2char$phbuffer$ph {char** keys  ; _Bool* item_existance; struct buffer** items  ; int size; int len; struct list$1char$ph* key_list; int it; };
+
+
+struct list_item$1sRightValueObject$ph {struct sRightValueObject* item  ; struct list_item$1sRightValueObject$ph* prev; struct list_item$1sRightValueObject$ph* next; };
+
+
+struct list$1sRightValueObject$ph {struct list_item$1sRightValueObject$ph* head; struct list_item$1sRightValueObject$ph* tail; int len; struct list_item$1sRightValueObject$ph* it; };
+
+
+struct list_item$1CVALUE$ph {struct CVALUE* item  ; struct list_item$1CVALUE$ph* prev; struct list_item$1CVALUE$ph* next; };
+
+
+struct list$1CVALUE$ph {struct list_item$1CVALUE$ph* head; struct list_item$1CVALUE$ph* tail; int len; struct list_item$1CVALUE$ph* it; };
+
+
+struct sInfo {char* p; char* head; struct buffer* source  ; char* end; char* sname  ; char* sname_at_head  ; char* base_sname  ; int sline; int err_num; int warning_num; char* clang_option  ; char* cpp_option  ; char* linker_option  ; char* linker_option2  ; _Bool no_output_err; _Bool no_output_come_code; _Bool undefined_array_num_var; struct sFun* come_fun  ; struct sFun* caller_fun  ; int caller_line; char* caller_sname; int block_level; struct map$2char$phsFun$ph* funcs; struct map$2char$phsFun$ph* uniq_funcs; struct map$2char$phsGenericsFun$ph* generics_funcs; struct map$2char$phsClass$ph* classes; struct map$2char$phsType$ph* types; struct map$2char$phsClass$ph* generics_classes; struct map$2char$phtuple2$2buffer$phbuffer$ph$ph* struct_definition; struct map$2char$phbuffer$ph* c_include_definition; struct map$2char$phbuffer$ph* var_definition; struct map$2char$phbuffer$ph* previous_struct_definition; struct map$2char$phbuffer$ph* typedef_definition; struct map$2char$phsType$ph* named_child_struct; struct map$2char$phchar$ph* reflection_vars; struct sModule* module  ; struct sType* type  ; struct list$1sRightValueObject$ph* right_value_objects; struct sType* generics_type  ; struct list$1sType$ph* method_generics_types; struct list$1CVALUE$ph* stack; struct sType* come_function_result_type  ; struct sType* come_method_block_function_result_type  ; struct sVarTable* lv_table  ; struct sVarTable* gv_table  ; _Bool no_comma; _Bool no_assign; _Bool no_label; _Bool last_statment_is_return; struct list$1char$ph* generics_type_names; struct list$1char$ph* method_generics_type_names; struct sType* impl_type  ; struct sType* class_type  ; int current_stack_num; int num_method_block; struct sClass* current_stack_frame_struct  ; _Bool define_struct; _Bool in_typedef; char* output_file_name  ; struct sVarTable* current_loop_vtable  ; _Bool verbose; int num_current_stack; int num_source_files; int max_source_files; _Bool writing_source_file_position; struct sType* function_result_type  ; _Bool in_class; struct map$2char$phchar$ph* module_params; _Bool constructor_; struct sClass* defining_class  ; _Bool array_initializer; _Bool va_arg; _Bool in_fun_param; _Bool inhibits_output_code; _Bool inhibits_output_code2; _Bool in_generics_fun; _Bool in_clone_object; _Bool in_conditional_operator; struct list$1sVar$ph* match_it_var; int sline_top; struct sFun* calling_fun  ; struct map$2char$phchar$ph* uniq_definition; _Bool in_top_level; _Bool remove_comment; int sline_real; int sline_block; _Bool m5stack_cpp; _Bool pico_cpp; _Bool baremetal_cpp; _Bool gcc_compiler; _Bool in_method_block; _Bool in_offsetof; int right_value_num; int right_value_max; _Bool in_conditional; int num_conditional; int max_conditional; char* pragma  ; _Bool in_refference; struct buffer* paren_block_buffer  ; _Bool in_typeof; _Bool in_store_array; int parse_struct_recursive_count; _Bool exp_value; struct buffer* if_expression_buffer  ; char* if_result_value_name  ; _Bool if_result_value_name_defined; struct sType* if_result_type  ; };
+
+
+struct sNodeBase {int sline; char* sname  ; int sline_real; };
+
+
+struct sCurrentNode {int sline; char* sname  ; int sline_real; };
+
+
+struct tuple2$2sType$phchar$ph {struct sType* v1  ; char* v2  ; };
+
+
+struct tuple2$2char$phsGenericsFun$p {char* v1  ; struct sGenericsFun* v2  ; };
+
+
+struct tuple3$3sType$phchar$ph_Bool$ {struct sType* v1  ; char* v2  ; _Bool v3; };
+
+
+struct tuple2$2char$phchar$ph {char* v1  ; char* v2  ; };
+
+
+struct tuple4$4list$1sType$ph$phlist$1char$ph$phlist$1char$ph$ph_Bool$ {struct list$1sType$ph* v1; struct list$1char$ph* v2; struct list$1char$ph* v3; _Bool v4; };
+
+
+struct tuple2$2sFun$pchar$ph {struct sFun* v1  ; char* v2  ; };
+
+
+struct tuple2$2char$ph_Bool$ {char* v1  ; _Bool v2; };
+
+
+struct tuple5$5_Bool$_Bool$_Bool$_Bool$_Bool$ {_Bool v1; _Bool v2; _Bool v3; _Bool v4; _Bool v5; };
+
+
+struct tuple3$3sType$phchar$phsNode$ph {struct sType* v1  ; char* v2  ; struct sNode* v3; };
+
+
+struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph {struct tuple3$3sType$phchar$phsNode$ph* item; struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* prev; struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* next; };
+
+
+struct list$1tuple3$3sType$phchar$phsNode$ph$ph {struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* head; struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* tail; int len; struct list_item$1tuple3$3sType$phchar$phsNode$ph$ph* it; };
+
+
+struct tuple3$3char$ph_Bool$char$ph {char* v1  ; _Bool v2; char* v3  ; };
+
+
+struct tuple3$3char$phsFun$psGenericsFun$p {char* v1  ; struct sFun* v2  ; struct sGenericsFun* v3  ; };
+
+
+struct tuple2$2char$phsNode$ph {char* v1  ; struct sNode* v2; };
+
+
+struct list_item$1tuple2$2char$phsNode$ph$ph {struct tuple2$2char$phsNode$ph* item; struct list_item$1tuple2$2char$phsNode$ph$ph* prev; struct list_item$1tuple2$2char$phsNode$ph$ph* next; };
+
+
+struct list$1tuple2$2char$phsNode$ph$ph {struct list_item$1tuple2$2char$phsNode$ph$ph* head; struct list_item$1tuple2$2char$phsNode$ph$ph* tail; int len; struct list_item$1tuple2$2char$phsNode$ph$ph* it; };
+
+
+struct sNothingNode {int sline; char* sname  ; int sline_real; };
+
+
+
+typedef struct MacroSnapshot MacroSnapshot;
+
+struct sNewNode {int sline; char* sname  ; int sline_real; struct sType* type  ; struct list$1tuple2$2char$phsNode$ph$ph* initializer; struct sNode* initializer_num; };
+
+
+struct sImplementsNode {int sline; char* sname  ; int sline_real; struct sNode* obj_exp; struct sType* inf_type  ; };
+
+
+struct sTrueNode {int sline; char* sname  ; int sline_real; };
+
+
+struct sFalseNode {int sline; char* sname  ; int sline_real; };
+
+
+struct sGeneric {int sline; char* sname  ; int sline_real; struct sNode* exp; struct list$1sType$ph* types; struct list$1sNode$ph* exps; struct sNode* default_exp; };
+
+
+struct sSizeOfNode {int sline; char* sname  ; int sline_real; struct sType* type  ; };
+
+
+struct sOffsetOf {int sline; char* sname  ; int sline_real; struct sType* type  ; char* name  ; };
+
+
+struct sSizeOfExpNode {int sline; char* sname  ; int sline_real; struct sNode* exp; };
+
+
+struct sTypeOfNode {int sline; char* sname  ; int sline_real; struct sType* type  ; };
+
+
+struct sTypeOfExpNode {int sline; char* sname  ; int sline_real; struct sNode* exp; };
+
+
+struct sDynamicTypeOf {int sline; char* sname  ; int sline_real; struct sNode* exp; };
+
+
+struct sAlignOfNode {int sline; char* sname  ; int sline_real; struct sType* type  ; };
+
+
+struct sAlignOfExpNode {int sline; char* sname  ; int sline_real; struct sNode* exp; };
+
+
+struct sAlignOfNode2 {int sline; char* sname  ; int sline_real; struct sType* type  ; };
+
+
+struct sAlignOfExpNode2 {int sline; char* sname  ; int sline_real; struct sNode* exp; };
+
+
+struct sAlignAsNode {int sline; char* sname  ; int sline_real; struct sType* type  ; };
+
+
+struct sAlignAsExpNode {int sline; char* sname  ; int sline_real; struct sNode* exp; };
+
+
+struct sDeleteNode {int sline; char* sname  ; int sline_real; struct sNode* node; };
+
+
+struct sBorrowNode {int sline; char* sname  ; int sline_real; struct sNode* node; };
+
+
+struct sCloneNode {int sline; char* sname  ; int sline_real; struct sNode* node; };
+
+
+struct sDupeNode {int sline; char* sname  ; int sline_real; struct sNode* node; };
+
+
+struct sDummyHeapNode {int sline; char* sname  ; int sline_real; struct sNode* node; };
+
+
+struct sGCIncNode {int sline; char* sname  ; int sline_real; struct sNode* node; };
+
+
+struct sGCDecNode {int sline; char* sname  ; int sline_real; struct sNode* node; };
+
+
+struct sIsHeap {int sline; char* sname  ; int sline_real; struct sType* type  ; };
+
+
+struct sIsPointer {int sline; char* sname  ; int sline_real; struct sType* type  ; };
+
+
+struct sGCDecNoFreeNode {int sline; char* sname  ; int sline_real; struct sNode* node; };
+
 
 /// variable definition ///
 extern struct _IO_FILE* stdin  ;
@@ -1885,7 +996,7 @@ struct _IO_FILE* freopen(const char* __filename, const char* __modes, struct _IO
 struct _IO_FILE* fopen64(const char* __filename, const char* __modes);
 struct _IO_FILE* freopen64(const char* __filename, const char* __modes, struct _IO_FILE* __stream  );
 struct _IO_FILE* fdopen(int __fd, const char* __modes);
-struct _IO_FILE* fopencookie(void* __magic_cookie, const char* __modes, struct _IO_cookie_io_functions_t __io_funcs  );
+struct _IO_FILE* fopencookie(void* __magic_cookie, const char* __modes, struct cookie_io_functions_t __io_funcs  );
 struct _IO_FILE* fmemopen(void* __s, unsigned long __len  , const char* __modes);
 struct _IO_FILE* open_memstream(char** __bufloc, unsigned long* __sizeloc  );
 void setbuf(struct _IO_FILE* __stream  , char* __buf);
@@ -1949,12 +1060,12 @@ long  int ftell(struct _IO_FILE* __stream  );
 void rewind(struct _IO_FILE* __stream  );
 int fseeko(struct _IO_FILE* __stream  , long  int __off  , int __whence);
 long  int ftello(struct _IO_FILE* __stream  );
-int fgetpos(struct _IO_FILE* __stream  , struct _G_fpos_t* __pos  );
-int fsetpos(struct _IO_FILE* __stream  , const struct _G_fpos_t* __pos  );
+int fgetpos(struct _IO_FILE* __stream  , struct fpos_t* __pos  );
+int fsetpos(struct _IO_FILE* __stream  , const struct fpos_t* __pos  );
 int fseeko64(struct _IO_FILE* __stream  , long  int __off  , int __whence);
 long  int ftello64(struct _IO_FILE* __stream  );
-int fgetpos64(struct _IO_FILE* __stream  , struct _G_fpos64_t* __pos  );
-int fsetpos64(struct _IO_FILE* __stream  , const struct _G_fpos64_t* __pos  );
+int fgetpos64(struct _IO_FILE* __stream  , struct fpos64_t* __pos  );
+int fsetpos64(struct _IO_FILE* __stream  , const struct fpos64_t* __pos  );
 void clearerr(struct _IO_FILE* __stream  );
 int feof(struct _IO_FILE* __stream  );
 int ferror(struct _IO_FILE* __stream  );
@@ -2004,25 +1115,25 @@ int strfromf32(char* __dest, unsigned long __size  , const char* __format, float
 int strfromf64(char* __dest, unsigned long __size  , const char* __format, double __f  );
 int strfromf32x(char* __dest, unsigned long __size  , const char* __format, double __f  );
 int strfromf64x(char* __dest, unsigned long __size  , const char* __format, long  double __f  );
-long  int strtol_l(const char* __nptr, char** __endptr, int __base, struct __locale_struct* __loc  );
-unsigned long  int strtoul_l(const char* __nptr, char** __endptr, int __base, struct __locale_struct* __loc  );
-long long int strtoll_l(const char* __nptr, char** __endptr, int __base, struct __locale_struct* __loc  );
-unsigned long long int strtoull_l(const char* __nptr, char** __endptr, int __base, struct __locale_struct* __loc  );
-long  int __isoc23_strtol_l(const char* __nptr, char** __endptr, int __base, struct __locale_struct* __loc  );
-unsigned long  int __isoc23_strtoul_l(const char* __nptr, char** __endptr, int __base, struct __locale_struct* __loc  );
-long long int __isoc23_strtoll_l(const char* __nptr, char** __endptr, int __base, struct __locale_struct* __loc  );
-unsigned long long int __isoc23_strtoull_l(const char* __nptr, char** __endptr, int __base, struct __locale_struct* __loc  );
-double strtod_l(const char* __nptr, char** __endptr, struct __locale_struct* __loc  );
-float strtof_l(const char* __nptr, char** __endptr, struct __locale_struct* __loc  );
-long  double strtold_l(const char* __nptr, char** __endptr, struct __locale_struct* __loc  );
-float strtof32_l(const char* __nptr, char** __endptr, struct __locale_struct* __loc  );
-double strtof64_l(const char* __nptr, char** __endptr, struct __locale_struct* __loc  );
-double strtof32x_l(const char* __nptr, char** __endptr, struct __locale_struct* __loc  );
-long  double strtof64x_l(const char* __nptr, char** __endptr, struct __locale_struct* __loc  );
+long  int strtol_l(const char* __nptr, char** __endptr, int __base, struct locale_t* __loc  );
+unsigned long  int strtoul_l(const char* __nptr, char** __endptr, int __base, struct locale_t* __loc  );
+long long int strtoll_l(const char* __nptr, char** __endptr, int __base, struct locale_t* __loc  );
+unsigned long long int strtoull_l(const char* __nptr, char** __endptr, int __base, struct locale_t* __loc  );
+long  int __isoc23_strtol_l(const char* __nptr, char** __endptr, int __base, struct locale_t* __loc  );
+unsigned long  int __isoc23_strtoul_l(const char* __nptr, char** __endptr, int __base, struct locale_t* __loc  );
+long long int __isoc23_strtoll_l(const char* __nptr, char** __endptr, int __base, struct locale_t* __loc  );
+unsigned long long int __isoc23_strtoull_l(const char* __nptr, char** __endptr, int __base, struct locale_t* __loc  );
+double strtod_l(const char* __nptr, char** __endptr, struct locale_t* __loc  );
+float strtof_l(const char* __nptr, char** __endptr, struct locale_t* __loc  );
+long  double strtold_l(const char* __nptr, char** __endptr, struct locale_t* __loc  );
+float strtof32_l(const char* __nptr, char** __endptr, struct locale_t* __loc  );
+double strtof64_l(const char* __nptr, char** __endptr, struct locale_t* __loc  );
+double strtof32x_l(const char* __nptr, char** __endptr, struct locale_t* __loc  );
+long  double strtof64x_l(const char* __nptr, char** __endptr, struct locale_t* __loc  );
 char* l64a(long  int __n);
 long  int a64l(const char* __s);
-int select(int __nfds, struct anonymous_typeX8* __readfds  , struct anonymous_typeX8* __writefds  , struct anonymous_typeX8* __exceptfds  , struct timeval* __timeout  );
-int pselect(int __nfds, struct anonymous_typeX8* __readfds  , struct anonymous_typeX8* __writefds  , struct anonymous_typeX8* __exceptfds  , const struct timespec* __timeout  , const struct anonymous_typeX7* __sigmask  );
+int select(int __nfds, struct fd_set* __readfds  , struct fd_set* __writefds  , struct fd_set* __exceptfds  , struct timeval* __timeout  );
+int pselect(int __nfds, struct fd_set* __readfds  , struct fd_set* __writefds  , struct fd_set* __exceptfds  , const struct timespec* __timeout  , const struct __sigset_t* __sigmask  );
 long  int random();
 void srandom(unsigned int __seed);
 char* initstate(unsigned int __seed, char* __statebuf, unsigned long __statelen  );
@@ -2099,9 +1210,9 @@ long long int llabs(long long int __x);
 unsigned int uabs(int __x);
 unsigned long  int ulabs(long  int __x);
 unsigned long long int ullabs(long long int __x);
-struct anonymous_typeX4 div(int __numer, int __denom);
-struct anonymous_typeX5 ldiv(long  int __numer, long  int __denom);
-struct anonymous_typeX6 lldiv(long long int __numer, long long int __denom);
+struct div_t div(int __numer, int __denom);
+struct ldiv_t ldiv(long  int __numer, long  int __denom);
+struct lldiv_t lldiv(long long int __numer, long long int __denom);
 char* ecvt(double __value, int __ndigit, int* __decpt, int* __sign);
 char* fcvt(double __value, int __ndigit, int* __decpt, int* __sign);
 char* gcvt(double __value, int __ndigit, char* __buf);
@@ -2143,8 +1254,8 @@ int strcmp(const char* __s1, const char* __s2);
 int strncmp(const char* __s1, const char* __s2, unsigned long __n  );
 int strcoll(const char* __s1, const char* __s2);
 unsigned long strxfrm(char* __dest, const char* __src, unsigned long __n  );
-int strcoll_l(const char* __s1, const char* __s2, struct __locale_struct* __l  );
-unsigned long strxfrm_l(char* __dest, const char* __src, unsigned long __n  , struct __locale_struct* __l  );
+int strcoll_l(const char* __s1, const char* __s2, struct locale_t* __l  );
+unsigned long strxfrm_l(char* __dest, const char* __src, unsigned long __n  , struct locale_t* __l  );
 char* strdup(const char* __s);
 char* strndup(const char* __string, unsigned long __n  );
 char* strchr(const char* __s, int __c);
@@ -2167,7 +1278,7 @@ char* strerror(int __errnum);
 char* strerror_r(int __errnum, char* __buf, unsigned long __buflen  );
 const char* strerrordesc_np(int __err);
 const char* strerrorname_np(int __err);
-char* strerror_l(int __errnum, struct __locale_struct* __l  );
+char* strerror_l(int __errnum, struct locale_t* __l  );
 int bcmp(const void* __s1, const void* __s2, unsigned long __n  );
 void bcopy(const void* __src, void* __dest, unsigned long __n  );
 void bzero(void* __s, unsigned long __n  );
@@ -2178,8 +1289,8 @@ int ffsl(long  int __l);
 int ffsll(long long int __ll);
 int strcasecmp(const char* __s1, const char* __s2);
 int strncasecmp(const char* __s1, const char* __s2, unsigned long __n  );
-int strcasecmp_l(const char* __s1, const char* __s2, struct __locale_struct* __loc  );
-int strncasecmp_l(const char* __s1, const char* __s2, unsigned long __n  , struct __locale_struct* __loc  );
+int strcasecmp_l(const char* __s1, const char* __s2, struct locale_t* __loc  );
+int strncasecmp_l(const char* __s1, const char* __s2, unsigned long __n  , struct locale_t* __loc  );
 void explicit_bzero(void* __s, unsigned long __n  );
 char* strsep(char** __stringp, const char* __delim);
 char* strsignal(int __sig);
@@ -2198,11 +1309,14 @@ char* basename(const char* __filename);
 long  int __sysconf(int __name);
 char* setlocale(int __category, const char* __locale);
 struct lconv* localeconv();
-struct __locale_struct* newlocale(int __category_mask, const char* __locale, struct __locale_struct* __base  );
-struct __locale_struct* duplocale(struct __locale_struct* __dataset  );
-void freelocale(struct __locale_struct* __dataset  );
-struct __locale_struct* uselocale(struct __locale_struct* __dataset  );
+struct locale_t* newlocale(int __category_mask, const char* __locale, struct locale_t* __base  );
+struct locale_t* duplocale(struct locale_t* __dataset  );
+void freelocale(struct locale_t* __dataset  );
+struct locale_t* uselocale(struct locale_t* __dataset  );
 int* __errno_location();
+void __assert_fail(const char* __assertion, const char* __file, unsigned int __line, const char* __function);
+void __assert_perror_fail(int __errnum, const char* __file, unsigned int __line, const char* __function);
+void __assert(const char* __assertion, const char* __file, int __line);
 void stackframe();
 _Bool die(const char* msg);
 void come_heap_init(int come_debug);
@@ -2372,19 +1486,19 @@ int re_matchp(struct re_program* pattern  , const char* text, int* matchlength, 
 int re_match(const char* pattern, const char* text, int* matchlength);
 struct re_program* re_compile(const char* pattern);
 void re_print(struct re_program* pattern  );
-void clear_captures(struct anonymous_typeX25* ctx  );
-void snapshot_captures(const struct anonymous_typeX25* ctx  , struct re_capture* buffer_  );
-void restore_captures(struct anonymous_typeX25* ctx  , const struct re_capture* buffer_  );
-struct regex_t* new_token(struct anonymous_typeX24* st  );
+void clear_captures(struct match_context* ctx  );
+void snapshot_captures(const struct match_context* ctx  , struct re_capture* buffer_  );
+void restore_captures(struct match_context* ctx  , const struct re_capture* buffer_  );
+struct regex_t* new_token(struct compiler_state* st  );
 int append_token(struct regex_t** head  , struct regex_t** tail  , struct regex_t* token  );
-struct regex_t* compile_sequence(struct anonymous_typeX24* st  , const char* pattern, int* pos, int in_group);
-const char* matchpattern(struct regex_t* pattern  , const char* text, struct anonymous_typeX25* ctx  );
-const char* matchgroup(struct regex_t* token  , struct regex_t* rest  , const char* text, struct anonymous_typeX25* ctx  );
-const char* matchstar(struct regex_t* token  , struct regex_t* rest  , const char* text, struct anonymous_typeX25* ctx  );
-const char* matchplus(struct regex_t* token  , struct regex_t* rest  , const char* text, struct anonymous_typeX25* ctx  );
-const char* matchquestion(struct regex_t* token  , struct regex_t* rest  , const char* text, struct anonymous_typeX25* ctx  );
+struct regex_t* compile_sequence(struct compiler_state* st  , const char* pattern, int* pos, int in_group);
+const char* matchpattern(struct regex_t* pattern  , const char* text, struct match_context* ctx  );
+const char* matchgroup(struct regex_t* token  , struct regex_t* rest  , const char* text, struct match_context* ctx  );
+const char* matchstar(struct regex_t* token  , struct regex_t* rest  , const char* text, struct match_context* ctx  );
+const char* matchplus(struct regex_t* token  , struct regex_t* rest  , const char* text, struct match_context* ctx  );
+const char* matchquestion(struct regex_t* token  , struct regex_t* rest  , const char* text, struct match_context* ctx  );
 unsigned char re_fold_char(unsigned char c, _Bool ignore_case);
-const char* matchtoken(struct regex_t* token  , const char* text, struct anonymous_typeX25* ctx  );
+const char* matchtoken(struct regex_t* token  , const char* text, struct match_context* ctx  );
 int matchdigit(char c);
 int matchalpha(char c);
 int matchwhitespace(char c);
@@ -2422,12 +1536,12 @@ int wcscmp(const int* __s1  , const int* __s2  );
 int wcsncmp(const int* __s1  , const int* __s2  , unsigned long __n  );
 int wcscasecmp(const int* __s1  , const int* __s2  );
 int wcsncasecmp(const int* __s1  , const int* __s2  , unsigned long __n  );
-int wcscasecmp_l(const int* __s1  , const int* __s2  , struct __locale_struct* __loc  );
-int wcsncasecmp_l(const int* __s1  , const int* __s2  , unsigned long __n  , struct __locale_struct* __loc  );
+int wcscasecmp_l(const int* __s1  , const int* __s2  , struct locale_t* __loc  );
+int wcsncasecmp_l(const int* __s1  , const int* __s2  , unsigned long __n  , struct locale_t* __loc  );
 int wcscoll(const int* __s1  , const int* __s2  );
 unsigned long wcsxfrm(int* __s1  , const int* __s2  , unsigned long __n  );
-int wcscoll_l(const int* __s1  , const int* __s2  , struct __locale_struct* __loc  );
-unsigned long wcsxfrm_l(int* __s1  , const int* __s2  , unsigned long __n  , struct __locale_struct* __loc  );
+int wcscoll_l(const int* __s1  , const int* __s2  , struct locale_t* __loc  );
+unsigned long wcsxfrm_l(int* __s1  , const int* __s2  , unsigned long __n  , struct locale_t* __loc  );
 int* wcsdup(const int* __s  );
 int* wcschr(const int* __wcs  , int __wc  );
 int* wcsrchr(const int* __wcs  , int __wc  );
@@ -2448,15 +1562,15 @@ int* wmemset(int* __s  , int __c  , unsigned long __n  );
 int* wmempcpy(int* __s1  , const int* __s2  , unsigned long __n  );
 unsigned int btowc(int __c);
 int wctob(unsigned int __c  );
-int mbsinit(const struct anonymous_typeX1* __ps  );
-unsigned long mbrtowc(int* __pwc  , const char* __s, unsigned long __n  , struct anonymous_typeX1* __p  );
-unsigned long wcrtomb(char* __s, int __wc  , struct anonymous_typeX1* __ps  );
-unsigned long __mbrlen(const char* __s, unsigned long __n  , struct anonymous_typeX1* __ps  );
-unsigned long mbrlen(const char* __s, unsigned long __n  , struct anonymous_typeX1* __ps  );
-unsigned long mbsrtowcs(int* __dst  , const char** __src, unsigned long __len  , struct anonymous_typeX1* __ps  );
-unsigned long wcsrtombs(char* __dst, const int** __src  , unsigned long __len  , struct anonymous_typeX1* __ps  );
-unsigned long mbsnrtowcs(int* __dst  , const char** __src, unsigned long __nmc  , unsigned long __len  , struct anonymous_typeX1* __ps  );
-unsigned long wcsnrtombs(char* __dst, const int** __src  , unsigned long __nwc  , unsigned long __len  , struct anonymous_typeX1* __ps  );
+int mbsinit(const struct mbstate_t* __ps  );
+unsigned long mbrtowc(int* __pwc  , const char* __s, unsigned long __n  , struct mbstate_t* __p  );
+unsigned long wcrtomb(char* __s, int __wc  , struct mbstate_t* __ps  );
+unsigned long __mbrlen(const char* __s, unsigned long __n  , struct mbstate_t* __ps  );
+unsigned long mbrlen(const char* __s, unsigned long __n  , struct mbstate_t* __ps  );
+unsigned long mbsrtowcs(int* __dst  , const char** __src, unsigned long __len  , struct mbstate_t* __ps  );
+unsigned long wcsrtombs(char* __dst, const int** __src  , unsigned long __len  , struct mbstate_t* __ps  );
+unsigned long mbsnrtowcs(int* __dst  , const char** __src, unsigned long __nmc  , unsigned long __len  , struct mbstate_t* __ps  );
+unsigned long wcsnrtombs(char* __dst, const int** __src  , unsigned long __nwc  , unsigned long __len  , struct mbstate_t* __ps  );
 int wcwidth(int __c  );
 int wcswidth(const int* __s  , unsigned long __n  );
 double wcstod(const int* __nptr  , int** __endptr  );
@@ -2476,21 +1590,21 @@ long  int __isoc23_wcstol(const int* __nptr  , int** __endptr  , int __base);
 unsigned long  int __isoc23_wcstoul(const int* __nptr  , int** __endptr  , int __base);
 long long int __isoc23_wcstoll(const int* __nptr  , int** __endptr  , int __base);
 unsigned long long int __isoc23_wcstoull(const int* __nptr  , int** __endptr  , int __base);
-long  int wcstol_l(const int* __nptr  , int** __endptr  , int __base, struct __locale_struct* __loc  );
-unsigned long  int wcstoul_l(const int* __nptr  , int** __endptr  , int __base, struct __locale_struct* __loc  );
-long long int wcstoll_l(const int* __nptr  , int** __endptr  , int __base, struct __locale_struct* __loc  );
-unsigned long long int wcstoull_l(const int* __nptr  , int** __endptr  , int __base, struct __locale_struct* __loc  );
-long  int __isoc23_wcstol_l(const int* __nptr  , int** __endptr  , int __base, struct __locale_struct* __loc  );
-unsigned long  int __isoc23_wcstoul_l(const int* __nptr  , int** __endptr  , int __base, struct __locale_struct* __loc  );
-long long int __isoc23_wcstoll_l(const int* __nptr  , int** __endptr  , int __base, struct __locale_struct* __loc  );
-unsigned long long int __isoc23_wcstoull_l(const int* __nptr  , int** __endptr  , int __base, struct __locale_struct* __loc  );
-double wcstod_l(const int* __nptr  , int** __endptr  , struct __locale_struct* __loc  );
-float wcstof_l(const int* __nptr  , int** __endptr  , struct __locale_struct* __loc  );
-long  double wcstold_l(const int* __nptr  , int** __endptr  , struct __locale_struct* __loc  );
-float wcstof32_l(const int* __nptr  , int** __endptr  , struct __locale_struct* __loc  );
-double wcstof64_l(const int* __nptr  , int** __endptr  , struct __locale_struct* __loc  );
-double wcstof32x_l(const int* __nptr  , int** __endptr  , struct __locale_struct* __loc  );
-long  double wcstof64x_l(const int* __nptr  , int** __endptr  , struct __locale_struct* __loc  );
+long  int wcstol_l(const int* __nptr  , int** __endptr  , int __base, struct locale_t* __loc  );
+unsigned long  int wcstoul_l(const int* __nptr  , int** __endptr  , int __base, struct locale_t* __loc  );
+long long int wcstoll_l(const int* __nptr  , int** __endptr  , int __base, struct locale_t* __loc  );
+unsigned long long int wcstoull_l(const int* __nptr  , int** __endptr  , int __base, struct locale_t* __loc  );
+long  int __isoc23_wcstol_l(const int* __nptr  , int** __endptr  , int __base, struct locale_t* __loc  );
+unsigned long  int __isoc23_wcstoul_l(const int* __nptr  , int** __endptr  , int __base, struct locale_t* __loc  );
+long long int __isoc23_wcstoll_l(const int* __nptr  , int** __endptr  , int __base, struct locale_t* __loc  );
+unsigned long long int __isoc23_wcstoull_l(const int* __nptr  , int** __endptr  , int __base, struct locale_t* __loc  );
+double wcstod_l(const int* __nptr  , int** __endptr  , struct locale_t* __loc  );
+float wcstof_l(const int* __nptr  , int** __endptr  , struct locale_t* __loc  );
+long  double wcstold_l(const int* __nptr  , int** __endptr  , struct locale_t* __loc  );
+float wcstof32_l(const int* __nptr  , int** __endptr  , struct locale_t* __loc  );
+double wcstof64_l(const int* __nptr  , int** __endptr  , struct locale_t* __loc  );
+double wcstof32x_l(const int* __nptr  , int** __endptr  , struct locale_t* __loc  );
+long  double wcstof64x_l(const int* __nptr  , int** __endptr  , struct locale_t* __loc  );
 int* wcpcpy(int* __dest  , const int* __src  );
 int* wcpncpy(int* __dest  , const int* __src  , unsigned long __n  );
 struct _IO_FILE* open_wmemstream(int** __bufloc  , unsigned long* __sizeloc  );
@@ -2531,7 +1645,7 @@ unsigned int putwchar_unlocked(int __wc  );
 int* fgetws_unlocked(int* __ws  , int __n, struct _IO_FILE* __stream  );
 int fputws_unlocked(const int* __ws  , struct _IO_FILE* __stream  );
 unsigned long wcsftime(int* __s  , unsigned long __maxsize  , const int* __format  , const struct tm* __tp  );
-unsigned long wcsftime_l(int* __s  , unsigned long __maxsize  , const int* __format  , const struct tm* __tp  , struct __locale_struct* __loc  );
+unsigned long wcsftime_l(int* __s  , unsigned long __maxsize  , const int* __format  , const struct tm* __tp  , struct locale_t* __loc  );
 char* dirname(char* __path);
 char* __xpg_basename(char* __path);
 int* __builtin_wstring(const char* str);
@@ -3995,7 +3109,7 @@ static struct list$1sType$ph* list$1sType$ph$p_clone(struct list$1sType$ph* self
         come_call_finalizer(list$1sType$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
         return __result_obj__0;
     }
-    result=(struct list$1sType$ph*)come_increment_ref_count(list$1sType$ph_initialize((struct list$1sType$ph*)come_increment_ref_count((struct list$1sType$ph*)come_calloc(1, sizeof(struct list$1sType$ph)*(1), (void*)0, 595, "struct list$1sType$ph*"))));
+    result=(struct list$1sType$ph*)come_increment_ref_count(list$1sType$ph_initialize((struct list$1sType$ph*)come_increment_ref_count((struct list$1sType$ph*)come_calloc(1, sizeof(struct list$1sType$ph)*(1), (void*)0, 593, "struct list$1sType$ph*"))));
     it=self->head;
     while(it!=((void*)0)) {
         if(1) {
@@ -4045,7 +3159,7 @@ static struct list$1sType$ph* list$1sType$ph_add(struct list$1sType$ph* self, st
         return __result_obj__0;
     }
     if(self->len==0) {
-        litem=(struct list_item$1sType$ph*)come_increment_ref_count(((struct list_item$1sType$ph*)(__right_value0=(struct list_item$1sType$ph*)come_calloc(1, sizeof(struct list_item$1sType$ph)*(1), (void*)0, 616, "struct list_item$1sType$ph*"))));
+        litem=(struct list_item$1sType$ph*)come_increment_ref_count(((struct list_item$1sType$ph*)(__right_value0=(struct list_item$1sType$ph*)come_calloc(1, sizeof(struct list_item$1sType$ph)*(1), (void*)0, 614, "struct list_item$1sType$ph*"))));
         litem->prev=((void*)0);
         litem->next=((void*)0);
         __dec_obj3=litem->item,
@@ -4055,7 +3169,7 @@ static struct list$1sType$ph* list$1sType$ph_add(struct list$1sType$ph* self, st
         self->head=litem;
     }
     else if(self->len==1) {
-        litem_0=(struct list_item$1sType$ph*)come_increment_ref_count(((struct list_item$1sType$ph*)(__right_value0=(struct list_item$1sType$ph*)come_calloc(1, sizeof(struct list_item$1sType$ph)*(1), (void*)0, 626, "struct list_item$1sType$ph*"))));
+        litem_0=(struct list_item$1sType$ph*)come_increment_ref_count(((struct list_item$1sType$ph*)(__right_value0=(struct list_item$1sType$ph*)come_calloc(1, sizeof(struct list_item$1sType$ph)*(1), (void*)0, 624, "struct list_item$1sType$ph*"))));
         litem_0->prev=self->head;
         litem_0->next=((void*)0);
         __dec_obj4=litem_0->item,
@@ -4065,7 +3179,7 @@ static struct list$1sType$ph* list$1sType$ph_add(struct list$1sType$ph* self, st
         self->head->next=litem_0;
     }
     else {
-        litem_1=(struct list_item$1sType$ph*)come_increment_ref_count(((struct list_item$1sType$ph*)(__right_value0=(struct list_item$1sType$ph*)come_calloc(1, sizeof(struct list_item$1sType$ph)*(1), (void*)0, 636, "struct list_item$1sType$ph*"))));
+        litem_1=(struct list_item$1sType$ph*)come_increment_ref_count(((struct list_item$1sType$ph*)(__right_value0=(struct list_item$1sType$ph*)come_calloc(1, sizeof(struct list_item$1sType$ph)*(1), (void*)0, 634, "struct list_item$1sType$ph*"))));
         litem_1->prev=self->tail;
         litem_1->next=((void*)0);
         __dec_obj5=litem_1->item,
@@ -4160,7 +3274,7 @@ static struct list$1sNode$ph* list$1sNode$ph$p_clone(struct list$1sNode$ph* self
         come_call_finalizer(list$1sNode$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
         return __result_obj__0;
     }
-    result=(struct list$1sNode$ph*)come_increment_ref_count(list$1sNode$ph_initialize((struct list$1sNode$ph*)come_increment_ref_count((struct list$1sNode$ph*)come_calloc(1, sizeof(struct list$1sNode$ph)*(1), (void*)0, 595, "struct list$1sNode$ph*"))));
+    result=(struct list$1sNode$ph*)come_increment_ref_count(list$1sNode$ph_initialize((struct list$1sNode$ph*)come_increment_ref_count((struct list$1sNode$ph*)come_calloc(1, sizeof(struct list$1sNode$ph)*(1), (void*)0, 593, "struct list$1sNode$ph*"))));
     it=self->head;
     while(it!=((void*)0)) {
         if(1) {
@@ -4210,7 +3324,7 @@ static struct list$1sNode$ph* list$1sNode$ph_add(struct list$1sNode$ph* self, st
         return __result_obj__0;
     }
     if(self->len==0) {
-        litem=(struct list_item$1sNode$ph*)come_increment_ref_count(((struct list_item$1sNode$ph*)(__right_value0=(struct list_item$1sNode$ph*)come_calloc(1, sizeof(struct list_item$1sNode$ph)*(1), (void*)0, 616, "struct list_item$1sNode$ph*"))));
+        litem=(struct list_item$1sNode$ph*)come_increment_ref_count(((struct list_item$1sNode$ph*)(__right_value0=(struct list_item$1sNode$ph*)come_calloc(1, sizeof(struct list_item$1sNode$ph)*(1), (void*)0, 614, "struct list_item$1sNode$ph*"))));
         litem->prev=((void*)0);
         litem->next=((void*)0);
         __dec_obj16=litem->item,
@@ -4220,7 +3334,7 @@ static struct list$1sNode$ph* list$1sNode$ph_add(struct list$1sNode$ph* self, st
         self->head=litem;
     }
     else if(self->len==1) {
-        litem_2=(struct list_item$1sNode$ph*)come_increment_ref_count(((struct list_item$1sNode$ph*)(__right_value0=(struct list_item$1sNode$ph*)come_calloc(1, sizeof(struct list_item$1sNode$ph)*(1), (void*)0, 626, "struct list_item$1sNode$ph*"))));
+        litem_2=(struct list_item$1sNode$ph*)come_increment_ref_count(((struct list_item$1sNode$ph*)(__right_value0=(struct list_item$1sNode$ph*)come_calloc(1, sizeof(struct list_item$1sNode$ph)*(1), (void*)0, 624, "struct list_item$1sNode$ph*"))));
         litem_2->prev=self->head;
         litem_2->next=((void*)0);
         __dec_obj17=litem_2->item,
@@ -4230,7 +3344,7 @@ static struct list$1sNode$ph* list$1sNode$ph_add(struct list$1sNode$ph* self, st
         self->head->next=litem_2;
     }
     else {
-        litem_3=(struct list_item$1sNode$ph*)come_increment_ref_count(((struct list_item$1sNode$ph*)(__right_value0=(struct list_item$1sNode$ph*)come_calloc(1, sizeof(struct list_item$1sNode$ph)*(1), (void*)0, 636, "struct list_item$1sNode$ph*"))));
+        litem_3=(struct list_item$1sNode$ph*)come_increment_ref_count(((struct list_item$1sNode$ph*)(__right_value0=(struct list_item$1sNode$ph*)come_calloc(1, sizeof(struct list_item$1sNode$ph)*(1), (void*)0, 634, "struct list_item$1sNode$ph*"))));
         litem_3->prev=self->tail;
         litem_3->next=((void*)0);
         __dec_obj18=litem_3->item,
@@ -4278,7 +3392,7 @@ static struct list$1int$* list$1int$$p_clone(struct list$1int$* self)
         come_call_finalizer(list$1int$$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
         return __result_obj__0;
     }
-    result=(struct list$1int$*)come_increment_ref_count(list$1int$_initialize((struct list$1int$*)come_increment_ref_count((struct list$1int$*)come_calloc(1, sizeof(struct list$1int$)*(1), (void*)0, 595, "struct list$1int$*"))));
+    result=(struct list$1int$*)come_increment_ref_count(list$1int$_initialize((struct list$1int$*)come_increment_ref_count((struct list$1int$*)come_calloc(1, sizeof(struct list$1int$)*(1), (void*)0, 593, "struct list$1int$*"))));
     it=self->head;
     while(it!=((void*)0)) {
         if(0) {
@@ -4324,7 +3438,7 @@ static struct list$1int$* list$1int$_add(struct list$1int$* self, int item)
         return __result_obj__0;
     }
     if(self->len==0) {
-        litem=(struct list_item$1int$*)come_increment_ref_count(((struct list_item$1int$*)(__right_value0=(struct list_item$1int$*)come_calloc(1, sizeof(struct list_item$1int$)*(1), (void*)0, 616, "struct list_item$1int$*"))));
+        litem=(struct list_item$1int$*)come_increment_ref_count(((struct list_item$1int$*)(__right_value0=(struct list_item$1int$*)come_calloc(1, sizeof(struct list_item$1int$)*(1), (void*)0, 614, "struct list_item$1int$*"))));
         litem->prev=((void*)0);
         litem->next=((void*)0);
         litem->item=item;
@@ -4332,7 +3446,7 @@ static struct list$1int$* list$1int$_add(struct list$1int$* self, int item)
         self->head=litem;
     }
     else if(self->len==1) {
-        litem_4=(struct list_item$1int$*)come_increment_ref_count(((struct list_item$1int$*)(__right_value0=(struct list_item$1int$*)come_calloc(1, sizeof(struct list_item$1int$)*(1), (void*)0, 626, "struct list_item$1int$*"))));
+        litem_4=(struct list_item$1int$*)come_increment_ref_count(((struct list_item$1int$*)(__right_value0=(struct list_item$1int$*)come_calloc(1, sizeof(struct list_item$1int$)*(1), (void*)0, 624, "struct list_item$1int$*"))));
         litem_4->prev=self->head;
         litem_4->next=((void*)0);
         litem_4->item=item;
@@ -4340,7 +3454,7 @@ static struct list$1int$* list$1int$_add(struct list$1int$* self, int item)
         self->head->next=litem_4;
     }
     else {
-        litem_5=(struct list_item$1int$*)come_increment_ref_count(((struct list_item$1int$*)(__right_value0=(struct list_item$1int$*)come_calloc(1, sizeof(struct list_item$1int$)*(1), (void*)0, 636, "struct list_item$1int$*"))));
+        litem_5=(struct list_item$1int$*)come_increment_ref_count(((struct list_item$1int$*)(__right_value0=(struct list_item$1int$*)come_calloc(1, sizeof(struct list_item$1int$)*(1), (void*)0, 634, "struct list_item$1int$*"))));
         litem_5->prev=self->tail;
         litem_5->next=((void*)0);
         litem_5->item=item;
@@ -4385,14 +3499,14 @@ static struct list$1char$ph* list$1char$ph$p_clone(struct list$1char$ph* self)
         come_call_finalizer(list$1char$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
         return __result_obj__0;
     }
-    result=(struct list$1char$ph*)come_increment_ref_count(list$1char$ph_initialize((struct list$1char$ph*)come_increment_ref_count((struct list$1char$ph*)come_calloc(1, sizeof(struct list$1char$ph)*(1), (void*)0, 595, "struct list$1char$ph*"))));
+    result=(struct list$1char$ph*)come_increment_ref_count(list$1char$ph_initialize((struct list$1char$ph*)come_increment_ref_count((struct list$1char$ph*)come_calloc(1, sizeof(struct list$1char$ph)*(1), (void*)0, 593, "struct list$1char$ph*"))));
     it=self->head;
     while(it!=((void*)0)) {
         if(1) {
-            list$1char$ph_add(result,(char*)come_increment_ref_count((char*)come_memdup(it->item, "/usr/local/include/neo-c.h", 600, "char*")));
+            list$1char$ph_add(result,(char*)come_increment_ref_count((char*)come_memdup(it->item, "/usr/local/include/neo-c.h", 598, "char*")));
         }
         else {
-            list$1char$ph_add(result,(char*)come_increment_ref_count((char*)come_memdup(it->item, "/usr/local/include/neo-c.h", 603, "char*")));
+            list$1char$ph_add(result,(char*)come_increment_ref_count((char*)come_memdup(it->item, "/usr/local/include/neo-c.h", 601, "char*")));
         }
         it=it->next;
     }
@@ -4435,7 +3549,7 @@ static struct list$1char$ph* list$1char$ph_add(struct list$1char$ph* self, char*
         return __result_obj__0;
     }
     if(self->len==0) {
-        litem=(struct list_item$1char$ph*)come_increment_ref_count(((struct list_item$1char$ph*)(__right_value0=(struct list_item$1char$ph*)come_calloc(1, sizeof(struct list_item$1char$ph)*(1), (void*)0, 616, "struct list_item$1char$ph*"))));
+        litem=(struct list_item$1char$ph*)come_increment_ref_count(((struct list_item$1char$ph*)(__right_value0=(struct list_item$1char$ph*)come_calloc(1, sizeof(struct list_item$1char$ph)*(1), (void*)0, 614, "struct list_item$1char$ph*"))));
         litem->prev=((void*)0);
         litem->next=((void*)0);
         __dec_obj26=litem->item,
@@ -4445,7 +3559,7 @@ static struct list$1char$ph* list$1char$ph_add(struct list$1char$ph* self, char*
         self->head=litem;
     }
     else if(self->len==1) {
-        litem_6=(struct list_item$1char$ph*)come_increment_ref_count(((struct list_item$1char$ph*)(__right_value0=(struct list_item$1char$ph*)come_calloc(1, sizeof(struct list_item$1char$ph)*(1), (void*)0, 626, "struct list_item$1char$ph*"))));
+        litem_6=(struct list_item$1char$ph*)come_increment_ref_count(((struct list_item$1char$ph*)(__right_value0=(struct list_item$1char$ph*)come_calloc(1, sizeof(struct list_item$1char$ph)*(1), (void*)0, 624, "struct list_item$1char$ph*"))));
         litem_6->prev=self->head;
         litem_6->next=((void*)0);
         __dec_obj27=litem_6->item,
@@ -4455,7 +3569,7 @@ static struct list$1char$ph* list$1char$ph_add(struct list$1char$ph* self, char*
         self->head->next=litem_6;
     }
     else {
-        litem_7=(struct list_item$1char$ph*)come_increment_ref_count(((struct list_item$1char$ph*)(__right_value0=(struct list_item$1char$ph*)come_calloc(1, sizeof(struct list_item$1char$ph)*(1), (void*)0, 636, "struct list_item$1char$ph*"))));
+        litem_7=(struct list_item$1char$ph*)come_increment_ref_count(((struct list_item$1char$ph*)(__right_value0=(struct list_item$1char$ph*)come_calloc(1, sizeof(struct list_item$1char$ph)*(1), (void*)0, 634, "struct list_item$1char$ph*"))));
         litem_7->prev=self->tail;
         litem_7->next=((void*)0);
         __dec_obj28=litem_7->item,
@@ -4895,7 +4009,7 @@ static struct list$1CVALUE$ph* list$1CVALUE$ph_push_back(struct list$1CVALUE$ph*
         return __result_obj__0;
     }
     if(self->len==0) {
-        litem=(struct list_item$1CVALUE$ph*)come_increment_ref_count(((struct list_item$1CVALUE$ph*)(__right_value0=(struct list_item$1CVALUE$ph*)come_calloc(1, sizeof(struct list_item$1CVALUE$ph)*(1), (void*)0, 701, "struct list_item$1CVALUE$ph*"))));
+        litem=(struct list_item$1CVALUE$ph*)come_increment_ref_count(((struct list_item$1CVALUE$ph*)(__right_value0=(struct list_item$1CVALUE$ph*)come_calloc(1, sizeof(struct list_item$1CVALUE$ph)*(1), (void*)0, 699, "struct list_item$1CVALUE$ph*"))));
         litem->prev=((void*)0);
         litem->next=((void*)0);
         __dec_obj39=litem->item,
@@ -4905,7 +4019,7 @@ static struct list$1CVALUE$ph* list$1CVALUE$ph_push_back(struct list$1CVALUE$ph*
         self->head=litem;
     }
     else if(self->len==1) {
-        litem_12=(struct list_item$1CVALUE$ph*)come_increment_ref_count(((struct list_item$1CVALUE$ph*)(__right_value0=(struct list_item$1CVALUE$ph*)come_calloc(1, sizeof(struct list_item$1CVALUE$ph)*(1), (void*)0, 711, "struct list_item$1CVALUE$ph*"))));
+        litem_12=(struct list_item$1CVALUE$ph*)come_increment_ref_count(((struct list_item$1CVALUE$ph*)(__right_value0=(struct list_item$1CVALUE$ph*)come_calloc(1, sizeof(struct list_item$1CVALUE$ph)*(1), (void*)0, 709, "struct list_item$1CVALUE$ph*"))));
         litem_12->prev=self->head;
         litem_12->next=((void*)0);
         __dec_obj40=litem_12->item,
@@ -4915,7 +4029,7 @@ static struct list$1CVALUE$ph* list$1CVALUE$ph_push_back(struct list$1CVALUE$ph*
         self->head->next=litem_12;
     }
     else {
-        litem_13=(struct list_item$1CVALUE$ph*)come_increment_ref_count(((struct list_item$1CVALUE$ph*)(__right_value0=(struct list_item$1CVALUE$ph*)come_calloc(1, sizeof(struct list_item$1CVALUE$ph)*(1), (void*)0, 721, "struct list_item$1CVALUE$ph*"))));
+        litem_13=(struct list_item$1CVALUE$ph*)come_increment_ref_count(((struct list_item$1CVALUE$ph*)(__right_value0=(struct list_item$1CVALUE$ph*)come_calloc(1, sizeof(struct list_item$1CVALUE$ph)*(1), (void*)0, 719, "struct list_item$1CVALUE$ph*"))));
         litem_13->prev=self->tail;
         litem_13->next=((void*)0);
         __dec_obj41=litem_13->item,
@@ -9265,7 +8379,7 @@ static struct list$1tuple2$2char$phsNode$ph$ph* list$1tuple2$2char$phsNode$ph$ph
         come_call_finalizer(list$1tuple2$2char$phsNode$ph$ph$p_finalize, __result_obj__0, (void*)0, (void*)0, 0, 0, 1, (void*)0);
         return __result_obj__0;
     }
-    result=(struct list$1tuple2$2char$phsNode$ph$ph*)come_increment_ref_count(list$1tuple2$2char$phsNode$ph$ph_initialize((struct list$1tuple2$2char$phsNode$ph$ph*)come_increment_ref_count((struct list$1tuple2$2char$phsNode$ph$ph*)come_calloc(1, sizeof(struct list$1tuple2$2char$phsNode$ph$ph)*(1), (void*)0, 595, "struct list$1tuple2$2char$phsNode$ph$ph*"))));
+    result=(struct list$1tuple2$2char$phsNode$ph$ph*)come_increment_ref_count(list$1tuple2$2char$phsNode$ph$ph_initialize((struct list$1tuple2$2char$phsNode$ph$ph*)come_increment_ref_count((struct list$1tuple2$2char$phsNode$ph$ph*)come_calloc(1, sizeof(struct list$1tuple2$2char$phsNode$ph$ph)*(1), (void*)0, 593, "struct list$1tuple2$2char$phsNode$ph$ph*"))));
     it=self->head;
     while(it!=((void*)0)) {
         if(1) {
@@ -9315,7 +8429,7 @@ static struct list$1tuple2$2char$phsNode$ph$ph* list$1tuple2$2char$phsNode$ph$ph
         return __result_obj__0;
     }
     if(self->len==0) {
-        litem=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_increment_ref_count(((struct list_item$1tuple2$2char$phsNode$ph$ph*)(__right_value0=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_calloc(1, sizeof(struct list_item$1tuple2$2char$phsNode$ph$ph)*(1), (void*)0, 616, "struct list_item$1tuple2$2char$phsNode$ph$ph*"))));
+        litem=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_increment_ref_count(((struct list_item$1tuple2$2char$phsNode$ph$ph*)(__right_value0=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_calloc(1, sizeof(struct list_item$1tuple2$2char$phsNode$ph$ph)*(1), (void*)0, 614, "struct list_item$1tuple2$2char$phsNode$ph$ph*"))));
         litem->prev=((void*)0);
         litem->next=((void*)0);
         __dec_obj136=litem->item,
@@ -9325,7 +8439,7 @@ static struct list$1tuple2$2char$phsNode$ph$ph* list$1tuple2$2char$phsNode$ph$ph
         self->head=litem;
     }
     else if(self->len==1) {
-        litem_53=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_increment_ref_count(((struct list_item$1tuple2$2char$phsNode$ph$ph*)(__right_value0=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_calloc(1, sizeof(struct list_item$1tuple2$2char$phsNode$ph$ph)*(1), (void*)0, 626, "struct list_item$1tuple2$2char$phsNode$ph$ph*"))));
+        litem_53=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_increment_ref_count(((struct list_item$1tuple2$2char$phsNode$ph$ph*)(__right_value0=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_calloc(1, sizeof(struct list_item$1tuple2$2char$phsNode$ph$ph)*(1), (void*)0, 624, "struct list_item$1tuple2$2char$phsNode$ph$ph*"))));
         litem_53->prev=self->head;
         litem_53->next=((void*)0);
         __dec_obj137=litem_53->item,
@@ -9335,7 +8449,7 @@ static struct list$1tuple2$2char$phsNode$ph$ph* list$1tuple2$2char$phsNode$ph$ph
         self->head->next=litem_53;
     }
     else {
-        litem_54=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_increment_ref_count(((struct list_item$1tuple2$2char$phsNode$ph$ph*)(__right_value0=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_calloc(1, sizeof(struct list_item$1tuple2$2char$phsNode$ph$ph)*(1), (void*)0, 636, "struct list_item$1tuple2$2char$phsNode$ph$ph*"))));
+        litem_54=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_increment_ref_count(((struct list_item$1tuple2$2char$phsNode$ph$ph*)(__right_value0=(struct list_item$1tuple2$2char$phsNode$ph$ph*)come_calloc(1, sizeof(struct list_item$1tuple2$2char$phsNode$ph$ph)*(1), (void*)0, 634, "struct list_item$1tuple2$2char$phsNode$ph$ph*"))));
         litem_54->prev=self->tail;
         litem_54->next=((void*)0);
         __dec_obj138=litem_54->item,
